@@ -6,14 +6,13 @@
 /*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/04/26 18:02:10 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/05/02 17:08:54 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "colors.h"
 # include "functions.h"
 # include "libft.h"
 # include <errno.h>
