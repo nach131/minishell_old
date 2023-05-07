@@ -6,16 +6,18 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/07 18:00:56 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/07 20:40:37 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include "../libft/inc/colors.h"
+# include "../libft/inc/error.h"
+# include "../libft/inc/ft_printf.h"
+# include "../libft/inc/libft.h"
 # include "functions.h"
-# include "libft.h"
-# include <error.h>
 # include <fcntl.h>
 # include <limits.h>
 # include <readline/history.h>
@@ -35,12 +37,12 @@ extern int		gbl_exit_code;
 
 // MACROS
 
-enum
-{
-	SUCCESS,
-	FAILURE,
-	PATH_MAX = 1024
-}
+// enum
+// {
+// 	SUCCESS,
+// 	FAILURE,
+// 	// PATH_MAX = 1024
+// };
 
 // STRUCTS
 

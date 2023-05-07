@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   functions.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 15:54:08 by caguerre          #+#    #+#             */
-/*   Updated: 2023/04/26 18:02:07 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/05/07 20:45:14 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FUNCTIONS_H
 # define FUNCTIONS_H
 
-char    print_message(char return_val);
+char	print_message(char return_val);
+void	print_util(void);
 
 #endif
