@@ -10,10 +10,5 @@
 <img alt="license-MIT" src="https://img.shields.io/badge/license-MIT-blue">
 </p>
 
-## Funciones permitidas
+## [Funciones permitidas](allowed.md)
 
-### [readline](funciones/permitidas/readline.c)
-
-<details>
-  <summary>Descripción</summary>
-</details>
