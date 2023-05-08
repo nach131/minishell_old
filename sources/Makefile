@@ -71,8 +71,6 @@ DEPS += $(DEPS_MAIN) $(DEPS_UTILS) $(DEPS_UTILS_BONUS)
 
 RL_INCDIR	=	-I$(RL_PATH)/include 
 RL_LIB		=	-L$(RL_PATH)/lib -lreadline -lhistory
-# RL_INCDIR	:=	-I$(RL_PATH)/include -I$(shell brew --prefix readline)/include
-# RL_LIB		:=	-L$(RL_PATH)/lib -L$(shell brew --prefix readline)/lib -lreadline -lhistory
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ RULES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
