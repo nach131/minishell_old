@@ -41,6 +41,7 @@ LDFLAGS	+= -lreadline
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ DIRECTORIES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 LIBFT_DIR = libft/
+RL_PATH		:=	/usr/local/opt/readline
 INCLUDES 	= inc/
 SRC_DIR 	= src/
 OBJ_DIR 	= obj/
@@ -66,18 +67,29 @@ DEPS_UTILS = $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_UTILS_FILES)))
 ALL_OBJS += $(OBJS_UTILS) $(OBJS_MAIN) 
 DEPS += $(DEPS_MAIN) $(DEPS_UTILS) $(DEPS_UTILS_BONUS)
 
+# ◼◼◼◼◼◼◼◼◼◼◼◼◼ READLINE ◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼#
+
+RL_INCDIR	=	-I$(RL_PATH)/include 
+RL_LIB		=	-L$(RL_PATH)/lib -lreadline -lhistory
+# RL_INCDIR	:=	-I$(RL_PATH)/include -I$(shell brew --prefix readline)/include
+# RL_LIB		:=	-L$(RL_PATH)/lib -L$(shell brew --prefix readline)/lib -lreadline -lhistory
+
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ RULES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 $(NAME):	$(OBJS_MAIN) $(OBJS_UTILS) $(OBJS_ORDER)
-			@$(CC) $(CFLAGS) $(LIBSFT) $^ -o $@
+			@$(CC) $(CFLAGS) $(LIBSFT) $(RL_INCDIR) $(RL_LIB) $^ -o $@
 			@echo "$(ORANGE) Compilando Ejecutable  ➟  $(RED)$@ $(WHITE)"
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c Makefile
 			@$(MKDIR) $(dir $@)
 			@echo "$(ORANGE) Compilando objetos  ➟  $(BLUE)$< $(WHITE)"
-			@$(CC) -MMD -MP $(CFLAGS) -I $(INCLUDES) -c $< -o $@
+			@$(CC) -MMD -MP $(CFLAGS) $(RL_INCDIR) -I $(INCLUDES) -c $< -o $@
 
 all: LIBFS $(NAME)
+
+tokemo:
+	@echo $(RL_INCDIR)
+	@echo $(RL_ARC)
 
 LIBFS:
 			@make -C $(LIBFT_DIR)
