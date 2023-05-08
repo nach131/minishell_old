@@ -31,7 +31,7 @@ void rl_clear_history(void);
 <details>
   <summary>Descripción</summary>
 
-La función rl_clear_history es una función de la biblioteca de línea de comandos `readline` en C, que se utiliza para borrar el historial de entrada. La función se define en el archivo de encabezado `readline/history.h`.
+La función `rl_clear_history` es una función de la biblioteca de línea de comandos `readline` en C, que se utiliza para borrar el historial de entrada. La función se define en el archivo de encabezado `readline/history.h`.
 
 La función no toma argumentos y no devuelve ningún valor.
 
@@ -39,4 +39,14 @@ La función `rl_clear_history` borra todo el historial de entrada almacenado en 
 
 Es importante tener en cuenta que la función `rl_clear_history` solo borra el historial de entrada que ha sido almacenado por la biblioteca readline. Si está utilizando otra biblioteca o un enfoque personalizado para manejar la entrada de la línea de comandos, es posible que deba implementar su propia función de limpieza de historial.
 
+</details>
+
+### [rl_on_new_line](funciones/permitidas/rl_on_new_line.c)
+
+```c
+void rl_on_new_line(void);
+```
+
+<details>
+  <summary>Descripción</summary>
 </details>
