@@ -68,6 +68,10 @@ DEPS += $(DEPS_MAIN) $(DEPS_UTILS) $(DEPS_UTILS_BONUS)
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ RULES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
+$(NAME):	$(OBJS_MAIN) $(OBJS_UTILS) $(OBJS_ORDER)
+			@$(CC) $(CFLAGS) $(LIBSFT) $^ -o $@
+			@echo "$(ORANGE) Compilando Ejecutable  ➟  $(RED)$@ $(WHITE)"
+
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c Makefile
 			@$(MKDIR) $(dir $@)
 			@echo "$(ORANGE) Compilando objetos  ➟  $(BLUE)$< $(WHITE)"
@@ -77,10 +81,6 @@ all: LIBFS $(NAME)
 
 LIBFS:
 			@make -C $(LIBFT_DIR)
-
-$(NAME):	$(OBJS_MAIN) $(OBJS_UTILS) $(OBJS_ORDER)
-			@$(CC) $(CFLAGS) $(LIBSFT) $^ -o $@
-			@echo "$(ORANGE) Compilando Ejecutable  ➟  $(RED)$@ $(WHITE)"
 
 clean :
 			@$(RM) $(OBJ_DIR) $(NAME)
