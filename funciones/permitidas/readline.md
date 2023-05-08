@@ -1,37 +1,4 @@
 
-
-En el lenguaje de programación C, la función `readline()` no existe de forma nativa. Sin embargo, existe la función `fgets()` que se utiliza comúnmente para leer una línea de entrada desde el teclado o desde un archivo. La sintaxis de la función `fgets()` es la siguiente:
-
-```c
-char *fgets(char *str, int n, FILE *stream);
-```
-
-Donde:
-- `str` es un puntero a un array de caracteres donde se almacenará la línea leída.
-- `n` es el número máximo de caracteres que se leerán (incluyendo el carácter nulo de terminación).
-- `stream` es un puntero a un objeto FILE que identifica el archivo o flujo de entrada desde el que se leerá la línea. Si se desea leer desde la entrada estándar (teclado), se utiliza `stdin`.
-
-La función `fgets()` devuelve un puntero a `str` si la lectura fue exitosa, o `NULL` si se alcanzó el final del archivo o se produjo un error.
-
-Por ejemplo, el siguiente código muestra cómo utilizar `fgets()` para leer una línea de entrada desde la entrada estándar:
-
-```c
-#include <stdio.h>
-
-int main() {
-    char buffer[100];
-    
-    printf("Ingrese una línea de texto: ");
-    fgets(buffer, 100, stdin);
-    
-    printf("La línea ingresada es: %s", buffer);
-    
-    return 0;
-}
-```
-
-En este ejemplo, se lee una línea de texto desde la entrada estándar y se almacena en un array de caracteres `buffer` de tamaño 100. Luego se muestra la línea ingresada en la pantalla.
-
 ## instalcion
 
 La biblioteca `libreadline` se utiliza comúnmente en sistemas operativos basados en Unix, como Linux y macOS, y generalmente se incluye en la mayoría de las distribuciones de estas plataformas. Sin embargo, si necesita descargar y compilar la biblioteca manualmente, puede seguir estos pasos:
