@@ -1,6 +1,6 @@
 # Funciones permitidas
 
-### [readline](funciones/permitidas/readline.c)
+### [readline](../funciones/permitidas/readline.c)
 
 ```c
 char *readline(const char *prompt);
@@ -9,7 +9,7 @@ char *readline(const char *prompt);
 <details>
   <summary>Descripción</summary>
 
-### [Instalar readline](./funciones/permitidas/readline.md)
+### [Instalar readline](./../funciones/permitidas/readline.md)
 
 `readline()` esta incluida en la biblioteca `libreadline`, que proporcionan una funcionalidad avanzada para la lectura de líneas de entrada desde el usuario en la línea de comandos.
 
@@ -22,7 +22,7 @@ La función `readline()` devuelve un puntero a una cadena de caracteres que cont
 
 </details>
 
-### [rl_clear_history](funciones/permitidas/rl_clear_history.c)
+### [rl_clear_history](../funciones/permitidas/rl_clear_history.c)
 
 ```c
 void rl_clear_history(void);
@@ -41,7 +41,7 @@ Es importante tener en cuenta que la función `rl_clear_history` solo borra el h
 
 </details>
 
-### [rl_on_new_line](funciones/permitidas/rl_on_new_line.c)
+### [rl_on_new_line](../funciones/permitidas/rl_on_new_line.c)
 
 ```c
 void rl_on_new_line(void);
@@ -58,7 +58,7 @@ Cuando se llama a la función `rl_on_new_line`, la biblioteca `readline` procesa
 
 </details>
 
-### [rl_replace_line](funciones/permitidas/rl_replace_line.c)
+### [rl_replace_line](../funciones/permitidas/rl_replace_line.c)
 
 ```c
 void rl_replace_line(const char* text, int clear_undo);
@@ -85,8 +85,7 @@ Luego llamamos a la función `rl_redisplay` para redibujar la nueva línea en la
 
 </details>
 
-## [rl_redisplay](funciones/permitidas/rl_redisplay.c)
-
+### [rl_redisplay](../funciones/permitidas/rl_redisplay.c)
 
 <details>
   <summary>Descripción</summary>
@@ -94,5 +93,42 @@ Luego llamamos a la función `rl_redisplay` para redibujar la nueva línea en la
   La función `rl_redisplay()` es parte de la biblioteca `readline` en C y se utiliza para redibujar la línea de entrada actual en la consola. Esto puede ser útil si necesitas actualizar la línea de entrada para que refleje un cambio en el estado del programa, por ejemplo, para mostrar un mensaje de error o para actualizar el prompt.
 
   Muy util 
+
+</details>
+
+## [add_history](../funciones/permitidas/add_history.c)
+
+```c
+void add_history(const char *line);
+```
+
+<details>
+  <summary>Descripción</summary>
+
+`add_history` es una función de la biblioteca `readline` que se utiliza para agregar una línea de texto al historial de comandos. El historial de comandos es una lista de comandos previamente ingresados por el usuario, que se puede recuperar y reutilizar en la consola con el uso de teclas de flecha hacia arriba y hacia abajo. 
+
+Donde `line` es un puntero a una cadena de caracteres que representa el comando a agregar al historial.
+
+</details>
+
+### [access](../funciones/permitidas/access.c)
+
+```c
+int access(const char *path, int mode);
+```
+
+<details>
+  <summary>Descripción</summary>
+
+se utiliza para verificar si se puede acceder a un archivo o si un archivo existe. La función devuelve un valor entero distinto de cero si se puede acceder al archivo o si el archivo existe, y devuelve cero si no se puede acceder al archivo o si el archivo no existe.
+
+Donde `path` es un puntero a una cadena de caracteres que representa la ruta del archivo a verificar, y `mode` es un conjunto de indicadores que especifican los permisos de acceso a comprobar.
+
+Los valores posibles de `mode` son los siguientes:
+
+- `F_OK`: Verifica si el archivo existe.
+- `R_OK`: Verifica si el archivo es legible.
+- `W_OK`: Verifica si el archivo es escribible.
+- `X_OK`: Verifica si el archivo es ejecutable.
 
 </details>

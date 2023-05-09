@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/09 16:09:08 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/09 16:33:02 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,18 +113,14 @@
 
 int	main(void)
 {
-	char	*input;
+	char *line;
 
-	while ((input = readline("Minishell> ")) != NULL)
+	// Ciclo de lectura y agregado de líneas al historial
+	while ((line = readline("Ingresa un comando: ")) != NULL)
 	{
-		// Procesamos la entrada
-		printf("Entrada recibida: %s\n", input);
-		// Reemplazamos la línea actual de entrada con una nueva línea
-		rl_replace_line("Nueva línea\n", 1);
-		// Redibujamos la nueva línea
-		rl_redisplay();
-		// Liberamos la memoria utilizada por readline para la entrada
-		free(input);
+		add_history(line);
+		free(line);
 	}
+
 	return (0);
 }
