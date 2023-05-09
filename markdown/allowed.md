@@ -135,11 +135,139 @@ Los valores posibles de `mode` son los siguientes:
 
 ### [fork](../funciones/permitidas/fork.c)
 
-<details>
-  <summary>Descripción</summary>
-
 La función `fork()` se utiliza para crear un nuevo proceso a partir del proceso actual. El proceso que llama a `fork()` se conoce como proceso padre y el proceso recién creado se conoce como proceso hijo.
 
 La función `fork()` devuelve un valor entero que representa el resultado de la llamada. Si el valor es negativo, significa que se produjo un error al crear el proceso hijo. Si el valor es cero, significa que la llamada a `fork()` se realizó correctamente en el proceso hijo. Si el valor es positivo, significa que la llamada a `fork()` se realizó correctamente en el proceso padre y el valor devuelto es el ID del proceso hijo.
+
+</details>
+
+### [wait](../funciones/permitidas/wait.c)
+
+```c
+pid_t wait(int *status);
+```
+
+<details>
+  <summary>Descripción</summary>
+
+La función `wait` en C es una llamada al sistema que suspende la ejecución del proceso actual hasta que uno de sus procesos hijos finaliza su ejecución. La función `wait` tiene la siguiente sintaxis:
+
+Donde `status` es un puntero a una variable de tipo `int` que contiene información sobre el estado del proceso hijo que finalizó su ejecución.
+
+A continuación, se presentan tres ejemplos que ilustran el uso de la función `wait` en C:
+
+#### Ejemplo 1: Esperando a un proceso hijo
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+int main() {
+    pid_t pid = fork();
+    
+    if (pid == 0) {
+        // Este es el proceso hijo
+        printf("Soy el proceso hijo\n");
+        exit(0);
+    } else if (pid > 0) {
+        // Este es el proceso padre
+        printf("Soy el proceso padre\n");
+        wait(NULL);
+        printf("El proceso hijo ha finalizado\n");
+    } else {
+        // Error al crear el proceso hijo
+        perror("fork");
+        exit(1);
+    }
+    
+    return 0;
+}
+```
+
+En este ejemplo, se crea un proceso hijo utilizando la función `fork`. El proceso hijo imprime un mensaje y sale de la ejecución utilizando la función `exit`. El proceso padre espera a que el proceso hijo finalice su ejecución utilizando la función `wait`. Una vez que el proceso hijo ha finalizado, el proceso padre imprime un mensaje indicando que el proceso hijo ha finalizado.
+
+#### Ejemplo 2: Manejando el estado de salida del proceso hijo
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+int main() {
+    pid_t pid = fork();
+    int status;
+    
+    if (pid == 0) {
+        // Este es el proceso hijo
+        printf("Soy el proceso hijo\n");
+        exit(1);
+    } else if (pid > 0) {
+        // Este es el proceso padre
+        printf("Soy el proceso padre\n");
+        wait(&status);
+        if (WIFEXITED(status)) {
+            printf("El proceso hijo ha finalizado con estado %d\n", WEXITSTATUS(status));
+        } else {
+            printf("El proceso hijo ha finalizado de manera anormal\n");
+        }
+    } else {
+        // Error al crear el proceso hijo
+        perror("fork");
+        exit(1);
+    }
+    
+    return 0;
+}
+```
+
+En este ejemplo, se crea un proceso hijo utilizando la función `fork`. El proceso hijo imprime un mensaje y sale de la ejecución con un código de salida de 1 utilizando la función `exit`. El proceso padre espera a que el proceso hijo finalice su ejecución utilizando la función `wait` y obtiene información sobre el estado de salida del proceso hijo utilizando la macro `WIFEXITED`. Si el proceso hijo finalizó de manera normal, se imprime el estado de salida del proceso hijo utilizando la macro `WEXITSTATUS`. Si el proceso hijo finalizó de manera anormal, se imprime un mensaje indicando que el proceso hijo finalizó de manera anormal.
+
+#### Ejemplo 3: Manejando señales del proceso hijo
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <signal.h>
+#include <sys/wait.h>
+
+void handler(int sig) {
+    printf("Se recibió la señal %d\n", sig);
+}
+
+int main() {
+pid_t pid = fork();
+if (pid == 0) {
+    // Este es el proceso hijo
+    printf("Soy el proceso hijo\n");
+    sleep(2);
+    printf("Proceso hijo terminando de manera anormal\n");
+    raise(SIGTERM);
+} else if (pid > 0) {
+    // Este es el proceso padre
+    printf("Soy el proceso padre\n");
+    signal(SIGTERM, handler);
+    wait(NULL);
+    printf("El proceso hijo ha finalizado\n");
+} else {
+    // Error al crear el proceso hijo
+    perror("fork");
+    exit(1);
+}
+return 0;
+}
+```
+Se crea un proceso hijo utilizando la función `fork`. Si `fork` devuelve 0, se está ejecutando en el proceso hijo, de lo contrario, se está ejecutando en el proceso padre. 
+
+En el proceso hijo, se imprime un mensaje indicando que es el proceso hijo y se espera 2 segundos utilizando la función `sleep`. Luego, se imprime otro mensaje indicando que el proceso hijo está terminando de manera anormal y se envía una señal `SIGTERM` al proceso padre utilizando la función `raise`.
+
+En el proceso padre, se establece un manejador de señal para la señal `SIGTERM` utilizando la función `signal`. Luego, se espera a que el proceso hijo finalice su ejecución utilizando la función `wait`. La función `wait` suspende la ejecución del proceso padre hasta que el proceso hijo haya terminado. Si se pasa NULL como argumento, no se devuelve ninguna información sobre el estado de salida del proceso hijo. Después de que el proceso hijo ha finalizado, se imprime un mensaje indicando que el proceso hijo ha finalizado.
+
+En caso de que haya un error al crear el proceso hijo, se imprime un mensaje de error utilizando la función `perror` y se sale del programa utilizando la función `exit`.
+
+Por último, se devuelve 0 para indicar que el programa ha finalizado correctamente.
 
 </details>
