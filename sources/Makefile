@@ -74,6 +74,8 @@ RL_LIB		=	-L$(RL_DIR)/lib -lreadline -lhistory
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ RULES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
+all: LIBFS $(NAME)
+
 $(NAME):	$(OBJS_MAIN) $(OBJS_UTILS) $(OBJS_ORDER)
 			@$(CC) $(CFLAGS) $(LIBSFT) $(RL_INCDIR) $(RL_LIB) $^ -o $@
 			@echo "$(ORANGE) Compilando Ejecutable  ➟  $(RED)$@ $(WHITE)"
@@ -83,18 +85,12 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.c Makefile
 			@echo "$(ORANGE) Compilando objetos  ➟  $(BLUE)$< $(WHITE)"
 			@$(CC) -MMD -MP $(CFLAGS) $(RL_INCDIR) -I $(INCLUDES) -c $< -o $@
 
-all: LIBFS $(NAME)
-
-tokemo:
-	@echo $(RL_INCDIR)
-	@echo $(RL_ARC)
-
 LIBFS:
 			@make -C $(LIBFT_DIR)
 
 clean :
 			@$(RM) $(OBJ_DIR) $(NAME)
-			@echo "$(RED)\n ✗ Archivos objetos projecto borrados.‼️\n$(WHITE)";
+			@echo "$(RED)\n ✗ Archivos objetos y projecto borrados.‼️\n$(WHITE)";
 
 fclean : clean
 			@make fclean -s -C $(LIBFT_DIR)
@@ -110,4 +106,4 @@ norm:
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ Non-file targets ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
-.PHONY: all clean fclean re norm 
+.PHONY: all clean fclean re norm LIBFS
