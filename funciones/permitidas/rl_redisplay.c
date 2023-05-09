@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rl_clear_history.c                                 :+:      :+:    :+:   */
+/*   rl_redisplay.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/08 12:16:40 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/09 10:08:17 by nmota-bu         ###   ########.fr       */
+/*   Created: 2023/05/09 10:13:13 by nmota-bu          #+#    #+#             */
+/*   Updated: 2023/05/09 10:19:34 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* ╔════════════════════════════════════════════════════════════════════════╗ */
-/* ║                 https://github.com/nach131/42Barcelona                 ║ */
+/* ║                      https://github.com/nach131                        ║ */
 /* ║                     https://github.com/Carlos1073                      ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
@@ -19,32 +19,32 @@
 #include <readline/readline.h>
 #include <stdio.h>
 
-// copiar en el main del proyecto y hacer make
-
 int	main(void)
 {
-	HIST_ENTRY	*entry;
+	char	*line;
 
-	// Agregamos algunas entradas al historial
-	add_history("comando1");
-	add_history("comando2");
-	add_history("comando3");
-	// Imprimimos el historial actual
-	printf(CYAN "Historial antes de borrar:\n");
-	// Acceder al tercer comando del historial
-	// entry = history_get(3);
-	for (int i = history_length; i > 0; i--)
+	rl_bind_key('\t', rl_abort);
+	while ((line = readline("Prompt> ")) != NULL)
 	{
-		entry = history_get(i);
-		if (entry)
+		printf("Comando ingresado: %s\n", line);
+		// Simular un error
+		if (strcmp(line, "error") == 0)
 		{
-			printf("%s\n", entry->line);
+			rl_replace_line("Error: comando no válido", 0);
+			rl_redisplay();
 		}
+		else
+		{
+			add_history(line);
+		}
+		free(line);
 	}
-	printf(MAGENTA "Numero en el history: %d\n", history_length);
-	rl_clear_history();
-	printf(RED "Despues de rl_clear_history: %d\n", history_length);
 	return (0);
 }
 
-// PONERLA EN MAIN DE MINISHEL y hacer make
+// En este ejemplo, si el usuario ingresa el comando "error",
+// llamamos a rl_replace_line() para reemplazar la línea de entrada
+// con el mensaje de error "Error: comando no válido". A continuación,
+// llamamos a rl_redisplay() para mostrar el mensaje de error en la consola.
+// Si el usuario ingresa cualquier otro comando, simplemente agregamos el
+//  comando al historial como de costumbre.

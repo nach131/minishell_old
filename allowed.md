@@ -83,5 +83,16 @@ En este ejemplo, utilizamos un ciclo `while` para leer continuamente líneas de 
 
 Luego llamamos a la función `rl_redisplay` para redibujar la nueva línea en la consola. Finalmente, liberamos la memoria utilizada por `readline` para la entrada utilizando la función `free`.
 
+</details>
+
+## [rl_redisplay](funciones/permitidas/rl_redisplay.c)
+
+
+<details>
+  <summary>Descripción</summary>
+
+  La función `rl_redisplay()` es parte de la biblioteca `readline` en C y se utiliza para redibujar la línea de entrada actual en la consola. Esto puede ser útil si necesitas actualizar la línea de entrada para que refleje un cambio en el estado del programa, por ejemplo, para mostrar un mensaje de error o para actualizar el prompt.
+
+  Muy util 
 
 </details>

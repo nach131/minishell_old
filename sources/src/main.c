@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/08 20:22:07 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/09 11:27:46 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,28 +85,53 @@
 // 	free(linea);
 // }
 
+// int	main(void)
+// {
+// 	HIST_ENTRY	*entry;
+
+// 	// Agregamos algunas entradas al historial
+// 	add_history("comando1");
+// 	add_history("comando2");
+// 	add_history("comando3");
+// 	// Imprimimos el historial actual
+// 	printf(CYAN "Historial antes de borrar:\n");
+// 	// Acceder al tercer comando del historial
+// 	// entry = history_get(3);
+// 	for (int i = history_length; i > 0; i--)
+// 	{
+// 		entry = history_get(i);
+// 		if (entry)
+// 		{
+// 			printf("%s\n", entry->line);
+// 		}
+// 	}
+// 	printf(MAGENTA "Numero en el history: %d\n", history_length);
+// 	rl_clear_history();
+// 	printf(RED "Despues de rl_clear_history: %d\n", history_length);
+// 	return (0);
+// }
+
 int	main(void)
 {
-	HIST_ENTRY	*entry;
+	char	*line;
 
-	// Agregamos algunas entradas al historial
-	add_history("comando1");
-	add_history("comando2");
-	add_history("comando3");
-	// Imprimimos el historial actual
-	printf(CYAN "Historial antes de borrar:\n");
-	// Acceder al tercer comando del historial
-	// entry = history_get(3);
-	for (int i = history_length; i > 0; i--)
+	// rl_bind_key('\t', rl_abort);
+	while ((line = readline("Minishel> ")) != NULL)
 	{
-		entry = history_get(i);
-		if (entry)
+		printf("Comando ingresado: %s\n", line);
+		// Simular un error
+		if (ft_strcmp(line, "tomate") == 0)
 		{
-			printf("%s\n", entry->line);
+			rl_replace_line("Error: comando no válido", 0);
+			rl_redisplay();
+			printf(RED "");
 		}
+		else
+		{
+			printf(CYAN "");
+			add_history(line);
+		}
+		free(line);
 	}
-	printf(MAGENTA "Numero en el history: %d\n", history_length);
-	rl_clear_history();
-	printf(RED "Despues de rl_clear_history: %d\n", history_length);
 	return (0);
 }

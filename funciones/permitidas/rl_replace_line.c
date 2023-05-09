@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 13:48:54 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/08 14:10:49 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/09 10:08:24 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,4 @@ int	main(void)
 // Finalmente liberamos la memoria utilizada por `readline`
 // para la entrada utilizando la función `free`.
 
-// gcc rl_replace_line.c  -lreadline
+// PONERLA EN MAIN DE MINISHEL y hacer make
