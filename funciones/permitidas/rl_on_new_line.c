@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 12:42:35 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/08 15:21:50 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:47:30 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ int	main(void)
 }
 
 // En este ejemplo,
-	utilizamos un ciclo `while` para leer continuamente líneas de entrada utilizando
+// utilizamos un ciclo `while` para leer continuamente líneas de entrada utilizando
 // la función `readline`. Después de procesar la entrada,
-	llamamos a la función `rl_on_new_line`
+// llamamos a la función `rl_on_new_line`
 //  para notificar a la biblioteca `readline` que se ha completado la entrada.
 //  Finalmente,
-	liberamos la memoria utilizada por `readline` para la entrada utilizando
+// liberamos la memoria utilizada por `readline` para la entrada utilizando
 //  la función `free`.
 
 // int	main(void)

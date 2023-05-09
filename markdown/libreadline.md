@@ -1,5 +1,5 @@
 
-## instalción
+## instalción libreadline
 
 La biblioteca `libreadline` se utiliza comúnmente en sistemas operativos basados en Unix, como Linux y macOS, y generalmente se incluye en la mayoría de las distribuciones de estas plataformas. Sin embargo, si necesita descargar y compilar la biblioteca manualmente, puede seguir estos pasos:
 

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:13:13 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/09 10:19:34 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/09 16:08:48 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,17 @@ int	main(void)
 	char	*line;
 
 	rl_bind_key('\t', rl_abort);
-	while ((line = readline("Prompt> ")) != NULL)
+	while ((line = readline("Minishell> ")) != NULL)
 	{
 		printf("Comando ingresado: %s\n", line);
 		// Simular un error
-		if (strcmp(line, "error") == 0)
+		if (ft_strcmp(line, "error") == 0)
 		{
 			rl_replace_line("Error: comando no válido", 0);
 			rl_redisplay();
 		}
 		else
-		{
 			add_history(line);
-		}
 		free(line);
 	}
 	return (0);

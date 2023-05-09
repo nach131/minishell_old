@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 13:48:54 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/09 10:08:24 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/09 16:08:05 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(void)
 {
 	char	*input;
 
-	while ((input = readline("> ")) != NULL)
+	while ((input = readline("Minishell> ")) != NULL)
 	{
 		// Procesamos la entrada
 		printf("Entrada recibida: %s\n", input);

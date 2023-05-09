@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/09 11:27:46 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/09 16:09:08 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,25 +113,18 @@
 
 int	main(void)
 {
-	char	*line;
+	char	*input;
 
-	// rl_bind_key('\t', rl_abort);
-	while ((line = readline("Minishel> ")) != NULL)
+	while ((input = readline("Minishell> ")) != NULL)
 	{
-		printf("Comando ingresado: %s\n", line);
-		// Simular un error
-		if (ft_strcmp(line, "tomate") == 0)
-		{
-			rl_replace_line("Error: comando no válido", 0);
-			rl_redisplay();
-			printf(RED "");
-		}
-		else
-		{
-			printf(CYAN "");
-			add_history(line);
-		}
-		free(line);
+		// Procesamos la entrada
+		printf("Entrada recibida: %s\n", input);
+		// Reemplazamos la línea actual de entrada con una nueva línea
+		rl_replace_line("Nueva línea\n", 1);
+		// Redibujamos la nueva línea
+		rl_redisplay();
+		// Liberamos la memoria utilizada por readline para la entrada
+		free(input);
 	}
 	return (0);
 }
