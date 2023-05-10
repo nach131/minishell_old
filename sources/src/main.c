@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/09 16:33:02 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/10 13:20:49 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,16 +111,23 @@
 // 	return (0);
 // }
 
+// int	main(void)
+// {
+// 	char *line;
+
+// 	// Ciclo de lectura y agregado de líneas al historial
+// 	while ((line = readline("Ingresa un comando: ")) != NULL)
+// 	{
+// 		add_history(line);
+// 		free(line);
+// 	}
+
+// 	return (0);
+// }
+
 int	main(void)
 {
-	char *line;
-
-	// Ciclo de lectura y agregado de líneas al historial
-	while ((line = readline("Ingresa un comando: ")) != NULL)
-	{
-		add_history(line);
-		free(line);
-	}
-
+	ft_printf(CYAN "Desde Main\n");
+	print_util();
 	return (0);
 }
