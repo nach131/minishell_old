@@ -50,8 +50,13 @@ UTILS_DIR	= utils/
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ SOURCES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
-# LIBSFT = $(LIBFT_DIR)libft.a
+LIBSFT = $(LIBFT_DIR)libft.a
 
+INC_DIRS += $(INCLUDES)
+INC_DIRS += $(LIBFT_DIR)inc/
+
+INCS = $(addprefix -I, $(INC_DIRS))
+# ====================================
 
 MAIN_FILES	=	main
 UTILS_FILES	= uno
@@ -74,28 +79,26 @@ DEPS += $(DEPS_MAIN) $(DEPS_UTILS) $(DEPS_UTILS_BONUS)
 RL_INCDIR	=	-I$(RL_DIR)include 
 RL_LIB		=	-L$(RL_DIR)lib -lreadline -lhistory
 
-LIBSFT = -I$(LIBFT_DIR)libft.a
-
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ RULES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 all: LIBFS $(NAME)
 # all: LIBFS RLINE $(NAME)
 
-tok:
-			@echo $(RL_LIB)
-			@echo $(RL_INCDIR)
-			@echo $(LIBSFT)
+toke:
+			@echo INCLUDES: $(INCLUDES)
+			@echo INC_DIRS: $(INC_DIRS)
+			@echo INCS: $(INCS)
 
 $(NAME):	$(OBJS_MAIN) $(OBJS_UTILS) $(OBJS_ORDER)
 			@$(CC) $(CFLAGS) $(LIBSFT) $^ -o $@
 #			@$(CC) $(CFLAGS) $(LIBSFT) $(RL_INCDIR) $(RL_LIB) $^ -o $@
 			@echo "$(ORANGE) Compilando Ejecutable  ➟  $(RED)$@ $(WHITE)"
 
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c Makefile
+# $(OBJ_DIR)%.o : $(SRC_DIR)%.c Makefile
+$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(LIBSFT) Makefile
 			@$(MKDIR) $(dir $@)
 			@echo "$(ORANGE) Compilando objetos  ➟  $(BLUE)$< $(WHITE)"
-			@$(CC) -MMD -MP $(CFLAGS) -I $(INCLUDES) -c $< -o $@
-#			@$(CC) -MMD -MP $(CFLAGS) $(RL_INCDIR) -I $(INCLUDES) -c $< -o $@
+			@$(CC) -MMD -MP $(CFLAGS) $(INCS) -c $< -o $@
 
 LIBFS:
 			@make -C $(LIBFT_DIR)

@@ -6,19 +6,16 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/10 17:28:53 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/10 20:21:40 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-// # include "../lib/libft/inc/colors.h"
-// # include "../lib/libft/inc/colors.h"
-// # include "../lib/libft/inc/error.h"
-// # include "../lib/libft/inc/ft_printf.h"
-// # include "libft.h"
-// # include "../lib/libft/inc/libft.h"
+# include "colors.h"
+# include "error.h"
+# include "ft_printf.h"
 # include "functions.h"
 # include "libft.h"
 // # include "history.h"

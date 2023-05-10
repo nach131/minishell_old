@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/10 17:27:53 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/10 20:22:54 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,9 @@
 int	main(void)
 {
 	// ft_printf(CYAN "Desde Main\n");
-	printf("main norma\n");
+	ft_printf(RED "main norma\n");
 	printf("numero: %d\n", ft_isalnum(49));
+	ft_message(SUCCESS, "TOMATE");
 	// print_util();
 	return (0);
 }
