@@ -35,13 +35,14 @@ RM			= rm -rf
 MKDIR		= -mkdir -p
 CFLAGS	= -Wall -Wextra -Werror -g3
 LEAKS		= -fsanitize=address
-MLXFLAGS = -framework OpenGL -framework AppKit
-LDFLAGS	+= -lreadline
+# MLXFLAGS = -framework OpenGL -framework AppKit
+LDFLAGS	+= -lreadline #CUIDADO QUITAR....!!
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ DIRECTORIES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 LIBFT_DIR = lib/libft/
 # RL_DIR		=	/usr/local/opt/readline
+RL_DIR		=	lib/readline/
 INCLUDES 	= inc/
 SRC_DIR 	= src/
 OBJ_DIR 	= obj/
@@ -49,7 +50,8 @@ UTILS_DIR	= utils/
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ SOURCES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
-LIBSFT = $(LIBFT_DIR)libft.a
+# LIBSFT = $(LIBFT_DIR)libft.a
+
 
 MAIN_FILES	=	main
 UTILS_FILES	= uno
@@ -69,29 +71,37 @@ DEPS += $(DEPS_MAIN) $(DEPS_UTILS) $(DEPS_UTILS_BONUS)
 
 # ◼◼◼◼◼◼◼◼◼◼◼◼◼ READLINE ◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼#
 
-# RL_INCDIR	=	-I$(RL_DIR)/include 
-# RL_LIB		=	-L$(RL_DIR)/lib -lreadline -lhistory
+RL_INCDIR	=	-I$(RL_DIR)include 
+RL_LIB		=	-L$(RL_DIR)lib -lreadline -lhistory
+
+LIBSFT = -I$(LIBFT_DIR)libft.a
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ RULES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 all: LIBFS $(NAME)
+# all: LIBFS RLINE $(NAME)
 
-tokemo:
-			@echo $(LIBFT_DIR)
+tok:
+			@echo $(RL_LIB)
+			@echo $(RL_INCDIR)
+			@echo $(LIBSFT)
 
 $(NAME):	$(OBJS_MAIN) $(OBJS_UTILS) $(OBJS_ORDER)
+			@$(CC) $(CFLAGS) $(LIBSFT) $^ -o $@
 #			@$(CC) $(CFLAGS) $(LIBSFT) $(RL_INCDIR) $(RL_LIB) $^ -o $@
-			@$(CC) $(CFLAGS) $(LIBSFT) $(RL_LIB) $^ -o $@
 			@echo "$(ORANGE) Compilando Ejecutable  ➟  $(RED)$@ $(WHITE)"
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c Makefile
 			@$(MKDIR) $(dir $@)
 			@echo "$(ORANGE) Compilando objetos  ➟  $(BLUE)$< $(WHITE)"
-#			@$(CC) -MMD -MP $(CFLAGS) $(RL_INCDIR) -I $(INCLUDES) -c $< -o $@
 			@$(CC) -MMD -MP $(CFLAGS) -I $(INCLUDES) -c $< -o $@
+#			@$(CC) -MMD -MP $(CFLAGS) $(RL_INCDIR) -I $(INCLUDES) -c $< -o $@
 
 LIBFS:
 			@make -C $(LIBFT_DIR)
+
+RLINE:
+			@make -C $(RL_DIR)
 
 clean :
 			@$(RM) $(OBJ_DIR) $(NAME)
