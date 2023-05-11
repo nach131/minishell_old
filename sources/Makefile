@@ -40,8 +40,7 @@ RDFLAGS	= -lreadline -lhistory
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ DIRECTORIES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 LIBFT_DIR = lib/libft/
-RL_DIR		=	/usr/local/opt/readline
-# RL_DIR		=	lib/readline/
+RL_DIR		=	lib/readline/
 INCLUDES 	= inc/
 SRC_DIR 	= src/
 OBJ_DIR 	= obj/
@@ -72,8 +71,8 @@ DEPS += $(DEPS_MAIN) $(DEPS_UTILS) $(DEPS_UTILS_BONUS)
 
 # ◼◼◼◼◼◼◼◼◼◼◼◼◼ READLINE ◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼#
 
-RL_INCDIR	=	-I$(RL_DIR)include 
-RL_LIB		=	-L$(RL_DIR)/lib $(RDFLAGS)
+RL_INCDIR	=	-I$(RL_DIR) 
+RL_LIB		=	-L$(RL_DIR) $(RDFLAGS)
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ RULES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 

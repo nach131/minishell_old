@@ -6,24 +6,24 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/11 11:22:14 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/11 11:51:12 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "colors.h"
+# include "colorsft.h"
 # include "error.h"
 # include "ft_printf.h"
 # include "functions.h"
+# include "history.h"
 # include "libft.h"
-// # include "history.h"
-// # include "readline.h"
+# include "readline.h"
 # include <fcntl.h>
 # include <limits.h>
-# include <readline/history.h>
-# include <readline/readline.h>
+// # include <readline/history.h>
+// # include <readline/readline.h>
 # include <signal.h>
 # include <stdbool.h>
 # include <stdio.h>
