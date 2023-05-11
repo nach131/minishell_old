@@ -35,13 +35,13 @@ RM			= rm -rf
 MKDIR		= -mkdir -p
 CFLAGS	= -Wall -Wextra -Werror -g3
 LEAKS		= -fsanitize=address
-LDFLAGS	+= -lreadline #CUIDADO QUITAR....!!
+RDFLAGS	= -lreadline -lhistory
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ DIRECTORIES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 LIBFT_DIR = lib/libft/
-# RL_DIR		=	/usr/local/opt/readline
-RL_DIR		=	lib/readline/
+RL_DIR		=	/usr/local/opt/readline
+# RL_DIR		=	lib/readline/
 INCLUDES 	= inc/
 SRC_DIR 	= src/
 OBJ_DIR 	= obj/
@@ -50,7 +50,7 @@ UTILS_DIR	= utils/
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ LIB ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 LIBSFT = $(LIBFT_DIR)libft.a
-INCS = $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/)
+INCS = $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/ $(RL_DIR))
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ SOURCES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
@@ -73,7 +73,7 @@ DEPS += $(DEPS_MAIN) $(DEPS_UTILS) $(DEPS_UTILS_BONUS)
 # ◼◼◼◼◼◼◼◼◼◼◼◼◼ READLINE ◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼#
 
 RL_INCDIR	=	-I$(RL_DIR)include 
-RL_LIB		=	-L$(RL_DIR)lib -lreadline -lhistory
+RL_LIB		=	-L$(RL_DIR)/lib $(RDFLAGS)
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ RULES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
@@ -81,17 +81,17 @@ all: LIBFS $(NAME)
 
 toke:
 			@echo INCLUDES: $(INCLUDES)
-			@echo INC_DIRS: $(INC_DIRS)
-			@echo INCS: $(INCS)
+			@echo RL_INCDIR: $(RL_INCDIR)
+			@echo RL_LIB: $(RL_LIB)
 
 $(NAME):	$(ALL_OBJS)
-			@$(CC) $(CFLAGS) $(LIBSFT) $^ -o $@
+			@$(CC) $(CFLAGS) $(LIBSFT) $(RL_INCDIR) $(RL_LIB) $^ -o $@
 			@echo "$(ORANGE) Compilando Ejecutable  ➟  $(RED)$@ $(WHITE)"
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c $(LIBSFT) Makefile
 			@$(MKDIR) $(dir $@)
 			@echo "$(ORANGE) Compilando objetos  ➟  $(BLUE)$< $(WHITE)"
-			@$(CC) -MMD -MP $(CFLAGS) $(INCS) -c $< -o $@
+			@$(CC) -MMD -MP $(CFLAGS) $(RL_INCDIR) $(INCS) -c $< -o $@
 
 LIBFS:
 			@make -C $(LIBFT_DIR)

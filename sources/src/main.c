@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/11 10:52:33 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/11 11:21:25 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,26 +111,26 @@
 // 	return (0);
 // }
 
-// int	main(void)
-// {
-// 	char	*line;
-
-// 	print_util();
-// 	// Ciclo de lectura y agregado de líneas al historial
-// 	while ((line = readline("Ingresa un comando: ")) != NULL)
-// 	{
-// 		add_history(line);
-// 		free(line);
-// 	}
-// 	return (0);
-// }
-
 int	main(void)
 {
-	// ft_printf(CYAN "Desde Main\n");
-	ft_printf(RED "main norma\n");
-	printf("numero: %d\n", ft_isalnum(49));
-	ft_message(SUCCESS, "TOMATE");
+	char	*line;
+
 	print_util();
+	// Ciclo de lectura y agregado de líneas al historial
+	while ((line = readline("Ingresa un comando: ")) != NULL)
+	{
+		add_history(line);
+		free(line);
+	}
 	return (0);
 }
+
+// int	main(void)
+// {
+// 	// ft_printf(CYAN "Desde Main\n");
+// 	ft_printf(RED "main norma\n");
+// 	printf("numero: %d\n", ft_isalnum(49));
+// 	ft_message(SUCCESS, "TOMATE");
+// 	print_util();
+// 	return (0);
+// }
