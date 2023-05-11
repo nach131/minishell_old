@@ -35,7 +35,6 @@ RM			= rm -rf
 MKDIR		= -mkdir -p
 CFLAGS	= -Wall -Wextra -Werror -g3
 LEAKS		= -fsanitize=address
-# MLXFLAGS = -framework OpenGL -framework AppKit
 LDFLAGS	+= -lreadline #CUIDADO QUITAR....!!
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ DIRECTORIES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
@@ -48,15 +47,12 @@ SRC_DIR 	= src/
 OBJ_DIR 	= obj/
 UTILS_DIR	= utils/
 
-# ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ SOURCES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
+# ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ LIB ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 LIBSFT = $(LIBFT_DIR)libft.a
+INCS = $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/)
 
-INC_DIRS += $(INCLUDES)
-INC_DIRS += $(LIBFT_DIR)inc/
-
-INCS = $(addprefix -I, $(INC_DIRS))
-# ====================================
+# ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ SOURCES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 MAIN_FILES	=	main
 UTILS_FILES	= uno
@@ -82,19 +78,16 @@ RL_LIB		=	-L$(RL_DIR)lib -lreadline -lhistory
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ RULES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 all: LIBFS $(NAME)
-# all: LIBFS RLINE $(NAME)
 
 toke:
 			@echo INCLUDES: $(INCLUDES)
 			@echo INC_DIRS: $(INC_DIRS)
 			@echo INCS: $(INCS)
 
-$(NAME):	$(OBJS_MAIN) $(OBJS_UTILS) $(OBJS_ORDER)
+$(NAME):	$(ALL_OBJS)
 			@$(CC) $(CFLAGS) $(LIBSFT) $^ -o $@
-#			@$(CC) $(CFLAGS) $(LIBSFT) $(RL_INCDIR) $(RL_LIB) $^ -o $@
 			@echo "$(ORANGE) Compilando Ejecutable  ➟  $(RED)$@ $(WHITE)"
 
-# $(OBJ_DIR)%.o : $(SRC_DIR)%.c Makefile
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c $(LIBSFT) Makefile
 			@$(MKDIR) $(dir $@)
 			@echo "$(ORANGE) Compilando objetos  ➟  $(BLUE)$< $(WHITE)"

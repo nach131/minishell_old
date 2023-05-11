@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 16:02:23 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/10 17:23:44 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/11 10:52:44 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@
 
 void	print_util(void)
 {
-	// ft_printf(RED "desde utils");
-	printf("uno\n");
+	ft_printf(MAGENTA "Desde utils\n");
 }
