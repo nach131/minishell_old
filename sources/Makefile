@@ -29,50 +29,50 @@ MSAN := -fsanitize=memory -fsanitize-memory-track-origins
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ COMPILATE ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
-CC			= gcc
-AR 			= ar -rcs
-RM			= rm -rf
-MKDIR		= -mkdir -p
-CFLAGS	= -Wall -Wextra -Werror -g3
-LEAKS		= -fsanitize=address
-RDFLAGS	= -lreadline -lhistory
+CC			:= gcc
+AR 			:= ar -rcs
+RM			:= rm -rf
+MKDIR		:= -mkdir -p
+CFLAGS	:= -Wall -Wextra -Werror -g3
+LEAKS		:= -fsanitize=address
+RDFLAGS	:= -lreadline -lhistory
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ DIRECTORIES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
-LIBFT_DIR = lib/libft/
-RL_DIR		=	lib/readline/
-INCLUDES 	= inc/
-SRC_DIR 	= src/
-OBJ_DIR 	= obj/
-UTILS_DIR	= utils/
+LIBFT_DIR := lib/libft/
+RL_DIR		:=	lib/readline/
+INCLUDES 	:= inc/
+SRC_DIR 	:= src/
+OBJ_DIR 	:= obj/
+UTILS_DIR	:= utils/
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ LIB ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
-LIBSFT = $(LIBFT_DIR)libft.a
-INCS = $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/ $(RL_DIR))
+LIBSFT := $(LIBFT_DIR)libft.a
+INCS := $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/ $(RL_DIR))
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ SOURCES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
-MAIN_FILES	=	main
-UTILS_FILES	= uno
+MAIN_FILES	:=	main
+UTILS_FILES	:= uno
 
 SRC_MAIN_FILES	+=$(MAIN_FILES)
-SRCS_MAIN = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_MAIN_FILES)))
-OBJS_MAIN = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_MAIN_FILES)))
-DEPS_MAIN = $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_MAIN_FILES)))
+SRCS_MAIN := $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_MAIN_FILES)))
+OBJS_MAIN := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_MAIN_FILES)))
+DEPS_MAIN := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_MAIN_FILES)))
 
 SRC_UTILS_FILES	+=$(addprefix $(UTILS_DIR),$(UTILS_FILES))
-SRCS_UTILS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_UTILS_FILES)))
-OBJS_UTILS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_UTILS_FILES)))
-DEPS_UTILS = $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_UTILS_FILES)))
+SRCS_UTILS := $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_UTILS_FILES)))
+OBJS_UTILS := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_UTILS_FILES)))
+DEPS_UTILS := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_UTILS_FILES)))
 
 ALL_OBJS += $(OBJS_UTILS) $(OBJS_MAIN) 
 DEPS += $(DEPS_MAIN) $(DEPS_UTILS) $(DEPS_UTILS_BONUS)
 
 # ◼◼◼◼◼◼◼◼◼◼◼◼◼ READLINE ◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼#
 
-RL_INCDIR	=	-I$(RL_DIR) 
-RL_LIB		=	-L$(RL_DIR) $(RDFLAGS)
+RL_INCDIR	:=	-I$(RL_DIR) 
+RL_LIB		:=	-L$(RL_DIR) $(RDFLAGS)
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ RULES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
