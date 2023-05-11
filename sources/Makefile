@@ -33,9 +33,14 @@ CC			:= gcc
 AR 			:= ar -rcs
 RM			:= rm -rf
 MKDIR		:= -mkdir -p
-CFLAGS	:= -Wall -Wextra -Werror -g3
+CFLAGS	:= -Wall -Wextra -Werror
 LEAKS		:= -fsanitize=address
 RDFLAGS	:= -lreadline -lhistory
+MODE		:= normal
+
+ifeq ($(MODE),g3)
+	CFLAGS += -g3
+endif
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ DIRECTORIES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
