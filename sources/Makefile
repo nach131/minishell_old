@@ -42,11 +42,17 @@ ifeq ($(MODE),g3)
 	CFLAGS += -g3
 endif
 
+ifeq ($(HOME),1)
+RL_DIR := /usr/local/opt/readline/
+else
+RL_DIR := ${HOME}/.brew/opt/readline/
+endif
+
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ DIRECTORIES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 LIBFT_DIR := lib/libft/
 # RL_DIR		:= /usr/local/opt/readline/
-RL_DIR		:= ${HOME}/.brew/opt/readline/
+# RL_DIR		= ${HOME}/.brew/opt/readline/
 INCLUDES 	:= inc/
 SRC_DIR 	:= src/
 OBJ_DIR 	:= obj/
