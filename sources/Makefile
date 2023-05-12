@@ -45,7 +45,8 @@ endif
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ DIRECTORIES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 LIBFT_DIR := lib/libft/
-RL_DIR		:= /usr/local/opt/readline/
+# RL_DIR		:= /usr/local/opt/readline/
+RL_DIR		:= ${HOME}/.brew/opt/readline/
 INCLUDES 	:= inc/
 SRC_DIR 	:= src/
 OBJ_DIR 	:= obj/
@@ -54,7 +55,8 @@ UTILS_DIR	:= utils/
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ LIB ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 LIBSFT := $(LIBFT_DIR)libft.a
-INCS := $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/ $(RL_DIR))
+# INCS := $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/ $(RL_DIR))
+INCS := $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/ )
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ SOURCES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
@@ -77,18 +79,19 @@ DEPS += $(DEPS_MAIN) $(DEPS_UTILS)
 
 # ◼◼◼◼◼◼◼◼◼◼◼◼◼ READLINE ◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼#
 
-# RL_INCDIR	:=	-I$(RL_DIR) 
-# RL_LIB		:=	-L$(RL_DIR) $(RDFLAGS)
+RL_INCDIR	:=	-I$(RL_DIR)include/readline/
+RL_LIB		:=	-L$(RL_DIR)lib $(RDFLAGS)
 
-RL_INCDIR	=	-I$(RL_DIR)/include/readline/
-RL_LIB		=	-L$(RL_DIR)lib $(RDFLAGS)
+# RL_INCDIR	=	-I$(RL_DIR)/include/readline/
+# RL_LIB		=	-L$(RL_DIR)lib $(RDFLAGS)
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ RULES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 all: LIBFS $(NAME)
 
 test:
-			@echo ALL_FILES: $(ALL_FILES)
+			@echo RL_LIB: $(RL_LIB)
+			@echo RL_INCDIR: $(RL_INCDIR)
 
 $(NAME):	$(ALL_OBJS)
 			@$(CC) $(CFLAGS) $(LIBSFT) $(RL_INCDIR) $(RL_LIB) $^ -o $@
