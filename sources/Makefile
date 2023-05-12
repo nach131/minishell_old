@@ -45,7 +45,7 @@ endif
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ DIRECTORIES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 LIBFT_DIR := lib/libft/
-RL_DIR		:=	lib/readline/
+RL_DIR		:= /usr/local/opt/readline/
 INCLUDES 	:= inc/
 SRC_DIR 	:= src/
 OBJ_DIR 	:= obj/
@@ -67,26 +67,28 @@ OBJS_MAIN := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_MAIN_FILES)))
 DEPS_MAIN := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_MAIN_FILES)))
 
 SRC_UTILS_FILES	+=$(addprefix $(UTILS_DIR),$(UTILS_FILES))
-SRCS_UTILS := $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_UTILS_FILES)))
+SRCS_MAIN := $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_UTILS_FILES)))
 OBJS_UTILS := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_UTILS_FILES)))
 DEPS_UTILS := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_UTILS_FILES)))
 
 ALL_OBJS += $(OBJS_UTILS) $(OBJS_MAIN) 
-DEPS += $(DEPS_MAIN) $(DEPS_UTILS) $(DEPS_UTILS_BONUS)
+ALL_FILES += $(SRCS_MAIN) $(SRCS_MAIN) # CUIDADO SIN USAR O USAR EN 42 ...?
+DEPS += $(DEPS_MAIN) $(DEPS_UTILS)
 
 # ◼◼◼◼◼◼◼◼◼◼◼◼◼ READLINE ◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼#
 
-RL_INCDIR	:=	-I$(RL_DIR) 
-RL_LIB		:=	-L$(RL_DIR) $(RDFLAGS)
+# RL_INCDIR	:=	-I$(RL_DIR) 
+# RL_LIB		:=	-L$(RL_DIR) $(RDFLAGS)
+
+RL_INCDIR	=	-I$(RL_DIR)/include/readline/
+RL_LIB		=	-L$(RL_DIR)lib $(RDFLAGS)
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ RULES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 all: LIBFS $(NAME)
 
-toke:
-			@echo INCLUDES: $(INCLUDES)
-			@echo RL_INCDIR: $(RL_INCDIR)
-			@echo RL_LIB: $(RL_LIB)
+test:
+			@echo ALL_FILES: $(ALL_FILES)
 
 $(NAME):	$(ALL_OBJS)
 			@$(CC) $(CFLAGS) $(LIBSFT) $(RL_INCDIR) $(RL_LIB) $^ -o $@
