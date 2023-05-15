@@ -789,6 +789,7 @@ int main() {
 En este ejemplo, utilizamos `lstat` para obtener información del enlace simbólico "enlace_simbolico". Si la función `lstat` se ejecuta correctamente, verificamos si el archivo es un enlace simbólico utilizando la macro `S_ISLNK` y la información de permisos de la estructura `stat`. Si es un enlace simbólico, imprimimos el tamaño del enlace simbólico.
 
 </details>
+
 ___
 
 ### [fstat](../funciones/permitidas/fstat.c)
@@ -875,6 +876,8 @@ En este ejemplo, utilizamos `fstat` para obtener información del descriptor de 
 
 </details>
 
+___
+
 ### [unlink](../funciones/permitidas/unlink.c)
 
 ```c
@@ -938,3 +941,12 @@ int main() {
 En este ejemplo, utilizamos `unlink` en un bucle para eliminar varios archivos de una vez. Los nombres de los archivos se almacenan en un array `filenames`. Iteramos sobre el array y, para cada archivo, utilizamos `unlink` para eliminarlo. Si la función `unlink` se ejecuta correctamente, imprimimos un mensaje indicando que el archivo se eliminó exitosamente. En caso de error, utilizamos `perror` para imprimir un mensaje de error detallado.
 
 </details>
+
+
+### [execve](../funciones/permitidas/execve.c)
+
+<details>
+  <summary>Descripción</summary>
+</details>
+
+___
