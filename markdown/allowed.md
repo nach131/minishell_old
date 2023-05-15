@@ -416,3 +416,67 @@ int main() {
 En este ejemplo, el proceso padre crea un proceso hijo utilizando `fork`. El proceso hijo imprime un mensaje y luego se suspende durante 2 segundos usando `sleep` antes de salir con `exit(0)`. Mientras tanto, el proceso padre llama a `wait3` para esperar a que el proceso hijo termine y obtener información detallada sobre su uso de recursos. El estado de salida del proceso hijo se almacena en la variable `status`, y la información de uso de recursos se almacena en la estructura `usage`. Después de que el proceso hijo termina, el proceso padre imprime un mensaje indicando que el proceso hijo ha terminado, junto con la información de uso de recursos obtenida.
 
 </details>
+
+### [wait4](../funciones/permitidas/wait4.c)
+
+```c
+pid_t wait4(pid_t pid, int *status, int options, struct rusage *rusage);
+```
+
+<details>
+  <summary>Descripción</summary>
+
+La función `wait4` en C se utiliza para esperar a un proceso hijo específico o a cualquier proceso hijo, y permite obtener estadísticas de utilización de recursos y proporcionar opciones adicionales. Aquí tienes la sintaxis de la función `wait4`:
+
+- `pid`: El ID del proceso hijo al que se desea esperar. Puede tener diferentes valores:
+  - Si `pid` es igual a -1, `wait4` espera a cualquier proceso hijo.
+  - Si `pid` es igual a 0, `wait4` espera a cualquier proceso hijo cuyo grupo de procesos sea igual al del proceso padre.
+  - Si `pid` es mayor que 0, `wait4` espera al proceso hijo con ese ID.
+
+- `status`: Un puntero a una variable entera donde `wait4` almacenará el estado de salida del proceso hijo. Puede ser `NULL` si no se necesita el estado de salida.
+
+- `options`: Un entero que puede contener varias opciones que afectan el comportamiento de `wait4`. Puede ser `0` para ninguna opción o utilizar macros como `WNOHANG` para realizar una espera no bloqueante o `WUNTRACED` para esperar por procesos detenidos.
+
+- `rusage`: Un puntero a una estructura `rusage` donde `wait4` almacenará información detallada sobre la utilización de recursos del proceso hijo, como tiempo de CPU, uso de memoria, etc. Puede ser `NULL` si no se necesita esta información.
+
+Aquí tienes dos ejemplos de código para ilustrar el uso de la función `wait4`:
+
+**Ejemplo 1: Esperar a cualquier proceso hijo y obtener información de utilización de recursos**
+
+En este ejemplo, utilizamos `wait4` para esperar a que cualquier proceso hijo termine su ejecución y obtener información detallada sobre su utilización de recursos:
+
+```c
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/resource.h>
+
+int main() {
+    pid_t childPid;
+    int status;
+    struct rusage usage;
+
+    childPid = fork();
+
+    if (childPid == 0) {
+        // Código del proceso hijo
+        printf("Proceso hijo ejecutándose\n");
+        sleep(2);
+        exit(0);
+    } else if (childPid > 0) {
+        // Código del proceso padre
+        printf("Proceso padre esperando a que el hijo termine\n");
+        wait4(-1, &status, 0, &usage);
+        printf("Proceso hijo terminado\n");
+        printf("Uso de recursos del hijo: Tiempo de CPU = %ld segundos, Memoria = %ld KB\n",
+               usage.ru_utime.tv_sec, usage.ru_maxrss);
+    } else {
+        perror("Error al crear el proceso hijo");
+        exit(1);
+    }
+
+    return 0
+}
+</details>
