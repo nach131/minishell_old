@@ -558,3 +558,69 @@ int main() {
 En este ejemplo, utilizamos `chdir` para cambiar al directorio "/tmp". Luego, utilizamos `getcwd` para obtener el nuevo directorio de trabajo actual y lo almacenamos en el búfer `cwd`. Finalmente, imprimimos el nuevo directorio de trabajo actual por pantalla. Si alguna de las funciones `chdir` o `getcwd` falla, se imprime un mensaje de error utilizando `perror`.
 
 </details>
+
+___
+
+### [chdir](../funciones/permitidas/chdir.c)
+
+```c
+#include <unistd.h>
+
+int chdir(const char *path);
+```
+
+<details>
+  <summary>Descripción</summary>
+
+  La función `chdir` en C se utiliza para cambiar el directorio de trabajo actual (Current Working Directory, CWD) a un directorio especificado. Permite cambiar el directorio en el que se encuentra el programa en ejecución.
+
+- `path`: Una cadena de caracteres que especifica la ruta del directorio al que se desea cambiar. Puede ser una ruta absoluta o relativa.
+
+La función `chdir` devuelve 0 en caso de éxito, indicando que el cambio de directorio se realizó correctamente, o -1 en caso de error.
+
+**Ejemplo 1: Cambiar al directorio "/tmp"**
+
+```c
+#include <unistd.h>
+#include <stdio.h>
+
+int main() {
+    if (chdir("/tmp") == 0) {
+        printf("Directorio cambiado correctamente\n");
+    } else {
+        perror("Error al cambiar el directorio");
+        return 1;
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, utilizamos `chdir` para cambiar al directorio "/tmp". Si el cambio de directorio se realiza correctamente, se imprime un mensaje de éxito por pantalla. Si `chdir` falla, se imprime un mensaje de error utilizando `perror`.
+
+**Ejemplo 2: Cambiar al directorio especificado por el usuario**
+
+```c
+#include <unistd.h>
+#include <stdio.h>
+
+int main() {
+    char path[256];
+
+    printf("Ingrese el directorio al que desea cambiar: ");
+    scanf("%s", path);
+
+    if (chdir(path) == 0) {
+        printf("Directorio cambiado correctamente\n");
+    } else {
+        perror("Error al cambiar el directorio");
+        return 1;
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, solicitamos al usuario que ingrese el directorio al que desea cambiar. Almacenamos la entrada del usuario en el búfer `path` y luego utilizamos `chdir` para cambiar al directorio especificado. Si el cambio de directorio se realiza correctamente, se imprime un mensaje de éxito por pantalla. Si `chdir` falla, se imprime un mensaje de error utilizando `perror`.
+
+</details>
