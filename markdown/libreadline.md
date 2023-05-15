@@ -38,7 +38,7 @@ El comando `./configure` configura la biblioteca para su sistema, `make` compila
 
 Tenga en cuenta que puede ser necesario instalar otras dependencias para compilar `libreadline` con éxito. En un sistema basado en Debian, puede instalar estas dependencias utilizando el comando `sudo apt-get build-dep readline`.
 
-## instalado desde Brew
+## Instalado desde Brew
 
 brew install readline
 
@@ -54,4 +54,13 @@ En la compilación es necesario incluir el flag `-lreadline`
 
 La opción -lreadline le indica al compilador que enlace con la biblioteca libreadline.
 
+## Inslado desde Brew en 42
 
+
+    rm -rf $HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew && echo 'export PATH=$HOME/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc && brew update
+
+    brew install readline
+
+Comprobación de la instalación
+
+    brew info readline

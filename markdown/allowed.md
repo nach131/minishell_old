@@ -1,5 +1,8 @@
 # Funciones permitidas
 
+[readline](#readline), [rl_clear_history](#rl_clear_history), [rl_on_new_line](#rl_on_new_line), [rl_replace_line](#rl_replace_line), [rl_redisplay](#rl_redisplay), [add_history](#add_history), [access](#access), [fork](#fork), [wait](#wait), 
+
+
 ### [readline](../funciones/permitidas/readline.c)
 
 ```c

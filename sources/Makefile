@@ -51,8 +51,6 @@ endif
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ DIRECTORIES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 LIBFT_DIR := lib/libft/
-# RL_DIR		:= /usr/local/opt/readline/
-# RL_DIR		= ${HOME}/.brew/opt/readline/
 INCLUDES 	:= inc/
 SRC_DIR 	:= src/
 OBJ_DIR 	:= obj/
@@ -61,8 +59,7 @@ UTILS_DIR	:= utils/
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ LIB ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 LIBSFT := $(LIBFT_DIR)libft.a
-# INCS := $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/ $(RL_DIR))
-INCS := $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/ )
+INCS := $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/)
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ SOURCES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
@@ -70,17 +67,16 @@ MAIN_FILES	:=	main
 UTILS_FILES	:= uno
 
 SRC_MAIN_FILES	+=$(MAIN_FILES)
-SRCS_MAIN := $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_MAIN_FILES)))
+# SRCS_MAIN := $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_MAIN_FILES)))
 OBJS_MAIN := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_MAIN_FILES)))
 DEPS_MAIN := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_MAIN_FILES)))
 
 SRC_UTILS_FILES	+=$(addprefix $(UTILS_DIR),$(UTILS_FILES))
-SRCS_MAIN := $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_UTILS_FILES)))
+# SRCS_MAIN := $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_UTILS_FILES)))
 OBJS_UTILS := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_UTILS_FILES)))
 DEPS_UTILS := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_UTILS_FILES)))
 
 ALL_OBJS += $(OBJS_UTILS) $(OBJS_MAIN) 
-ALL_FILES += $(SRCS_MAIN) $(SRCS_MAIN) # CUIDADO SIN USAR O USAR EN 42 ...?
 DEPS += $(DEPS_MAIN) $(DEPS_UTILS)
 
 # ◼◼◼◼◼◼◼◼◼◼◼◼◼ READLINE ◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼#
@@ -88,16 +84,13 @@ DEPS += $(DEPS_MAIN) $(DEPS_UTILS)
 RL_INCDIR	:=	-I$(RL_DIR)include/readline/
 RL_LIB		:=	-L$(RL_DIR)lib $(RDFLAGS)
 
-# RL_INCDIR	=	-I$(RL_DIR)/include/readline/
-# RL_LIB		=	-L$(RL_DIR)lib $(RDFLAGS)
-
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ RULES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 all: LIBFS $(NAME)
 
 test:
-			@echo RL_LIB: $(RL_LIB)
-			@echo RL_INCDIR: $(RL_INCDIR)
+			@echo ALL_OBJS: $(ALL_OBJS)
+			@echo NAME: $(NAME)
 
 $(NAME):	$(ALL_OBJS)
 			@$(CC) $(CFLAGS) $(LIBSFT) $(RL_INCDIR) $(RL_LIB) $^ -o $@
