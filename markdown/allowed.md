@@ -1152,6 +1152,125 @@ int main() {
 
 En este ejemplo, abrimos el archivo "archivo.txt" en modo de lectura (`O_RDONLY`) y obtenemos un descriptor de archivo `fd`. Luego, abrimos el archivo "copia.txt" en modo de escritura (`O_WRONLY | O_CREAT | O_TRUNC`) y obtenemos un nuevo descriptor de archivo `new
 </details>
+___
+
+### [pipe](../funciones/permitidas/pipe.c)
+
+<details>
+  <summary>Descripción</summary>
+
+La función `pipe` se utiliza para crear una tubería o canal de comunicación unidireccional entre dos procesos. Permite la transferencia de datos de un proceso a otro, donde un proceso actúa como el escritor (productor) y el otro proceso actúa como el lector (consumidor) de los datos.
+
+**Ejemplo 1: Comunicación entre procesos padre e hijo**
+
+En este ejemplo, se crea una tubería entre un proceso padre y un proceso hijo. El proceso hijo enviará un mensaje al proceso padre a través de la tubería, y el proceso padre lo leerá y lo imprimirá en la salida estándar.
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    int fd[2]; // Arreglo de descriptores de archivo para la tubería
+    char message[] = "Hola desde el proceso hijo";
+
+    if (pipe(fd) == -1) {
+        perror("Error al crear la tubería");
+        exit(EXIT_FAILURE);
+    }
+
+    pid_t pid = fork();
+    if (pid == -1) {
+        perror("Error al crear el proceso hijo");
+        exit(EXIT_FAILURE);
+    }
+
+    if (pid == 0) {
+        // Proceso hijo
+        close(fd[0]); // Cierra el extremo de lectura de la tubería
+
+        write(fd[1], message, strlen(message) + 1); // Escribe el mensaje en la tubería
+
+        close(fd[1]); // Cierra el extremo de escritura de la tubería
+
+        exit(EXIT_SUCCESS);
+    } else {
+        // Proceso padre
+        close(fd[1]); // Cierra el extremo de escritura de la tubería
+
+        char received_message[100];
+        read(fd[0], received_message, sizeof(received_message)); // Lee el mensaje de la tubería
+
+        printf("Mensaje recibido: %s\n", received_message);
+
+        close(fd[0]); // Cierra el extremo de lectura de la tubería
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, se utiliza `pipe` para crear la tubería en el arreglo `fd`. El proceso padre cierra el extremo de escritura de la tubería (`fd[1]`) y lee el mensaje del extremo de lectura de la tubería (`fd[0]`). El proceso hijo cierra el extremo de lectura de la tubería (`fd[0]`) y escribe el mensaje en el extremo de escritura de la tubería (`fd[1]`).
+
+**Ejemplo 2: Comunicación entre procesos mediante redirección**
+
+En este ejemplo, se redirige la salida de un proceso hijo hacia la entrada de otro proceso padre utilizando `pipe`.
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+int main() {
+    int fd[2]; // Arreglo de descriptores de archivo para la tubería
+
+    if (pipe(fd) == -1) {
+        perror("Error al crear la tubería");
+        exit(EXIT_FAILURE);
+    }
+
+    pid_t pid = fork();
+    if (pid == -1) {
+        perror("Error al crear el proceso hijo");
+        exit(EXIT_FAILURE);
+    }
+
+    if (pid == 0) {
+        // Proceso hijo
+                close(fd[0]); // Cierra el extremo de lectura de la tubería
+
+        dup2(fd[1], STDOUT_FILENO); // Redirige la salida estándar al extremo de escritura de la tubería
+
+        // Ejecuta el comando 'ls' y redirige su salida al proceso padre
+        execlp("ls", "ls", NULL);
+
+        close(fd[1]); // Cierra el extremo de escritura de la tubería
+
+        exit(EXIT_SUCCESS);
+    } else {
+        // Proceso padre
+        close(fd[1]); // Cierra el extremo de escritura de la tubería
+
+        dup2(fd[0], STDIN_FILENO); // Redirige la entrada estándar al extremo de lectura de la tubería
+
+        // Lee y muestra la salida del proceso hijo
+        char buffer[256];
+        ssize_t bytesRead;
+        while ((bytesRead = read(STDIN_FILENO, buffer, sizeof(buffer))) > 0) {
+            write(STDOUT_FILENO, buffer, bytesRead);
+        }
+
+        close(fd[0]); // Cierra el extremo de lectura de la tubería
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, se utiliza `pipe` para crear la tubería en el arreglo `fd`. El proceso hijo cierra el extremo de lectura de la tubería (`fd[0]`) y redirige su salida estándar al extremo de escritura de la tubería (`fd[1]`) utilizando `dup2`. Luego, ejecuta el comando "ls" utilizando `execlp`, lo cual redirige la salida del comando hacia el proceso padre. El proceso padre cierra el extremo de escritura de la tubería (`fd[1]`) y redirige su entrada estándar al extremo de lectura de la tubería (`fd[0]`) utilizando `dup2`. Luego, lee los datos del proceso hijo desde la entrada estándar y los muestra en la salida estándar.
+
+</details>
 
 ___
 
