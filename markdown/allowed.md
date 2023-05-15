@@ -1351,3 +1351,79 @@ En este ejemplo, se define una función `directoryExists` que utiliza `opendir` 
 </details>
 
 ___
+
+### [readdir](../funciones/readdir.c)
+
+<details>
+  <summary>Descripción</summary>
+
+  La función `readdir` en el lenguaje de programación C se utiliza para leer las entradas de un directorio abierto previamente utilizando la función `opendir`. Proporciona una forma de acceder a los archivos y subdirectorios contenidos en el directorio. A continuación, te proporcionaré dos ejemplos de cómo usar la función `readdir` en código.
+
+**Ejemplo 1: Listar archivos de un directorio**
+
+Este ejemplo muestra cómo utilizar `readdir` para obtener y mostrar los nombres de los archivos y subdirectorios contenidos en un directorio.
+
+```c
+#include <stdio.h>
+#include <dirent.h>
+
+int main() {
+    DIR *dir;
+    struct dirent *entry;
+
+    dir = opendir("directorio/"); // Reemplaza "directorio/" con la ruta de tu directorio
+
+    if (dir == NULL) {
+        perror("Error al abrir el directorio");
+        return 1;
+    }
+
+    while ((entry = readdir(dir)) != NULL) {
+        printf("%s\n", entry->d_name);
+    }
+
+    closedir(dir);
+
+    return 0;
+}
+```
+
+En este ejemplo, se abre el directorio utilizando `opendir`, pasando la ruta del directorio como argumento. Si `opendir` devuelve un puntero nulo, indica que hubo un error al abrir el directorio. Luego, se utiliza un bucle while para llamar a `readdir` en cada iteración y obtener la siguiente entrada del directorio (`struct dirent`). El nombre del archivo o subdirectorio se accede a través del miembro `d_name` de la estructura `dirent`. En este ejemplo, simplemente se muestra el nombre en la salida estándar. Finalmente, se cierra el directorio utilizando `closedir`.
+
+**Ejemplo 2: Filtrar archivos por extensión**
+
+Este ejemplo muestra cómo utilizar `readdir` para filtrar y mostrar solo los archivos con una extensión específica en un directorio.
+
+```c
+#include <stdio.h>
+#include <string.h>
+#include <dirent.h>
+
+int main() {
+    DIR *dir;
+    struct dirent *entry;
+    const char *extension = ".txt"; // Extensión a filtrar
+
+    dir = opendir("directorio/"); // Reemplaza "directorio/" con la ruta de tu directorio
+
+    if (dir == NULL) {
+        perror("Error al abrir el directorio");
+        return 1;
+    }
+
+    while ((entry = readdir(dir)) != NULL) {
+        if (entry->d_type == DT_REG && strstr(entry->d_name, extension) != NULL) {
+            printf("%s\n", entry->d_name);
+        }
+    }
+
+    closedir(dir);
+
+    return 0;
+}
+```
+
+En este ejemplo, se abre el directorio utilizando `opendir`, pasando la ruta del directorio como argumento. Si `opendir` devuelve un puntero nulo, indica que hubo un error al abrir el directorio. Luego, se utiliza un bucle while para llamar a `readdir` en cada iteración y obtener la siguiente entrada del directorio (`struct dirent`). Se utiliza la condición `entry->d_type == DT_REG` para filtrar solo los archivos regulares (no directorios ni enlaces simbólicos). Luego, se utiliza `strstr` para verificar si el nombre del archivo contiene la extensión deseada. Si se cumple ambas condiciones, se muestra el nombre del archivo en la salida estándar. Finalmente, se cierra el directorio utilizando `
+</details>
+
+___
