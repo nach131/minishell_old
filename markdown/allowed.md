@@ -1152,6 +1152,7 @@ int main() {
 
 En este ejemplo, abrimos el archivo "archivo.txt" en modo de lectura (`O_RDONLY`) y obtenemos un descriptor de archivo `fd`. Luego, abrimos el archivo "copia.txt" en modo de escritura (`O_WRONLY | O_CREAT | O_TRUNC`) y obtenemos un nuevo descriptor de archivo `new
 </details>
+
 ___
 
 ### [pipe](../funciones/permitidas/pipe.c)
@@ -1274,3 +1275,79 @@ En este ejemplo, se utiliza `pipe` para crear la tubería en el arreglo `fd`. El
 
 ___
 
+### [opendir](../funciones/permitidas/opendir.c)
+
+<details>
+  <summary>Descripción</summary>
+
+Se utiliza para abrir un directorio y obtener un puntero a una estructura `DIR` que representa dicho directorio. Proporciona una forma de acceder a los archivos y subdirectorios contenidos en el directorio abierto.
+
+**Ejemplo 1: Listar archivos de un directorio**
+
+En este ejemplo, se utiliza `opendir` para abrir un directorio y luego se recorren los archivos y subdirectorios contenidos en él utilizando la función `readdir`.
+
+```c
+#include <stdio.h>
+#include <dirent.h>
+
+int main() {
+    DIR *dir;
+    struct dirent *entry;
+
+    dir = opendir("directorio/"); // Reemplaza "directorio/" con la ruta de tu directorio
+
+    if (dir == NULL) {
+        perror("Error al abrir el directorio");
+        return 1;
+    }
+
+    while ((entry = readdir(dir)) != NULL) {
+        printf("%s\n", entry->d_name);
+    }
+
+    closedir(dir);
+
+    return 0;
+}
+```
+
+En este ejemplo, se abre el directorio utilizando `opendir`, pasando la ruta del directorio como argumento. Si `opendir` devuelve un puntero nulo, indica que hubo un error al abrir el directorio. Luego, se utiliza un bucle while y la función `readdir` para obtener cada entrada del directorio (`struct dirent`) y mostrar el nombre de archivo o subdirectorio (`d_name`) en la salida estándar. Finalmente, se cierra el directorio utilizando `closedir`.
+
+**Ejemplo 2: Verificar si un directorio existe**
+
+En este ejemplo, se utiliza `opendir` para intentar abrir un directorio. Si `opendir` tiene éxito, significa que el directorio existe; de lo contrario, indica que no existe.
+
+```c
+#include <stdio.h>
+#include <stdbool.h>
+#include <dirent.h>
+
+bool directoryExists(const char *path) {
+    DIR *dir = opendir(path);
+
+    if (dir) {
+        closedir(dir);
+        return true;
+    }
+
+    return false;
+}
+
+int main() {
+    const char *path = "directorio/"; // Reemplaza "directorio/" con la ruta de tu directorio
+
+    if (directoryExists(path)) {
+        printf("El directorio existe.\n");
+    } else {
+        printf("El directorio no existe.\n");
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, se define una función `directoryExists` que utiliza `opendir` para intentar abrir el directorio especificado por la ruta. Si `opendir` tiene éxito, se cierra el directorio y la función devuelve `true`, lo que indica que el directorio existe. Si `opendir` devuelve un puntero nulo, la función devuelve `false`, lo que indica que el directorio no existe. En la función `main`, se llama a `directoryExists` para verificar si el directorio existe y se muestra un mensaje apropiado en la salida estándar.
+
+</details>
+
+___
