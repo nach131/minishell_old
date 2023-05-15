@@ -481,8 +481,11 @@ int main() {
 
     return 0
 }
-</details>
+
 ```
+
+</details>
+
 ___
 
 ### [getcwd](../funciones/permitidas/getcwd.c)
