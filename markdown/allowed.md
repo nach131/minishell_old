@@ -945,8 +945,78 @@ En este ejemplo, utilizamos `unlink` en un bucle para eliminar varios archivos d
 
 ### [execve](../funciones/permitidas/execve.c)
 
+```c
+int execve(const char *pathname, char *const argv[], char *const envp[]);
+```
+
 <details>
   <summary>Descripción</summary>
+
+La función `execve` se utiliza para reemplazar la imagen del proceso actual con una nueva imagen de programa. Permite ejecutar un programa específico con argumentos y variables de entorno personalizados.
+
+- `pathname`: Una cadena de caracteres que especifica la ruta y nombre del programa que se desea ejecutar.
+
+- `argv`: Un arreglo de cadenas de caracteres que representan los argumentos pasados al programa. El último elemento del arreglo debe ser `NULL`.
+
+- `envp`: Un arreglo de cadenas de caracteres que representan las variables de entorno pasadas al programa. El último elemento del arreglo debe ser `NULL`.
+
+La función `execve` devuelve -1 en caso de error y, en caso de éxito, no se devuelve ningún valor, ya que el programa actual es reemplazado por el nuevo programa ejecutado.
+
+Aquí tienes dos ejemplos de código que ilustran el uso de la función `execve`:
+
+**Ejemplo 1: Ejecutar un programa con argumentos personalizados**
+
+```c
+#include <unistd.h>
+#include <stdio.h>
+
+int main() {
+    char *const argv[] = {"ls", "-l", NULL};
+    char *const envp[] = {NULL};
+
+    if (execve("/bin/ls", argv, envp) == -1) {
+        perror("Error al ejecutar el programa");
+        return 1;
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, utilizamos `execve` para ejecutar el programa `ls` con la opción `-l`. Definimos un arreglo `argv` que contiene los argumentos pasados al programa `ls`, donde el primer elemento es el nombre del programa (`ls`), el segundo elemento es la opción `-l` y el último elemento es `NULL`. El arreglo `envp` se define como `NULL` ya que no pasamos variables de entorno personalizadas. Si la función `execve` se ejecuta correctamente, el programa actual será reemplazado por el programa `ls` con los argumentos personalizados.
+
+**Ejemplo 2: Ejecutar un programa con variables de entorno personalizadas**
+
+```c
+#include <unistd.h>
+#include <stdio.h>
+
+int main() {
+    char *const argv[] = {"echo", "Hello, World!", NULL};
+    char *const envp[] = {"CUSTOM_VAR=OpenAI", NULL};
+
+    if (execve("/bin/echo", argv, envp) == -1) {
+        perror("Error al ejecutar el programa");
+        return 1;
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, utilizamos `execve` para ejecutar el programa `echo` con el argumento `"Hello, World!"` y una variable de entorno personalizada `"CUSTOM_VAR"` establecida en `"OpenAI"`. Definimos el arreglo `argv` con el nombre del programa y el argumento, y el arreglo `envp` con la variable de entorno personalizada. Si la función `execve` se ejecuta correctamente, el programa actual será reemplazado por el programa `echo` con el argumento y la variable de entorno personalizados.
+
+Ten en cuenta que el programa que se intenta ejecutar debe tener los permisos de ejecución adecuados y la ruta completa debe ser especificada en `pathname`. Además, debes tener cuidado al utilizar `
+
+</details>
+
+___
+
+### [dup](../funciones/permitidas/dup.c)
+
+<details>
+  <summary>Descripción</summary>
+
 </details>
 
 ___
