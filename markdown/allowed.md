@@ -25,6 +25,8 @@ La función `readline()` devuelve un puntero a una cadena de caracteres que cont
 
 </details>
 
+___
+
 ### [rl_clear_history](../funciones/permitidas/rl_clear_history.c)
 
 ```c
@@ -44,6 +46,9 @@ Es importante tener en cuenta que la función `rl_clear_history` solo borra el h
 
 </details>
 
+___
+
+
 ### [rl_on_new_line](../funciones/permitidas/rl_on_new_line.c)
 
 ```c
@@ -60,6 +65,8 @@ La función no toma argumentos y no devuelve ningún valor.
 Cuando se llama a la función `rl_on_new_line`, la biblioteca `readline` procesa la línea actual de entrada y la agrega al historial. También restablece el estado de la línea de entrada a la configuración inicial para la siguiente entrada. Esta función debe llamarse siempre que se completa una línea de entrada y antes de leer una nueva línea de entrada.
 
 </details>
+
+___
 
 ### [rl_replace_line](../funciones/permitidas/rl_replace_line.c)
 
@@ -79,14 +86,13 @@ La función toma dos argumentos:
 
 Cuando se llama a la función `rl_replace_line`, la biblioteca `readline` reemplaza la línea actual de entrada con la cadena de caracteres especificada en `text`. Si `clear_undo` es `1`, se borrarán los datos de deshacer (undo) de la línea actual de entrada. Si `clear_undo` es `0`, los datos de deshacer (undo) permanecerán intactos.
 
-
-
-
 En este ejemplo, utilizamos un ciclo `while` para leer continuamente líneas de entrada utilizando la función `readline`. Después de procesar la entrada, llamamos a la función `rl_replace_line` para reemplazar la línea actual de entrada con una nueva línea que dice "Nueva línea". También especificamos que se deben borrar los datos de deshacer (undo) de la línea actual de entrada utilizando `1` como segundo argumento.
 
 Luego llamamos a la función `rl_redisplay` para redibujar la nueva línea en la consola. Finalmente, liberamos la memoria utilizada por `readline` para la entrada utilizando la función `free`.
 
 </details>
+
+___
 
 ### [rl_redisplay](../funciones/permitidas/rl_redisplay.c)
 
@@ -95,9 +101,9 @@ Luego llamamos a la función `rl_redisplay` para redibujar la nueva línea en la
 
   La función `rl_redisplay()` es parte de la biblioteca `readline` en C y se utiliza para redibujar la línea de entrada actual en la consola. Esto puede ser útil si necesitas actualizar la línea de entrada para que refleje un cambio en el estado del programa, por ejemplo, para mostrar un mensaje de error o para actualizar el prompt.
 
-  Muy util 
-
 </details>
+
+___
 
 ## [add_history](../funciones/permitidas/add_history.c)
 
@@ -113,6 +119,8 @@ void add_history(const char *line);
 Donde `line` es un puntero a una cadena de caracteres que representa el comando a agregar al historial.
 
 </details>
+
+___
 
 ### [access](../funciones/permitidas/access.c)
 
@@ -136,6 +144,8 @@ Los valores posibles de `mode` son los siguientes:
 
 </details>
 
+___
+
 ### [fork](../funciones/permitidas/fork.c)
 
 <details>
@@ -146,6 +156,8 @@ La función `fork()` se utiliza para crear un nuevo proceso a partir del proceso
 La función `fork()` devuelve un valor entero que representa el resultado de la llamada. Si el valor es negativo, significa que se produjo un error al crear el proceso hijo. Si el valor es cero, significa que la llamada a `fork()` se realizó correctamente en el proceso hijo. Si el valor es positivo, significa que la llamada a `fork()` se realizó correctamente en el proceso padre y el valor devuelto es el ID del proceso hijo.
 
 </details>
+
+___
 
 ### [wait](../funciones/permitidas/wait.c)
 
@@ -277,3 +289,5 @@ En caso de que haya un error al crear el proceso hijo, se imprime un mensaje de 
 Por último, se devuelve 0 para indicar que el programa ha finalizado correctamente.
 
 </details>
+
+___
