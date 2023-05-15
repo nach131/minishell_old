@@ -709,3 +709,85 @@ int main() {
 En este ejemplo, utilizamos `stat` para obtener información del directorio "directorio". Si la función `stat` se ejecuta correctamente, verificamos si el archivo es un directorio utilizando la macro `S_ISDIR` y la información de permisos de la estructura `stat`. Luego, imprimimos un mensaje indicando si el directorio existe o no.
 
 </details>
+
+### [lstat](../funciones/permitidas/lstat.c)
+
+
+```c
+
+int lstat(const char *path, struct stat *buf);
+```
+
+<details>
+  <summary>Descripción</summary>
+
+La función `lstat` en C se utiliza para obtener información sobre un archivo o enlace simbólico específico, sin seguir el enlace simbólico para obtener información sobre el archivo al que apunta.
+
+- `path`: Una cadena de caracteres que especifica la ruta del archivo o enlace simbólico sobre el cual se desea obtener información.
+
+- `buf`: Un puntero a una estructura `stat` donde se almacenarán los detalles del archivo o enlace simbólico.
+
+La función `lstat` devuelve 0 en caso de éxito, indicando que se pudo obtener la información correctamente, o -1 en caso de error.
+
+
+**Ejemplo 1: Obtener información de un archivo regular**
+
+```c
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <stdio.h>
+
+int main() {
+    const char *path = "archivo.txt";
+    struct stat fileStat;
+
+    if (lstat(path, &fileStat) == 0) {
+        if (S_ISREG(fileStat.st_mode)) {
+            printf("El archivo es un archivo regular\n");
+            printf("Tamaño: %lld bytes\n", fileStat.st_size);
+            printf("Permisos: %o\n", fileStat.st_mode & 0777);
+        } else {
+            printf("El archivo no es un archivo regular\n");
+        }
+    } else {
+        perror("Error al obtener información del archivo");
+        return 1;
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, utilizamos `lstat` para obtener información del archivo regular "archivo.txt". Si la función `lstat` se ejecuta correctamente, verificamos si el archivo es un archivo regular utilizando la macro `S_ISREG` y la información de permisos de la estructura `stat`. Si es un archivo regular, imprimimos detalles como el tamaño y los permisos del archivo.
+
+**Ejemplo 2: Obtener información de un enlace simbólico**
+
+```c
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <stdio.h>
+
+int main() {
+    const char *path = "enlace_simbolico";
+    struct stat fileStat;
+
+    if (lstat(path, &fileStat) == 0) {
+        if (S_ISLNK(fileStat.st_mode)) {
+            printf("El archivo es un enlace simbólico\n");
+            printf("Tamaño: %ld bytes\n", fileStat.st_size);
+        } else {
+            printf("El archivo no es un enlace simbólico\n");
+        }
+    } else {
+        perror("Error al obtener información del enlace simbólico");
+        return 1;
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, utilizamos `lstat` para obtener información del enlace simbólico "enlace_simbolico". Si la función `lstat` se ejecuta correctamente, verificamos si el archivo es un enlace simbólico utilizando la macro `S_ISLNK` y la información de permisos de la estructura `stat`. Si es un enlace simbólico, imprimimos el tamaño del enlace simbólico.
+
+Espero que estos ejemplos te ayuden a comprender el uso de la función `lstat` en C
+</details>
