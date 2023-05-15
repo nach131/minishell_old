@@ -624,3 +624,88 @@ int main() {
 En este ejemplo, solicitamos al usuario que ingrese el directorio al que desea cambiar. Almacenamos la entrada del usuario en el búfer `path` y luego utilizamos `chdir` para cambiar al directorio especificado. Si el cambio de directorio se realiza correctamente, se imprime un mensaje de éxito por pantalla. Si `chdir` falla, se imprime un mensaje de error utilizando `perror`.
 
 </details>
+
+___
+
+### [stat](../funciones/permitidas/stat.c)
+
+```c
+int stat(const char *path, struct stat *buf);
+```
+
+<details>
+  <summary>Descripción</summary>
+
+  La función `stat` en C se utiliza para obtener información sobre un archivo o directorio específico. Permite obtener detalles como los permisos, tamaño, tipo de archivo, información de tiempo, etc.
+
+- `path`: Una cadena de caracteres que especifica la ruta del archivo o directorio sobre el cual se desea obtener información.
+
+- `buf`: Un puntero a una estructura `stat` donde se almacenarán los detalles del archivo o directorio.
+
+La función `stat` devuelve 0 en caso de éxito, indicando que se pudo obtener la información correctamente, o -1 en caso de error.
+
+**Ejemplo 1: Obtener información de un archivo existente**
+
+```c
+#include <stdio.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <time.h>
+#include <unistd.h>
+
+int	main(void)
+{
+	const char	*path;
+	struct stat	fileStat;
+
+	path = "archivo.txt";
+	if (stat(path, &fileStat) == 0)
+	{
+		printf("Información del archivo:\n");
+		printf("Tamaño: %lld bytes\n", fileStat.st_size);
+		printf("Permisos: %o\n", fileStat.st_mode & 0777);
+		printf("Último acceso: %s", ctime(&fileStat.st_atime));
+		printf("Última modificación: %s", ctime(&fileStat.st_mtime));
+		printf("Último cambio de estado: %s", ctime(&fileStat.st_ctime));
+	}
+	else
+	{
+		perror("Error al obtener información del archivo");
+		return (1);
+	}
+	return (0);
+}
+```
+
+En este ejemplo, utilizamos `stat` para obtener información del archivo "archivo.txt". Si la función `stat` se ejecuta correctamente, imprimimos detalles como el tamaño, los permisos y las fechas de último acceso, modificación y cambio de estado del archivo utilizando la estructura `stat` y las funciones de la biblioteca estándar.
+
+**Ejemplo 2: Verificar la existencia de un directorio**
+
+```c
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <stdio.h>
+
+int main() {
+    const char *path = "directorio";
+    struct stat dirStat;
+
+    if (stat(path, &dirStat) == 0) {
+        if (S_ISDIR(dirStat.st_mode)) {
+            printf("El directorio existe\n");
+        } else {
+            printf("El directorio no existe\n");
+        }
+    } else {
+        perror("Error al obtener información del directorio");
+        return 1;
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, utilizamos `stat` para obtener información del directorio "directorio". Si la función `stat` se ejecuta correctamente, verificamos si el archivo es un directorio utilizando la macro `S_ISDIR` y la información de permisos de la estructura `stat`. Luego, imprimimos un mensaje indicando si el directorio existe o no.
+
+</details>
