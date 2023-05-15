@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dup.c                                              :+:      :+:    :+:   */
+/*   dup2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/15 16:36:09 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/15 17:07:32 by nmota-bu         ###   ########.fr       */
+/*   Created: 2023/05/15 17:07:07 by nmota-bu          #+#    #+#             */
+/*   Updated: 2023/05/15 17:11:41 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,31 +19,6 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-int main()
-{
-	int fd = open("archivo.txt", O_RDONLY);
-	if (fd == -1)
-	{
-		perror("Error al abrir el archivo");
-		return 1;
-	}
-
-	int newfd = dup(fd);
-	if (newfd == -1)
-	{
-		perror("Error al duplicar el descriptor de archivo");
-		return 1;
-	}
-
-	printf("Descriptor de archivo original: %d\n", fd);
-	printf("Nuevo descriptor de archivo: %d\n", newfd);
-
-	close(fd);
-	close(newfd);
-
-	return 0;
-}
-
 // int main()
 // {
 // 	int fd = open("salida.txt", O_WRONLY | O_CREAT | O_TRUNC, 0666);
@@ -53,8 +28,7 @@ int main()
 // 		return 1;
 // 	}
 
-// 	int newfd = dup2(fd, STDOUT_FILENO);
-// 	if (newfd == -1)
+// 	if (dup2(fd, STDOUT_FILENO) == -1)
 // 	{
 // 		perror("Error al redirigir la salida estándar");
 // 		return 1;
@@ -66,3 +40,33 @@ int main()
 
 // 	return 0;
 // }
+
+int main()
+{
+	int fd = open("archivo.txt", O_RDONLY);
+	if (fd == -1)
+	{
+		perror("Error al abrir el archivo");
+		return 1;
+	}
+
+	int newfd = open("copia.txt", O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	if (newfd == -1)
+	{
+		perror("Error al abrir el archivo de destino");
+		return 1;
+	}
+
+	if (dup2(fd, newfd) == -1)
+	{
+		perror("Error al duplicar el descriptor de archivo");
+		return 1;
+	}
+
+	printf("Archivo duplicado exitosamente.\n");
+
+	close(fd);
+	close(newfd);
+
+	return 0;
+}

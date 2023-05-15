@@ -1014,9 +1014,144 @@ ___
 
 ### [dup](../funciones/permitidas/dup.c)
 
+```c
+int dup(int oldfd);
+```
+
 <details>
   <summary>Descripción</summary>
+
+La función `dup` en C se utiliza para duplicar un descriptor de archivo existente. Crea una nueva entrada en la tabla de descriptores de archivo del proceso y devuelve un nuevo descriptor de archivo que hace referencia al mismo archivo o flujo que el descriptor original.
+
+- `oldfd`: El descriptor de archivo que se desea duplicar.
+
+La función `dup` devuelve el nuevo descriptor de archivo en caso de éxito, o -1 en caso de error.
+
+Aquí tienes dos ejemplos de código que ilustran el uso de la función `dup`:
+
+**Ejemplo 1: Duplicar un descriptor de archivo**
+
+```c
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
+
+int main() {
+    int fd = open("archivo.txt", O_RDONLY);
+    if (fd == -1) {
+        perror("Error al abrir el archivo");
+        return 1;
+    }
+
+    int newfd = dup(fd);
+    if (newfd == -1) {
+        perror("Error al duplicar el descriptor de archivo");
+        return 1;
+    }
+
+    printf("Descriptor de archivo original: %d\n", fd);
+    printf("Nuevo descriptor de archivo: %d\n", newfd);
+
+    close(fd);
+    close(newfd);
+
+    return 0;
+}
+```
+
+En este ejemplo, abrimos el archivo "archivo.txt" utilizando la función `open` y obtenemos un descriptor de archivo `fd`. Luego, utilizamos `dup` para duplicar el descriptor `fd` y obtener un nuevo descriptor `newfd`. Imprimimos ambos descriptores de archivo para verificar que son diferentes. Luego, cerramos ambos descriptores de archivo.
 
 </details>
 
 ___
+
+### [dup2](../funciones/dup2.c)
+
+
+```c
+int dup2(int oldfd, int newfd);
+```
+
+<details>
+  <summary>Descripción</summary>
+
+La función `dup2` en C se utiliza para duplicar un descriptor de archivo existente en otro descriptor de archivo específico. Permite especificar un descriptor de archivo de destino en lugar de dejar que el sistema operativo seleccione automáticamente el siguiente descriptor disponible.
+
+- `oldfd`: El descriptor de archivo que se desea duplicar.
+- `newfd`: El descriptor de archivo de destino donde se colocará la duplicación.
+
+La función `dup2` devuelve el nuevo descriptor de archivo en caso de éxito, o -1 en caso de error.
+
+
+**Ejemplo 1: Redirigir la salida estándar a un archivo**
+
+```c
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
+
+int main() {
+    int fd = open("salida.txt", O_WRONLY | O_CREAT | O_TRUNC, 0666);
+    if (fd == -1) {
+        perror("Error al abrir el archivo");
+        return 1;
+    }
+
+    if (dup2(fd, STDOUT_FILENO) == -1) {
+        perror("Error al redirigir la salida estándar");
+        return 1;
+    }
+
+    printf("Este texto se escribirá en el archivo salida.txt\n");
+
+    close(fd);
+
+    return 0;
+}
+```
+
+En este ejemplo, abrimos el archivo "salida.txt" utilizando la función `open` en modo de escritura (`O_WRONLY`). Si el archivo no existe, se crea. Si ya existe, se trunca a un tamaño de cero. Obtenemos un descriptor de archivo `fd` para este archivo.
+
+Luego, utilizamos `dup2` para duplicar el descriptor `fd` y asignarlo al descriptor de archivo de la salida estándar (`STDOUT_FILENO`). De esta manera, cualquier salida escrita en `stdout` se redirigirá al archivo "salida.txt". En este ejemplo, utilizamos `printf` para imprimir un mensaje, pero en lugar de mostrarse en la consola, se escribirá en el archivo.
+
+Cerramos el descriptor de archivo `fd` ya que no lo necesitamos más.
+
+**Ejemplo 2: Duplicar un descriptor de archivo en un descriptor específico**
+
+```c
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
+
+int main() {
+    int fd = open("archivo.txt", O_RDONLY);
+    if (fd == -1) {
+        perror("Error al abrir el archivo");
+        return 1;
+    }
+
+    int newfd = open("copia.txt", O_WRONLY | O_CREAT | O_TRUNC, 0666);
+    if (newfd == -1) {
+        perror("Error al abrir el archivo de destino");
+        return 1;
+    }
+
+    if (dup2(fd, newfd) == -1) {
+        perror("Error al duplicar el descriptor de archivo");
+        return 1;
+    }
+
+    printf("Archivo duplicado exitosamente.\n");
+
+    close(fd);
+    close(newfd);
+
+    return 0;
+}
+```
+
+En este ejemplo, abrimos el archivo "archivo.txt" en modo de lectura (`O_RDONLY`) y obtenemos un descriptor de archivo `fd`. Luego, abrimos el archivo "copia.txt" en modo de escritura (`O_WRONLY | O_CREAT | O_TRUNC`) y obtenemos un nuevo descriptor de archivo `new
+</details>
+
+___
+
