@@ -874,3 +874,67 @@ int main() {
 En este ejemplo, utilizamos `fstat` para obtener información del descriptor de archivo `STDIN_FILENO`, que representa la entrada estándar. Si la función `fstat` se ejecuta correctamente, verificamos si el descriptor de archivo se refiere a una terminal utilizando la macro `S_ISCHR` y la información de permisos de la estructura `stat`. Si es una terminal, imprimimos un mensaje indicando que el descriptor de archivo se refiere a una terminal.
 
 </details>
+
+### [unlink](../funciones/permitidas/unlink.c)
+
+```c
+int unlink(const char *pathname);
+```
+
+<details>
+  <summary>Descripción</summary>
+
+La función `unlink` en C se utiliza para eliminar un archivo del sistema de archivos.
+
+- `pathname`: Una cadena de caracteres que especifica la ruta y nombre del archivo que se desea eliminar.
+
+La función `unlink` devuelve 0 en caso de éxito, indicando que el archivo se eliminó correctamente, o -1 en caso de error.
+
+**Ejemplo 1: Eliminar un archivo existente**
+
+```c
+#include <unistd.h>
+#include <stdio.h>
+
+int main() {
+    const char *filename = "archivo.txt";
+    
+    if (unlink(filename) == 0) {
+        printf("Archivo eliminado exitosamente.\n");
+    } else {
+        perror("Error al eliminar el archivo");
+        return 1;
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, utilizamos `unlink` para eliminar el archivo "archivo.txt". Si la función `unlink` se ejecuta correctamente, imprimimos un mensaje indicando que el archivo se eliminó exitosamente. En caso de error, utilizamos `perror` para imprimir un mensaje de error detallado.
+
+**Ejemplo 2: Eliminar varios archivos**
+
+```c
+#include <unistd.h>
+#include <stdio.h>
+
+int main() {
+    const char *filenames[] = {"archivo1.txt", "archivo2.txt", "archivo3.txt"};
+    int numFiles = sizeof(filenames) / sizeof(filenames[0]);
+
+    for (int i = 0; i < numFiles; i++) {
+        if (unlink(filenames[i]) == 0) {
+            printf("Archivo %s eliminado exitosamente.\n", filenames[i]);
+        } else {
+            perror("Error al eliminar el archivo");
+            return 1;
+        }
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, utilizamos `unlink` en un bucle para eliminar varios archivos de una vez. Los nombres de los archivos se almacenan en un array `filenames`. Iteramos sobre el array y, para cada archivo, utilizamos `unlink` para eliminarlo. Si la función `unlink` se ejecuta correctamente, imprimimos un mensaje indicando que el archivo se eliminó exitosamente. En caso de error, utilizamos `perror` para imprimir un mensaje de error detallado.
+
+</details>
