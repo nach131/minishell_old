@@ -417,6 +417,8 @@ En este ejemplo, el proceso padre crea un proceso hijo utilizando `fork`. El pro
 
 </details>
 
+___
+
 ### [wait4](../funciones/permitidas/wait4.c)
 
 ```c
@@ -479,4 +481,77 @@ int main() {
 
     return 0
 }
+</details>
+```
+___
+
+### [getcwd](../funciones/permitidas/getcwd.c)
+
+```c
+#include <unistd.h>
+
+char *getcwd(char *buf, size_t size);
+```
+
+<details>
+  <summary>Descripción</summary>
+
+La función `getcwd` en C se utiliza para obtener el directorio de trabajo actual (Current Working Directory, CWD). Permite obtener la ruta absoluta del directorio en el que se encuentra actualmente el programa en ejecución.
+
+- `buf`: Un puntero a un búfer de caracteres donde se almacenará el directorio de trabajo actual. Puede ser `NULL` para que la función asigne automáticamente un búfer.
+
+- `size`: El tamaño del búfer especificado en `buf`.
+
+La función `getcwd` devuelve un puntero a la cadena de caracteres que contiene el directorio de trabajo actual en caso de éxito, o `NULL` en caso de error.
+
+
+**Ejemplo 1: Obtener el directorio de trabajo actual y mostrarlo por pantalla**
+
+```c
+#include <unistd.h>
+#include <stdio.h>
+
+int main() {
+    char cwd[256];
+
+    if (getcwd(cwd, sizeof(cwd)) != NULL) {
+        printf("Directorio de trabajo actual: %s\n", cwd);
+    } else {
+        perror("Error al obtener el directorio de trabajo actual");
+        return 1;
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, utilizamos `getcwd` para obtener el directorio de trabajo actual y lo almacenamos en el búfer `cwd`. Luego, imprimimos el directorio de trabajo actual por pantalla. Si la función `getcwd` falla, se imprime un mensaje de error utilizando `perror`.
+
+**Ejemplo 2: Cambiar de directorio y obtener el nuevo directorio de trabajo actual**
+
+```c
+#include <unistd.h>
+#include <stdio.h>
+
+int main() {
+    char cwd[256];
+
+    if (chdir("/tmp") == 0) {
+        if (getcwd(cwd, sizeof(cwd)) != NULL) {
+            printf("Nuevo directorio de trabajo actual: %s\n", cwd);
+        } else {
+            perror("Error al obtener el directorio de trabajo actual");
+            return 1;
+        }
+    } else {
+        perror("Error al cambiar de directorio");
+        return 1;
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, utilizamos `chdir` para cambiar al directorio "/tmp". Luego, utilizamos `getcwd` para obtener el nuevo directorio de trabajo actual y lo almacenamos en el búfer `cwd`. Finalmente, imprimimos el nuevo directorio de trabajo actual por pantalla. Si alguna de las funciones `chdir` o `getcwd` falla, se imprime un mensaje de error utilizando `perror`.
+
 </details>
