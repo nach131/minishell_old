@@ -712,7 +712,6 @@ En este ejemplo, utilizamos `stat` para obtener información del directorio "dir
 
 ### [lstat](../funciones/permitidas/lstat.c)
 
-
 ```c
 
 int lstat(const char *path, struct stat *buf);
@@ -789,5 +788,89 @@ int main() {
 
 En este ejemplo, utilizamos `lstat` para obtener información del enlace simbólico "enlace_simbolico". Si la función `lstat` se ejecuta correctamente, verificamos si el archivo es un enlace simbólico utilizando la macro `S_ISLNK` y la información de permisos de la estructura `stat`. Si es un enlace simbólico, imprimimos el tamaño del enlace simbólico.
 
-Espero que estos ejemplos te ayuden a comprender el uso de la función `lstat` en C
+</details>
+___
+
+### [fstat](../funciones/permitidas/fstat.c)
+
+```c
+int fstat(int fd, struct stat *buf);
+```
+
+<details>
+  <summary>Descripción</summary>
+
+La función `fstat` en C se utiliza para obtener información sobre un descriptor de archivo específico, proporcionando detalles sobre el archivo asociado al descriptor.
+
+- `fd`: El descriptor de archivo del cual se desea obtener información.
+
+- `buf`: Un puntero a una estructura `stat` donde se almacenarán los detalles del archivo asociado al descriptor.
+
+La función `fstat` devuelve 0 en caso de éxito, indicando que se pudo obtener la información correctamente, o -1 en caso de error.
+
+**Ejemplo 1: Obtener información de un archivo abierto**
+
+```c
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
+
+int main() {
+    int fd = open("archivo.txt", O_RDONLY);
+    if (fd == -1) {
+        perror("Error al abrir el archivo");
+        return 1;
+    }
+
+    struct stat fileStat;
+    if (fstat(fd, &fileStat) == 0) {
+        if (S_ISREG(fileStat.st_mode)) {
+            printf("El archivo es un archivo regular\n");
+            printf("Tamaño: %ld bytes\n", fileStat.st_size);
+            printf("Permisos: %o\n", fileStat.st_mode & 0777);
+        } else {
+            printf("El archivo no es un archivo regular\n");
+        }
+    } else {
+        perror("Error al obtener información del archivo");
+        return 1;
+    }
+
+    close(fd);
+
+    return 0;
+}
+```
+
+En este ejemplo, abrimos el archivo "archivo.txt" utilizando la función `open` y obtenemos un descriptor de archivo `fd`. Luego, utilizamos `fstat` para obtener información del archivo asociado al descriptor. Si la función `fstat` se ejecuta correctamente, verificamos si el archivo es un archivo regular utilizando la macro `S_ISREG` y la información de permisos de la estructura `stat`. Si es un archivo regular, imprimimos detalles como el tamaño y los permisos del archivo.
+
+**Ejemplo 2: Obtener información de la entrada estándar**
+
+```c
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <stdio.h>
+
+int main() {
+    struct stat fileStat;
+    if (fstat(STDIN_FILENO, &fileStat) == 0) {
+        if (S_ISCHR(fileStat.st_mode)) {
+            printf("El descriptor de archivo se refiere a una terminal\n");
+        } else {
+            printf("El descriptor de archivo no se refiere a una terminal\n");
+        }
+    } else {
+        perror("Error al obtener información del descriptor de archivo");
+        return 1;
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, utilizamos `fstat` para obtener información del descriptor de archivo `STDIN_FILENO`, que representa la entrada estándar. Si la función `fstat` se ejecuta correctamente, verificamos si el descriptor de archivo se refiere a una terminal utilizando la macro `S_ISCHR` y la información de permisos de la estructura `stat`. Si es una terminal, imprimimos un mensaje indicando que el descriptor de archivo se refiere a una terminal.
+
 </details>
