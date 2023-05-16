@@ -2083,3 +2083,47 @@ En este ejemplo, después de cargar la entrada terminfo para el terminal actual 
 </details>
 
 ___
+
+### [tgetnum](../funciones/permitidas/tgetnum.c)
+
+<details>
+  <summary>Descripción</summary>
+
+La función `tgetnum` en C se utiliza para obtener el valor de una capacidad de tipo numérica del terminal desde la base de datos terminfo. Esta función devuelve -1 si la capacidad no está definida para el terminal actual, y un valor numérico mayor o igual a cero si está definida.
+
+
+**Ejemplo 1: Obtener el ancho de la ventana del terminal**
+
+En este ejemplo, utilizaremos `tgetnum` para obtener el ancho de la ventana del terminal actual.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <term.h>
+
+int main() {
+    char term_buffer[2048]; // Buffer para almacenar la entrada terminfo
+
+    // Cargar la entrada terminfo para el terminal actual
+    if (tgetent(term_buffer, getenv("TERM")) == -1) {
+        perror("Error al cargar la entrada terminfo");
+        return 1;
+    }
+
+    // Obtener el ancho de la ventana del terminal
+    int width = tgetnum("cols");
+    if (width != -1) {
+        printf("Ancho de la ventana del terminal: %d\n", width);
+    } else {
+        printf("No se pudo obtener el ancho de la ventana del terminal.\n");
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, después de cargar la entrada terminfo para el terminal actual utilizando `tgetent`, utilizamos `tgetnum` para obtener el valor de la capacidad "cols" (columnas), que representa el ancho de la ventana del terminal en caracteres. Si `tgetnum` devuelve un valor distinto de -1, lo mostramos en la salida. De lo contrario, imprimimos un mensaje indicando que no se pudo obtener el ancho de la ventana del terminal.
+
+</details>
+
+___
