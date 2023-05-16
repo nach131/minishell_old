@@ -1564,3 +1564,48 @@ En este ejemplo, se intenta asignar una cantidad excesiva de memoria utilizando 
 </details>
 
 ___
+
+### [perror](../funciones/permitidas/perror.c)
+
+<details>
+  <summary>Descripción</summary>
+
+  La función `perror` se utiliza para imprimir un mensaje de error descriptivo basado en el valor de `errno`. Proporciona una forma conveniente de mostrar información sobre el último error ocurrido en el programa.
+
+**Ejemplo 1: Manejo de errores en la apertura de un archivo**
+
+En este ejemplo, se utiliza `perror` para imprimir un mensaje de error descriptivo cuando ocurre un error durante la apertura de un archivo.
+
+```c
+#include <stdio.h>
+#include <errno.h>
+
+int main() {
+    FILE *file = fopen("archivo_no_existente.txt", "r");
+
+    if (file == NULL) {
+        perror("Error al abrir el archivo");
+        return 1;
+    }
+
+    // Resto del código para trabajar con el archivo
+
+    fclose(file);
+
+    return 0;
+}
+```
+
+En este ejemplo, se intenta abrir un archivo llamado "archivo_no_existente.txt" en modo lectura utilizando `fopen`. Si `fopen` devuelve un puntero nulo, indica que hubo un error al abrir el archivo. Luego, se llama a `perror` pasando un mensaje descriptivo como argumento. `perror` imprimirá este mensaje seguido de una descripción del error específico basado en el valor de `errno`. Finalmente, el programa retorna con un código de error.
+
+</details>
+
+___
+
+### [isatty](../funciones/permitidas/isatty.c)
+
+<details>
+  <summary>Descripción</summary>
+</details>
+
+___
