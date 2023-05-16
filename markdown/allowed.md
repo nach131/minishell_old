@@ -1606,6 +1606,105 @@ ___
 
 <details>
   <summary>Descripción</summary>
+
+  La función `isatty` se utiliza para determinar si un descriptor de archivo se asocia con un terminal interactivo. Devuelve un valor distinto de cero si el descriptor de archivo se asocia con un terminal, y devuelve 0 si no es así.
+
+**Ejemplo 1: Comprobación de la entrada estándar**
+
+En este ejemplo, se utiliza `isatty` para determinar si la entrada estándar (`stdin`) se asocia con un terminal.
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    if (isatty(fileno(stdin))) {
+        printf("La entrada estándar es un terminal interactivo.\n");
+    } else {
+        printf("La entrada estándar no es un terminal interactivo.\n");
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, se utiliza `fileno` para obtener el descriptor de archivo correspondiente a la entrada estándar (`stdin`), y luego se pasa este descriptor de archivo a `isatty`. Si `isatty` devuelve un valor distinto de cero, indica que `stdin` está asociado con un terminal, por lo que se muestra un mensaje apropiado en la salida estándar.
+
+**Ejemplo 2: Comprobación de la salida estándar**
+
+En este ejemplo, se utiliza `isatty` para determinar si la salida estándar (`stdout`) se asocia con un terminal.
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    if (isatty(fileno(stdout))) {
+        printf("La salida estándar es un terminal interactivo.\n");
+    } else {
+        printf("La salida estándar no es un terminal interactivo.\n");
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, se utiliza `fileno` para obtener el descriptor de archivo correspondiente a la salida estándar (`stdout`), y luego se pasa este descriptor de archivo a `isatty`. Si `isatty` devuelve un valor distinto de cero, indica que `stdout` está asociado con un terminal, por lo que se muestra un mensaje apropiado en la salida estándar.
+
+Estos ejemplos ilustran el uso básico de la función `isatty` en C para determinar si un descriptor de archivo está asociado con un terminal interactivo. Esto puede ser útil para realizar acciones diferentes según si el programa se está ejecutando en un entorno interactivo o en un contexto no interactivo, como en un redireccionamiento de entrada/salida.
 </details>
 
 ___
+
+### [ttyname](../funciones/permitidas/ttyname.c)
+
+<details>
+  <summary>Descripción</summary>
+
+La función `ttyname` se utiliza para obtener el nombre del dispositivo de terminal asociado con un descriptor de archivo de terminal. Devuelve un puntero al nombre del dispositivo de terminal si se puede determinar, y devuelve `NULL` si no se puede determinar. 
+
+**Ejemplo 1: Obtención del nombre del terminal interactivo de entrada**
+
+En este ejemplo, se utiliza `ttyname` para obtener el nombre del dispositivo de terminal asociado con la entrada estándar (`stdin`) si `stdin` está asociado con un terminal.
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    char *name = ttyname(fileno(stdin));
+    if (name != NULL) {
+        printf("El nombre del dispositivo de terminal de entrada es: %s\n", name);
+    } else {
+        printf("La entrada estándar no está asociada con un dispositivo de terminal.\n");
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, se utiliza `fileno` para obtener el descriptor de archivo correspondiente a la entrada estándar (`stdin`), y luego se pasa este descriptor de archivo a `ttyname`. Si `ttyname` devuelve un puntero distinto de `NULL`, indica que `stdin` está asociado con un terminal, por lo que se muestra el nombre del dispositivo de terminal en la salida estándar.
+
+**Ejemplo 2: Obtención del nombre del terminal interactivo de salida**
+
+En este ejemplo, se utiliza `ttyname` para obtener el nombre del dispositivo de terminal asociado con la salida estándar (`stdout`) si `stdout` está asociado con un terminal.
+
+```c
+#include <stdio.h>
+#include <unistd.h>
+
+int main() {
+    char *name = ttyname(fileno(stdout));
+    if (name != NULL) {
+        printf("El nombre del dispositivo de terminal de salida es: %s\n", name);
+    } else {
+        printf("La salida estándar no está asociada con un dispositivo de terminal.\n");
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, se utiliza `fileno` para obtener el descriptor de archivo correspondiente a la salida estándar (`stdout`), y luego se pasa este descriptor de archivo a `ttyname`. Si `ttyname` devuelve un puntero distinto de `NULL`, indica que `stdout` está asociado con un terminal, por lo que se muestra el nombre del dispositivo de terminal en la salida estándar.
+
+</details>
