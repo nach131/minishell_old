@@ -1795,3 +1795,40 @@ En este ejemplo, se llama a `ioctl` dos veces: la primera para obtener el tamañ
 </details>
 
 ___
+
+### [getenv](../funciones/permitidas/getenv.c)
+
+<details>
+  <summary>Descripción</summary>
+
+La función `getenv` en C se utiliza para obtener el valor de una variable de entorno. Toma como argumento el nombre de la variable de entorno y devuelve un puntero al valor asociado si la variable existe, o `NULL` si no existe. A continuación, te proporcionaré dos ejemplos de cómo usar la función `getenv` en código.
+
+**Ejemplo 1: Obtención del valor de una variable de entorno existente**
+
+En este ejemplo, se utiliza `getenv` para obtener el valor de la variable de entorno `HOME`, que generalmente almacena la ruta del directorio de inicio del usuario.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+	char *home = getenv("HOME");
+	char *username = getenv("LOGNAME");
+	if (home != NULL)
+	{
+		printf("El valor de la variable HOME es: %s\n", home);
+		printf("El valor de la variable LOGNAME es: %s\n", username);
+	}
+	else
+		printf("La variable HOME no está definida.\n");
+
+	return 0;
+}
+```
+
+En este ejemplo, se llama a `getenv` con el argumento `"HOME"` para obtener el valor de la variable de entorno `HOME`. Si `getenv` devuelve un puntero distinto de `NULL`, indica que la variable de entorno existe y se muestra su valor en la salida estándar. Si `getenv` devuelve `NULL`, indica que la variable de entorno no está definida.
+
+</details>
+
+___
