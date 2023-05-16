@@ -1909,3 +1909,77 @@ En este ejemplo, se obtiene la configuración original del terminal utilizando `
 </details>
 
 ___
+
+### [tcgetattr](../funciones/permitidas/tcgetattr.c)
+
+<details>
+  <summary>Descripción</summary>
+
+La función `tcgetattr` en C se utiliza para obtener la configuración actual de un terminal asociado a un descriptor de archivo. Permite obtener los diferentes parámetros de configuración, como la velocidad de transmisión, los modos de línea, el control de flujo, entre otros.
+
+**Ejemplo 1: Obtención de la configuración del terminal**
+
+En este ejemplo, se utiliza `tcgetattr` para obtener la configuración actual del terminal y mostrar algunos de sus parámetros.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <termios.h>
+
+int main() {
+    struct termios attr;
+    if (tcgetattr(STDIN_FILENO, &attr) == -1) {
+        perror("Error al obtener la configuración del terminal");
+        return 1;
+    }
+
+    printf("Configuración del terminal:\n");
+    printf("Velocidad de transmisión: %lu\n", cfgetospeed(&attr));
+    printf("Modos de línea: %d\n", attr.c_lflag);
+    // Otros parámetros de configuración...
+
+    return 0;
+}
+```
+
+En este ejemplo, se declara una estructura `termios` llamada `attr` para almacenar la configuración del terminal. Luego, se llama a `tcgetattr` para obtener la configuración actual del terminal asociado al descriptor de archivo de entrada estándar (`STDIN_FILENO`). Si `tcgetattr` devuelve -1, indica que ocurrió un error, por lo que se imprime un mensaje de error utilizando `perror`. Si `tcgetattr` se ejecuta correctamente, se muestra la configuración del terminal en la salida estándar, como la velocidad de transmisión y algunos modos de línea.
+
+**Ejemplo 2: Verificación de parámetros de configuración**
+
+En este ejemplo, se utiliza `tcgetattr` para obtener la configuración actual del terminal y verificar si ciertos parámetros de configuración están activados o desactivados.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <termios.h>
+
+int main() {
+    struct termios attr;
+    if (tcgetattr(STDIN_FILENO, &attr) == -1) {
+        perror("Error al obtener la configuración del terminal");
+        return 1;
+    }
+
+    if (attr.c_lflag & ECHO) {
+        printf("El eco de caracteres está habilitado.\n");
+    } else {
+        printf("El eco de caracteres está deshabilitado.\n");
+    }
+
+    if (attr.c_iflag & IXON) {
+        printf("El control de flujo de entrada XON/XOFF está habilitado.\n");
+    } else {
+        printf("El control de flujo de entrada XON/XOFF está deshabilitado.\n");
+    }
+
+    // Otros parámetros de configuración...
+
+    return 0;
+}
+```
+
+En este ejemplo, se obtiene la configuración actual del terminal utilizando `tcgetattr` y se almacena en la estructura `attr`. Luego, se utilizan operaciones de bits para verificar si ciertos parámetros de configuración están activados o desactivados. En este caso, se verifica si el eco de caracteres (`ECHO`) y el control de flujo de entrada XON/XOFF (`IXON`) están habilitados. Se muestra un mensaje correspondiente en función del resultado de cada verificación.
+
+</details>
+
+___
