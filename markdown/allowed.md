@@ -1502,3 +1502,65 @@ En este ejemplo, se define una función `directoryExists` que utiliza `opendir` 
 </details>
 
 ___
+
+### [strerror](../funciones/permitidas/strerror.c)
+
+<details>
+  <summary>Descripción</summary>
+
+La función `strerror` se utiliza para obtener una cadena de caracteres que describe el último error ocurrido en el programa. Proporciona una forma de obtener información más detallada sobre el motivo de un error específico.
+
+**Ejemplo 1: Manejo de errores en la apertura de un archivo**
+
+```c
+#include <stdio.h>
+#include <string.h>
+#include <errno.h>
+
+int main() {
+    FILE *file = fopen("archivo_no_existente.txt", "r");
+
+    if (file == NULL) {
+        fprintf(stderr, "Error al abrir el archivo: %s\n", strerror(errno));
+        return 1;
+    }
+
+    // Resto del código para trabajar con el archivo
+
+    fclose(file);
+
+    return 0;
+}
+```
+
+En este ejemplo, se intenta abrir un archivo llamado "archivo_no_existente.txt" en modo lectura utilizando `fopen`. Si `fopen` devuelve un puntero nulo, indica que hubo un error al abrir el archivo. Luego, se utiliza `strerror` para obtener una cadena de caracteres que describe el error ocurrido, y se muestra este mensaje de error en la salida de error estándar utilizando `fprintf`. El código `errno` es una variable global que contiene el número de error del último error ocurrido. Al pasar `errno` a `strerror`, se obtiene una cadena de caracteres con una descripción legible del error. Finalmente, el programa retorna con un código de error.
+
+**Ejemplo 2: Manejo de errores en la asignación de memoria**
+
+```c
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <errno.h>
+
+int main() {
+    int *ptr = malloc(1000000000000); // Intenta asignar una cantidad excesiva de memoria
+
+    if (ptr == NULL) {
+        fprintf(stderr, "Error al asignar memoria: %s\n", strerror(errno));
+        return 1;
+    }
+
+    // Resto del código para trabajar con el puntero asignado
+
+    free(ptr);
+
+    return 0;
+}
+```
+
+En este ejemplo, se intenta asignar una cantidad excesiva de memoria utilizando `malloc`. Si `malloc` devuelve un puntero nulo, indica que hubo un error en la asignación de memoria. Luego, se utiliza `strerror` para obtener una cadena de caracteres que describe el error ocurrido, y se muestra este mensaje de error en la salida de error estándar utilizando `fprintf`. Al igual que en el ejemplo anterior, se utiliza `errno` para obtener el número de error y pasarlo a `strerror`. Finalmente, el programa retorna con un código de error.
+
+</details>
+
+___
