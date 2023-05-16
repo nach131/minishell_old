@@ -1749,3 +1749,49 @@ En este ejemplo, se obtiene el número de ranura del terminal actual utilizando 
 </details>
 
 ___
+
+### [ioctl](../funciones/permitidas/ioctl.c)
+
+<details>
+  <summary>Descripción</summary>
+
+La función `ioctl` en C se utiliza para realizar operaciones de E/S de bajo nivel en un archivo o dispositivo. Esta función se utiliza principalmente en sistemas Unix para enviar comandos a dispositivos y controladores de dispositivos.
+
+**Ejemplo 1: Cambiar el tamaño de la ventana de terminal**
+
+En este ejemplo, se utiliza `ioctl` para cambiar el tamaño de la ventana de terminal en la que se está ejecutando el programa.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
+
+int main() {
+    struct winsize ws;
+    if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &ws) == -1) {
+        perror("Error al obtener el tamaño de la ventana de terminal");
+        return 1;
+    }
+
+    printf("El tamaño actual de la ventana de terminal es %d columnas x %d filas\n", ws.ws_col, ws.ws_row);
+
+    ws.ws_col = 80;
+    ws.ws_row = 24;
+
+    if (ioctl(STDOUT_FILENO, TIOCSWINSZ, &ws) == -1) {
+        perror("Error al cambiar el tamaño de la ventana de terminal");
+        return 1;
+    }
+
+    printf("El tamaño de la ventana de terminal ha sido cambiado a %d columnas x %d filas\n", ws.ws_col, ws.ws_row);
+
+    return 0;
+}
+```
+
+En este ejemplo, se llama a `ioctl` dos veces: la primera para obtener el tamaño actual de la ventana de terminal utilizando el comando `TIOCGWINSZ`, y la segunda para cambiar el tamaño de la ventana de terminal utilizando el comando `TIOCSWINSZ`. Si `ioctl` devuelve -1, indica que ocurrió un error, por lo que se imprime un mensaje de error utilizando `perror`. Si `ioctl` se ejecuta correctamente, se muestra el tamaño de la ventana de terminal actual y el nuevo tamaño después de cambiarlo.
+
+</details>
+
+___
