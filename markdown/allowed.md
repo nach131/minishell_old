@@ -2127,3 +2127,47 @@ En este ejemplo, después de cargar la entrada terminfo para el terminal actual 
 </details>
 
 ___
+
+### [tgetstr](../funciones/permitidas/tgetstr.c)
+
+<details>
+  <summary>Descripción</summary>
+
+La función `tgetstr` en C se utiliza para obtener una secuencia de escape o cadena de caracteres asociada a una capacidad de tipo cadena del terminal desde la base de datos terminfo. Esta función devuelve un puntero a la secuencia de escape si la capacidad está definida para el terminal actual, y `NULL` si no está definida.
+
+
+**Ejemplo 1: Obtener la secuencia de escape para mover el cursor hacia arriba**
+
+En este ejemplo, utilizaremos `tgetstr` para obtener la secuencia de escape necesaria para mover el cursor hacia arriba en el terminal.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <term.h>
+
+int main() {
+    char term_buffer[2048]; // Buffer para almacenar la entrada terminfo
+
+    // Cargar la entrada terminfo para el terminal actual
+    if (tgetent(term_buffer, getenv("TERM")) == -1) {
+        perror("Error al cargar la entrada terminfo");
+        return 1;
+    }
+
+    // Obtener la secuencia de escape para mover el cursor hacia arriba
+    char *cursor_up = tgetstr("up", NULL);
+    if (cursor_up != NULL) {
+        printf("Secuencia de escape para mover el cursor hacia arriba: %s\n", cursor_up);
+    } else {
+        printf("No se pudo obtener la secuencia de escape para mover el cursor hacia arriba.\n");
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, después de cargar la entrada terminfo para el terminal actual utilizando `tgetent`, utilizamos `tgetstr` para obtener la secuencia de escape asociada a la capacidad "up" (mover el cursor hacia arriba). Si `tgetstr` devuelve un puntero distinto de `NULL`, mostramos la secuencia de escape en la salida. De lo contrario, imprimimos un mensaje indicando que no se pudo obtener la secuencia de escape.
+
+</details>
+
+___
