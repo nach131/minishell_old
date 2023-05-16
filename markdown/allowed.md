@@ -1983,3 +1983,55 @@ En este ejemplo, se obtiene la configuración actual del terminal utilizando `tc
 </details>
 
 ___
+
+### [tgetent](../funciones/permitidas/tgetent.c)
+
+<details>
+  <summary>Descripción</summary>
+
+La función `tgetent` en C se utiliza para cargar una entrada de la base de datos terminfo que corresponde al nombre del terminal especificado. Proporciona acceso a la información de configuración específica del terminal, como capacidades y atributos.
+
+**Ejemplo 1: Obtención de la entrada terminfo para el terminal actual**
+
+En este ejemplo, se utiliza `tgetent` para cargar la entrada terminfo correspondiente al terminal actual y mostrar algunas de las capacidades disponibles.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <term.h>
+
+int main()
+{
+	char term_buffer[2048]; // Buffer para almacenar la entrada terminfo
+
+	// Cargar la entrada terminfo para el terminal actual
+	if (tgetent(term_buffer, getenv("TERM")) == -1)
+	{
+		perror("Error al cargar la entrada terminfo");
+		return 1;
+	}
+
+	// Obtener y mostrar la capacidad de color del terminal
+	if (tigetflag("colors") != -1)
+	{
+		int num_colors = tigetnum("colors");
+		printf("El terminal admite %d colores.\n", num_colors);
+	}
+	else
+	{
+		printf("El terminal no admite colores.\n");
+	}
+
+	return 0;
+}
+```
+
+En este ejemplo, se utiliza `tgetent` para cargar la entrada terminfo para el terminal actual utilizando el valor de la variable de entorno `TERM`. Si `tgetent` devuelve -1, se imprime un mensaje de error utilizando `perror`.
+
+Luego, se utiliza `tigetflag` para verificar si el terminal admite colores (`colors`). Si la capacidad está disponible, se utiliza `tigetnum` para obtener el número de colores admitidos por el terminal y se muestra en la salida.
+
+Compilar este código en macOS, debes enlazarlo con la biblioteca `curses`. Puedes hacerlo usando la opción `-lcurses` al compilar:
+
+</details>
+
+___
