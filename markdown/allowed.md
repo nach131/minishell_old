@@ -172,8 +172,6 @@ La función `wait` en C es una llamada al sistema que suspende la ejecución del
 
 Donde `status` es un puntero a una variable de tipo `int` que contiene información sobre el estado del proceso hijo que finalizó su ejecución.
 
-A continuación, se presentan tres ejemplos que ilustran el uso de la función `wait` en C:
-
 #### Ejemplo 1: Esperando a un proceso hijo
 
 ```c
@@ -370,8 +368,6 @@ pid_t wait3(int *status, int options, struct rusage *rusage);
 - `options`: Un entero que puede contener varias opciones que afectan el comportamiento de `wait3`. Puede ser `0` para ninguna opción o utilizar la macro `WNOHANG` para realizar una espera no bloqueante.
 
 - `rusage`: Un puntero a una estructura `rusage` donde `wait3` almacenará información detallada sobre el uso de recursos del proceso hijo, como tiempo de CPU, uso de memoria, etc. Puede ser `NULL` si no se necesita esta información.
-
-A continuación, se presentan dos ejemplos de código para ilustrar el uso de la función `wait3`:
 
 **Ejemplo 1: Esperar a cualquier proceso hijo y obtener información de uso de recursos**
 
@@ -1357,7 +1353,7 @@ ___
 <details>
   <summary>Descripción</summary>
 
-Se utiliza para leer las entradas de un directorio abierto previamente utilizando la función `opendir`. Proporciona una forma de acceder a los archivos y subdirectorios contenidos en el directorio. A continuación, te proporcionaré dos ejemplos de cómo usar la función `readdir` en código.
+Se utiliza para leer las entradas de un directorio abierto previamente utilizando la función `opendir`. Proporciona una forma de acceder a los archivos y subdirectorios contenidos en el directorio.
 
 **Ejemplo 1: Listar archivos de un directorio**
 
@@ -1708,3 +1704,48 @@ int main() {
 En este ejemplo, se utiliza `fileno` para obtener el descriptor de archivo correspondiente a la salida estándar (`stdout`), y luego se pasa este descriptor de archivo a `ttyname`. Si `ttyname` devuelve un puntero distinto de `NULL`, indica que `stdout` está asociado con un terminal, por lo que se muestra el nombre del dispositivo de terminal en la salida estándar.
 
 </details>
+
+___
+
+### [ttyslot](../funciones/permitidas/ttyslot.c)
+
+<details>
+  <summary>Descripción</summary>
+
+La función `ttyslot` se utiliza para obtener el número de la ranura (slot) en la tabla de terminales del archivo `/etc/ttys`. Esta función se utiliza principalmente en sistemas Unix para determinar el índice del terminal asociado con el proceso actual.
+
+
+En este ejemplo, se utiliza `ttyslot` para obtener el número de ranura del terminal actual y luego se utiliza ese número para obtener información adicional del terminal utilizando la función `getttyent`.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <ttyent.h>
+
+int main() {
+    int slot = ttyslot();
+    if (slot == -1) {
+        perror("Error al obtener el número de ranura del terminal");
+        return 1;
+    }
+
+    struct ttyent *tty = getttyent();
+    if (tty == NULL) {
+        perror("Error al obtener la información del terminal");
+        return 1;
+    }
+
+    printf("El terminal asociado con la ranura %d es: %s\n", slot, tty->ty_name);
+
+    endttyent();
+
+    return 0;
+}
+```
+
+En este ejemplo, se obtiene el número de ranura del terminal actual utilizando `ttyslot`. Luego, se utiliza ese número para llamar a `getttyent`, que devuelve un puntero a una estructura `ttyent` que contiene información adicional del terminal asociado con la ranura. Si `getttyent` devuelve `NULL`, indica que ocurrió un error al obtener la información del terminal. En caso contrario, se muestra el nombre del terminal en la salida estándar utilizando `tty->ty_name`. Finalmente, se llama a `endttyent` para cerrar el archivo `/etc/ttys` y liberar los recursos.
+
+</details>
+
+___
