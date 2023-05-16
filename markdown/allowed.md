@@ -2226,3 +2226,70 @@ En este ejemplo, después de cargar la entrada terminfo para el terminal actual 
 </details> 
 
 ___
+
+### [tputs](../funciones/permitidas/tputs.c)
+
+```c
+int tputs(const char *str, int affcnt, int (*putc)(int));
+```
+
+<details> 
+  <summary>Descripción</summary>
+
+La función `tputs` en C se utiliza para enviar secuencias de escape al terminal. Permite enviar una cadena de control al terminal para realizar operaciones como mover el cursor, cambiar los colores, borrar la pantalla, etc.
+
+- `str`: La cadena de control que se enviará al terminal.
+- `affcnt`: El número de líneas afectadas por la operación (opcional, se puede pasar 0).
+- `putc`: Puntero a una función que envía caracteres al terminal (opcional, se puede pasar NULL).
+
+La función `tputs` toma como entrada una cadena de control `str` y la envía al terminal. Esta cadena de control contiene secuencias de escape que representan operaciones específicas. El parámetro `affcnt` se utiliza para indicar cuántas líneas se verán afectadas por la operación (puede ser 0 si no es relevante). El parámetro `putc` se utiliza para especificar una función que envía caracteres al terminal (puede ser NULL para usar `putchar` por defecto).
+
+La función `tputs` devuelve un valor distinto de 0 si se produjo un error, de lo contrario, devuelve 0.
+
+**Ejemplo 1: Imprimir texto en negrita**
+
+En este ejemplo, utilizaremos la función `tputs` para enviar una secuencia de escape al terminal y hacer que el texto se imprima en negrita.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <term.h>
+#include <curses.h>
+
+int main() {
+    char term_buffer[2048]; // Buffer para almacenar la entrada terminfo
+
+    // Cargar la entrada terminfo para el terminal actual
+    if (tgetent(term_buffer, getenv("TERM")) == -1) {
+        perror("Error al cargar la entrada terminfo");
+        return 1;
+    }
+
+    // Obtener la secuencia de escape para imprimir en negrita
+    char *bold_seq = tgetstr("bold", NULL);
+    if (bold_seq != NULL) {
+        // Enviar la secuencia de escape al terminal utilizando tputs
+        if (tputs(bold_seq, 1, putchar) == ERR) {
+            perror("Error al enviar la secuencia de escape");
+            return 1;
+        }
+
+        // Imprimir texto en negrita
+        printf("Texto en negrita\n");
+
+        // Restaurar el formato normal
+        char *reset_seq = tgetstr("sgr0", NULL);
+        if (reset_seq != NULL) {
+            tputs(reset_seq, 1, putchar);
+        }
+    } else {
+        printf("No se pudo obtener la secuencia de escape para imprimir en negrita.\n");
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, después de cargar la entrada terminfo para el terminal actual utilizando `tgetent`, utilizamos `tgetstr` para obtener la capacidad de impresión en negrita `"bold"`. Luego, utilizamos `tputs` para enviar la secuencia de escape al terminal y hacer que el texto se imprima en negrita. Después de imprimir el texto en negrita, utilizamos otra secuencia de escape `"sgr0"` para restablecer el formato al valor normal.
+
+</details> 
