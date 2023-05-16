@@ -1832,3 +1832,80 @@ En este ejemplo, se llama a `getenv` con el argumento `"HOME"` para obtener el v
 </details>
 
 ___
+
+### [tcsetattr](../funciones/permitidas/tcsetattr.c)
+
+<details>
+  <summary>Descripción</summary>
+
+La función `tcsetattr` en C se utiliza para establecer la configuración de un terminal asociado a un descriptor de archivo. Permite configurar varios aspectos del terminal, como la velocidad de transmisión, el control de flujo, los caracteres de terminal especiales, entre otros.
+
+**Ejemplo 1: Configuración básica del terminal**
+
+En este ejemplo, se utiliza `tcsetattr` para establecer una configuración básica del terminal, como la velocidad de transmisión y los modos de línea.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <termios.h>
+
+int main() {
+    struct termios new_attr;
+    if (tcgetattr(STDIN_FILENO, &new_attr) == -1) {
+        perror("Error al obtener la configuración del terminal");
+        return 1;
+    }
+
+    // Configuración básica del terminal
+    new_attr.c_iflag &= ~(IGNBRK | BRKINT | PARMRK | ISTRIP | INLCR | IGNCR | ICRNL | IXON);
+    new_attr.c_oflag &= ~OPOST;
+    new_attr.c_lflag &= ~(ECHO | ECHONL | ICANON | ISIG | IEXTEN);
+    new_attr.c_cflag &= ~(CSIZE | PARENB);
+    new_attr.c_cflag |= CS8;
+
+    if (tcsetattr(STDIN_FILENO, TCSANOW, &new_attr) == -1) {
+        perror("Error al establecer la configuración del terminal");
+        return 1;
+    }
+
+    printf("Configuración del terminal establecida correctamente.\n");
+
+    return 0;
+}
+```
+
+En este ejemplo, se obtiene la configuración actual del terminal utilizando `tcgetattr` y se almacena en la estructura `new_attr`. Luego, se modifican los diferentes campos de `new_attr` para establecer la configuración deseada del terminal. Finalmente, se llama a `tcsetattr` con el flag `TCSANOW` para aplicar la configuración de forma inmediata. Si `tcsetattr` devuelve -1, indica que ocurrió un error, por lo que se imprime un mensaje de error utilizando `perror`. Si `tcsetattr` se ejecuta correctamente, se muestra un mensaje indicando que la configuración del terminal se estableció correctamente.
+
+**Ejemplo 2: Restaurar la configuración original del terminal**
+
+En este ejemplo, se utiliza `tcsetattr` para restaurar la configuración original del terminal después de aplicar una configuración modificada.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <termios.h>
+
+int main() {
+    struct termios orig_attr;
+    if (tcgetattr(STDIN_FILENO, &orig_attr) == -1) {
+        perror("Error al obtener la configuración original del terminal");
+        return 1;
+    }
+
+    // Aplicar una configuración modificada aquí...
+
+    if (tcsetattr(STDIN_FILENO, TCSANOW, &orig_attr) == -1) {
+        perror("Error al restaurar la configuración original del terminal");
+        return 1;
+    }
+
+    printf("Configuración original del terminal restaurada correctamente.\n");
+
+    return 0;
+}
+```
+
+En este ejemplo, se obtiene la configuración original del terminal utilizando `tcgetattr` y se almacena en la estructura `orig_attr`. Luego, se aplica cualquier configuración modificada en el bloque correspondiente. Finalmente
+</details>
+
+___
