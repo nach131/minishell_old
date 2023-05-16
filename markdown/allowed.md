@@ -2171,3 +2171,58 @@ En este ejemplo, después de cargar la entrada terminfo para el terminal actual 
 </details>
 
 ___
+
+### [tgoto](../funciones/permitidas/tgoto.c)
+
+
+```c
+char *tgoto(const char *cap, int col, int row);
+```
+
+<details> 
+  <summary>Descripción</summary>
+
+La función `tgoto` se utiliza para construir secuencias de escape que mueven el cursor a una posición específica en el terminal, basándose en la capacidad de posicionamiento del cursor del terminal.
+
+- `cap`: La capacidad de posicionamiento del cursor del terminal.
+- `col`: La columna a la que se desea mover el cursor.
+- `row`: La fila a la que se desea mover el cursor.
+
+La función `tgoto` toma como entrada una capacidad de posicionamiento del cursor del terminal (`cap`) y las coordenadas (`col` y `row`) a las que se desea mover el cursor. Devuelve una secuencia de escape que realiza el movimiento necesario para llegar a la posición especificada.
+
+**Ejemplo 1: Mover el cursor a una posición específica**
+
+En este ejemplo, utilizaremos la función `tgoto` para generar una secuencia de escape que mueva el cursor a una posición específica en el terminal.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <term.h>
+#include <curses.h>
+
+int main() {
+    char term_buffer[2048]; // Buffer para almacenar la entrada terminfo
+
+    // Cargar la entrada terminfo para el terminal actual
+    if (tgetent(term_buffer, getenv("TERM")) == -1) {
+        perror("Error al cargar la entrada terminfo");
+        return 1;
+    }
+
+    // Obtener la secuencia de escape para mover el cursor a la posición (5, 10)
+    char *cursor_pos = tgoto(tgetstr("cm", NULL), 5, 10);
+    if (cursor_pos != NULL) {
+        printf("Secuencia de escape para mover el cursor a la posición (5, 10): %s\n", cursor_pos);
+    } else {
+        printf("No se pudo obtener la secuencia de escape para mover el cursor.\n");
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, después de cargar la entrada terminfo para el terminal actual utilizando `tgetent`, utilizamos `tgetstr` para obtener la capacidad de posicionamiento del cursor `"cm"`. Luego, utilizamos `tgoto` para generar la secuencia de escape que mueve el cursor a la posición (5, 10). Si la secuencia de escape se genera correctamente, la mostramos en la salida. De lo contrario, imprimimos un mensaje indicando que no se pudo obtener la secuencia de escape.
+
+</details> 
+
+___
