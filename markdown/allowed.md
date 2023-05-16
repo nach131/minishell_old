@@ -2035,3 +2035,51 @@ Compilar este código en macOS, debes enlazarlo con la biblioteca `curses`. Pued
 </details>
 
 ___
+
+### [tgetflag](../funciones/permitidas/tgetflag.c)
+
+<details>
+  <summary>Descripción</summary>
+
+La función `tgetflag` en C se utiliza para obtener el valor de una capacidad de tipo bandera (flag) del terminal desde la base de datos terminfo. Esta función devuelve -1 si la capacidad no está definida para el terminal actual, y 0 o 1 dependiendo del valor de la capacidad.
+
+
+**Ejemplo 1: Verificar si el terminal admite el cursor parpadeante**
+
+En este ejemplo, utilizaremos `tgetflag` para verificar si el terminal actual admite el cursor parpadeante.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <term.h>
+
+int main() {
+    char term_buffer[2048]; // Buffer para almacenar la entrada terminfo
+
+    // Cargar la entrada terminfo para el terminal actual
+    if (tgetent(term_buffer, getenv("TERM")) == -1) {
+        perror("Error al cargar la entrada terminfo");
+        return 1;
+    }
+
+    // Verificar si el terminal admite el cursor parpadeante
+    if (tgetflag("blink") != -1) {
+        printf("El terminal admite el cursor parpadeante.\n");
+    } else {
+        printf("El terminal no admite el cursor parpadeante.\n");
+    }
+     if (tgetflag("rev") != -1) {
+        printf("El terminal admite el resaltado de texto.\n");
+    } else {
+        printf("El terminal no admite el resaltado de texto.\n");
+    }
+
+    return 0;
+}
+```
+
+En este ejemplo, después de cargar la entrada terminfo para el terminal actual utilizando `tgetent`, utilizamos `tgetflag` para obtener el valor de la capacidad "blink" (parpadeo). Si `tgetflag` devuelve un valor distinto de -1, significa que la capacidad está definida para el terminal actual. En este caso, imprimimos un mensaje indicando que el terminal admite el cursor parpadeante. De lo contrario, imprimimos un mensaje indicando que no lo admite.
+
+</details>
+
+___
