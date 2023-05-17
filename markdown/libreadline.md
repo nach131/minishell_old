@@ -54,12 +54,14 @@ En la compilación es necesario incluir el flag `-lreadline`
 
 La opción -lreadline le indica al compilador que enlace con la biblioteca libreadline.
 
-## Inslado desde Brew en 42
+## Instalar Brew en 42
 
-
-    rm -rf $HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew && echo 'export PATH=$HOME/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc && brew update
-
-    brew install readline
+```
+rm -rf $HOME/.brew && git clone --depth=1 https://github.com/Homebrew/brew $HOME/.brew && echo 'export PATH=$HOME/.brew/bin:$PATH' >> $HOME/.zshrc && source $HOME/.zshrc && brew update
+```
+```
+brew install readline
+```
 
 Comprobación de la instalación
 

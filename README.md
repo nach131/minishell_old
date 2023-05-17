@@ -12,5 +12,5 @@
 
 ## [Funciones permitidas](markdown/allowed.md)
 
-## [Instalción libreadline](markdown/libreadline.md)
+## [Instalación libreadline](markdown/libreadline.md)
 
