@@ -2,3 +2,4 @@ cositas a hacer....!!!
 
 getenv usar para asignar el valor de  home a "~"
 
+https://www.codequoi.com/en/creating-and-killing-child-processes-in-c/
