@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
+/*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/18 15:09:30 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/18 18:14:16 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	data = ft_calloc(sizeof(t_data), 1);
 	data->env = env;
+	// esto es para comprobar
 	// if (!check_params(&data, argc, argv))
 	// 	exit_msl(NULL, EXIT_FAILURE); // pendiente
 	// if (data->interactive == true)
