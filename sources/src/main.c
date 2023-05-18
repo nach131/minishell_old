@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/18 17:32:27 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/18 18:18:33 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,14 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	data = ft_calloc(sizeof(t_data), 1);
 	data->env_old = env;
-	// if (!check_params(&data, argc, argv))
-	// 	exit_msl(NULL, EXIT_FAILURE); // pendiente
-	// if (data->interactive == true)
-	// 	msl_interact(&data); // pendiente
-	// else
-	// 	msl_non_interact(&data); // pendiente
-	// exit_msl(&data, gbl_exit_code);
+	// es no es nada
+	//  if (!check_params(&data, argc, argv))
+	//  	exit_msl(NULL, EXIT_FAILURE); // pendiente
+	//  if (data->interactive == true)
+	//  	msl_interact(&data); // pendiente
+	//  else
+	//  	msl_non_interact(&data); // pendiente
+	//  exit_msl(&data, gbl_exit_code);
 	start(data);
 	return (0);
 }
