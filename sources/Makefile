@@ -55,6 +55,7 @@ INCLUDES 	:= inc/
 SRC_DIR 	:= src/
 OBJ_DIR 	:= obj/
 UTILS_DIR	:= utils/
+TOOLS_DIR	:= tools/
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ LIB ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
@@ -65,19 +66,22 @@ INCS := $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/)
 
 MAIN_FILES	:=	main
 UTILS_FILES	:= uno
+TOOLS_FILES := printer
 
 SRC_MAIN_FILES	+=$(MAIN_FILES)
-# SRCS_MAIN := $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_MAIN_FILES)))
 OBJS_MAIN := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_MAIN_FILES)))
 DEPS_MAIN := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_MAIN_FILES)))
 
 SRC_UTILS_FILES	+=$(addprefix $(UTILS_DIR),$(UTILS_FILES))
-# SRCS_MAIN := $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_UTILS_FILES)))
 OBJS_UTILS := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_UTILS_FILES)))
 DEPS_UTILS := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_UTILS_FILES)))
 
-ALL_OBJS += $(OBJS_UTILS) $(OBJS_MAIN) 
-DEPS += $(DEPS_MAIN) $(DEPS_UTILS)
+SRC_TOOLS_FILES	+=$(addprefix $(TOOLS_DIR),$(TOOLS_FILES))
+OBJ_TOOLS := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_TOOLS_FILES)))
+DEPS_TOOLS := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_TOOLS_FILES)))
+
+ALL_OBJS += $(OBJS_UTILS) $(OBJS_MAIN) $(OBJ_TOOLS)
+DEPS += $(DEPS_MAIN) $(DEPS_UTILS) $(DEPS_TOOLS)
 
 # ◼◼◼◼◼◼◼◼◼◼◼◼◼ READLINE ◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼#
 

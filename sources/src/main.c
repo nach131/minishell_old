@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/18 12:47:45 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/18 13:06:58 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
 #include "minishell.h"
+#include "tools.h"
 
 // // Función para salir del programa,
 // // cerrando todos los fd y liberando memoria.
@@ -76,5 +77,6 @@ int	main(int argc, char **argv, char **env)
 	// else
 	// 	msl_non_interact(&data); // pendiente
 	// exit_msl(&data, gbl_exit_code);
+	printf_env(env);
 	return (0);
 }
