@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/12 10:49:06 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/18 12:47:45 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@
 // 	if (data)
 // 	{
 // 		if (data->cmd && data->cmd->fds)
-// 			close_fds(data->cmd, true); //pendiente
-// 		free_data(data, true);          //pendiente
+// 			close_fds(data->cmd, true); // pendiente
+// 		free_data(data, true);          // pendiente
 // 	}
 // 	exit(gbl);
 // }
 
 //
-// Chequeamos los argumentos al iniciar minishell. El programa funcionará tanto
+// Chequeamos los argumentos al iniciar minishell.El programa funcionará tanto
 // // si no hay argumentos como si se proporciona un -c seguido de un argumento.
 // // Devolverá true si minishell puede proceder y printeará false si no.
 // //
@@ -54,83 +54,27 @@
 // 	return (true);
 // }
 
-// // Programa principal, arranca minishell y lo primero que hacemos es check de
-// // parámetros. Luego determinamos si funciona en modo interactivo o no, y en
-// // función de cada caso llamamos a la función correspondiente.
-// //
-// // La salida del programa es con el último comando.
-// //
-// int	main(int argc, char **argv, char **env)
-// {
-// 	t_data	data;
-
-// 	ft_memset(&data, 0, sizeof(t_data));
-// 	if (!check_params(&data, argc, argv))
-// 		exit_msl(NULL, EXIT_FAILURE); //pendiente
-// 	if (data.interactive == true)
-// 		msl_interact(&data); //pendiente
-// 	else
-// 		msl_non_interact(&data); //pendiente
-// 	exit_msl(&data, gbl_exit_code);
-// 	return (0);
-// }
-
-// int	main(void)
-// {
-// 	char	*linea;
-
-// 	ft_printf(CYAN "Main\n");
-// 	linea = readline("Ingrese una línea de texto: ");
-// 	printf("La línea ingresada es:\n%s\n", linea);
-// 	free(linea);
-// }
-
-// int	main(void)
-// {
-// 	HIST_ENTRY	*entry;
-
-// 	// Agregamos algunas entradas al historial
-// 	add_history("comando1");
-// 	add_history("comando2");
-// 	add_history("comando3");
-// 	// Imprimimos el historial actual
-// 	printf(CYAN "Historial antes de borrar:\n");
-// 	// Acceder al tercer comando del historial
-// 	// entry = history_get(3);
-// 	for (int i = history_length; i > 0; i--)
-// 	{
-// 		entry = history_get(i);
-// 		if (entry)
-// 		{
-// 			printf("%s\n", entry->line);
-// 		}
-// 	}
-// 	printf(MAGENTA "Numero en el history: %d\n", history_length);
-// 	rl_clear_history();
-// 	printf(RED "Despues de rl_clear_history: %d\n", history_length);
-// 	return (0);
-// }
-
-int	main(void)
+// Programa principal, arranca minishell y lo primero que hacemos es check de
+// parámetros. Luego determinamos si funciona en modo interactivo o no, y en
+// función de cada caso llamamos a la función correspondiente.
+//
+// La salida del programa es con el último comando.
+//
+int	main(int argc, char **argv, char **env)
 {
-	char	*line;
+	t_data	*data;
 
-	print_util();
-	// Ciclo de lectura y agregado de líneas al historial
-	while ((line = readline("Ingresa un comando: ")) != NULL)
-	{
-		add_history(line);
-		free(line);
-	}
+	(void)argc;
+	(void)argv;
+	(void)env;
+	// ft_memset(&data, 0, sizeof(t_data));
+	data = ft_calloc(sizeof(t_data), 1);
+	// if (!check_params(&data, argc, argv))
+	// 	exit_msl(NULL, EXIT_FAILURE); // pendiente
+	// if (data->interactive == true)
+	// 	msl_interact(&data); // pendiente
+	// else
+	// 	msl_non_interact(&data); // pendiente
+	// exit_msl(&data, gbl_exit_code);
 	return (0);
 }
-
-// int	main(void)
-// {
-// 	// ft_printf(CYAN "Desde Main\n");
-// 	ft_printf(RED "main norma\n");
-// 	printf("numero: %d\n", ft_isalnum(49));
-// 	ft_message(SUCCESS, "TOMATE");
-// 	print_util();
-// 	return (0);
-// }

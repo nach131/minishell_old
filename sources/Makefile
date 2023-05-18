@@ -38,7 +38,7 @@ LEAKS		:= -fsanitize=address
 RDFLAGS	:= -lreadline -lhistory
 MODE		:= normal
 
-ifeq ($(MODE),g3)
+ifeq ($(MODE),g)
 	CFLAGS += -g3
 endif
 

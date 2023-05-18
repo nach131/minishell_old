@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/12 12:25:39 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/18 12:46:56 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "error.h"
 # include "ft_printf.h"
 # include "functions.h"
-# include "readline/history.h"
 # include "libft.h"
+# include "readline/history.h"
 # include "readline/readline.h"
 # include <fcntl.h>
 # include <limits.h>
@@ -33,7 +33,7 @@
 
 // VARIABLE GLOBAL
 
-extern int		gbl_exit_code;
+extern int			gbl_exit_code;
 
 // MACROS
 
@@ -46,25 +46,40 @@ extern int		gbl_exit_code;
 
 // STRUCTS
 
+enum				parsec
+{
+	NEW_LINE = '\n',
+	WHITE_SPACE = ' ',
+	DOUBLE_QUOTE = '\"',
+	ENV = '$',
+	QOUTE = '\'',
+	_NULL = '0',
+	REDIR_IN = '<',
+	REDIR_OUT = '>',
+	ESCAPE = '\\',
+	PIPE = '|',
+};
+
 typedef struct s_fds
 {
-	char		*in_file;
-	char		*out_file;
-}				t_fds;
+	char			*in_file;
+	char			*out_file;
+}					t_fds;
 
-typedef struct s_command
+typedef struct s_cmd
 {
-	char		*command;
-	char		**args;
-	char		*path;
-	t_fds		*fds;
-}				t_command;
+	char			*command;
+	char			**args;
+	char			*path;
+	t_fds			*fds;
+	struct s_cmd	*next;
+}					t_cmd;
 
 typedef struct s_data
 {
-	bool		interactive;
-	t_command	*cmd;
-	pid_t		pid;
-}				t_data;
+	bool			interactive;
+	t_cmd			*cmd;
+	pid_t			pid;
+}					t_data;
 
 #endif
