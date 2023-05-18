@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/18 12:46:56 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/18 13:33:52 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_data
 {
 	bool			interactive;
 	t_cmd			*cmd;
+	char			**env;
 	pid_t			pid;
 }					t_data;
 
