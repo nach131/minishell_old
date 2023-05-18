@@ -33,7 +33,7 @@ CC			:= gcc
 AR 			:= ar -rcs
 RM			:= rm -rf
 MKDIR		:= -mkdir -p
-CFLAGS	:= -Wall -Wextra -Werror
+CFLAGS	:= -Wall -Wextra -Werror -g3
 LEAKS		:= -fsanitize=address
 RDFLAGS	:= -lreadline -lhistory
 MODE		:= normal
@@ -65,7 +65,7 @@ INCS := $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/)
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ SOURCES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 MAIN_FILES	:=	main
-UTILS_FILES	:= uno
+UTILS_FILES	:= uno env
 TOOLS_FILES := printer
 
 SRC_MAIN_FILES	+=$(MAIN_FILES)

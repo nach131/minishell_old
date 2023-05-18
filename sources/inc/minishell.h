@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/18 17:30:46 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/18 21:13:30 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,18 +75,11 @@ typedef struct s_cmd
 	struct s_cmd	*next;
 }					t_cmd;
 
-typedef struct s_env
-{
-	char *name;
-	struct s_env *next;
-} t_env;
-
 typedef struct s_data
 {
+	t_list			*env;
 	bool			interactive;
 	t_cmd			*cmd;
-	char **env_old;
-	t_env *env;
 	char			*line;
 	pid_t			pid;
 }					t_data;

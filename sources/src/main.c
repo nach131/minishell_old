@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/18 18:18:33 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/18 21:14:06 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,29 @@
 
 void	start(t_data *data)
 {
-	printf_env(data->env_old);
 	while (1)
 	{
 		data->line = readline("Minishell> ");
 		printf("La línea ingresada es:\n%s\n", data->line);
 		free(data->line);
 	}
+}
+
+t_list	*init_env(char **env)
+{
+	int		i;
+	t_list	*new;
+
+	i = 0;
+	while (env[i] != NULL)
+	{
+		if (!i)
+			new = ft_lstnew(env[i]);
+		else
+			ft_lstadd_back(&new, ft_lstnew(env[i]));
+		i++;
+	}
+	return (new);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -80,8 +96,12 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	data = ft_calloc(sizeof(t_data), 1);
-	data->env_old = env;
-	// es no es nada
+	data->env = init_env(env);
+	while (data->env)
+	{
+		printf(YELLOW "%s\n", data->env->content);
+		data->env = data->env->next;
+	}
 	//  if (!check_params(&data, argc, argv))
 	//  	exit_msl(NULL, EXIT_FAILURE); // pendiente
 	//  if (data->interactive == true)

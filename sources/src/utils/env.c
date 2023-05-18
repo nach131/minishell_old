@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printer.c                                          :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/18 12:52:58 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/18 21:13:42 by nmota-bu         ###   ########.fr       */
+/*   Created: 2023/05/18 20:01:40 by nmota-bu          #+#    #+#             */
+/*   Updated: 2023/05/18 20:47:13 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,18 @@
 /* ║                     https://github.com/Carlos1073                      ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
-#include "colorsft.h"
-#include "ft_printf.h"
+#include "minishell.h"
 
-// int	countPointers(char **env)
+// t_env	*new_env(char *name)
 // {
-// 	int	i;
+// 	t_env	*new;
 
-// 	i = 0;
-// 	while (env[i] != NULL)
-// 		i++;
-// 	return (i);
+// 	new = ft_calloc(1, sizeof(t_env));
+// 	new->name = name;
+// 	return (new);
 // }
 
-// void	printf_env(char **env)
+// t_env *add_env(t_env *env, char *name)
 // {
-// 	int	i;
 
-// 	i = 0;
-// 	while (env[i] != NULL)
-// 	{
-// 		ft_printf(CYAN "%s\n", env[i]);
-// 		i++;
-// 	}
-// 	ft_printf(ORANGE "TOTAL: %d\n", countPointers(env));
 // }
