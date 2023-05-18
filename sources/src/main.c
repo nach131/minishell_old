@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/18 15:09:30 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/18 17:32:27 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@
 
 void	start(t_data *data)
 {
-	printf_env(data->env);
+	printf_env(data->env_old);
 	while (1)
 	{
 		data->line = readline("Minishell> ");
@@ -80,7 +80,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	data = ft_calloc(sizeof(t_data), 1);
-	data->env = env;
+	data->env_old = env;
 	// if (!check_params(&data, argc, argv))
 	// 	exit_msl(NULL, EXIT_FAILURE); // pendiente
 	// if (data->interactive == true)
