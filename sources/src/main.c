@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/18 13:35:58 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/18 15:09:30 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@
 
 //
 // Chequeamos los argumentos al iniciar minishell.El programa funcionará tanto
-// // si no hay argumentos como si se proporciona un -c seguido de un argumento.
-// // Devolverá true si minishell puede proceder y printeará false si no.
-// //
+// si no hay argumentos como si se proporciona un -c seguido de un argumento.
+// Devolverá true si minishell puede proceder y printeará false si no.
+//
+
 // static bool	check_params(t_data *data, int argc, char **argv)
 // {
 // 	if (argc != 1 && argc != 3)
@@ -60,7 +61,18 @@
 // función de cada caso llamamos a la función correspondiente.
 //
 // La salida del programa es con el último comando.
-//
+
+void	start(t_data *data)
+{
+	printf_env(data->env);
+	while (1)
+	{
+		data->line = readline("Minishell> ");
+		printf("La línea ingresada es:\n%s\n", data->line);
+		free(data->line);
+	}
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_data	*data;
@@ -76,6 +88,6 @@ int	main(int argc, char **argv, char **env)
 	// else
 	// 	msl_non_interact(&data); // pendiente
 	// exit_msl(&data, gbl_exit_code);
-	printf_env(data->env);
+	start(data);
 	return (0);
 }
