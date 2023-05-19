@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 20:01:40 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/18 20:47:13 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/19 13:29:06 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,46 @@
 
 #include "minishell.h"
 
-// t_env	*new_env(char *name)
+// Encuentra el valor pasado en un lista
+int	find_env(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s2[i])
+	{
+		if (s1[i] == s2[i])
+			i++;
+		else
+			return (1);
+	}
+	if (s1[i] == '=')
+		return (0);
+	return (1);
+}
+
+// quiata el nombre del env y devuelve el valor
+char	*env_value(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (*s)
+	{
+		if (*s == '=')
+		{
+			s++;
+			return (s);
+		}
+		s++;
+	}
+	return (s);
+}
+
+// tmp = ft_lstfind(data->env, "OLDPWD", find_env);
+// if (tmp)
 // {
-// 	t_env	*new;
-
-// 	new = ft_calloc(1, sizeof(t_env));
-// 	new->name = name;
-// 	return (new);
-// }
-
-// t_env *add_env(t_env *env, char *name)
-// {
-
+// 	ft_printf(MAGENTA "tmp: %s\n", tmp->content);
+// 	tmp->content = env_value(tmp->content);
+// 	ft_printf(CYAN "tmp: %s\n", tmp->content);
 // }
