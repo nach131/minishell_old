@@ -102,7 +102,7 @@ $(NAME):	$(ALL_OBJS)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c $(LIBSFT) Makefile
 			@$(MKDIR) $(dir $@)
-			@echo "$(ORANGE) Compilando objetos  ➟  $(BLUE)$< $(WHITE)"
+			@echo "$(ORANGE) Compilando Minishell  ➟  $(BLUE)$< $(WHITE)"
 			@$(CC) -MMD -MP $(CFLAGS) $(RL_INCDIR) $(INCS) -c $< -o $@
 
 LIBFS:
