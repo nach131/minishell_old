@@ -115,7 +115,7 @@ int	main(int argc, char **argv, char **env)
 	// 	data->env = data->env->next;
 	// }
 	// ft_lstprint(data->env);
-	tmp = ft_lstfind(data->env, "OLDPWD", find_env);
+	tmp = ft_lstfind(data->env, "SSH_AUTH_SOCK", find_env);
 	if (tmp)
 	{
 		ft_printf(MAGENTA "tmp: %s\n", tmp->content);
