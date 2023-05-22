@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/19 08:42:02 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/22 12:01:46 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,8 @@ typedef struct s_data
 	char			*line;
 	pid_t			pid;
 }					t_data;
+
+void				handle_int(int sig);
+void				handle_quit(int sig);
 
 #endif

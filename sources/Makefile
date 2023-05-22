@@ -65,7 +65,7 @@ INCS := $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/)
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ SOURCES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 MAIN_FILES	:=	main
-UTILS_FILES	:= uno env
+UTILS_FILES	:= env signal
 TOOLS_FILES := printer
 
 SRC_MAIN_FILES	+=$(MAIN_FILES)
