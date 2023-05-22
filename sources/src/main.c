@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/22 12:05:56 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/22 12:43:28 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@
 
 void	start(t_data *data)
 {
+	// signal(SIGTSTP, SIG_IGN);
 	signal(SIGINT, (void *)handle_int);
 	signal(SIGQUIT, (void *)handle_quit);
 	while (1)

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 11:49:58 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/22 12:06:27 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/22 12:43:52 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@
 
 #include "minishell.h"
 
+// ctl+C
 void	handle_int(int sig)
 {
 	(void)sig;
-	write(1, " por hacer\n", 10);
-	write(1, "\n", 1);
+	// write(1, " por hacer\n", 10);
+	// write(1, "\n", 1);
 }
 
 void	handle_quit(int sig)
