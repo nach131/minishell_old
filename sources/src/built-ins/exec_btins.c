@@ -6,16 +6,17 @@
 /*   By: carles <carles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/05/23 23:26:26 by carles           ###   ########.fr       */
+/*   Updated: 2023/05/24 00:21:54 by carles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "ft_printf.h"
+#include "minishell.h"
 // Chequea qué comando estamos introduciendo, si no es un builtin devuelve -1. 
 //	Si es un builtin ejecuta la función correspondiente.
 //
-int	execute_builtin(t_data *data, t_command *cmd)
+int	execute_builtin(t_data *data, t_cmd *cmd)
 {
 	int	res;
 
