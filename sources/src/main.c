@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/23 16:05:27 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:31:20 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,29 +101,16 @@ t_list	*init_env(char **env)
 int	main(int argc, char **argv, char **env)
 {
 	t_data	*data;
-	t_list	*tmp;
 
+	// t_list	*tmp;
 	(void)argc;
 	(void)argv;
 	data = ft_calloc(sizeof(t_data), 1);
 	// ft_bzero(&data, sizeof(t_data));
 	data->env = init_env(env);
 	// system("leaks minishell");
-	ft_printf(GREEN "env:%d\n", ft_lstsize(data->env));
+	print_find_env("HOME", data->env);
 	print_env(data->env);
-	// while (data->env)
-	// {
-	// 	printf(YELLOW "%s\n", data->env->content);
-	// 	data->env = data->env->next;
-	// }
-	// ft_lstprint(data->env);
-	tmp = ft_lstfind(data->env, "OLDPWD", find_env);
-	if (tmp)
-	{
-		ft_printf(MAGENTA "tmp: %s\n", tmp->content);
-		tmp->content = env_value(tmp->content);
-		ft_printf(CYAN "tmp: %s\n", tmp->content);
-	}
 	//  if (!check_params(&data, argc, argv))
 	//  	exit_msl(NULL, EXIT_FAILURE); // pendiente
 	//  if (data->interactive == true)
