@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   env_print.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/18 20:01:40 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/19 13:29:06 by nmota-bu         ###   ########.fr       */
+/*   Created: 2023/05/23 16:08:27 by nmota-bu          #+#    #+#             */
+/*   Updated: 2023/05/23 16:13:21 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,48 +15,17 @@
 /* ║                     https://github.com/Carlos1073                      ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
-#include "minishell.h"
+#include "ft_printf.h"
+#include "libft.h"
 
-// Encuentra el valor pasado en un lista
-int	find_env(char *s1, char *s2)
+void	print_env(t_list *env)
 {
-	int	i;
-
-	i = 0;
-	while (s2[i])
+	if (env)
 	{
-		if (s1[i] == s2[i])
-			i++;
-		else
-			return (1);
-	}
-	if (s1[i] == '=')
-		return (0);
-	return (1);
-}
-
-// quiata el nombre del env y devuelve el valor
-char	*env_value(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (*s)
-	{
-		if (*s == '=')
+		while (env)
 		{
-			s++;
-			return (s);
+			ft_printf("%s\n", env->content);
+			env = env->next;
 		}
-		s++;
 	}
-	return (s);
 }
-
-// tmp = ft_lstfind(data->env, "OLDPWD", find_env);
-// if (tmp)
-// {
-// 	ft_printf(MAGENTA "tmp: %s\n", tmp->content);
-// 	tmp->content = env_value(tmp->content);
-// 	ft_printf(CYAN "tmp: %s\n", tmp->content);
-// }

@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.h                                            :+:      :+:    :+:   */
+/*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/18 12:53:41 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/23 16:07:55 by nmota-bu         ###   ########.fr       */
+/*   Created: 2023/05/23 15:57:38 by nmota-bu          #+#    #+#             */
+/*   Updated: 2023/05/23 16:11:21 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOOLS_H
-# define TOOLS_H
+#ifndef BUILTINS_H
+# define BUILTINS_H
 
-// void	printf_env(char **env);
+# include "libft.h"
 
-int		find_env(char *s1, char *s2);
-char	*env_value(char *s);
+void	print_env(t_list *env);
+
+// WORKS
+void	toma(void);
 #endif

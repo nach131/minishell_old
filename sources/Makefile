@@ -56,6 +56,7 @@ SRC_DIR 	:= src/
 OBJ_DIR 	:= obj/
 UTILS_DIR	:= utils/
 TOOLS_DIR	:= tools/
+BUILTINS_DIR := built-ins/
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ LIB ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
@@ -65,8 +66,9 @@ INCS := $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/)
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ SOURCES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 MAIN_FILES	:=	main
-UTILS_FILES	:= env signal
+UTILS_FILES	:= env_lst signal
 TOOLS_FILES := printer
+BUILTINS_FILES := echo env_print
 
 SRC_MAIN_FILES	+=$(MAIN_FILES)
 OBJS_MAIN := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_MAIN_FILES)))
@@ -80,8 +82,12 @@ SRC_TOOLS_FILES	+=$(addprefix $(TOOLS_DIR),$(TOOLS_FILES))
 OBJ_TOOLS := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_TOOLS_FILES)))
 DEPS_TOOLS := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_TOOLS_FILES)))
 
-ALL_OBJS += $(OBJS_UTILS) $(OBJS_MAIN) $(OBJ_TOOLS)
-DEPS += $(DEPS_MAIN) $(DEPS_UTILS) $(DEPS_TOOLS)
+SRC_BUILTINS_FILES	+=$(addprefix $(BUILTINS_DIR),$(BUILTINS_FILES))
+OBJ_BUILTINS := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_BUILTINS_FILES)))
+DEPS_BUILTINS := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_BUILTINS_FILES)))
+
+ALL_OBJS += $(OBJS_UTILS) $(OBJS_MAIN) $(OBJ_TOOLS) $(OBJ_BUILTINS)
+DEPS += $(DEPS_MAIN) $(DEPS_UTILS) $(DEPS_TOOLS) $(DEPS_BUILTINS)
 
 # ◼◼◼◼◼◼◼◼◼◼◼◼◼ READLINE ◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼#
 

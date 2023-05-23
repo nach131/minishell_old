@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/22 12:43:28 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:05:27 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /* ║                     https://github.com/Carlos1073                      ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
+#include "builtins.h"
 #include "minishell.h"
 #include "tools.h"
 
@@ -109,6 +110,7 @@ int	main(int argc, char **argv, char **env)
 	data->env = init_env(env);
 	// system("leaks minishell");
 	ft_printf(GREEN "env:%d\n", ft_lstsize(data->env));
+	print_env(data->env);
 	// while (data->env)
 	// {
 	// 	printf(YELLOW "%s\n", data->env->content);
