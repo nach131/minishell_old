@@ -6,10 +6,12 @@
 /*   By: carles <carles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/05/23 23:08:12 by carles           ###   ########.fr       */
+/*   Updated: 2023/05/23 23:26:26 by carles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "builtins.h"
+#include "ft_printf.h"
 // Chequea qué comando estamos introduciendo, si no es un builtin devuelve -1. 
 //	Si es un builtin ejecuta la función correspondiente.
 //
