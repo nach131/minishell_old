@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
+/*   By: carles <carles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/23 15:57:24 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/24 00:20:45 by carles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "colorsft.h"
 # include "error.h"
+# include <errno.h>
 # include "ft_printf.h"
 # include "functions.h"
 # include "libft.h"
@@ -37,6 +38,7 @@ extern int			gbl_exit_code;
 
 // MACROS
 
+# define CMD_NOT_FOUND 127
 // enum
 // {
 // 	SUCCESS,
@@ -81,6 +83,7 @@ typedef struct s_data
 	bool			interactive;
 	t_cmd			*cmd;
 	char			*line;
+	char			*act_dir;
 	pid_t			pid;
 }					t_data;
 
