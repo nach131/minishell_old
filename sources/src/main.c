@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
+/*   By: carles <carles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/24 16:28:35 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/25 01:33:31 by carles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	main(int argc, char **argv, char **env)
 	data = ft_calloc(sizeof(t_data), 1);
 	// ft_bzero(&data, sizeof(t_data));
 	data->env = init_env(env);
-	// system("leaks minishell");
+	//init_path(data);
 	// print_find_env("HOME", data->env);
 	// print_env(data->env);
 	//  if (!check_params(&data, argc, argv))
