@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
+/*   By: carles <carles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/24 15:35:57 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/24 21:17:42 by carles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ typedef struct s_data
 	char			*line;
 	char			*act_dir;
 	pid_t			pid;
+	int				exit;
+	int				ret;
 }					t_data;
 
 void				handle_int(int sig);
