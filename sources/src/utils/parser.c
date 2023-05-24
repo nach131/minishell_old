@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_print.c                                        :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 16:08:27 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/24 16:17:58 by nmota-bu         ###   ########.fr       */
+/*   Created: 2023/05/24 12:54:00 by nmota-bu          #+#    #+#             */
+/*   Updated: 2023/05/24 12:54:03 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,3 @@
 /* ║                      https://github.com/nach131                        ║ */
 /* ║                     https://github.com/Carlos1073                      ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
-
-#include "ft_printf.h"
-#include "libft.h"
-
-int	print_env(t_list *env)
-{
-	if (env)
-	{
-		while (env)
-		{
-			ft_printf("%s\n", env->content);
-			env = env->next;
-		}
-	}
-	return (EXIT_SUCCESS);
-}

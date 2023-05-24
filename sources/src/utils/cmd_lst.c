@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_print.c                                        :+:      :+:    :+:   */
+/*   cmd_lst.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 16:08:27 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/24 16:17:58 by nmota-bu         ###   ########.fr       */
+/*   Created: 2023/05/24 12:32:21 by nmota-bu          #+#    #+#             */
+/*   Updated: 2023/05/24 15:19:09 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,16 @@
 /* ║                     https://github.com/Carlos1073                      ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
-#include "ft_printf.h"
-#include "libft.h"
+#include "minishell.h"
 
-int	print_env(t_list *env)
+t_cmd	*cmd_new(char *str)
 {
-	if (env)
-	{
-		while (env)
-		{
-			ft_printf("%s\n", env->content);
-			env = env->next;
-		}
-	}
-	return (EXIT_SUCCESS);
+	t_cmd	*new;
+
+	new = (t_cmd *)malloc(sizeof(t_cmd) * 1);
+	if (!new)
+		return (NULL);
+	new->command = str;
+	new->next = NULL;
+	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/23 16:31:20 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/24 16:28:35 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,20 @@ void	start(t_data *data)
 	{
 		data->line = readline("Minishell> ");
 		add_history(data->line);
-		printf("La línea ingresada es:\n%s\n", data->line);
-		free(data->line);
-		if (history_length)
+		data->cmd = cmd_new(data->line);
+		// FALTA PARSEAR LA LINEA Y GUARDARLA EN CMD CON SUS SEPARADORES TOKEN
+		// FALTA LIMPIAR CMD DESPUES DE USAR
+		if (data->cmd)
 		{
-			ft_printf(RED "cmd %d\n" WHITE, history_length);
+			// ft_printf(RED "%s\n", data->cmd->command);
+			execute_builtin(data, data->cmd);
 		}
+		// printf("La línea ingresada es:\n%s\n", data->line);
+		free(data->line);
+		// if (history_length)
+		// {
+		// 	ft_printf(RED "cmd %d\n" WHITE, history_length);
+		// }
 	}
 }
 
@@ -109,8 +117,8 @@ int	main(int argc, char **argv, char **env)
 	// ft_bzero(&data, sizeof(t_data));
 	data->env = init_env(env);
 	// system("leaks minishell");
-	print_find_env("HOME", data->env);
-	print_env(data->env);
+	// print_find_env("HOME", data->env);
+	// print_env(data->env);
 	//  if (!check_params(&data, argc, argv))
 	//  	exit_msl(NULL, EXIT_FAILURE); // pendiente
 	//  if (data->interactive == true)
