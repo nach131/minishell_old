@@ -14,3 +14,17 @@
 
 ## [Instalación libreadline](markdown/libreadline.md)
 
+```mermaid
+flowchart TD
+    A{Leer entrada}
+    A -->|Desde archivo| B{Dividir}
+    A -->|Desde Argv| B
+    A -->|Desde terminal| B
+    B --> |Palabras| C{Tokens}
+    B --> |Operadores| C
+    C --> |Simples| D[Expandir]
+    C --> |Compuestos| D
+    D --> E[Redirecionar] --> F
+    F([Ejecutar comando]) --> G
+    G{{Esperar fin comando}}
+```
