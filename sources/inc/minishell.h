@@ -6,7 +6,7 @@
 /*   By: carles <carles@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/24 21:17:42 by carles           ###   ########.fr       */
+/*   Updated: 2023/05/25 01:26:37 by carles           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,18 @@ enum				parsec
 	PIPE = '|',
 };
 
+typedef struct s_env_prop
+{
+	char			content;
+	char			*name;
+}					t_env_prop;
+
+typedef struct s_env
+{
+	int				count;
+	t_env_prop		*var;
+}					t_env;
+
 typedef struct s_fds
 {
 	char			*in_file;
@@ -86,6 +98,8 @@ typedef struct s_data
 	pid_t			pid;
 	int				exit;
 	int				ret;
+	char			**path;
+	int				status;
 }					t_data;
 
 void				handle_int(int sig);
