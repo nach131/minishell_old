@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/05/24 16:27:21 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/24 22:04:56 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	int	res;
 
 	res = CMD_NOT_FOUND;
-	if (ft_strncmp(cmd->command, "env", 4) == 0)
+	if (!ft_strncmp(cmd->command, "env", 4))
 		// res = env_btin(data, cmd->args);
 		print_env(data->env);
 	// else if (ft_strncmp(cmd->command, "pwd", 4) == 0)
