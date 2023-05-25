@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/25 11:51:07 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/25 14:02:04 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,6 @@ int	main(int argc, char **argv, char **env)
 	// ft_bzero(&data, sizeof(t_data));
 	data->env = init_env(env);
 	//init_path(data);
-	// print_find_env("HOME", data->env);
-	// print_env(data->env);
 	//  if (!check_params(&data, argc, argv))
 	//  	exit_msl(NULL, EXIT_FAILURE); // pendiente
 	//  if (data->interactive == true)

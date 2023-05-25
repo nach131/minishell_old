@@ -6,25 +6,12 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 20:08:46 by carles            #+#    #+#             */
-/*   Updated: 2023/05/25 13:42:26 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/25 13:55:57 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "minishell.h"
-
-// Esto simplemente para verificar que el argumento es un número válido
-//
-int	ft_isnumber(const char *str)
-{
-	if (*str == '-')
-		str++;
-	else if (*str == '+')
-		str++;
-	if (ft_isdigit(*str))
-		return (TRUE);
-	return (FALSE);
-}
 
 // Lo primero que hacemos es indicar que hay que salir del programa. Luego
 // imprimimos exit en la salida de error y utilizamos un operador ternario
