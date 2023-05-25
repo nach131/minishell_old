@@ -68,7 +68,7 @@ INCS := $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/)
 MAIN_FILES	:=	main
 UTILS_FILES	:= env_lst signal cmd_lst
 TOOLS_FILES := printer
-BUILTINS_FILES := echo env_print exec_btins
+BUILTINS_FILES := echo env_print exit_btin
 
 SRC_MAIN_FILES	+=$(MAIN_FILES)
 OBJS_MAIN := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_MAIN_FILES)))
