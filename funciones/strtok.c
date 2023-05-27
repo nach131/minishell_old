@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_lst.c                                          :+:      :+:    :+:   */
+/*   strtok.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/18 20:01:40 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/26 23:18:11 by nmota-bu         ###   ########.fr       */
+/*   Created: 2023/05/26 23:21:48 by nmota-bu          #+#    #+#             */
+/*   Updated: 2023/05/26 23:38:56 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,48 +15,36 @@
 /* ║                     https://github.com/Carlos1073                      ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
-#include "minishell.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
-// Encuentra el valor, del nombre pasado en un lista
-int	find_env(char *s1, char *s2)
+char *ft_strtok(char *str, const char *sep)
 {
-	int	i;
-
-	i = 0;
-	while (s2[i])
+	int i = 0;
+	while (str[i])
 	{
-		if (s1[i] == s2[i])
-			i++;
-		else
-			return (1);
+		if (str[i] == *sep)
+			break;
+		i++;
 	}
-	if (s1[i] == '=')
-		return (0);
-	return (1);
+
+	str[i] = '\0';
+
+	return (str);
 }
 
-// Quita el nombre del env y devuelve el valor
-char	*env_value(char *s)
+int main(void)
 {
-	int	i;
+	char str[] = "COLORTERM=truecolor";
+	char *token;
 
-	i = 0;
-	while (*s)
-	{
-		if (*s == '=')
-		{
-			s++;
-			return (s);
-		}
-		s++;
-	}
-	return (s);
+	printf("mio: %s\n", ft_strtok(str, "="));
+	// Utilizar strtok para obtener el primer token antes del espacio en blanco
+	token = strtok(str, "=");
+
+	// Imprimir el token obtenido
+	printf("%s\n", token);
+
+	return 0;
 }
-
-// tmp = ft_lstfind(data->env, "OLDPWD", find_env);
-// if (tmp)
-// {
-// 	ft_printf(MAGENTA "tmp: %s\n", tmp->content);
-// 	tmp->content = env_value(tmp->content);
-// 	ft_printf(CYAN "tmp: %s\n", tmp->content);
-// }

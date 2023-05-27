@@ -3,3 +3,10 @@ cositas a hacer....!!!
 getenv usar para asignar el valor de  home a "~"
 
 https://www.codequoi.com/en/creating-and-killing-child-processes-in-c/
+
+UTILIZAR
+ft_strcmp
+	para localizar un token dentro de la line escrita
+
+EXPORT
+Pasar todas las lista a **env y ordenar dentro todo los valores según ASCII

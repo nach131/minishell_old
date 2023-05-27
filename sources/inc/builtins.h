@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:57:38 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/25 13:57:17 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/26 12:19:43 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 void	print_env(t_list *env);
 int		execute_builtin(t_data *data, t_cmd *cmd);
+void	start_export(t_list *env);
 // int		ft_isnumber(const char *str);
 
 // WORKS

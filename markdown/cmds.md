@@ -1,4 +1,3 @@
-Aquí tienes cinco ejemplos de comandos combinados en Bash:
 
 1. Pipe (|): Permite redirigir la salida de un comando como entrada al siguiente comando.
 

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/25 14:02:04 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/27 13:13:45 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,16 @@ int	main(int argc, char **argv, char **env)
 {
 	t_data	*data;
 
-	// t_list	*tmp;
 	(void)argc;
 	(void)argv;
 	data = ft_calloc(sizeof(t_data), 1);
 	// ft_bzero(&data, sizeof(t_data));
 	data->env = init_env(env);
+	//=========================================================================
+	parser();
+	// start_export(data->env);
+	//=========================================================================
+
 	//init_path(data);
 	//  if (!check_params(&data, argc, argv))
 	//  	exit_msl(NULL, EXIT_FAILURE); // pendiente

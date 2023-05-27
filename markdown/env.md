@@ -1,6 +1,7 @@
 # ENV
 
-Ejemplos simples:
+## Ejemplos simples:
+
 1. Mostrar todas las variables de entorno:
    ```
    env
@@ -26,7 +27,7 @@ Ejemplos simples:
    env VAR_NAME=valor script.sh
    ```
 
-Ejemplos complejos:
+## Ejemplos complejos:
 
 6. Ejecutar un programa en un entorno virtual de Python:
    ```

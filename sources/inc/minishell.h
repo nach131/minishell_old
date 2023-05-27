@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carles <carles@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/25 01:26:37 by carles           ###   ########.fr       */
+/*   Updated: 2023/05/27 12:51:58 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@
 # include "colorsft.h"
 # include "error.h"
 # include "ft_printf.h"
-# include "functions.h"
+// # include "functions.h"
 # include "libft.h"
 # include "readline/history.h"
 # include "readline/readline.h"
-# include <errno.h>
-# include <fcntl.h>
-# include <limits.h>
+// # include <errno.h>
+// # include <fcntl.h>
+// # include <limits.h>
 # include <signal.h>
 # include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include <unistd.h>
+// # include <stdio.h>
+// # include <stdlib.h>
+// # include <sys/stat.h>
+// # include <sys/types.h>
+// # include <sys/wait.h>
+// # include <unistd.h>
 
 // VARIABLE GLOBAL
 
@@ -47,7 +47,7 @@ extern int			gbl_exit_code;
 
 // STRUCTS
 
-enum				parsec
+enum token
 {
 	NEW_LINE = '\n',
 	WHITE_SPACE = ' ',
@@ -106,5 +106,6 @@ void				handle_int(int sig);
 void				handle_quit(int sig);
 
 t_cmd				*cmd_new(char *str);
+int parser(void);
 
 #endif
