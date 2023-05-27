@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/27 12:51:58 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/27 15:10:31 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ extern int			gbl_exit_code;
 
 // STRUCTS
 
-enum token
+enum				token
 {
 	NEW_LINE = '\n',
 	WHITE_SPACE = ' ',
@@ -106,6 +106,6 @@ void				handle_int(int sig);
 void				handle_quit(int sig);
 
 t_cmd				*cmd_new(char *str);
-int parser(void);
+void				parser_space(char *line);
 
 #endif
