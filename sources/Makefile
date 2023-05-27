@@ -67,7 +67,7 @@ INCS := $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/)
 
 MAIN_FILES	:=	main
 UTILS_FILES	:= env_lst signal cmd_lst parser
-TOOLS_FILES := printer
+TOOLS_FILES := printer working
 BUILTINS_FILES := echo env_print exit_btin exec_btins export_btin
 
 SRC_MAIN_FILES	+=$(MAIN_FILES)
