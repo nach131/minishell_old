@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:50:41 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/27 13:12:35 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/27 13:39:20 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
 #include "minishell.h"
-#include "tools.h"
+#include "working_tools.h"
 
 void start_export(t_list *palabras)
 {

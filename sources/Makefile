@@ -55,7 +55,7 @@ INCLUDES 	:= inc/
 SRC_DIR 	:= src/
 OBJ_DIR 	:= obj/
 UTILS_DIR	:= utils/
-TOOLS_DIR	:= tools/
+TOOLS_DIR	:= working_tools/
 BUILTINS_DIR := built-ins/
 
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ LIB ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#

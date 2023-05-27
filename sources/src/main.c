@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/27 13:32:59 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/27 13:39:20 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #include "builtins.h"
 #include "minishell.h"
-#include "tools.h"
+#include "working_tools.h"
 
 // // Función para salir del programa,
 // // cerrando todos los fd y liberando memoria.

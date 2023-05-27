@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.h                                            :+:      :+:    :+:   */
+/*   working_tools.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:53:41 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/27 13:33:21 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/27 13:39:23 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOOLS_H
-# define TOOLS_H
+#ifndef WORKING_TOOLS_H
+# define WORKING_TOOLS_H
 
 # include "libft.h"
 
@@ -20,5 +20,5 @@
 int		find_env(char *s1, char *s2);
 char	*env_value(char *s);
 void	print_find_env(char *find, t_list *env);
-int parser_tmp(void);
+int		parser_tmp(void);
 #endif

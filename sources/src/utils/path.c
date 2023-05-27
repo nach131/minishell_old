@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: carles <carles@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 00:58:53 by carles            #+#    #+#             */
-/*   Updated: 2023/05/25 01:33:04 by carles           ###   ########.fr       */
+/*   Updated: 2023/05/27 13:39:20 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "minishell.h"
-#include "tools.h"
+#include "working_tools.h"
 
 int get_evar_index(t_env *env, char *str)
 {
