@@ -5,7 +5,12 @@
 		"*.hbs": "handlebars",
 		"*.c": "c",
 		"sstream": "c",
-		"libft.h": "c"
+		"libft.h": "c",
+		"algorithm": "c",
+		"*.tcc": "c",
+		"bitset": "c",
+		"istream": "c",
+		"hashtable": "c"
 	},
 	"editor.fontLigatures": false,
 	"lldb.dbgconfig": {}

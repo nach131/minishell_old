@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/27 15:10:44 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/28 14:47:49 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void	start(t_data *data)
 	{
 		data->line = readline("Minishell> ");
 		add_history(data->line);
-		parser_space(data->line);
+		ctrl_line(data->flag, data->line);
+		parser_space(data->flag, data->line);
 		data->cmd = cmd_new(data->line);
 		// FALTA PARSEAR LA LINEA Y GUARDARLA EN CMD CON SUS SEPARADORES TOKEN
 		// FALTA LIMPIAR CMD DESPUES DE USAR

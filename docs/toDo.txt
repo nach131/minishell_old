@@ -4,9 +4,26 @@ getenv usar para asignar el valor de  home a "~"
 
 https://www.codequoi.com/en/creating-and-killing-child-processes-in-c/
 
-UTILIZAR
-ft_strcmp
-	para localizar un token dentro de la line escrita
+controlar el crtl+c, ctrl=v
+
 
 EXPORT
 Pasar todas las lista a **env y ordenar dentro todo los valores según ASCII
+
+Dobles comillas o simple
+cuando se impar, abrir la consola para que el usuario intruduzca comandos
+en el fd 0
+
+cuando hacer | grep BUSCADO
+devolver el nombre de BUSCADO en otro color
+
+
+COSAS A TENER EN CUENTA (o cosas que no funcionan en otros proyectos)
+
+nombre="Juan"
+echo "Hola, $nombre"
+//=========================================================================
+
+env VAR1=valor1 VAR2=valor2 env
+
+echo "La fecha actual es: $(date)"

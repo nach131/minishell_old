@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/27 15:10:31 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:08:50 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,21 +91,23 @@ typedef struct s_cmd
 typedef struct s_data
 {
 	t_list			*env;
-	bool			interactive;
 	t_cmd			*cmd;
+	int				flag[126];
+	bool interactive; // poner en flag
 	char			*line;
-	char			*act_dir;
-	pid_t			pid;
 	int				exit;
 	int				ret;
-	char			**path;
-	int				status;
+	// char			*act_dir;
+	// pid_t			pid;
+	// char			**path;
+	// int				status;
 }					t_data;
 
 void				handle_int(int sig);
 void				handle_quit(int sig);
 
 t_cmd				*cmd_new(char *str);
-void				parser_space(char *line);
+void				parser_space(int flag[], char *line);
+void				ctrl_line(int flag[], char *line);
 
 #endif
