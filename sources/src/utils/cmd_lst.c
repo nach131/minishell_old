@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:32:21 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/29 17:32:40 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:04:16 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,3 +33,29 @@ t_cmd	*cmd_new(char *str)
 // {
 // 	t_cmd
 // }
+
+void	cmd_add_back(t_cmd **cmd, t_cmd *new)
+{
+	t_cmd	*l_aux;
+
+	if (!(*cmd))
+		*cmd = new;
+	else
+	{
+		l_aux = cmd_last(*cmd);
+		l_aux->next = new;
+	}
+}
+
+t_cmd	*cmd_last(t_cmd *cmd)
+{
+	if (!cmd)
+		return (NULL);
+	while (cmd)
+	{
+		if (cmd->next == NULL)
+			return (cmd);
+		cmd = cmd->next;
+	}
+	return (cmd);
+}

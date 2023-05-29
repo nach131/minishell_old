@@ -5,7 +5,7 @@ getenv usar para asignar el valor de  home a "~"
 https://www.codequoi.com/en/creating-and-killing-child-processes-in-c/
 
 controlar el crtl+c, ctrl=v
-
+controlar $
 
 EXPORT
 Pasar todas las lista a **env y ordenar dentro todo los valores según ASCII
@@ -27,3 +27,4 @@ echo "Hola, $nombre"
 env VAR1=valor1 VAR2=valor2 env
 
 echo "La fecha actual es: $(date)"
+

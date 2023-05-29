@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/29 17:08:50 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:04:22 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ typedef struct s_data
 	t_list			*env;
 	t_cmd			*cmd;
 	int				flag[126];
-	bool interactive; // poner en flag
+	bool interactive; // poner con flag
 	char			*line;
 	int				exit;
 	int				ret;
@@ -107,7 +107,10 @@ void				handle_int(int sig);
 void				handle_quit(int sig);
 
 t_cmd				*cmd_new(char *str);
-void				parser_space(int flag[], char *line);
+void				cmd_add_back(t_cmd **cmd, t_cmd *new);
+t_cmd				*cmd_last(t_cmd *cmd);
+
+void				parser_space(int flag[], char *line, t_cmd **cmd);
 void				ctrl_line(int flag[], char *line);
 
 #endif

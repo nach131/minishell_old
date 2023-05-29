@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:53:41 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/29 17:33:09 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:11:44 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ char	*env_value(char *s);
 void	print_find_env(char *find, t_list *env);
 int		parser_tmp(void);
 void	history_line(void);
+// void	print_cmd(t_cmd *cmd);
 #endif
