@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/28 14:47:49 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:33:15 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void	start(t_data *data)
 			// ft_printf(RED "%s\n", data->cmd->command);
 			execute_builtin(data, data->cmd);
 		}
-		// printf("La línea ingresada es:\n%s\n", data->line);
 		free(data->line);
+		history_line();
 		// if (history_length)
 		// {
 		// 	ft_printf(RED "cmd %d\n" WHITE, history_length);

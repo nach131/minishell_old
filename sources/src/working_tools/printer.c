@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:52:58 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/27 13:39:20 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/29 17:34:08 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include "colorsft.h"
 #include "ft_printf.h"
 #include "libft.h"
+#include "readline/history.h"
+#include "readline/readline.h"
 #include "working_tools.h"
 
 // int	countPointers(char **env)
@@ -59,4 +61,11 @@ void	print_find_env(char *find, t_list *env)
 	{
 		ft_printf(RED "NO ENCONTRADO\n");
 	}
+}
+
+// printea cuantas cmd line hay en el historial
+void	history_line(void)
+{
+	if (history_length)
+		ft_printf(RED "cmd %d\n" WHITE, history_length);
 }
