@@ -38,6 +38,7 @@
    ```
    env VAR1=valor1 VAR2=valor2 comando
    ```
+este no lo hacen todos.
 
 8. Cambiar el valor de una variable de entorno existente y ejecutar un script:
    ```
