@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:54:00 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/29 18:14:34 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:21:09 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	parser_space(int flag[], char *line, t_cmd **cmd)
 	char	*token;
 
 	(void)flag;
-	// (void)cmd;
 	token = ft_strtok(line, " ");
 	while (token != NULL)
 	{

@@ -36,7 +36,7 @@
 
 7. Establecer múltiples variables de entorno en un solo comando:
    ```
-   env VAR1=valor1 VAR2=valor2 comando
+   env VAR1=valor1 VAR2=valor2 env
    ```
 este no lo hacen todos.
 

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/29 18:12:47 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:20:48 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,13 @@ void	start(t_data *data)
 		add_history(data->line);
 		ctrl_line(data->flag, data->line);
 		parser_space(data->flag, data->line, &data->cmd);
-		// data->cmd = cmd_new(data->line);
-		// FALTA PARSEAR LA LINEA Y GUARDARLA EN CMD CON SUS SEPARADORES TOKEN
-		// FALTA LIMPIAR CMD DESPUES DE USAR
 		if (data->cmd)
 		{
 			print_cmd(data->cmd);
 			// ft_printf(RED "%s\n", data->cmd->command);
 			// execute_builtin(data, data->cmd);
 		}
+		// FALTA LIMPIAR CMD DESPUES DE USAR
 		free(data->line);
 		// DESPUES DE REALIZAR LAS OPERACIONES HAY QUE LIMPIAR LA LISTA CMD
 		// history_line();

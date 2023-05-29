@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:52:58 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/29 18:11:45 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/29 18:19:55 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,3 @@ void	history_line(void)
 	if (history_length)
 		ft_printf(RED "cmd %d\n" WHITE, history_length);
 }
-
-// void	print_cmd(t_cmd *cmd)
-// {
-// 	t_cmd	*tmp;
-
-// 	tmp = cmd;
-// 	while (cmd)
-// 	{
-// 		printf(YELLOW "%s\n", cmd->command);
-// 		cmd = cmd->next;
-// 	}
-// }
