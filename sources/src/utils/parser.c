@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:54:00 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/30 19:10:23 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/30 23:59:10 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	parser_space(int flag[], char *line, t_cmd **cmd)
 	{
 		if (*line == DOUBLE_QUOTE)
 			quotes = !quotes;
-		else if (*line == ' ' && !quotes)
+		else if (*line == WHITE_SPACE && !quotes)
+		// else if (*line == ' ' && !quotes)
 		{
 			*line = '\0';
 			cmd_add_back(cmd, cmd_new(start));
