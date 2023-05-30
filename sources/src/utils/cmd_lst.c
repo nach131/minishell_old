@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:32:21 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/30 10:35:13 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/30 23:37:24 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,10 @@ t_cmd	*cmd_new(char *str)
 	new = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!new)
 		return (NULL);
-	new->command = str;
+	new->command = ft_strdup(str);
 	new->next = NULL;
 	return (new);
 }
-
-// void cmd_add_back(t_cmd **cmd, t_cmd *new)
-// {
-// 	t_cmd
-// }
 
 void	cmd_add_back(t_cmd **cmd, t_cmd *new)
 {
@@ -56,17 +51,40 @@ t_cmd	*cmd_last(t_cmd *cmd)
 	return (cmd);
 }
 
-void	cmd_clear(t_cmd *cmd)
+void	cmd_iter(t_cmd *cmd, void (*funcion)(void *))
+{
+	while (cmd)
+	{
+		funcion(&cmd->command);
+		cmd = cmd->next;
+	}
+}
+
+// void	cmd_clear(t_cmd *cmd)
+// {
+// 	t_cmd	*tmp;
+
+// 	if (cmd)
+// 	{
+// 		while (cmd != NULL)
+// 		{
+// 			tmp = cmd;
+// 			cmd = cmd->next;
+// 			free(tmp);
+// 		}
+// 	}
+// }
+
+void	cmd_free(t_cmd *cmd)
 {
 	t_cmd	*tmp;
 
-	if (cmd)
+	while (cmd != NULL)
 	{
-		while (cmd != NULL)
-		{
-			tmp = cmd;
-			cmd = cmd->next;
-			free(tmp);
-		}
+		tmp = cmd;
+		cmd = cmd->next;
+		if (tmp->command)
+			free(tmp->command);
+		free(tmp);
 	}
 }
