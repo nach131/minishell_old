@@ -33,3 +33,11 @@ echo "La fecha actual es: $(date)"
 
 ## env
 crear una env nueva
+
+
+hacer un read del file descriptor, y ponerlo en un array de lo que contenga el fichero
+
+gioliano
+para ejecucion usa access
+
+acabar quitar qoutes
