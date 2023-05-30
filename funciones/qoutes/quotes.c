@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst.c                                              :+:      :+:    :+:   */
+/*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 10:03:36 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/30 13:42:24 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/30 14:55:05 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct s_cmd
 {
@@ -73,32 +74,84 @@ void	cmd_add_back(t_cmd **cmd, t_cmd *new)
 	}
 }
 
-void	print_lst(t_cmd *lst)
+void	print_cmd(char **str)
 {
-	while (lst != NULL)
+	printf("%s\n", *str);
+}
+
+// void	remove_quote(char **str)
+// {
+// 	int		i;
+// 	int		j;
+// 	char	*tmp;
+
+// 	i = 0;
+// 	j = 0;
+// 	tmp = *str;
+// 	while (tmp[i] != '\0')
+// 	{
+// 		if (tmp[i] != '\"')
+// 		{
+// 			(*str)[j] = tmp[i];
+// 			// *str = "@";
+// 			j++;
+// 			// printf("aqui\n");
+// 		}
+// 		i++;
+// 	}
+// 	// str[0][j] = '\0';
+// 	printf("%d\n", j);
+// }
+
+void	remove_quote(char **str)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+	char	*result;
+
+	i = 0;
+	j = 0;
+	tmp = *str;
+	result = malloc(strlen(tmp) + 1);
+	// Cadena temporal para almacenar el resultado
+	while (tmp[i] != '\0')
 	{
-		printf("%s\n", lst->command);
-		lst = lst->next;
+		if (tmp[i] != '\"')
+		{
+			result[j] = tmp[i];
+			j++;
+		}
+		i++;
+	}
+	result[j] = '\0';
+	// free(*str);    // Liberar memoria de la cadena original
+	*str = result; // Asignar la cadena resultante a la cadena original
+}
+
+void	ft_lstiter(t_cmd *cmd, void (*funcion)(void *))
+{
+	while (cmd)
+	{
+		funcion(&cmd->command);
+		cmd = cmd->next;
 	}
 }
 
 int	main(void)
 {
 	t_cmd	*cmd;
-	t_cmd	*current;
 
 	cmd = NULL;
 	cmd_add_back(&cmd, cmd_new("NUEVO=\"toma mas\""));
 	cmd_add_back(&cmd, cmd_new("dos"));
 	cmd_add_back(&cmd, cmd_new("tres"));
-	print_lst(cmd);
+	// remove_quotes_from_cmd_list(cmd);
+	// print_lst(cmd);
+	ft_lstiter(cmd, (void *)remove_quote);
+	ft_lstiter(cmd, (void *)print_cmd);
+	// ft_lstiter(cmd, (void *)print_cmd);
 	cmd_clear(cmd);
 	// Volver a asignar valores
-	cmd = NULL;
-	cmd_add_back(&cmd, cmd_new("cuatro"));
-	cmd_add_back(&cmd, cmd_new("cinco"));
-	cmd_add_back(&cmd, cmd_new("seis"));
-	print_lst(cmd);
-	cmd_clear(cmd);
 	return (0);
 }
