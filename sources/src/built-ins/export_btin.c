@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:50:41 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/27 13:39:20 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/30 12:33:32 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@
 #include "minishell.h"
 #include "working_tools.h"
 
-void start_export(t_list *palabras)
+void	start_export(t_list *palabras)
 {
-	t_list *current;
-	int num_palabras;
-	int i;
-	int j;
-	t_list *next;
-	char *word1;
-	char *word2;
-	t_list *temp;
+	t_list	*current;
+	int		num_palabras;
+	int		i;
+	int		j;
+	t_list	*next;
+	char	*word1;
+	char	*word2;
+	t_list	*temp;
 
 	current = palabras;
 	num_palabras = 0;
@@ -84,3 +84,9 @@ void start_export(t_list *palabras)
 // VALE ....
 // PRIMERO EL NOMBRE DE LA VARIABLE, DEPUES LA VARIABLE DENTRO DE ""
 // asi que organizar solo los nombres despues buscar casa variable e imprimir el valor
+
+void	add_export(t_list *env, t_cmd *cmd)
+{
+	(void)cmd;
+	ft_lstadd_back(&env, ft_lstnew("TOMATE=nuevo tomate"));
+}
