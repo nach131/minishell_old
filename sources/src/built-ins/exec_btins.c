@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/05/25 13:40:23 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/30 11:20:46 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 {
 	int	res;
 
+	(void)data;
 	res = CMD_NOT_FOUND;
 	if (!ft_strncmp(cmd->command, "env", 4))
 		// res = env_btin(data, cmd->args);

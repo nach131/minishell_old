@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/30 10:40:05 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/30 11:21:21 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	print_cmd(t_cmd *cmd)
 	t_cmd	*tmp;
 
 	tmp = cmd;
-	while (cmd)
+	while (cmd != NULL)
 	{
 		printf(YELLOW "%s\n" WHITE, cmd->command);
 		cmd = cmd->next;
@@ -89,10 +89,10 @@ void	start(t_data *data)
 		if (data->cmd)
 		{
 			print_cmd(data->cmd);
+			// AQUI LAS COMPROBACIONES DE QUE HACE CADA ELEMENTO DE LA LISTA
+			execute_builtin(data, data->cmd);
 			cmd_clear(data->cmd);
 			data->cmd = NULL;
-			// AQUI LAS COMPROBACIONES DE QUE HACE CADA ELEMENTO DE LA LISTA
-			// execute_builtin(data, data->cmd);
 		}
 		free(data->line);
 		// history_line(); // ESTO EN FUNCION EXIT

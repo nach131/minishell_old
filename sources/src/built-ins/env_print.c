@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:08:27 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/24 16:17:58 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/30 11:21:07 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 
 int	print_env(t_list *env)
 {
-	if (env)
+	t_list	*tmp;
+
+	tmp = env;
+	while (tmp != NULL)
 	{
-		while (env)
-		{
-			ft_printf("%s\n", env->content);
-			env = env->next;
-		}
+		ft_printf("%s\n", tmp->content);
+		tmp = tmp->next;
 	}
 	return (EXIT_SUCCESS);
 }
