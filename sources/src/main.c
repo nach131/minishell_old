@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/29 18:20:48 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/30 10:40:05 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	print_cmd(t_cmd *cmd)
 	tmp = cmd;
 	while (cmd)
 	{
-		printf(YELLOW "%s\n", cmd->command);
+		printf(YELLOW "%s\n" WHITE, cmd->command);
 		cmd = cmd->next;
 	}
 }
@@ -89,13 +89,13 @@ void	start(t_data *data)
 		if (data->cmd)
 		{
 			print_cmd(data->cmd);
-			// ft_printf(RED "%s\n", data->cmd->command);
+			cmd_clear(data->cmd);
+			data->cmd = NULL;
+			// AQUI LAS COMPROBACIONES DE QUE HACE CADA ELEMENTO DE LA LISTA
 			// execute_builtin(data, data->cmd);
 		}
-		// FALTA LIMPIAR CMD DESPUES DE USAR
 		free(data->line);
-		// DESPUES DE REALIZAR LAS OPERACIONES HAY QUE LIMPIAR LA LISTA CMD
-		// history_line();
+		// history_line(); // ESTO EN FUNCION EXIT
 	}
 }
 
@@ -118,13 +118,13 @@ t_list	*init_env(char **env)
 
 int	main(int argc, char **argv, char **env)
 {
-	t_data	*data;
+	t_data	data;
 
 	(void)argc;
 	(void)argv;
-	data = ft_calloc(sizeof(t_data), 1);
-	// ft_bzero(&data, sizeof(t_data));
-	data->env = init_env(env);
+	// data = ft_calloc(sizeof(t_data), 1);
+	ft_bzero(&data, sizeof(t_data));
+	data.env = init_env(env);
 	//=========================================================================
 	// parser_tmp();
 	// start_export(data->env);
@@ -137,6 +137,6 @@ int	main(int argc, char **argv, char **env)
 	//  else
 	//  	msl_non_interact(&data); // pendiente
 	//  exit_msl(&data, gbl_exit_code);
-	start(data);
+	start(&data);
 	return (0);
 }

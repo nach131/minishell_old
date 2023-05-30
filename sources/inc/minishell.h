@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/29 18:04:22 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/29 23:24:01 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void				handle_quit(int sig);
 t_cmd				*cmd_new(char *str);
 void				cmd_add_back(t_cmd **cmd, t_cmd *new);
 t_cmd				*cmd_last(t_cmd *cmd);
+void				cmd_clear(t_cmd *cmd);
 
 void				parser_space(int flag[], char *line, t_cmd **cmd);
 void				ctrl_line(int flag[], char *line);
