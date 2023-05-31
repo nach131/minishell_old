@@ -41,3 +41,6 @@ gioliano
 para ejecucion usa access
 
 acabar quitar qoutes
+
+lst_map
+Para quitar o poner las comillas y devolve una nueva lista
