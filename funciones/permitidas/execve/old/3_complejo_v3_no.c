@@ -42,10 +42,14 @@ int main()
 	int pipefd[2];
 	int filefd;
 
-	char *cmd_1 = "/usr/bin/find";
-	char *args_1[] = {"find", "../../", "-type", "f", "-mtime", "0", NULL};
-	char *cmd_2 = "/usr/bin/sort";
-	char *args_2[] = {"sort", NULL};
+	char *cmd_cat = "/bin/cat";
+	char *args_1[] = {"cat", "archivo.txt", NULL};
+	char *cmd_grep = "/usr/bin/grep";
+	char *args_2[] = {"grep", "42", NULL};
+	char *cmd_sed = "/usr/bin/sed";
+	char *args_3[] = {"sed", "s/42/131/g", NULL};
+	char *cmd_sort = "/usr/bin/sort";
+	char *args_4[] = {"sort", NULL};
 
 	if (pipe(pipefd) == -1)
 	{
@@ -53,21 +57,32 @@ int main()
 		exit(1);
 	}
 
-	executeCommand(cmd_1, args_1, STDIN_FILENO, pipefd[1]);
+	executeCommand(cmd_cat, args_1, STDIN_FILENO, pipefd[1]);
 	close(pipefd[1]);
 
-	filefd = open("toma.txt", O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
-	if (filefd == -1)
+	int pipefd3[2];
+	if (pipe(pipefd3) == -1)
 	{
-		perror("Error al abrir el archivo archivos_modificados.txt");
+		perror("Error al crear la tubería");
 		exit(1);
 	}
 
-	executeCommand(cmd_2, args_2, pipefd[0], filefd);
+	executeCommand(cmd_grep, args_2, pipefd[0], pipefd3[1]);
 	close(pipefd[0]);
+	close(pipefd3[1]);
+
+	filefd = open("salida.txt", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	if (filefd == -1)
+	{
+		perror("Error al abrir el archivo salida.txt");
+		exit(1);
+	}
+
+	executeCommand(cmd_sed, args_3, pipefd3[0], filefd);
+	close(pipefd3[0]);
 	close(filefd);
 
-	printf("Archivo actualizado correctamente.\n");
+	printf("Archivo creado correctamente.\n");
 
 	return 0;
 }

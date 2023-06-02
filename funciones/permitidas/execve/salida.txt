@@ -1,5 +1,2 @@
-484K	../../
-320K	../..//permitidas
-124K	../..//permitidas/execve
- 60K	../..//parsec
- 32K	../..//qoutes
+131 New York es el campus de programación más innovador y gratuito que te abre las puertas al mercado laboral.
+Para formar parte de 131 New York no necesitas conocimientos previos ni titulación de ningún tipo,

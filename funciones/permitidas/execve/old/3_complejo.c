@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 12:04:17 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/02 11:20:03 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/02 20:14:20 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,9 +161,6 @@ int main()
 	return 0;
 }
 
-// cat archivo.txt | grep "42" | sed "131" | sort > salida.txt
-
-// falta por hacer
-// cat archivo.txt | grep "patrón" | sed "s/buscar/reemplazar/g" | sort > salida.txt
+// cat archivo.txt | grep "42" | sed "s/42/131/g" | sort > salida.txt
 
 // modificar con refacorizacion

@@ -5,7 +5,7 @@
 #include <sys/wait.h>
 
 // Función para ejecutar un comando y redirigir la entrada y salida según los descriptores de archivo dados
-void executeCommand(char *command, char **args, int input_fd, int output_fd)
+void executeCommand(char *command, char **args, char **envp, int input_fd, int output_fd)
 {
 	pid_t pid = fork();
 
@@ -26,7 +26,7 @@ void executeCommand(char *command, char **args, int input_fd, int output_fd)
 		close(output_fd);
 
 		// Ejecuta el comando
-		execve(command, args, NULL);
+		execve(command, args, envp);
 		perror("Error al ejecutar el comando");
 		exit(1);
 	}
@@ -42,12 +42,16 @@ int main()
 	int pipefd[2];
 	int filefd;
 
-	char *cmd_du = "/usr/bin/du";
-	char *args_1[] = {"du", "-h", "../../", NULL};
-	char *cmd_sort = "/usr/bin/sort";
-	char *args_2[] = {"sort", "-rh", NULL};
-	char *cmd_head = "/usr/bin/head";
-	char *args_3[] = {"head", "-n", "5", NULL};
+	char *cmd_cat = "/bin/cat";
+	char *args_cat[] = {"cat", "archivo.txt", NULL};
+	char *cmd_grep = "/usr/bin/grep";
+	char *args_grep[] = {"grep", "42", NULL};
+	char *cmd_sed = "/usr/bin/sed";
+	char *args_sed[] = {"sed", "s/42/131/g", NULL};
+	// char *cmd_sort = "/usr/bin/sort";
+	// char *args_4[] = {"sort", NULL};
+
+	char *envp[] = {NULL};
 
 	if (pipe(pipefd) == -1)
 	{
@@ -55,7 +59,7 @@ int main()
 		exit(1);
 	}
 
-	executeCommand(cmd_du, args_1, STDIN_FILENO, pipefd[1]);
+	executeCommand(cmd_cat, args_cat, envp, STDIN_FILENO, pipefd[1]);
 	close(pipefd[1]);
 
 	int pipefd2[2];
@@ -65,7 +69,7 @@ int main()
 		exit(1);
 	}
 
-	executeCommand(cmd_sort, args_2, pipefd[0], pipefd2[1]);
+	executeCommand(cmd_grep, args_grep, envp, pipefd[0], pipefd2[1]);
 	close(pipefd[0]);
 	close(pipefd2[1]);
 
@@ -76,7 +80,7 @@ int main()
 		exit(1);
 	}
 
-	executeCommand(cmd_head, args_3, pipefd2[0], filefd);
+	executeCommand(cmd_sed, args_sed, envp, pipefd2[0], filefd);
 	close(pipefd2[0]);
 	close(filefd);
 
@@ -85,4 +89,4 @@ int main()
 	return 0;
 }
 
-// du -h ~/Desktop/ | sort -rh | head -n 5 > salida.txt
+//  cat archivo.txt | grep "42" | sed "s/42/131/g" | sort > salida.txt

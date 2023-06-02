@@ -26,7 +26,7 @@ void executeCommand(char *command, char **args, int input_fd, int output_fd)
 		close(output_fd);
 
 		// Ejecuta el comando
-		execve(command, args, NULL);
+		execvp(command, args);
 		perror("Error al ejecutar el comando");
 		exit(1);
 	}
@@ -42,12 +42,17 @@ int main()
 	int pipefd[2];
 	int filefd;
 
-	char *cmd_du = "/usr/bin/du";
-	char *args_1[] = {"du", "-h", "../../", NULL};
+	char *cmd_cat = "/bin/cat";
+	char *args_cat[] = {"cat", "archivo.txt", NULL};
+
+	char *cmd_grep = "/usr/bin/grep";
+	char *args_grep[] = {"grep", "42", NULL};
+
+	char *cmd_sed = "/usr/bin/sed";
+	char *args_sed[] = {"sed", "s/42/131/g", NULL};
+
 	char *cmd_sort = "/usr/bin/sort";
-	char *args_2[] = {"sort", "-rh", NULL};
-	char *cmd_head = "/usr/bin/head";
-	char *args_3[] = {"head", "-n", "5", NULL};
+	char *args_sort[] = {"sort", NULL};
 
 	if (pipe(pipefd) == -1)
 	{
@@ -55,34 +60,26 @@ int main()
 		exit(1);
 	}
 
-	executeCommand(cmd_du, args_1, STDIN_FILENO, pipefd[1]);
+	executeCommand(cmd_cat, args_cat, STDIN_FILENO, pipefd[1]);
 	close(pipefd[1]);
 
-	int pipefd2[2];
-	if (pipe(pipefd2) == -1)
-	{
-		perror("Error al crear la tubería");
-		exit(1);
-	}
+	executeCommand(cmd_grep, args_grep, pipefd[0], pipefd[1]);
+	close(pipefd[1]);
 
-	executeCommand(cmd_sort, args_2, pipefd[0], pipefd2[1]);
-	close(pipefd[0]);
-	close(pipefd2[1]);
+	executeCommand(cmd_sed, args_sed, pipefd[0], pipefd[1]);
+	close(pipefd[1]);
 
+	executeCommand(cmd_sort, args_sort, pipefd[0], filefd);
 	filefd = open("salida.txt", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	if (filefd == -1)
 	{
 		perror("Error al abrir el archivo salida.txt");
 		exit(1);
 	}
-
-	executeCommand(cmd_head, args_3, pipefd2[0], filefd);
-	close(pipefd2[0]);
+	close(pipefd[1]);
 	close(filefd);
 
 	printf("Archivo creado correctamente.\n");
 
 	return 0;
 }
-
-// du -h ~/Desktop/ | sort -rh | head -n 5 > salida.txt

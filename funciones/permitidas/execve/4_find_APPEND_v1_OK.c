@@ -22,8 +22,8 @@ void executeCommand(char *command, char **args, int input_fd, int output_fd)
 		dup2(output_fd, STDOUT_FILENO);
 
 		// Cierra los descriptores de archivo no necesarios
-		close(input_fd);
-		close(output_fd);
+		// close(input_fd); // no son necesarias aqui
+		// close(output_fd);
 
 		// Ejecuta el comando
 		execve(command, args, NULL);
@@ -42,12 +42,10 @@ int main()
 	int pipefd[2];
 	int filefd;
 
-	char *cmd_du = "/usr/bin/du";
-	char *args_1[] = {"du", "-h", "../../", NULL};
-	char *cmd_sort = "/usr/bin/sort";
-	char *args_2[] = {"sort", "-rh", NULL};
-	char *cmd_head = "/usr/bin/head";
-	char *args_3[] = {"head", "-n", "5", NULL};
+	char *cmd_1 = "/usr/bin/find";
+	char *args_1[] = {"find", "../../", "-type", "f", "-mtime", "0", NULL};
+	char *cmd_2 = "/usr/bin/sort";
+	char *args_2[] = {"sort", NULL};
 
 	if (pipe(pipefd) == -1)
 	{
@@ -55,34 +53,27 @@ int main()
 		exit(1);
 	}
 
-	executeCommand(cmd_du, args_1, STDIN_FILENO, pipefd[1]);
+	executeCommand(cmd_1, args_1, STDIN_FILENO, pipefd[1]);
 	close(pipefd[1]);
 
-	int pipefd2[2];
-	if (pipe(pipefd2) == -1)
-	{
-		perror("Error al crear la tubería");
-		exit(1);
-	}
-
-	executeCommand(cmd_sort, args_2, pipefd[0], pipefd2[1]);
-	close(pipefd[0]);
-	close(pipefd2[1]);
-
-	filefd = open("salida.txt", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	filefd = open("toma.txt", O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
 	if (filefd == -1)
 	{
-		perror("Error al abrir el archivo salida.txt");
+		perror("Error al abrir el archivo archivos_modificados.txt");
 		exit(1);
 	}
 
-	executeCommand(cmd_head, args_3, pipefd2[0], filefd);
-	close(pipefd2[0]);
+	executeCommand(cmd_2, args_2, pipefd[0], filefd);
+	close(pipefd[0]);
 	close(filefd);
 
-	printf("Archivo creado correctamente.\n");
+	printf("Archivo actualizado correctamente.\n");
 
 	return 0;
 }
 
-// du -h ~/Desktop/ | sort -rh | head -n 5 > salida.txt
+// USADO O_APPEND
+// En esta versión, se utiliza la bandera O_APPEND al abrir el archivo "archivos_modificados.txt"
+// para asegurar que la salida se agregue al final del archivo existente.
+
+// find ../../ -type f -mtime 0 | sort >> archivos_modificados.txt
