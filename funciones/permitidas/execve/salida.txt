@@ -1,0 +1,5 @@
+484K	../../
+320K	../..//permitidas
+124K	../..//permitidas/execve
+ 60K	../..//parsec
+ 32K	../..//qoutes

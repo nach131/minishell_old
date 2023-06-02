@@ -38,4 +38,4 @@ Ejemplos compuestos:
    ```
    du -h | sort -rh | head -n 5
    ```
-   Aquí, el comando `du -h` se utiliza para calcular el tamaño de todos los archivos y directorios en el directorio actual, y la opción `-h` muestra los resultados en un formato legible para humanos. Luego, se redirige la salida hacia el comando `sort -rh`, que ordena los resultados en orden inverso de tamaño. Por último, se utiliza
+   Aquí, el comando `du -h` se utiliza para calcular el tamaño de todos los archivos y directorios en el directorio actual, y la opción `-h` muestra los resultados en un formato legible para humanos. Luego, se redirige la salida hacia el comando `sort -rh`, que ordena los resultados en orden inverso de tamaño. Por último, se utiliza head para mostrar las primeras lineas de la entrada, `-n 5` indica que solo se deben de mostrar 5 lineas de la salida

@@ -989,7 +989,7 @@ En este ejemplo, utilizamos `execve` para ejecutar el programa `ls` con la opci�
 
 int main() {
     char *const argv[] = {"echo", "Hello, World!", NULL};
-    char *const envp[] = {"CUSTOM_VAR=OpenAI", NULL};
+    char *const envp[] = {"CUSTOM_VAR=42 Barcelona", NULL};
 
     if (execve("/bin/echo", argv, envp) == -1) {
         perror("Error al ejecutar el programa");
@@ -1000,7 +1000,7 @@ int main() {
 }
 ```
 
-En este ejemplo, utilizamos `execve` para ejecutar el programa `echo` con el argumento `"Hello, World!"` y una variable de entorno personalizada `"CUSTOM_VAR"` establecida en `"OpenAI"`. Definimos el arreglo `argv` con el nombre del programa y el argumento, y el arreglo `envp` con la variable de entorno personalizada. Si la función `execve` se ejecuta correctamente, el programa actual será reemplazado por el programa `echo` con el argumento y la variable de entorno personalizados.
+En este ejemplo, utilizamos `execve` para ejecutar el programa `echo` con el argumento `"Hello, World!"` y una variable de entorno personalizada `"CUSTOM_VAR"` establecida en `"42 Barcelona"`. Definimos el arreglo `argv` con el nombre del programa y el argumento, y el arreglo `envp` con la variable de entorno personalizada. Si la función `execve` se ejecuta correctamente, el programa actual será reemplazado por el programa `echo` con el argumento y la variable de entorno personalizados.
 
 Ten en cuenta que el programa que se intenta ejecutar debe tener los permisos de ejecución adecuados y la ruta completa debe ser especificada en `pathname`. Además, debes tener cuidado al utilizar `
 

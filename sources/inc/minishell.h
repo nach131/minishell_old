@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/30 23:37:29 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/01 19:45:05 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,17 @@ enum				token
 	PIPE = '|',
 };
 
-typedef struct s_env_prop
-{
-	char			content;
-	char			*name;
-}					t_env_prop;
+// typedef struct s_env_prop
+// {
+// 	char			content;
+// 	char			*name;
+// }					t_env_prop;
 
-typedef struct s_env
-{
-	int				count;
-	t_env_prop		*var;
-}					t_env;
+// typedef struct s_env
+// {
+// 	int				count;
+// 	t_env_prop		*var;
+// }					t_env;
 
 typedef struct s_fds
 {

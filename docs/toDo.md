@@ -19,7 +19,22 @@ cuando hacer | grep BUSCADO
 ```
 devolver el nombre de BUSCADO en otro color
 
-## COSAS A TENER EN CUENTA 
+## env
+crear una env nueva
+
+env -i ./minishel
+
+enviromen simples
+
+hacer un read del file descriptor, y ponerlo en un array de lo que contenga el fichero
+
+~~acabar quitar qoutes~~
+
+lst_map
+Para quitar o poner las comillas y devolve una nueva lista
+
+## NO es necesario
+
 (o cosas que no funcionan en otros proyectos)
 ```bash
 nombre="Juan"
@@ -31,16 +46,8 @@ env VAR1=valor1 VAR2=valor2 env
 echo "La fecha actual es: $(date)"
 ```
 
-## env
-crear una env nueva
+## Flujo
 
-
-hacer un read del file descriptor, y ponerlo en un array de lo que contenga el fichero
-
-gioliano
-para ejecucion usa access
-
-acabar quitar qoutes
-
-lst_map
-Para quitar o poner las comillas y devolve una nueva lista
+	variables
+		getenv-> recuepera el valor del nombre de la variable pasad
+			Usar la funcion lst_value como get event.

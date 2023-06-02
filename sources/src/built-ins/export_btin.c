@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:50:41 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/30 12:33:32 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/05/31 19:24:12 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	start_export(t_list *palabras)
 
 // VALE ....
 // PRIMERO EL NOMBRE DE LA VARIABLE, DEPUES LA VARIABLE DENTRO DE ""
-// asi que organizar solo los nombres despues buscar casa variable e imprimir el valor
+// asi que organizar solo los nombres despues buscar cada variable e imprimir el valor
 
 void	add_export(t_list *env, t_cmd *cmd)
 {

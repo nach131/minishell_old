@@ -5,8 +5,6 @@
 #include <string.h>
 #include <unistd.h>
 
-#define MAX_ARGS 10
-
 typedef struct s_cmd
 {
 	char			*command;
@@ -41,7 +39,7 @@ t_cmd	*cmd_new(char *str)
 	new = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!new)
 		return (NULL);
-	new->command = str;
+	new->command = strdup(str);
 	new->next = NULL;
 	return (new);
 }
@@ -58,6 +56,29 @@ void	parse_command(char *line, t_cmd **cmd)
 		if (*line == '\"')
 			in_quotes = !in_quotes;
 		else if (*line == ' ' && !in_quotes)
+		{
+			*line = '\0';
+			cmd_add_back(cmd, cmd_new(start));
+			start = line + 1;
+		}
+		line++;
+	}
+	cmd_add_back(cmd, cmd_new(start));
+}
+void	parser_space(int flag[], char *line, t_cmd **cmd)
+{
+	int		quotes;
+	char	*start;
+
+	(void)flag;
+	quotes = 0;
+	start = line;
+	while (*line != '\0')
+	{
+		if (*line == '/"')
+			quotes = !quotes;
+		// else if (*line == " " && !quotes)
+		else if (*line == ' ' && !quotes)
 		{
 			*line = '\0';
 			cmd_add_back(cmd, cmd_new(start));
@@ -97,8 +118,7 @@ int	main(void)
 			i++;
 		}
 		free(line);
-		// Liberar la memoria de la lista de comandos
-		while (cmd != NULL)
+		// Liberar la memoria de la lista de comandos while (cmd != NULL)
 		{
 			tmp = cmd;
 			cmd = cmd->next;

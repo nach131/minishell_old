@@ -7,11 +7,11 @@
 
 typedef struct s_cmd
 {
-	char *command;
-	struct s_cmd *next;
-} t_cmd;
+	char			*command;
+	struct s_cmd	*next;
+}					t_cmd;
 
-t_cmd *cmd_last(t_cmd *cmd)
+t_cmd	*cmd_last(t_cmd *cmd)
 {
 	if (!cmd)
 		return (NULL);
@@ -20,9 +20,9 @@ t_cmd *cmd_last(t_cmd *cmd)
 	return (cmd);
 }
 
-void cmd_add_back(t_cmd **cmd, t_cmd *new)
+void	cmd_add_back(t_cmd **cmd, t_cmd *new)
 {
-	t_cmd *last;
+	t_cmd	*last;
 
 	if (!(*cmd))
 		*cmd = new;
@@ -32,9 +32,9 @@ void cmd_add_back(t_cmd **cmd, t_cmd *new)
 		last->next = new;
 	}
 }
-t_cmd *cmd_new(char *str)
+t_cmd	*cmd_new(char *str)
 {
-	t_cmd *new;
+	t_cmd	*new;
 
 	new = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!new)
@@ -44,10 +44,10 @@ t_cmd *cmd_new(char *str)
 	return (new);
 }
 
-void parse_command(char *line, t_cmd **cmd)
+void	parse_command(char *line, t_cmd **cmd)
 {
-	int in_quotes;
-	char *start;
+	int		in_quotes;
+	char	*start;
 
 	in_quotes = 0;
 	start = line;
@@ -66,28 +66,21 @@ void parse_command(char *line, t_cmd **cmd)
 	cmd_add_back(cmd, cmd_new(start));
 }
 
-void execute_command(t_cmd *cmd)
+void	execute_command(t_cmd *cmd)
 {
-	pid_t pid;
+	pid_t	pid;
 
 	pid = fork();
 	if (pid < 0)
 	{
 		printf("Error al crear el proceso hijo.\n");
-		return;
+		return ;
 	}
 	else if (pid == 0)
 	{
 		// Proceso hijo
-		char *pwd = getenv("PWD");
-		char *argv[] = {cmd->command, "Valor de PWD:", pwd, NULL};
-		char *env[] = {"CUSTOM_VAR=42 Barcelona", NULL};
-
-		if (execve("/bin/echo", argv, env) == -1)
-		{
-			perror("Error al ejecutar el programa");
-			// return 1;
-		}
+		execvp(cmd->command, &(cmd->command));
+		printf("Error al ejecutar el comando.\n");
 		exit(1);
 	}
 	else
@@ -97,12 +90,12 @@ void execute_command(t_cmd *cmd)
 	}
 }
 
-int main(void)
+int	main(void)
 {
-	char *line;
-	t_cmd *cmd;
-	int i;
-	t_cmd *tmp;
+	char	*line;
+	t_cmd	*cmd;
+	int		i;
+	t_cmd	*tmp;
 
 	cmd = NULL;
 	while (1)
@@ -111,7 +104,7 @@ int main(void)
 		if (line == NULL)
 		{
 			printf("\n");
-			break;
+			break ;
 		}
 		add_history(line);
 		parse_command(line, &cmd);
