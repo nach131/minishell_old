@@ -26,7 +26,7 @@ void executeCommand(char *command, char **args, int input_fd, int output_fd)
 		close(output_fd);
 
 		// Ejecuta el comando
-		execve(command, args, NULL);
+		execvp(command, args);
 		perror("Error al ejecutar el comando");
 		exit(1);
 	}
@@ -42,12 +42,10 @@ int main()
 	int pipefd[2];
 	int filefd;
 
-	char *cmd_1 = "/usr/bin/du";
-	char *args_1[] = {"du", "-h", "../../", NULL};
+	char *cmd_1 = "/usr/bin/find";
+	char *args_1[] = {"find", "../../", "-type", "f", "-mtime", "0", NULL};
 	char *cmd_2 = "/usr/bin/sort";
-	char *args_2[] = {"sort", "-rh", NULL};
-	char *cmd_3 = "/usr/bin/head";
-	char *args_3[] = {"head", "-n", "5", NULL};
+	char *args_2[] = {"sort", NULL};
 
 	if (pipe(pipefd) == -1)
 	{
@@ -58,26 +56,15 @@ int main()
 	executeCommand(cmd_1, args_1, STDIN_FILENO, pipefd[1]);
 	close(pipefd[1]);
 
-	int pipefd2[2];
-	if (pipe(pipefd2) == -1)
-	{
-		perror("Error al crear la tubería");
-		exit(1);
-	}
-
-	executeCommand(cmd_2, args_2, pipefd[0], pipefd2[1]);
-	close(pipefd[0]);
-	close(pipefd2[1]);
-
-	filefd = open("salida.txt", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	filefd = open("archivos_modificados.txt", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	if (filefd == -1)
 	{
-		perror("Error al abrir el archivo salida.txt");
+		perror("Error al abrir el archivo archivos_modificados.txt");
 		exit(1);
 	}
 
-	executeCommand(cmd_3, args_3, pipefd2[0], filefd);
-	close(pipefd2[0]);
+	executeCommand(cmd_2, args_2, pipefd[0], filefd);
+	close(pipefd[0]);
 	close(filefd);
 
 	printf("Archivo creado correctamente.\n");
@@ -85,4 +72,4 @@ int main()
 	return 0;
 }
 
-// du -h ~/Desktop/ | sort -rh | head -n 5 > salida.txt
+// find ~/Desktop/ -type f -mtime 0 | sort > archivos_modificados.txt

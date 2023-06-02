@@ -1,0 +1,67 @@
+../..//permitidas/execve.c
+../..//permitidas/execve/1_du_salida.c
+../..//permitidas/execve/1_du_salida.out
+../..//permitidas/execve/1_du_salida_re.c
+../..//permitidas/execve/1_du_salida_re_v2.c
+../..//permitidas/execve/1_du_salida_re_v3_1.c
+../..//permitidas/execve/1_du_salida_re_v3_2_OK.c
+../..//permitidas/execve/2_du_salida_bonus.c
+../..//permitidas/execve/3_complejo.c
+../..//permitidas/execve/4.out
+../..//permitidas/execve/4_find_OK.c
+../..//permitidas/execve/4_find_O_APPEND copy.c
+../..//permitidas/execve/4_find_O_APPEND.c
+../..//permitidas/execve/a.out
+../..//permitidas/execve/a.out.dSYM/Contents/Info.plist
+../..//permitidas/execve/a.out.dSYM/Contents/Resources/DWARF/a.out
+../..//permitidas/execve/archivos_modificados.txt
+../..//permitidas/execve/du.c
+../..//permitidas/execve/execvp_NO VALE.c
+../..//permitidas/execve/procesos_a_out.txt
+../..//permitidas/execve/salida.txt
+../..//permitidas/execve/todo.md
+../..//permitidas/execve.c
+../..//permitidas/execve/1_du_salida.c
+../..//permitidas/execve/1_du_salida.out
+../..//permitidas/execve/1_du_salida_re.c
+../..//permitidas/execve/1_du_salida_re_v2.c
+../..//permitidas/execve/1_du_salida_re_v3_1.c
+../..//permitidas/execve/1_du_salida_re_v3_2_OK.c
+../..//permitidas/execve/2_du_salida_bonus.c
+../..//permitidas/execve/3_complejo.c
+../..//permitidas/execve/4.out
+../..//permitidas/execve/4_find_OK.c
+../..//permitidas/execve/4_find_O_APPEND copy.c
+../..//permitidas/execve/4_find_O_APPEND.c
+../..//permitidas/execve/a.out
+../..//permitidas/execve/a.out.dSYM/Contents/Info.plist
+../..//permitidas/execve/a.out.dSYM/Contents/Resources/DWARF/a.out
+../..//permitidas/execve/archivos_modificados.txt
+../..//permitidas/execve/du.c
+../..//permitidas/execve/execvp_NO VALE.c
+../..//permitidas/execve/procesos_a_out.txt
+../..//permitidas/execve/salida.txt
+../..//permitidas/execve/todo.md
+../..//permitidas/execve/toma.txt
+../..//permitidas/execve.c
+../..//permitidas/execve/1_du_salida.c
+../..//permitidas/execve/1_du_salida.out
+../..//permitidas/execve/1_du_salida_re.c
+../..//permitidas/execve/1_du_salida_re_v2.c
+../..//permitidas/execve/1_du_salida_re_v3_1.c
+../..//permitidas/execve/1_du_salida_re_v3_2_OK.c
+../..//permitidas/execve/2_du_salida_bonus.c
+../..//permitidas/execve/3_complejo.c
+../..//permitidas/execve/4.out
+../..//permitidas/execve/4_find_OK.c
+../..//permitidas/execve/4_find_O_APPEND.c
+../..//permitidas/execve/a.out
+../..//permitidas/execve/a.out.dSYM/Contents/Info.plist
+../..//permitidas/execve/a.out.dSYM/Contents/Resources/DWARF/a.out
+../..//permitidas/execve/archivos_modificados.txt
+../..//permitidas/execve/du.c
+../..//permitidas/execve/execvp_NO VALE.c
+../..//permitidas/execve/procesos_a_out.txt
+../..//permitidas/execve/salida.txt
+../..//permitidas/execve/todo.md
+../..//permitidas/execve/toma.txt
