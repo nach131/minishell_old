@@ -10,7 +10,7 @@ enum
 	OUT,
 };
 
-void executeCommand(char *command, char **args, int *input_fd, int *output_fd)
+void executeCommand(char *command, char **args, int input_fd, int output_fd)
 {
 	pid_t pid = fork();
 
@@ -52,9 +52,6 @@ int main()
 
 	char *args_sed2[] = {"sed", "s/Barcelona/New York/g", NULL};
 
-	// char *cmd_sort = "/usr/bin/sort";
-	// char *args_4[] = {"sort", NULL};
-
 	if (pipe(pipefd) == -1)
 	{
 		perror("Error al crear la tubería");
@@ -67,7 +64,7 @@ int main()
 		exit(1);
 	}
 	int pipefd3[2];
-	if (pipe(pipefd3) == -1) // Corrección aquí
+	if (pipe(pipefd3) == -1)
 	{
 		perror("Error al crear la tubería");
 		exit(1);
