@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/04 19:36:01 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/04 20:08:56 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,13 @@ void	start(t_data *data)
 		data->line = readline("Minishell> ");
 		add_history(data->line);
 		ctrl_line(data->flag, data->line);
-		// parser_space(data->flag, data->line, &data->cmd);
 		parser_space_lst(data->line, &data->token);
 		if (data->token)
 		{
-			ft_lstprint(data->token);
-			ft_lstfree(data->token);
-			// execute_builtin(data, data->token);
-			data->token = NULL;
-		}
-		if (data->cmd)
-		{
-			// AQUI LAS COMPROBACIONES DE QUE HACE CADA ELEMENTO DE LA LISTA
+			// ft_lstprint(data->token);
 			execute_builtin(data, data->cmd);
-			cmd_free(data->cmd);
-			data->cmd = NULL;
+			ft_lstfree(data->token);
+			data->token = NULL;
 		}
 		free(data->line);
 		// history_line(); // ESTO EN FUNCION EXIT

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/05/30 12:34:27 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/04 20:08:23 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 {
 	int	res;
 
-	(void)data;
+	(void)cmd;
 	res = CMD_NOT_FOUND;
-	if (!ft_strncmp(cmd->command, "env", 4))
+	if (!ft_strncmp(data->token->content, "env", 4))
 		// res = env_btin(data, cmd->args);
 		print_env(data->env);
-	else if (ft_strncmp(cmd->command, "export", 7) == 0)
+	else if (!ft_strncmp(data->token->content, "export", 7))
 		add_export(data->env, data->cmd);
 	// res = export_btin(data, cmd->args);
 	// else if (ft_strncmp(cmd->command, "pwd", 4) == 0)
