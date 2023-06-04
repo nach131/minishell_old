@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/05/30 23:56:35 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:36:01 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,6 @@
 //
 // La salida del programa es con el último comando.
 
-void	print_cmd(t_cmd *cmd)
-{
-	t_cmd	*tmp;
-
-	tmp = cmd;
-	while (cmd != NULL)
-	{
-		printf(YELLOW "%s\n" WHITE, cmd->command);
-		cmd = cmd->next;
-	}
-}
-
 void	start(t_data *data)
 {
 	// signal(SIGTSTP, SIG_IGN);
@@ -85,10 +73,17 @@ void	start(t_data *data)
 		data->line = readline("Minishell> ");
 		add_history(data->line);
 		ctrl_line(data->flag, data->line);
-		parser_space(data->flag, data->line, &data->cmd);
+		// parser_space(data->flag, data->line, &data->cmd);
+		parser_space_lst(data->line, &data->token);
+		if (data->token)
+		{
+			ft_lstprint(data->token);
+			ft_lstfree(data->token);
+			// execute_builtin(data, data->token);
+			data->token = NULL;
+		}
 		if (data->cmd)
 		{
-			print_cmd(data->cmd);
 			// AQUI LAS COMPROBACIONES DE QUE HACE CADA ELEMENTO DE LA LISTA
 			execute_builtin(data, data->cmd);
 			cmd_free(data->cmd);

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 17:25:08 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/04 17:25:15 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/04 17:37:02 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ void executeCommand(char *command, char **args, int input_fd, int output_fd)
 		wait(NULL);
 	}
 }
+typedef struct s_cmd
+{
+	char *cmd;
+	char **args;
+	char *path;
+	int filefd[2];
+	int type;
+	struct s_cmd *next;
+} t_cmd;
 
 int main()
 {
@@ -93,3 +102,5 @@ int main()
 
 	return 0;
 }
+
+//  cat archivo.txt | grep "42" | sed "s/42/131/g" | sed "s/Barcelona/Nueva York/g" > salida.txt

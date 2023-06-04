@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:54:00 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/30 23:59:10 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/04 19:35:57 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,54 @@ void	parser_space(int flag[], char *line, t_cmd **cmd)
 		line++;
 	}
 	cmd_add_back(cmd, cmd_new(start));
+}
+
+// void	parser_space_lst(char *line, t_list **token)
+// {
+// 	int		quotes;
+// 	char	*start;
+
+// 	quotes = 0;
+// 	start = line;
+// 	while (*line != '\0')
+// 	{
+// 		if (*line == DOUBLE_QUOTE)
+// 			quotes = !quotes;
+// 		else if (*line == WHITE_SPACE && !quotes)
+// 		// else if (*line == ' ' && !quotes)
+// 		{
+// 			*line = '\0';
+// 			ft_lstadd_back(token, ft_lstnew(start));
+// 			start = line + 1;
+// 		}
+// 		line++;
+// 	}
+// 	ft_lstadd_back(token, ft_lstnew(start));
+// }
+
+void	parser_space_lst(char *line, t_list **cmd)
+{
+	int		quotes;
+	char	*start;
+
+	quotes = 0;
+	start = line;
+	while (*line != '\0')
+	{
+		if (*line == DOUBLE_QUOTE)
+			quotes = !quotes;
+		else if (*line == WHITE_SPACE && !quotes)
+		// else if (*line == ' ' && !quotes)
+		{
+			*line = '\0';
+			// cmd_add_back(cmd, cmd_new(start));
+			ft_lstadd_back(cmd, ft_lstnew(start));
+			start = line + 1;
+		}
+		line++;
+	}
+	// cmd_add_back(cmd, cmd_new(start));
+	ft_lstadd_back(cmd, ft_lstnew(start));
 }
 
 // CUANDO SEA IMPAR " o ' SE abre la consola de lineas,
