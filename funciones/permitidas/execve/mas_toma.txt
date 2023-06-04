@@ -1,0 +1,26 @@
+1_du_salida.out*
+1_du_salida_re_v3_2_OK.c
+2_du_salida_conus_v2_OK.c
+3_complejo_v4_OK.c
+3_complejo_v5.c
+3_complejo_v7_refactor_OK.c
+3_complejo_v8.c
+4.out*
+4_find_APPEND_v1_OK.c
+4_find_v1_OK.c
+5_interactivo.c
+a.out*
+a.out.dSYM/
+archivo.txt
+con_pip.c
+config.txt
+du.c
+du_salida.out*
+mas_toma.txt
+old/
+procesos_a_out.txt
+salida.txt
+todo.md
+toma.c
+toma.txt
+sábado,  3 de junio de 2023, 21:54:52 CEST
