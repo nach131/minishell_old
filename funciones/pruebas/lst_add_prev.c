@@ -1,21 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_lst.c                                          :+:      :+:    :+:   */
+/*   lst_add_prev.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 12:32:21 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/05 09:56:23 by nmota-bu         ###   ########.fr       */
+/*   Created: 2023/06/05 09:29:40 by nmota-bu          #+#    #+#             */
+/*   Updated: 2023/06/05 09:56:10 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* ╔════════════════════════════════════════════════════════════════════════╗ */
 /* ║                      https://github.com/nach131                        ║ */
-/* ║                     https://github.com/Carlos1073                      ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
-#include "minishell.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct s_cmd
+{
+	int				filefd[2];
+	char			*command;
+	char			**args;
+	char			*path;
+	struct s_cmd	*prev;
+	struct s_cmd	*next;
+}					t_cmd;
+
+int	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = -1;
+	while (s[++i])
+		;
+	return (i);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*res;
+	int		i;
+
+	if (!s1)
+		return (NULL);
+	res = (char *)malloc((ft_strlen(s1) + 1) * sizeof(*s1));
+	if (!res)
+		return (NULL);
+	i = -1;
+	while (s1[++i])
+		res[i] = s1[i];
+	res[i] = '\0';
+	return (res);
+}
 
 t_cmd	*cmd_new(char *str)
 {
@@ -28,6 +65,15 @@ t_cmd	*cmd_new(char *str)
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
+}
+
+t_cmd	*cmd_last(t_cmd *cmd)
+{
+	if (!cmd)
+		return (NULL);
+	while (cmd->next != NULL)
+		cmd = cmd->next;
+	return (cmd);
 }
 
 void	cmd_add_back(t_cmd **cmd, t_cmd *new)
@@ -47,34 +93,39 @@ void	cmd_add_back(t_cmd **cmd, t_cmd *new)
 	}
 }
 
-t_cmd	*cmd_last(t_cmd *cmd)
+void	printf_lst(t_cmd *lst)
 {
-	if (!cmd)
-		return (NULL);
-	while (cmd->next != NULL)
-		cmd = cmd->next;
-	return (cmd);
-}
-
-void	cmd_iter(t_cmd *cmd, void (*funcion)(void *))
-{
-	while (cmd)
+	while (lst != NULL)
 	{
-		funcion(&cmd->command);
-		cmd = cmd->next;
+		printf("%s\n", lst->command);
+		lst = lst->next;
 	}
 }
 
-void	cmd_free(t_cmd *cmd)
+void	VerLista(t_cmd *lst)
 {
-	t_cmd	*tmp;
-
-	while (cmd != NULL)
+	while (lst != NULL)
 	{
-		tmp = cmd;
-		cmd = cmd->next;
-		if (tmp->command)
-			free(tmp->command);
-		free(tmp);
+		printf("%s\n", lst->command);
+		if (lst->prev != NULL)
+			printf("\tprev: %s\n", lst->prev->command);
+		//		if (lst != NULL)
+		lst = lst->next;
 	}
 }
+
+int	main(void)
+{
+	t_cmd	*a;
+
+	a = cmd_new("1 Barcelona");
+	cmd_add_back(&a, cmd_new("2 Madrid"));
+	cmd_add_back(&a, cmd_new("3 Malaga"));
+	VerLista(a);
+}
+
+// 1 Barcelona
+// 2 Madrid
+// 	prev: 1 Barcelona
+// 3 Malaga
+// 	prev: 2 Madrid

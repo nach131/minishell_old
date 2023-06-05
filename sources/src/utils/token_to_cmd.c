@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_lst.c                                          :+:      :+:    :+:   */
+/*   token_to_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/24 12:32:21 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/05 09:56:23 by nmota-bu         ###   ########.fr       */
+/*   Created: 2023/06/04 20:25:31 by nmota-bu          #+#    #+#             */
+/*   Updated: 2023/06/04 21:19:48 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,64 +17,56 @@
 
 #include "minishell.h"
 
-t_cmd	*cmd_new(char *str)
-{
-	t_cmd	*new;
+// void	stop_to_pipe(t_list *token, t_cmd **cmd)
+// {
+// 	t_list	*tmp;
 
-	new = (t_cmd *)malloc(sizeof(t_cmd));
-	if (!new)
-		return (NULL);
-	new->command = ft_strdup(str);
-	new->next = NULL;
-	new->prev = NULL;
-	return (new);
+// 	(void)cmd;
+// 	tmp = token;
+// 	// while (tmp != NULL && ft_strncmp(tmp->content, "|", 2) != 0)
+// 	while (tmp && (ft_strncmp(tmp->content, "|", 2) != 0))
+// 	// && ft_strncmp(tmp->content, ">", 2) != 0))
+// 	{
+// 		ft_printf(RED "\t%s\n", tmp->content);
+// 		tmp = tmp->next;
+// 	}
+// 	// if (tmp != NULL)
+// 	// 	stop_to_pipe(tmp, cmd);
+// }
+
+int static	count_token(t_list *token)
+{
+	t_list	*tmp;
+	int		i;
+
+	tmp = token;
+	i = 0;
+	while (tmp != NULL)
+	{
+		if (!ft_strncmp(tmp->content, "|", 1) || !ft_strncmp(tmp->content, ">",
+				1))
+			i++;
+		tmp = tmp->next;
+	}
+	return (i);
 }
 
-void	cmd_add_back(t_cmd **cmd, t_cmd *new)
+void	token_to_pipe(t_list *token, t_cmd **cmd)
 {
-	t_cmd	*last;
+	t_list	*tmp;
+	int		num_cmd;
 
-	if (!(*cmd))
-	{
-		*cmd = new;
-		new->prev = NULL; // Establecer prev como NULL para el primer nodo
-	}
-	else
-	{
-		last = cmd_last(*cmd);
-		last->next = new;
-		new->prev = last; // Establecer prev como el último nodo existente
-	}
-}
-
-t_cmd	*cmd_last(t_cmd *cmd)
-{
-	if (!cmd)
-		return (NULL);
-	while (cmd->next != NULL)
-		cmd = cmd->next;
-	return (cmd);
-}
-
-void	cmd_iter(t_cmd *cmd, void (*funcion)(void *))
-{
-	while (cmd)
-	{
-		funcion(&cmd->command);
-		cmd = cmd->next;
-	}
-}
-
-void	cmd_free(t_cmd *cmd)
-{
-	t_cmd	*tmp;
-
-	while (cmd != NULL)
-	{
-		tmp = cmd;
-		cmd = cmd->next;
-		if (tmp->command)
-			free(tmp->command);
-		free(tmp);
-	}
+	num_cmd = count_token(token);
+	(void)cmd;
+	tmp = token;
+	printf(RED "\t%d\n", num_cmd);
+	// while (tmp != NULL && ft_strncmp(tmp->content, "|", 2) != 0)
+	// while (tmp != NULL)
+	// {
+	// 	if (tmp && (ft_strncmp(tmp->content, "|", 2) != 0))
+	// 		ft_printf(RED "\t%s\n", tmp->content);
+	// 	else
+	// 		break ;
+	// 	tmp = tmp->next;
+	// }
 }

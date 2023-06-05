@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/04 20:08:56 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/04 21:13:43 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,10 @@ void	start(t_data *data)
 		add_history(data->line);
 		ctrl_line(data->flag, data->line);
 		parser_space_lst(data->line, &data->token);
+		token_to_pipe(data->token, &data->cmd);
 		if (data->token)
 		{
-			// ft_lstprint(data->token);
+			ft_lstprint(data->token);
 			execute_builtin(data, data->cmd);
 			ft_lstfree(data->token);
 			data->token = NULL;
