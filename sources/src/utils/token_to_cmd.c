@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 20:25:31 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/06 16:01:42 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:19:00 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,44 +74,16 @@ char	*access_file(char *file)
 	return (NULL);
 }
 
-// t_cmd	*token_to_pipe(t_list *token)
-// {
-// 	t_cmd	*tmp;
-// 	int		num_cmd;
-
-// 	// char	*command;
-// 	tmp = malloc(sizeof(t_cmd));
-// 	if (!access_file(token->content))
-// 	{
-// 		printf(RED "-bash: %s: command not found\n", token->content);
-// 		return (tmp);
-// 	}
-// 	tmp->command = access_file(token->content);
-// 	tmp->args = NULL;
-// 	tmp->next = NULL;
-// 	tmp->prev = NULL;
-// 	// command = access_file(token->content);
-// 	// printf(GREEN "command: %s\n", command);
-// 	num_cmd = count_token(token);
-// 	printf(RED "\t%d\n", num_cmd);
-// 	return (tmp);
-// }
-
-// void	token_to_pipe(t_list *token, t_cmd **cmd)
 t_cmd	*token_to_pipe(t_list *token)
 {
 	t_cmd	*tmp;
 	int		num_cmd;
 
+	tmp = cmd_new((t_cmd){
+		token->content, {STDIN_FILENO, 2}, NULL, NULL});
 	(void)token;
 	num_cmd = count_token(token);
-	tmp = ft_calloc(1, sizeof(t_cmd));
-	tmp->command = ft_strdup(token->content);
-	// tmp->command = ft_substr(token->content, 0, 0xFFFFFFF);
 	return (tmp);
 }
 
 //  cat archivo.txt | grep "42" | sed "s/42/131/g" | sed "s/Barcelona/Nueva York/g" > salida.txt
-
-// cmd_add_back(t_cmd **cmd, t_cmd *new)
-// cmd_add_back(t_cmd **cmd, (t_cmd){filefd[2],command...})

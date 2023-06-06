@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/06 15:55:19 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:17:50 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ void	start(t_data *data)
 		cmd = token_to_pipe(data->token);
 		if (cmd)
 		{
-			printf(RED "cmd: %s\n", cmd->command);
+			printf(RED "cmd: %s, filefd: %d-%D\n", cmd->command, cmd->filefd[0],
+					cmd->filefd[1]);
 			cmd_free(cmd);
 		}
 		if (data->token)
