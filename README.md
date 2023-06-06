@@ -14,6 +14,10 @@
 
 ## [Instalación libreadline](markdown/libreadline.md)
 
+## Usadas
+
+pipe, perror, dup2, execve, access
+
 ```mermaid
 flowchart TD
     A{Leer entrada}

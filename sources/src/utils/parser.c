@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:54:00 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/04 19:35:57 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/06 12:17:46 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	parser_space_lst(char *line, t_list **cmd)
 	ft_lstadd_back(cmd, ft_lstnew(start));
 }
 
+// YA NO
 // CUANDO SEA IMPAR " o ' SE abre la consola de lineas,
 // esto hay que comprobarlo en el segundo paso de parser_space
-
 // en la stacic de next_token

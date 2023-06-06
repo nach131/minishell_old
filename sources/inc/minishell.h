@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/05 09:13:00 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/06 11:55:33 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,12 @@ enum
 	OUT,
 };
 
-// typedef struct s_fds
-// {
-// 	char			*in_file;
-// 	char			*out_file;
-// }					t_fds;
-
 typedef struct s_cmd
 {
 	int				filefd[2];
 	char			*command;
 	char			**args;
-	char			*path;
+	// char			*path;
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
 }					t_cmd;
@@ -77,13 +71,8 @@ typedef struct s_data
 	t_cmd			*cmd;
 	int				flag[126];
 	bool interactive; // poner con flag
-	char			*line;
 	int				exit;
 	int				ret;
-	// char			*act_dir;
-	// pid_t			pid;
-	// char			**path;
-	// int				status;
 }					t_data;
 
 void				handle_int(int sig);
@@ -102,6 +91,6 @@ void				parser_space_lst(char *line, t_list **token);
 void				ctrl_line(int flag[], char *line);
 
 void				add_export(t_list *env, t_cmd *cmd);
-void				token_to_pipe(t_list *token, t_cmd **cmd);
+t_cmd				*token_to_pipe(t_list *token);
 
 #endif

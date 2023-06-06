@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/04 21:13:43 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/06 12:48:27 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,24 +65,34 @@
 
 void	start(t_data *data)
 {
+	char	*line;
+	t_cmd	*cmd;
+
+	cmd = NULL;
 	// signal(SIGTSTP, SIG_IGN);
 	signal(SIGINT, (void *)handle_int);
 	signal(SIGQUIT, (void *)handle_quit);
 	while (1)
 	{
-		data->line = readline("Minishell> ");
-		add_history(data->line);
-		ctrl_line(data->flag, data->line);
-		parser_space_lst(data->line, &data->token);
-		token_to_pipe(data->token, &data->cmd);
+		line = readline("Minishell> ");
+		add_history(line);
+		ctrl_line(data->flag, line);
+		parser_space_lst(line, &data->token);
+		// cmd = token_to_pipe(data->token);
+		// if (cmd)
+		// {
+		// 	printf(MAGENTA "\t%s\n" WHITE, cmd->command);
+		// 	cmd_free(cmd);
+		// 	// cmd = NULL;
+		// }
 		if (data->token)
 		{
 			ft_lstprint(data->token);
-			execute_builtin(data, data->cmd);
+			execute_builtin(data, cmd);
 			ft_lstfree(data->token);
 			data->token = NULL;
 		}
-		free(data->line);
+		free(line);
 		// history_line(); // ESTO EN FUNCION EXIT
 	}
 }
@@ -110,7 +120,6 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	// data = ft_calloc(sizeof(t_data), 1);
 	ft_bzero(&data, sizeof(t_data));
 	data.env = init_env(env);
 	//=========================================================================

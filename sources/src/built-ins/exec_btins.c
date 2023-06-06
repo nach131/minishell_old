@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/06/04 20:08:23 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/06 09:45:48 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 		// res = env_btin(data, cmd->args);
 		print_env(data->env);
 	else if (!ft_strncmp(data->token->content, "export", 7))
-		add_export(data->env, data->cmd);
+		add_export(data->env, cmd);
 	// res = export_btin(data, cmd->args);
 	// else if (ft_strncmp(cmd->command, "pwd", 4) == 0)
 	// 	res = pwd_btin(data, cmd->args);

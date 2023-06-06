@@ -38,8 +38,8 @@ void executeCommand(char *command, char **args, int input_fd, int output_fd)
 int main()
 {
 
-	char *cmd[] = {"/bin/cat", "/usr/bin/grep", "/usr/bin/sed", "/usr/bin/sed"};
-	char *args[][3] = {
+	char *cmd[4] = {"/bin/cat", "/usr/bin/grep", "/usr/bin/sed", "/usr/bin/sed"};
+	char *args[4][3] = {
 		{"cat", "archivo.txt", NULL},
 		{"grep", "42", NULL},
 		{"sed", "s/42/131/g", NULL},

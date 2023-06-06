@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:32:21 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/05 09:56:23 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/06 12:15:48 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_cmd	*cmd_new(char *str)
 	if (!new)
 		return (NULL);
 	new->command = ft_strdup(str);
+	// new->args = NULL;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
@@ -74,7 +75,10 @@ void	cmd_free(t_cmd *cmd)
 		tmp = cmd;
 		cmd = cmd->next;
 		if (tmp->command)
+		{
 			free(tmp->command);
+			// AQUI HAY QUE LIBERAR TODO LO DEMAS;
+		}
 		free(tmp);
 	}
 }
