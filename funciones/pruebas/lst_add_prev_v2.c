@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_add_prev.c                                     :+:      :+:    :+:   */
+/*   lst_add_prev_v2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 09:29:40 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/06 13:59:13 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/06 14:26:16 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 typedef struct s_cmd
 {
-	int				filefd[2];
 	char			*command;
+	int				filefd[2];
 	char			**args;
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
@@ -53,14 +53,16 @@ char	*ft_strdup(const char *s1)
 	return (res);
 }
 
-t_cmd	*cmd_new(char *str)
+t_cmd	*cmd_new(t_cmd cmd)
 {
 	t_cmd	*new;
 
 	new = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!new)
 		return (NULL);
-	new->command = ft_strdup(str);
+	new->command = ft_strdup(cmd.command);
+	new->filefd[0] = cmd.filefd[0];
+	new->filefd[1] = cmd.filefd[1];
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
@@ -106,8 +108,14 @@ void	ver_lista(t_cmd *lst)
 	while (lst != NULL)
 	{
 		printf("%s\n", lst->command);
+		printf("%s\n", lst->args);
+		printf("%d, %d\n", lst->filefd[0], lst->filefd[1]);
+		// if (lst->args)
+		// 	printf("%s\n", lst->args[0]);
 		if (lst->prev != NULL)
+		{
 			printf("\tprev: %s\n", lst->prev->command);
+		}
 		lst = lst->next;
 	}
 }
@@ -116,9 +124,13 @@ int	main(void)
 {
 	t_cmd	*a;
 
-	a = cmd_new("1 Barcelona");
-	cmd_add_back(&a, cmd_new("2 Madrid"));
-	cmd_add_back(&a, cmd_new("3 Malaga"));
+	a = cmd_new((t_cmd){
+		"1 Barcelona",
+		10,
+		22,
+	});
+	cmd_add_back(&a, cmd_new((t_cmd){"1 Madrid"}));
+	cmd_add_back(&a, cmd_new((t_cmd){"1 Malaga"}));
 	ver_lista(a);
 }
 
@@ -127,3 +139,28 @@ int	main(void)
 // 	prev: 1 Barcelona
 // 3 Malaga
 // 	prev: 2 Madrid
+//=========================================================================
+// // Crear una nueva estructura t_cmd con los valores deseados
+// t_cmd newCmd = {
+// 	.command = "1 Barcelona",
+// 	.filefd[0] = 10,
+// 	.filefd[1] = 22,
+// };
+
+// // Asignar memoria para el arreglo args
+// newCmd.args = malloc(sizeof(char *) * 4);
+
+// // Asignar los valores al arreglo args
+// newCmd.args[0] = strdup("cat");
+// newCmd.args[1] = strdup("archivo.txt");
+// newCmd.args[2] = strdup("-l");
+// newCmd.args[3] = NULL;
+// Es importante agregar un valor nulo al final del arreglo
+
+// // Asignar los punteros prev y next
+// newCmd.prev = NULL;
+// newCmd.next = NULL;
+
+// // Asignar la nueva estructura a la variable a
+// a = cmd_new(newCmd);
+//=========================================================================

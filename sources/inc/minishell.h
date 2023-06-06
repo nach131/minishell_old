@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/06 11:55:33 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/06 16:05:24 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ enum
 
 typedef struct s_cmd
 {
-	int				filefd[2];
 	char			*command;
 	char			**args;
+	int				filefd[2];
 	// char			*path;
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
@@ -79,14 +79,12 @@ void				handle_int(int sig);
 void				handle_quit(int sig);
 
 t_cmd				*cmd_new(char *str);
+
 void				cmd_add_back(t_cmd **cmd, t_cmd *new);
 t_cmd				*cmd_last(t_cmd *cmd);
-// void				cmd_clear(t_cmd *cmd);
 void				cmd_free(t_cmd *cmd);
 void				cmd_iter(t_cmd *cmd, void (*funcion)(void *));
 
-void				parser_space(int flag[], char *line, t_cmd **cmd);
-// void				parser_space_lst(int flag[], char *line, t_list **cmd);
 void				parser_space_lst(char *line, t_list **token);
 void				ctrl_line(int flag[], char *line);
 
