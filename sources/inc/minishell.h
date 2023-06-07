@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/06 16:16:20 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/07 10:53:23 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ enum
 typedef struct s_cmd
 {
 	char			*command;
-	// char			**args;
+	char			**args;
 	int				filefd[2];
-	// char			*path;
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
+	// char			*path;
 }					t_cmd;
 
 typedef struct s_data

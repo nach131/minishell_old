@@ -7,6 +7,9 @@ https://www.codequoi.com/en/creating-and-killing-child-processes-in-c/
 - controlar el crtl+c, ctrl=v
 - controlar $
 
+~~`TAB` para listar los elementos de la carpeta actual~~
+
+
 ## EXPORT
 Pasar todas las lista a **env y ordenar dentro todo los valores según ASCII
 
@@ -51,3 +54,4 @@ echo "La fecha actual es: $(date)"
 	variables
 		getenv-> recuepera el valor del nombre de la variable pasad
 			Usar la funcion lst_value como get event.
+

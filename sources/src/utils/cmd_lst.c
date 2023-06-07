@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:32:21 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/06 16:16:26 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/07 11:19:07 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ t_cmd	*cmd_new(t_cmd cmd)
 	new = (t_cmd *)malloc(sizeof(t_cmd));
 	if (!new)
 		return (NULL);
-	new->command = ft_strdup(cmd.command);
+	new->command = cmd.command;
 	new->filefd[0] = cmd.filefd[0];
 	new->filefd[1] = cmd.filefd[1];
+	new->args = cmd.args;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);

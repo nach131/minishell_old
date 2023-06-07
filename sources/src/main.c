@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/06 16:17:50 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/07 11:18:56 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,19 +77,16 @@ void	start(t_data *data)
 	{
 		line = readline("Minishell> ");
 		add_history(line);
-		ctrl_line(data->flag, line);
+		// ctrl_line(data->flag, line);
 		parser_space_lst(line, &data->token);
 		cmd = token_to_pipe(data->token);
 		if (cmd)
 		{
-			printf(RED "cmd: %s, filefd: %d-%D\n", cmd->command, cmd->filefd[0],
-					cmd->filefd[1]);
-			cmd_free(cmd);
-		}
-		if (data->token)
-		{
-			ft_lstprint(data->token);
+			printf(RED "cmd: %s, filefd: %d-%D\n" WHITE, cmd->command,
+					cmd->filefd[0], cmd->filefd[1]);
 			execute_builtin(data, cmd);
+			cmd_free(cmd);
+			// liberear todos los elementos de cmd
 			ft_lstfree(data->token);
 			data->token = NULL;
 		}
