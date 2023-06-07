@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 20:25:31 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/07 10:58:47 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/07 19:45:17 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,6 @@ int static	count_token(t_list *token)
 	}
 	return (i);
 }
-
-// cuando este todo en cmd, buscar desdel el primer args de cmd
-// ededede
-// minishell(79755,0x7fffa8670380) malloc: *** error for object 0x7ff090e000b0: pointer being freed was not allocated
-// *** set a breakpoint in malloc_error_break to debug
-// Abort trap: 6
 
 char	*access_file(char *file)
 {
@@ -105,14 +99,14 @@ t_cmd	*token_to_pipe(t_list *token)
 {
 	t_cmd	*tmp;
 	int		num_cmd;
-	char	*command;
 
+	// char	*command;
 	num_cmd = count_token(token);
-	command = access_file(token->content);
+	// command = access_file(token->content);
 	// if (!num_cmd)
 	// {
 	tmp = cmd_new((t_cmd){
-		.command = command,
+		.command = access_file(token->content),
 		.args = args(token),
 		.filefd = {STDIN_FILENO, STDOUT_FILENO},
 		.prev = NULL,

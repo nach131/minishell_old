@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:32:21 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/07 11:19:07 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/07 18:28:26 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	cmd_free(t_cmd *cmd)
 		if (tmp->command)
 		{
 			free(tmp->command);
+			// printf(tmp->args[0]);
 			// AQUI HAY QUE LIBERAR TODO LO DEMAS;
 		}
 		free(tmp);
