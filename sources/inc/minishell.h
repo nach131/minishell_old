@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/08 20:07:21 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:25:17 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,6 @@ void				ctrl_line(int flag[], char *line);
 
 void				add_export(t_list *env, t_cmd *cmd);
 t_cmd				*token_to_pipe(t_list *token);
+char				*access_file(char *file);
 
 #endif

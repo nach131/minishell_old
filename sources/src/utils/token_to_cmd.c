@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 20:25:31 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/08 19:52:51 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:32:00 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 #include "minishell.h"
 
+// cuenta la cantidad de elementos en la lista
 int static	count_token(t_list *token)
 {
 	t_list	*tmp;
@@ -34,31 +35,7 @@ int static	count_token(t_list *token)
 	return (i);
 }
 
-char	*access_file(char *file)
-{
-	char	*path;
-
-	path = ft_strjoin("/bin/", file);
-	if (access(path, X_OK) == 0)
-		return (path);
-	else if (!ft_strncmp(file, "export", 7))
-		return (ft_strdup("export"));
-	else if (!ft_strncmp(file, "exit", 7))
-		return (ft_strdup("exit"));
-	else if (!ft_strncmp(file, "unset", 7))
-		return (ft_strdup("unset"));
-	else
-	{
-		free(path);
-		path = ft_strjoin("/usr/bin/", file);
-		if (access(path, X_OK) == 0)
-			return (path);
-	}
-	if (path)
-		free(path);
-	return (NULL);
-}
-
+// cuenta la cantidad de elementos en la lista token hasta encontrar el primer "|" o ">"
 int	count_to_token(t_list *token)
 {
 	int	i;
@@ -109,7 +86,7 @@ t_cmd	*token_to_pipe(t_list *token)
 	else
 	{
 		tmp = cmd_new((t_cmd){
-			.command = access_file(token->content),
+			.command = command,
 			.args = args(token),
 			.filefd = {STDIN_FILENO, STDOUT_FILENO},
 			.prev = NULL,
@@ -119,5 +96,3 @@ t_cmd	*token_to_pipe(t_list *token)
 }
 
 //  cat archivo.txt | grep "42" | sed "s/42/131/g" | sed "s/Barcelona/Nueva York/g" > salida.txt
-
-// HACER EL TAB para listar los elementos de la carpeta actual

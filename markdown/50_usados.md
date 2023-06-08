@@ -54,12 +54,12 @@
 35. tee
 
 **Variables de entorno y configuración:**
-36. source
+36. source ESTE NO ESTA
 37. export
 
 **Gestión de historial y comandos:**
 38. alias
-39. history
+39. history ESTE NO ESTA
 40. command
 41. which
 
