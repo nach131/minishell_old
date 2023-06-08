@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/08 20:07:24 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/08 22:56:37 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,12 @@ void	start(t_data *data)
 		if (cmd)
 		{
 			printf(RED "cmd: %s\n" WHITE, cmd->command);
+			// print_dptr(cmd->args);
 			execute_builtin(data, cmd);
 			cmd_free(cmd);
-			// liberear todos los elementos de cmd
-			// data->token = NULL;
 		}
 		else
-			printf(RED "-Mybash: %s: command not found\n" WHITE,
+			printf(RED "-Minishell: %s: command not found\n" WHITE,
 					token->content);
 		if (token)
 			ft_lstfree(token);

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:52:58 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/04 19:10:18 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/08 22:16:44 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,19 @@
 // 	}
 // 	ft_printf(ORANGE "TOTAL: %d\n", countPointers(env));
 // }
+
+void	print_dptr(char **line)
+{
+	int	i;
+
+	(void)line;
+	i = 0;
+	while (line[i] != NULL)
+	{
+		ft_printf(ORANGE "%s\n", line[i]);
+		i++;
+	}
+}
 
 void	print_find_env(char *find, t_list *env)
 {

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:54:00 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/08 20:07:25 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/08 23:00:17 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,18 @@ t_list	*parser_space_lst(char *line)
 			quotes = !quotes;
 		else if (*line == WHITE_SPACE && !quotes)
 		{
-			*line = '\0';
-			ft_lstadd_back(&token, ft_lstnew(ft_strdup(start)));
+			if (line != start) // Evitar añadir espacios en blanco consecutivos
+			{
+				*line = '\0';
+				ft_lstadd_back(&token, ft_lstnew(ft_strdup(start)));
+			}
 			start = line + 1;
 		}
 		line++;
 	}
-	ft_lstadd_back(&token, ft_lstnew(ft_strdup(start)));
+	if (line != start)
+		// Añadir el último token si no hay espacio en blanco al final
+		ft_lstadd_back(&token, ft_lstnew(ft_strdup(start)));
 	return (token);
 }
 

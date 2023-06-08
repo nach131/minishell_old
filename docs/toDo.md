@@ -4,7 +4,7 @@
 
 https://www.codequoi.com/en/creating-and-killing-child-processes-in-c/
 
-- controlar el crtl+c, ctrl=v
+~~- controlar el crtl+c, ctrl=v~~
 - controlar $
 
 ~~`TAB` para listar los elementos de la carpeta actual~~
@@ -57,5 +57,11 @@ echo "La fecha actual es: $(date)"
 
 ## HAY QUE REVISAR
 
+### clear
 cmd: /usr/bin/clear, filefd: 0-1
 TERM environment variable not set.
+
+### ejecucion ./***.sh
+No puedo ejecuar ./archivo
+mesnaje de error
+-Minishell: ./minishell: command not found
