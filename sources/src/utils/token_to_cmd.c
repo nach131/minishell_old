@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 20:25:31 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/08 08:23:03 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/08 19:52:51 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,12 @@ char	*access_file(char *file)
 	else
 	{
 		free(path);
-		ft_strjoin("/usr/bin/", file);
+		path = ft_strjoin("/usr/bin/", file);
 		if (access(path, X_OK) == 0)
 			return (path);
 	}
-	free(path);
+	if (path)
+		free(path);
 	return (NULL);
 }
 
@@ -82,9 +83,9 @@ char	**args(t_list *token)
 	int		i;
 
 	num = count_to_token(token);
-	res = malloc(num * sizeof(char *) + 1);
+	res = malloc((num + 1) * sizeof(char *));
 	i = 0;
-	while (i < num)
+	while (token != NULL)
 	{
 		res[i] = ft_strdup(token->content);
 		i++;

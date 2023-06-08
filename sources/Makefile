@@ -33,7 +33,8 @@ CC			:= gcc
 AR 			:= ar -rcs
 RM			:= rm -rf
 MKDIR		:= -mkdir -p
-CFLAGS	:= -Wall -Wextra -Werror -g3
+CFLAGS	:= -Wall -Wextra -Werror -g3 $(ASAN)
+# CFLAGS	:= -Wall -Wextra -Werror -g3
 LEAKS		:= -fsanitize=address
 RDFLAGS	:= -lreadline -lhistory
 MODE		:= normal

@@ -55,3 +55,7 @@ echo "La fecha actual es: $(date)"
 		getenv-> recuepera el valor del nombre de la variable pasad
 			Usar la funcion lst_value como get event.
 
+## HAY QUE REVISAR
+
+cmd: /usr/bin/clear, filefd: 0-1
+TERM environment variable not set.

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/06/08 08:32:10 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/08 15:33:02 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,26 +44,24 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 {
 	int	res;
 
-	(void)cmd;
 	res = CMD_NOT_FOUND;
-	if (!ft_strncmp(cmd->command, "/usr/bin/env", 12))
-		print_env(data->env);
-	else if (!ft_strncmp(cmd->command, "export", 7))
-		add_export(data->env, cmd);
-	else if (ft_strncmp(cmd->command, "exit", 4) == 0)
-		printf(MAGENTA "esto es EXIT MOTHERF*CKER\n" WHITE);
-	else if (ft_strncmp(cmd->command, "/bin/echo", 9) == 0)
-		printf(MAGENTA "esto es ECHO MOTHERF*CKER\n" WHITE);
-	else if (ft_strncmp(cmd->command, "/usr/bin/cd", 9) == 0)
-		printf(MAGENTA "esto es CD MOTHERF*CKER\n" WHITE);
-	else if (ft_strncmp(cmd->command, "/bin/pwd", 8) == 0)
-		printf(MAGENTA "esto es PWD MOTHERF*CKER\n" WHITE);
-	else if (ft_strncmp(cmd->command, "unset", 8) == 0)
-		printf(MAGENTA "esto es UNSET MOTHERF*CKER\n" WHITE);
-	else if (ft_strncmp(cmd->command, "(null)", 6) == 0)
-		printf(MAGENTA "esto es (null) MOTHERF*CKER\n" WHITE);
-	else
-		executeCommand(cmd->command, cmd->args, cmd->filefd[0], cmd->filefd[1]);
+	(void)data;
+	// if (!ft_strncmp(cmd->command, "/usr/bin/env", 13))
+	// 	print_env(data->env);
+	// else if (!ft_strncmp(cmd->command, "export", 8))
+	// 	add_export(data->env, cmd);
+	// else if (ft_strncmp(cmd->command, "exit", 5) == 0)
+	// 	printf(MAGENTA "esto es EXIT MOTHERF*CKER\n" WHITE);
+	// else if (ft_strncmp(cmd->command, "/bin/echo", 10) == 0)
+	// 	printf(MAGENTA "esto es ECHO MOTHERF*CKER\n" WHITE);
+	// else if (ft_strncmp(cmd->command, "/usr/bin/cd", 12) == 0)
+	// 	printf(MAGENTA "esto es CD MOTHERF*CKER\n" WHITE);
+	// else if (ft_strncmp(cmd->command, "/bin/pwd", 9) == 0)
+	// 	printf(MAGENTA "esto es PWD MOTHERF*CKER\n" WHITE);
+	// else if (ft_strncmp(cmd->command, "unset", 6) == 0)
+	// 	printf(MAGENTA "esto es UNSET MOTHERF*CKER\n" WHITE);
+	// else
+	executeCommand(cmd->command, cmd->args, cmd->filefd[0], cmd->filefd[1]);
 	return (res);
 }
 

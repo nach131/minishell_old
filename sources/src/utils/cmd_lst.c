@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:32:21 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/07 18:28:26 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/08 20:01:10 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,17 @@ void	cmd_iter(t_cmd *cmd, void (*funcion)(void *))
 
 void	cmd_free(t_cmd *cmd)
 {
-	t_cmd	*tmp;
+	t_cmd *current;
+	t_cmd *next;
 
-	while (cmd != NULL)
+	current = cmd;
+	while (current != NULL)
 	{
-		tmp = cmd;
-		cmd = cmd->next;
-		if (tmp->command)
-		{
-			free(tmp->command);
-			// printf(tmp->args[0]);
-			// AQUI HAY QUE LIBERAR TODO LO DEMAS;
-		}
-		free(tmp);
+		free(current->command);
+		if (current->args != NULL)
+			ft_free_dptr(current->args);
+		next = current->next;
+		free(current);
+		current = next;
 	}
 }

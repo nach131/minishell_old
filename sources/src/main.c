@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/08 08:34:36 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/08 20:07:24 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,35 +66,32 @@
 void	start(t_data *data)
 {
 	char	*line;
+	t_list	*token;
 	t_cmd	*cmd;
 
-	cmd = NULL;
-	// cmd = ft_calloc(1, sizeof(t_cmd));
-	// signal(SIGTSTP, SIG_IGN);
-	signal(SIGINT, (void *)handle_int);
-	signal(SIGQUIT, (void *)handle_quit);
+	(void)data;
 	while (1)
 	{
 		line = readline("Minishell> ");
 		add_history(line);
-		// ctrl_line(data->flag, line);
-		parser_space_lst(line, &data->token);
-		cmd = token_to_pipe(data->token);
-		// ft_lstprint(data->token);
+		token = parser_space_lst(line);
+		ft_lstprint(token);
+		cmd = token_to_pipe(token);
 		if (cmd)
 		{
-			printf(RED "cmd: %s, filefd: %d-%D\n" WHITE, cmd->command,
-					cmd->filefd[0], cmd->filefd[1]);
+			printf(RED "cmd: %s\n" WHITE, cmd->command);
 			execute_builtin(data, cmd);
 			cmd_free(cmd);
 			// liberear todos los elementos de cmd
-			ft_lstfree(data->token);
-			data->token = NULL;
+			// data->token = NULL;
 		}
 		else
 			printf(RED "-Mybash: %s: command not found\n" WHITE,
-					data->token->content);
-		free(line);
+					token->content);
+		if (token)
+			ft_lstfree(token);
+		if (line)
+			free(line);
 		// history_line(); // ESTO EN FUNCION EXIT
 	}
 }
@@ -124,18 +121,9 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	ft_bzero(&data, sizeof(t_data));
 	data.env = init_env(env);
-	//=========================================================================
-	// parser_tmp();
-	// start_export(data->env);
-	//=========================================================================
-	//init_path(data);
-	//  if (!check_params(&data, argc, argv))
-	//  	exit_msl(NULL, EXIT_FAILURE); // pendiente
-	//  if (data->interactive == true)
-	//  	msl_interact(&data); // pendiente
-	//  else
-	//  	msl_non_interact(&data); // pendiente
-	//  exit_msl(&data, gbl_exit_code);
+	// signal(SIGTSTP, SIG_IGN);
+	signal(SIGINT, (void *)handle_int);
+	signal(SIGQUIT, (void *)handle_quit);
 	start(&data);
 	return (0);
 }

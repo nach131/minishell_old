@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:54:00 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/06 16:05:56 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/08 20:07:25 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "minishell.h"
 
 // CONTROL DE LOS FLAG PARA EL PARSER
+// esta sin usar
 void	ctrl_line(int flag[], char *line)
 {
 	int	i;
@@ -35,13 +36,15 @@ void	ctrl_line(int flag[], char *line)
 		flag[DOUBLE_QUOTE] = 1;
 }
 
-void	parser_space_lst(char *line, t_list **token)
+t_list	*parser_space_lst(char *line)
 {
 	int		quotes;
 	char	*start;
+	t_list	*token;
 
 	quotes = 0;
 	start = line;
+	token = NULL;
 	while (*line != '\0')
 	{
 		if (*line == DOUBLE_QUOTE)
@@ -49,12 +52,13 @@ void	parser_space_lst(char *line, t_list **token)
 		else if (*line == WHITE_SPACE && !quotes)
 		{
 			*line = '\0';
-			ft_lstadd_back(token, ft_lstnew(start));
+			ft_lstadd_back(&token, ft_lstnew(ft_strdup(start)));
 			start = line + 1;
 		}
 		line++;
 	}
-	ft_lstadd_back(token, ft_lstnew(start));
+	ft_lstadd_back(&token, ft_lstnew(ft_strdup(start)));
+	return (token);
 }
 
 // YA NO

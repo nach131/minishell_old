@@ -7,7 +7,6 @@ typedef struct s_cmd
 	int				filefd[2];
 	char			*command;
 	char			**args;
-	// char			*path;
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
 }					t_cmd;
