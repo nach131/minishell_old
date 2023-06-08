@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/07 18:42:51 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/08 08:34:36 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	start(t_data *data)
 		// ctrl_line(data->flag, line);
 		parser_space_lst(line, &data->token);
 		cmd = token_to_pipe(data->token);
-		ft_lstprint(data->token);
+		// ft_lstprint(data->token);
 		if (cmd)
 		{
 			printf(RED "cmd: %s, filefd: %d-%D\n" WHITE, cmd->command,
@@ -91,6 +91,9 @@ void	start(t_data *data)
 			ft_lstfree(data->token);
 			data->token = NULL;
 		}
+		else
+			printf(RED "-Mybash: %s: command not found\n" WHITE,
+					data->token->content);
 		free(line);
 		// history_line(); // ESTO EN FUNCION EXIT
 	}
