@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 20:25:31 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/08 21:32:00 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/08 22:03:43 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 #include "minishell.h"
 
-// cuenta la cantidad de elementos en la lista
-int static	count_token(t_list *token)
+// cuenta la cantidad de elementos (cmd) en la lista
+int static	count_cmd(t_list *token)
 {
 	t_list	*tmp;
 	int		i;
@@ -36,7 +36,7 @@ int static	count_token(t_list *token)
 }
 
 // cuenta la cantidad de elementos en la lista token hasta encontrar el primer "|" o ">"
-int	count_to_token(t_list *token)
+int	count_to_token_cmd(t_list *token)
 {
 	int	i;
 
@@ -59,7 +59,7 @@ char	**args(t_list *token)
 	char	**res;
 	int		i;
 
-	num = count_to_token(token);
+	num = count_to_token_cmd(token);
 	res = malloc((num + 1) * sizeof(char *));
 	i = 0;
 	while (token != NULL)
@@ -79,7 +79,7 @@ t_cmd	*token_to_pipe(t_list *token)
 	int		num_cmd;
 	char	*command;
 
-	num_cmd = count_token(token);
+	num_cmd = count_cmd(token);
 	command = access_file(token->content);
 	if (!command)
 		tmp = NULL;
