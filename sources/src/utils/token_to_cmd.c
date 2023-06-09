@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 20:25:31 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/09 19:19:53 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/09 20:45:41 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,11 @@ t_cmd	*token_to_pipe(t_list *token, t_list *env)
 	char	*command;
 
 	num_cmd = count_cmd(token);
+	printf(RED "\t%d\n", num_cmd);
 	command = access_file(token->content);
 	if (!command)
 		tmp = NULL;
-	else
+	else if (command && num_cmd == 0)
 	{
 		tmp = cmd_new((t_cmd){
 			.command = command,
@@ -95,6 +96,11 @@ t_cmd	*token_to_pipe(t_list *token, t_list *env)
 			.next = NULL});
 		// tmp = cmd_new((t_cmd){command, args(token), {STDIN_FILENO,
 		// 		STDOUT_FILENO}, NULL, NULL});
+	}
+	else
+	{
+		printf("mas...\n");
+		tmp = NULL;
 	}
 	return (tmp);
 }
