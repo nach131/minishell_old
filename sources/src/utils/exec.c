@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_btins.c                                       :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/06/09 12:18:18 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/09 19:26:49 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	(void)data;
 	if (!ft_strncmp(cmd->command, "env", 4))
 		print_env(data->env);
-	else if (!ft_strncmp(cmd->command, "echo", 5))
-		printf(MAGENTA "esto es ECHO MOTHERF*CKER\n" WHITE);
+	// else if (!ft_strncmp(cmd->command, "echo", 5))
+	// 	printf(MAGENTA "esto es ECHO MOTHERF*CKER\n" WHITE);
 	else if (ft_strncmp(cmd->command, "cd", 3) == 0)
 		printf(MAGENTA "esto es CD MOTHERF*CKER\n" WHITE);
 	else if (ft_strncmp(cmd->command, "pwd", 4) == 0)

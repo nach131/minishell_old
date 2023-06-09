@@ -2,13 +2,10 @@
 
 - getenv usar para asignar el valor de  home a "~"
 
-https://www.codequoi.com/en/creating-and-killing-child-processes-in-c/
-
 ~~- controlar el crtl+c, ctrl=v~~
 - controlar $
 
 ~~`TAB` para listar los elementos de la carpeta actual~~
-
 
 ## EXPORT
 Pasar todas las lista a **env y ordenar dentro todo los valores según ASCII
@@ -55,14 +52,14 @@ echo "La fecha actual es: $(date)"
 		getenv-> recuepera el valor del nombre de la variable pasad
 			Usar la funcion lst_value como get event.
 
-leer todos los env, añadir los que se pasan desde la orden de comandos y pasarlos todos a **array,
-ponerlos en t_cmd y liberar todo desde t_cmdfree
+~~leer todos los env, añadir los que se pasan desde la orden de comandos y pasarlos todos a **array,~~
+~~ponerlos en t_cmd y liberar todo desde t_cmdfree~~
 
 ## HAY QUE REVISAR
 
 ### clear
-cmd: /usr/bin/clear, filefd: 0-1
-TERM environment variable not set.
+~~cmd: /usr/bin/clear, filefd: 0-1~~
+~~TERM environment variable not set.~~
 
 ### ejecucion ./***.sh
 No puedo ejecuar ./archivo

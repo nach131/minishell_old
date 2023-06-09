@@ -3,3 +3,5 @@ https://tldp.org/LDP/abs/html/intandnonint.html#:~:text=A%20shell%20running%20a%
 https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html
 
 https://mywiki.wooledge.org/BashParser
+
+https://www.codequoi.com/en/creating-and-killing-child-processes-in-c/

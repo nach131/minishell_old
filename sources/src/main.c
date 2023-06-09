@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/09 12:51:55 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/09 19:08:32 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	start(t_data *data)
 	t_list	*token;
 	t_cmd	*cmd;
 
-	(void)data;
 	while (1)
 	{
 		line = readline("Minishell> ");

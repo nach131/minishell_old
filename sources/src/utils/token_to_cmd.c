@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 20:25:31 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/09 12:15:59 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/09 19:19:53 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int static	count_cmd(t_list *token)
 
 // cuenta la cantidad de elementos en la lista token
 //  hasta encontrar el primer "|" o ">"
-int	count_to_token_cmd(t_list *token)
+int static	count_to_token_cmd(t_list *token)
 {
 	int	i;
 
@@ -54,7 +54,7 @@ int	count_to_token_cmd(t_list *token)
 	return (i);
 }
 
-char	**args(t_list *token)
+char static	**args(t_list *token)
 {
 	int		num;
 	char	**res;
@@ -80,7 +80,6 @@ t_cmd	*token_to_pipe(t_list *token, t_list *env)
 	int		num_cmd;
 	char	*command;
 
-	(void)env;
 	num_cmd = count_cmd(token);
 	command = access_file(token->content);
 	if (!command)

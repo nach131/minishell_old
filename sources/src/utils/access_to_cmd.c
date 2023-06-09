@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 21:24:26 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/08 22:05:23 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/09 19:28:26 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ char static	*real_command(char *file)
 
 char	*access_file(char *file)
 {
-	if (!ft_strncmp(file, "echo", 5))
-		return (ft_strdup("echo"));
-	else if (!ft_strncmp(file, "cd", 3))
+	// if (!ft_strncmp(file, "echo", 5))
+	// 	return (ft_strdup("echo"));
+	if (!ft_strncmp(file, "cd", 3))
 		return (ft_strdup("cd"));
 	else if (!ft_strncmp(file, "pwd", 4))
 		return (ft_strdup("pwd"));
