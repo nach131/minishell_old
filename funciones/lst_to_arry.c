@@ -1,76 +1,64 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_lst.c                                          :+:      :+:    :+:   */
+/*   lst_to_arry.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/18 20:01:40 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/09 10:05:44 by nmota-bu         ###   ########.fr       */
+/*   Created: 2023/06/09 09:50:58 by nmota-bu          #+#    #+#             */
+/*   Updated: 2023/06/09 10:02:39 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* ╔════════════════════════════════════════════════════════════════════════╗ */
 /* ║                      https://github.com/nach131                        ║ */
-/* ║                     https://github.com/Carlos1073                      ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
-#include "minishell.h"
+#include "../../libft/inc/libft.h"
 
-// Encuentra el valor, del nombre pasado en un lista
-int	find_env(char *s1, char *s2)
+void ft_lstprint(t_list *lst)
 {
-	int	i;
+	t_list *tmp;
 
-	i = 0;
-	while (s2[i])
+	tmp = lst;
+	while (tmp != NULL)
 	{
-		if (s1[i] == s2[i])
-			i++;
-		else
-			return (1);
-	}
-	if (s1[i] == '=')
-		return (0);
-	return (1);
-}
-
-// Quita el nombre del env y devuelve el valor
-char	*env_value(char *s)
-{
-	int	i;
-
-	i = 0;
-	while (*s)
-	{
-		if (*s == '=')
-		{
-			s++;
-			return (s);
-		}
-		s++;
-	}
-	return (s);
-}
-
-// Pasa las lista env a array
-char	**env_to_array(t_list *env)
-{
-	t_list	*tmp;
-	int		i;
-	int		num;
-	char	**array;
-
-	tmp = env;
-	i = 0;
-	num = ft_lstsize(tmp);
-	array = malloc((num + 1) * sizeof(char *));
-	while (tmp)
-	{
-		array[i] = ft_strdup(tmp->content);
-		i++;
+		printf("%s\n", tmp->content);
 		tmp = tmp->next;
 	}
+}
+
+int main(void)
+{
+	t_list *lst;
+
+	lst = ft_lstnew("UNO=uno");
+	lst->next = ft_lstnew("DOS=dos");
+	lst->next->next = ft_lstnew("TRES=tres");
+	int num = ft_lstsize(lst);
+
+	printf("%d\n", num);
+	ft_lstprint(lst);
+
+	char **array;
+
+	array = malloc((num + 1) * sizeof(char *));
+
+	int i = 0;
+	while (lst)
+	{
+		array[i] = ft_strdup(lst->content);
+		i++;
+		lst = lst->next;
+	}
 	array[i] = NULL;
-	return (array);
+
+	i = 0;
+	while (array[i])
+	{
+		printf("%s\n", array[i]);
+		i++;
+	}
+
+	return (0);
 }

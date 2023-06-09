@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/06/08 22:08:32 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/09 10:09:47 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 // Chequea qué comando estamos introduciendo, si no es un builtin devuelve -1.
 //	Si es un builtin ejecuta la función correspondiente.
 
-void	executeCommand(char *command, char **args, int input_fd, int output_fd)
+void	executeCommand(char *command, char **args, int input_fd, int output_fd,
+		char **env)
 {
 	pid_t	pid;
 
@@ -30,7 +31,7 @@ void	executeCommand(char *command, char **args, int input_fd, int output_fd)
 	{
 		dup2(input_fd, STDIN_FILENO);
 		dup2(output_fd, STDOUT_FILENO);
-		execve(command, args, NULL);
+		execve(command, args, env);
 		perror("Error al ejecutar el comando");
 		exit(1);
 	}
@@ -61,7 +62,8 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	else if (ft_strncmp(cmd->command, "exit", 5) == 0)
 		printf(MAGENTA "esto es EXIT MOTHERF*CKER\n" WHITE);
 	else
-		executeCommand(cmd->command, cmd->args, cmd->filefd[0], cmd->filefd[1]);
+		executeCommand(cmd->command, cmd->args, cmd->filefd[0], cmd->filefd[1],
+				env_to_array(data->env));
 	return (res);
 }
 
