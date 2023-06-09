@@ -55,6 +55,9 @@ echo "La fecha actual es: $(date)"
 		getenv-> recuepera el valor del nombre de la variable pasad
 			Usar la funcion lst_value como get event.
 
+leer todos los env, añadir los que se pasan desde la orden de comandos y pasarlos todos a **array,
+ponerlos en t_cmd y liberar todo desde t_cmdfree
+
 ## HAY QUE REVISAR
 
 ### clear
@@ -65,3 +68,6 @@ TERM environment variable not set.
 No puedo ejecuar ./archivo
 mesnaje de error
 -Minishell: ./minishell: command not found
+
+
+

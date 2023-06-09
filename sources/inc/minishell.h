@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/09 10:06:28 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/09 12:11:48 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_cmd
 {
 	char			*command;
 	char			**args;
+	char			**env;
 	int				filefd[2];
 	struct s_cmd	*prev;
 	struct s_cmd	*next;
@@ -89,7 +90,7 @@ t_list				*parser_space_lst(char *line);
 void				ctrl_line(int flag[], char *line);
 
 void				add_export(t_list *env, t_cmd *cmd);
-t_cmd				*token_to_pipe(t_list *token);
+t_cmd				*token_to_pipe(t_list *token, t_list *env);
 char				*access_file(char *file);
 char				**env_to_array(t_list *env);
 

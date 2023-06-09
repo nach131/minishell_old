@@ -6,16 +6,14 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/06/09 10:09:47 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/09 12:18:18 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "minishell.h"
 
-// Chequea qué comando estamos introduciendo, si no es un builtin devuelve -1.
-//	Si es un builtin ejecuta la función correspondiente.
-
+// hacer un structura para pasarla como argumento desde arriba incluiyendo env para despues
 void	executeCommand(char *command, char **args, int input_fd, int output_fd,
 		char **env)
 {
@@ -63,7 +61,7 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 		printf(MAGENTA "esto es EXIT MOTHERF*CKER\n" WHITE);
 	else
 		executeCommand(cmd->command, cmd->args, cmd->filefd[0], cmd->filefd[1],
-				env_to_array(data->env));
+				cmd->env);
 	return (res);
 }
 

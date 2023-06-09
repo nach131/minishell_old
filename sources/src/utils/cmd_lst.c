@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:32:21 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/08 20:01:10 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/09 12:15:45 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_cmd	*cmd_new(t_cmd cmd)
 	new->filefd[0] = cmd.filefd[0];
 	new->filefd[1] = cmd.filefd[1];
 	new->args = cmd.args;
+	new->env = cmd.env;
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
@@ -70,8 +71,8 @@ void	cmd_iter(t_cmd *cmd, void (*funcion)(void *))
 
 void	cmd_free(t_cmd *cmd)
 {
-	t_cmd *current;
-	t_cmd *next;
+	t_cmd	*current;
+	t_cmd	*next;
 
 	current = cmd;
 	while (current != NULL)
@@ -79,6 +80,8 @@ void	cmd_free(t_cmd *cmd)
 		free(current->command);
 		if (current->args != NULL)
 			ft_free_dptr(current->args);
+		if (current->env != NULL)
+			ft_free_dptr(current->env);
 		next = current->next;
 		free(current);
 		current = next;

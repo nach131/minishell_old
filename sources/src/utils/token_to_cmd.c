@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 20:25:31 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/08 22:50:00 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/09 12:15:59 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,13 @@ char	**args(t_list *token)
 	return (res);
 }
 
-t_cmd	*token_to_pipe(t_list *token)
+t_cmd	*token_to_pipe(t_list *token, t_list *env)
 {
 	t_cmd	*tmp;
 	int		num_cmd;
 	char	*command;
 
+	(void)env;
 	num_cmd = count_cmd(token);
 	command = access_file(token->content);
 	if (!command)
@@ -89,6 +90,7 @@ t_cmd	*token_to_pipe(t_list *token)
 		tmp = cmd_new((t_cmd){
 			.command = command,
 			.args = args(token),
+			.env = env_to_array(env),
 			.filefd = {STDIN_FILENO, STDOUT_FILENO},
 			.prev = NULL,
 			.next = NULL});

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/08 22:56:37 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/09 12:51:55 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	start(t_data *data)
 		add_history(line);
 		token = parser_space_lst(line);
 		ft_lstprint(token);
-		cmd = token_to_pipe(token);
+		cmd = token_to_pipe(token, data->env);
 		if (cmd)
 		{
 			printf(RED "cmd: %s\n" WHITE, cmd->command);
