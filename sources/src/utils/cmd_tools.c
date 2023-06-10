@@ -1,79 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_to_arry.c                                      :+:      :+:    :+:   */
+/*   cmd_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/09 09:50:58 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/10 13:13:22 by nmota-bu         ###   ########.fr       */
+/*   Created: 2023/06/10 12:15:58 by nmota-bu          #+#    #+#             */
+/*   Updated: 2023/06/10 12:30:48 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* ╔════════════════════════════════════════════════════════════════════════╗ */
 /* ║                      https://github.com/nach131                        ║ */
+/* ║                     https://github.com/Carlos1073                      ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
-#include "../../libft/inc/libft.h"
+#include "minishell.h"
 
-void ft_lstprint(t_list *lst)
+// cuenta la cantidad de elementos (cmd) en la lista
+int	count_cmd(t_list *token)
 {
-	t_list *tmp;
+	t_list	*tmp;
+	int		i;
 
-	tmp = lst;
+	tmp = token;
+	i = 0;
 	while (tmp != NULL)
 	{
-		printf("%s\n", tmp->content);
+		if (!ft_strncmp(tmp->content, "|", 1) || !ft_strncmp(tmp->content, ">",
+				1))
+			i++;
 		tmp = tmp->next;
 	}
+	return (i);
 }
 
-char **lst_to_dptr(t_list *lst)
+// cuenta la cantidad de elementos en la lista token
+//  hasta encontrar el primer "|" o ">"
+int	count_to_token_cmd(t_list *token)
 {
-	int i = 0;
-	int num_lst = ft_lstsize(lst);
-	char **res;
-	res = malloc((num_lst + 1) * sizeof(char *));
-
-	while (lst)
-	{
-		res[i] = ft_strdup(lst->content);
-		i++;
-		lst = lst->next;
-	}
-	res[i] = NULL;
-	return (res);
-}
-
-int main(void)
-{
-	t_list *lst;
-
-	lst = ft_lstnew("UNO=uno");
-	lst->next = ft_lstnew("DOS=dos");
-	lst->next->next = ft_lstnew("TRES=tres");
-	int num = ft_lstsize(lst);
-
-	printf("elementos lst: %d\n", num);
-	ft_lstprint(lst);
-
-	char **array = lst_to_dptr(lst);
-
-	int i = 0;
+	int	i;
 
 	i = 0;
-	printf("----array----\n");
-	while (array[i])
+	while (token != NULL)
 	{
-		printf("%s\n", array[i]);
+		//CUIADO CON EL ESPACIO EN BLANCO
+		if (!ft_strncmp(token->content, "|", 1) || !ft_strncmp(token->content,
+				">", 1))
+			break ;
 		i++;
+		token = token->next;
 	}
-	printf("----lst----\n");
-	if (lst)
-		ft_lstprint(lst);
-
-	ft_free_dptr(array);
-	ft_lstfree(lst);
-
-	return (0);
+	return (i);
 }

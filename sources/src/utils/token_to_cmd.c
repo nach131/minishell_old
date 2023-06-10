@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 20:25:31 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/09 20:45:41 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/10 13:55:33 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,43 +16,6 @@
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
 #include "minishell.h"
-
-// cuenta la cantidad de elementos (cmd) en la lista
-int static	count_cmd(t_list *token)
-{
-	t_list	*tmp;
-	int		i;
-
-	tmp = token;
-	i = 0;
-	while (tmp != NULL)
-	{
-		if (!ft_strncmp(tmp->content, "|", 1) || !ft_strncmp(tmp->content, ">",
-				1))
-			i++;
-		tmp = tmp->next;
-	}
-	return (i);
-}
-
-// cuenta la cantidad de elementos en la lista token
-//  hasta encontrar el primer "|" o ">"
-int static	count_to_token_cmd(t_list *token)
-{
-	int	i;
-
-	i = 0;
-	while (token != NULL)
-	{
-		//CUIADO CON EL ESPACIO EN BLANCO
-		if (!ft_strncmp(token->content, "|", 1) || !ft_strncmp(token->content,
-				">", 1))
-			break ;
-		i++;
-		token = token->next;
-	}
-	return (i);
-}
 
 char static	**args(t_list *token)
 {
@@ -74,6 +37,35 @@ char static	**args(t_list *token)
 	return (res);
 }
 
+t_cmd static *one_cmd(t_list *token, t_list *env)
+{
+	t_cmd	*tmp;
+
+	tmp = cmd_new((t_cmd){
+		.command = access_file(token->content),
+		.args = args(token),
+		// .env = env_to_array(env),
+		.env = ft_lst_to_dptr(&env, 0),
+		.filefd = {STDIN_FILENO, STDOUT_FILENO},
+		.prev = NULL,
+		.next = NULL});
+	return (tmp);
+}
+
+t_cmd static *two_cmd(t_list *token, t_list *env)
+{
+	t_cmd	*tmp;
+
+	tmp = cmd_new((t_cmd){
+		.command = access_file(token->content),
+		.args = args(token),
+		.env = ft_lst_to_dptr(&env, 0),
+		.filefd = {STDIN_FILENO, STDOUT_FILENO},
+		.prev = NULL,
+		.next = NULL});
+	return (tmp);
+}
+
 t_cmd	*token_to_pipe(t_list *token, t_list *env)
 {
 	t_cmd	*tmp;
@@ -87,15 +79,14 @@ t_cmd	*token_to_pipe(t_list *token, t_list *env)
 		tmp = NULL;
 	else if (command && num_cmd == 0)
 	{
-		tmp = cmd_new((t_cmd){
-			.command = command,
-			.args = args(token),
-			.env = env_to_array(env),
-			.filefd = {STDIN_FILENO, STDOUT_FILENO},
-			.prev = NULL,
-			.next = NULL});
+		tmp = one_cmd(token, env);
 		// tmp = cmd_new((t_cmd){command, args(token), {STDIN_FILENO,
 		// 		STDOUT_FILENO}, NULL, NULL});
+	}
+	else if (command && num_cmd == 1)
+	{
+		printf("Solo Uno...\n");
+		tmp = two_cmd(token, env);
 	}
 	else
 	{
