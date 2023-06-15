@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 20:25:31 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/10 13:55:33 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/10 14:14:10 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,19 @@ t_cmd static *one_cmd(t_list *token, t_list *env)
 	return (tmp);
 }
 
-t_cmd static *two_cmd(t_list *token, t_list *env)
-{
-	t_cmd	*tmp;
+// t_cmd static *two_cmd(t_list *token, t_list *env)
+// {
+// 	t_cmd	*tmp;
 
-	tmp = cmd_new((t_cmd){
-		.command = access_file(token->content),
-		.args = args(token),
-		.env = ft_lst_to_dptr(&env, 0),
-		.filefd = {STDIN_FILENO, STDOUT_FILENO},
-		.prev = NULL,
-		.next = NULL});
-	return (tmp);
-}
+// 	tmp = cmd_new((t_cmd){
+// 		.command = access_file(token->content),
+// 		.args = args(token),
+// 		.env = ft_lst_to_dptr(&env, 0),
+// 		.filefd = {STDIN_FILENO, STDOUT_FILENO},
+// 		.prev = NULL,
+// 		.next = NULL});
+// 	return (tmp);
+// }
 
 t_cmd	*token_to_pipe(t_list *token, t_list *env)
 {
@@ -85,12 +85,13 @@ t_cmd	*token_to_pipe(t_list *token, t_list *env)
 	}
 	else if (command && num_cmd == 1)
 	{
-		printf("Solo Uno...\n");
-		tmp = two_cmd(token, env);
+		printf("Dos...\n");
+		// tmp = two_cmd(token, env);
+		tmp = NULL;
 	}
 	else
 	{
-		printf("mas...\n");
+		printf("Muchas mas...\n");
 		tmp = NULL;
 	}
 	return (tmp);

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 20:01:40 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/10 13:55:03 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/10 14:04:20 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,26 +52,3 @@ char	*env_value(char *s)
 	}
 	return (s);
 }
-
-// PASSADA A LIBFT
-// Pasa las lista env a array
-// char	**env_to_array(t_list *env)
-// {
-// 	t_list	*tmp;
-// 	int		i;
-// 	int		num;
-// 	char	**array;
-
-// 	tmp = env;
-// 	i = 0;
-// 	num = ft_lstsize(tmp);
-// 	array = malloc((num + 1) * sizeof(char *));
-// 	while (tmp)
-// 	{
-// 		array[i] = ft_strdup(tmp->content);
-// 		i++;
-// 		tmp = tmp->next;
-// 	}
-// 	array[i] = NULL;
-// 	return (array);
-// }

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:54:00 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/08 23:00:17 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/10 15:33:54 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,22 @@ void	ctrl_line(int flag[], char *line)
 	}
 	if (double_quote == 2)
 		flag[DOUBLE_QUOTE] = 1;
+}
+
+// quita las "" de contenido de la lista
+// paras esta funcion desde ft_lstiter
+void	remove_quotes(void *content)
+{
+	char	*str;
+	int		len;
+
+	str = (char *)content;
+	len = strlen(str);
+	if (len >= 2 && str[0] == '"' && str[len - 1] == '"')
+	{
+		ft_memmove(str, str + 1, len - 1);
+		str[len - 2] = '\0';
+	}
 }
 
 t_list	*parser_space_lst(char *line)
