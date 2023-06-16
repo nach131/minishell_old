@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/06/09 19:26:49 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/16 11:50:00 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,24 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 
 	res = CMD_NOT_FOUND;
 	(void)data;
-	if (!ft_strncmp(cmd->command, "env", 4))
-		print_env(data->env);
+	(void)cmd;
+	// if (!ft_strncmp(cmd->command, "env", 4))
+	// 	print_env(data->env);
 	// else if (!ft_strncmp(cmd->command, "echo", 5))
 	// 	printf(MAGENTA "esto es ECHO MOTHERF*CKER\n" WHITE);
-	else if (ft_strncmp(cmd->command, "cd", 3) == 0)
-		printf(MAGENTA "esto es CD MOTHERF*CKER\n" WHITE);
-	else if (ft_strncmp(cmd->command, "pwd", 4) == 0)
-		printf(MAGENTA "esto es PWD MOTHERF*CKER\n" WHITE);
-	else if (!ft_strncmp(cmd->command, "export", 8))
-		add_export(data->env, cmd);
-	else if (ft_strncmp(cmd->command, "unset", 6) == 0)
-		printf(MAGENTA "esto es UNSET MOTHERF*CKER\n" WHITE);
-	else if (ft_strncmp(cmd->command, "exit", 5) == 0)
-		printf(MAGENTA "esto es EXIT MOTHERF*CKER\n" WHITE);
-	else
-		executeCommand(cmd->command, cmd->args, cmd->filefd[0], cmd->filefd[1],
-				cmd->env);
+	// else if (ft_strncmp(cmd->command, "cd", 3) == 0)
+	// 	printf(MAGENTA "esto es CD MOTHERF*CKER\n" WHITE);
+	// else if (ft_strncmp(cmd->command, "pwd", 4) == 0)
+	// 	printf(MAGENTA "esto es PWD MOTHERF*CKER\n" WHITE);
+	// else if (!ft_strncmp(cmd->command, "export", 8))
+	// 	add_export(data->env, cmd);
+	// else if (ft_strncmp(cmd->command, "unset", 6) == 0)
+	// 	printf(MAGENTA "esto es UNSET MOTHERF*CKER\n" WHITE);
+	// else if (ft_strncmp(cmd->command, "exit", 5) == 0)
+	// 	printf(MAGENTA "esto es EXIT MOTHERF*CKER\n" WHITE);
+	// else
+	// 	executeCommand(cmd->command, cmd->args, cmd->filefd[0], cmd->filefd[1],
+	// 			cmd->env);
 	return (res);
 }
 

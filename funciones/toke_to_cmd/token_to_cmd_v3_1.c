@@ -45,7 +45,6 @@ int count_commands(t_list *token)
 
 	return count;
 }
-
 int count_nodes_in_command(t_list *token)
 {
 	int count = 0;
@@ -64,6 +63,69 @@ int count_nodes_in_command(t_list *token)
 
 	return count;
 }
+
+// // char static ***args(t_list *token)
+// // {
+// // 	int num;
+// // 	char **res;
+// // 	int i;
+
+// // 	num = count_to_token_cmd(token);
+// // 	res = malloc((num) * sizeof(char *));
+// // 	i = 0;
+// // 	while (token != NULL)
+// // 	{
+// // 		if (!ft_strncmp(token->content, "|", 1) || !ft_strncmp(token->content, ">", 1))
+// // 			break;
+// // 		res[i] = ft_strdup(token->content);
+// // 		i++;
+// // 		token = token->next;
+// // 	}
+// // 	res[i] = NULL;
+// // 	// borrar todo los nodos ya pasados hasta el "|"
+// // 	return (res);
+// // }
+
+// char ***args(t_list *token)
+// {
+// 	int num = count_to_token_cmd(token);
+// 	char ***res = malloc((num) * sizeof(char **)); // Alojar memoria para num+1 punteros
+// 	int i = 0;
+// 	int j = 0;
+
+// 	// Alojar memoria para cada puntero dentro de res
+// 	for (i = 0; i < num; i++)
+// 	{
+// 		res[i] = malloc(2 * sizeof(char *)); // Alojar memoria para dos punteros
+// 	}
+
+// 	i = 0;
+// 	while (token != NULL)
+// 	{
+// 		if (!ft_strncmp(token->content, "|", 1) || !ft_strncmp(token->content, ">", 1))
+// 		{
+// 			// Ignorar "|" y ">"
+// 			token = token->next;
+// 			continue;
+// 		}
+
+// 		res[i][j] = ft_strdup(token->content);
+// 		j++;
+
+// 		if (j == 2)
+// 		{
+// 			// Se ha alcanzado el segundo argumento para el comando actual
+// 			i++;
+// 			j = 0;
+// 		}
+
+// 		token = token->next;
+// 	}
+
+// 	res[num] = NULL;
+
+// 	return res;
+// }
 
 void commands(t_cmd *cmd, t_list *token)
 {
@@ -130,29 +192,7 @@ void args(t_cmd *cmd, t_list *token)
 	}
 }
 
-void test(t_cmd *cmd)
-{
-	int i = 0;
-	while (i < cmd->num_cmd)
-	{
-		int j = 0;
-		printf(CYAN "%d\n", count_elements(cmd->args[i]));
-		while (j < count_elements(cmd->args[i]))
-		{
-			printf(ORANGE "\t%s\n", cmd->args[i][j]);
-			j++;
-		}
-		i++;
-	}
-	i = 0;
-	while (i < cmd->num_cmd)
-	{
-		printf(CYAN "%s\n", cmd->command[i]);
-		i++;
-	}
-}
-
-void start(t_list *token)
+void test_args(t_list *token)
 {
 	t_cmd *cmd = malloc(sizeof(t_cmd));
 
@@ -163,12 +203,26 @@ void start(t_list *token)
 	printf(GREEN "Número de comandos: %d\n" WHITE, cmd->num_cmd);
 	args(cmd, token);
 
-	test(cmd);
+	int i = 0;
+	while (i < cmd->num_cmd)
+	{
+		int j = 0;
+		printf(CYAN "%d\n", count_elements(cmd->args[i]));
+		while (j < count_elements(cmd->args[i]))
+		{
+			printf(ORANGE "\t%s\n", cmd->args[i][j]);
+			j++;
+		}
+
+		i++;
+	}
 }
 
 int main(void)
 {
 	t_list *token;
+	t_cmd *cmd = malloc(sizeof(t_cmd));
+	cmd->num_cmd = count_commands(token) + 1;
 
 	token = ft_lstnew("cat");
 	ft_lstadd_back(&token, ft_lstnew("archivo.txt"));
@@ -177,7 +231,22 @@ int main(void)
 	ft_lstadd_back(&token, ft_lstnew("\"42\""));
 	ft_lstadd_back(&token, ft_lstnew(">"));
 	ft_lstadd_back(&token, ft_lstnew("salida.txt"));
+	printf("Tokens\n");
 	ft_lstprint(token);
+	args(cmd, token);
+	int i = 0;
+	while (i < cmd->num_cmd)
+	{
+		int j = 0;
+		printf(CYAN "%d\n", count_elements(cmd->args[i]));
+		while (j < count_elements(cmd->args[i]))
+		{
+			printf(ORANGE "\t%s\n", cmd->args[i][j]);
+			j++;
+		}
 
-	start(token);
+		i++;
+	}
+
+	// test_args(token);
 }
