@@ -25,6 +25,7 @@ int count_elements(char **arr)
 	return count;
 }
 
+// PASADO
 int count_commands(t_list *token)
 {
 	int count = 0;
