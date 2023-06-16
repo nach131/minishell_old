@@ -66,6 +66,7 @@ int count_nodes_in_command(t_list *token)
 	return count;
 }
 
+// PASADO
 void commands(t_cmd *cmd, t_list *token)
 {
 	int i = 0;

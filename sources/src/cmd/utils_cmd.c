@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:37:57 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/16 18:45:40 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/16 18:47:52 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void free_cmd(t_cmd *cmd)
 		}
 		free(cmd->command);
 	}
+
 	// if (cmd->args != NULL)
 	// {
 	// 	int i = 0;
