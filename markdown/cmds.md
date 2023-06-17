@@ -40,3 +40,14 @@ sleep 10 &
 Este comando ejecutaría el comando `sleep 10` en segundo plano, lo que provocaría una pausa de 10 segundos sin bloquear la terminal, lo que permitiría al usuario seguir ingresando otros comandos.
 
 Estos son solo ejemplos básicos de comandos combinados en Bash. Hay muchas otras combinaciones y técnicas avanzadas disponibles para realizar tareas más complejas en un script de Bash.
+
+```bach
+ls -lh > listado.txt
+```
+
+Crea el arachivo `listado.txt` con ls de la carpeta actual
+
+```bash
+sort -k 9 listado.txt | uniq
+```
+Ordenara el contenido de `listado.txt` segun los valores de la 9 columna y solo mostrara los resultados unicos.

@@ -66,5 +66,11 @@ No puedo ejecuar ./archivo
 mesnaje de error
 -Minishell: ./minishell: command not found
 
+```bash
+man ls | vim -
+```
 
+```bash
+ls -la | vim -
+```
 

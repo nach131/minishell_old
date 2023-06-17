@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/06/16 11:50:00 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/17 18:42:46 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	// else if (ft_strncmp(cmd->command, "exit", 5) == 0)
 	// 	printf(MAGENTA "esto es EXIT MOTHERF*CKER\n" WHITE);
 	// else
-	// 	executeCommand(cmd->command, cmd->args, cmd->filefd[0], cmd->filefd[1],
-	// 			cmd->env);
+	executeCommand(cmd->command[0], cmd->args[0], cmd->filefd[0][0],
+			cmd->filefd[0][1], cmd->env);
 	return (res);
 }
 

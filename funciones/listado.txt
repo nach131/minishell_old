@@ -1,0 +1,20 @@
+total 144
+-rwxr-xr-x@  1 nacho  admin    11K 10 jun 13:18 a.out*
+-rw-r--r--@  1 nacho  admin   1,7K 18 may 21:26 asc_ascii.c
+-rw-r--r--   1 nacho  admin     0B 17 jun 13:39 listado.txt
+-rw-r--r--@  1 nacho  admin   2,7K 30 may 13:42 lst.c
+-rw-r--r--@  1 nacho  admin   2,7K 30 may 13:42 lst.c
+-rwxr-xr-x@  1 nacho  admin   8,5K  9 jun 09:48 lst.out*
+-rw-r--r--@  1 nacho  admin   2,3K 10 jun 13:13 lst_to_arry.c
+-rwxr-xr-x@  1 nacho  admin   8,7K 26 may 12:29 main.o*
+-rw-r--r--@  1 nacho  admin   1,7K  1 jun 09:56 new copy.c
+-rw-r--r--@  1 nacho  admin   1,8K  1 jun 11:35 new.c
+drwxr-xr-x@ 10 nacho  admin   340B  1 jun 09:43 parsec/
+drwxr-xr-x@ 49 nacho  admin   1,6K  1 jun 11:38 permitidas/
+drwxr-xr-x@  7 nacho  admin   238B 15 jun 12:17 pruebas/
+drwxr-xr-x@  5 nacho  admin   170B 30 may 23:23 qoutes/
+-rw-r--r--@  1 nacho  admin   5,7K 26 may 13:35 sort_ascii.c
+-rw-r--r--@  1 nacho  admin   2,1K 26 may 12:28 sort_ascii_arg.c
+-rw-r--r--@  1 nacho  admin   2,0K 26 may 23:38 strtok.c
+drwxr-xr-x@ 10 nacho  admin   340B 16 jun 12:33 toke_to_cmd/
+drwxr-xr-x@  5 nacho  admin   170B 15 jun 12:17 token/

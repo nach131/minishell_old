@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/16 19:13:43 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/17 18:40:13 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ void	start(t_data *data)
 		// cmd = token_to_pipe(token, data->env);
 		init_cmd(token, data->env, cmd);
 		printf(CYAN "num:%d\n" WHITE, cmd->num_cmd);
-
 		if (cmd)
 		{
-			printf(MAGENTA "hace algo\n");
-			// printf(RED "cmd: %s\n" WHITE, cmd->command);
-			// execute_builtin(data, cmd);
+			printf(MAGENTA "hay cmd, hay que exec\n");
+			printf(RED "cmd: %d\n" WHITE, cmd->filefd[0][0]);
+			printf(RED "cmd: %d\n" WHITE, cmd->filefd[0][1]);
+			execute_builtin(data, cmd);
 			// cmd_free(cmd); //ANTIC
 			free_cmd(cmd);
 		}
