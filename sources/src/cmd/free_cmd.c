@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_cmd.c                                        :+:      :+:    :+:   */
+/*   free_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/16 12:37:57 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/19 17:00:46 by nmota-bu         ###   ########.fr       */
+/*   Created: 2023/06/19 16:59:57 by nmota-bu          #+#    #+#             */
+/*   Updated: 2023/06/19 17:56:21 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,40 +18,67 @@
 #include "cmd.h"
 #include "minishell.h"
 
-// Cuenta cuantos comandos tiene readline
-int	count_commands(t_list *token)
+void static	free_commnad(t_cmd *cmd)
 {
-	int	count;
-	int	inCommand;
+	int	i;
 
-	count = 0;
-	inCommand = 0;
-	while (token != NULL)
+	i = 0;
+	while (i < cmd->num_cmd)
 	{
-		if (!ft_strncmp(token->content, "|", 1) || !ft_strncmp(token->content,
-				">", 1) || !ft_strncmp(token->content, "<", 1))
-			inCommand = 1;
-		else if (inCommand && ft_strncmp(token->content, "|", 1)
-				&& ft_strncmp(token->content, ">", 1)
-				&& ft_strncmp(token->content, "<", 1))
-		{
-			count++;
-			inCommand = 0;
-		}
-		token = token->next;
+		if (cmd->command[i] != NULL)
+			free(cmd->command[i]);
+		i++;
 	}
-	return (count);
+	free(cmd->command);
 }
 
-// Contar el numero de elementos del comando
-int	count_elements(char **arr)
+void static	free_args(t_cmd *cmd)
 {
-	int	count;
+	int	i;
+	int	j;
 
-	count = 0;
-	while (arr[count] != NULL)
+	i = 0;
+	while (i < cmd->num_cmd)
 	{
-		count++;
+		if (cmd->args[i] != NULL)
+		{
+			j = 0;
+			while (cmd->args[i][j] != NULL)
+			{
+				if (cmd->args[i][j] != NULL)
+					free(cmd->args[i][j]);
+				j++;
+			}
+			free(cmd->args[i]);
+		}
+		i++;
 	}
-	return (count);
+	free(cmd->args);
+}
+
+void static	free_filefd(t_cmd *cmd)
+{
+	int	i;
+
+	if (cmd->filefd != NULL)
+	{
+		i = -1;
+		while (cmd->filefd[++i] != NULL)
+			free(cmd->filefd[i]);
+		free(cmd->filefd);
+	}
+}
+
+void	free_cmd(t_cmd *cmd)
+{
+	if (cmd == NULL)
+		return ;
+	if (cmd->command != NULL)
+		free_commnad(cmd);
+	if (cmd->args != NULL)
+		free_args(cmd);
+	if (cmd->out != NULL)
+		free_filefd(cmd);
+	// Free env if needed (assuming it follows the same structure as args)
+	// free(cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/17 19:23:07 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:50:00 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,26 +54,14 @@ enum
 	OUT,
 };
 
-// typedef struct s_cmd
-// {
-// 	char			*command;
-// 	char			**args;
-// 	char			**env;
-// 	int				filefd[2];
-// 	struct s_cmd	*prev;
-// 	struct s_cmd	*next;
-// 	// char			*path;
-// }					t_cmd;
-
 typedef struct s_cmd
 {
 	int		num_cmd;
 	char	**command;
 	char	***args;
 	char	**env;
-	// int *filefd[2];
 	int		**filefd;
-	int		*out;
+	char	**out;
 }			t_cmd;
 
 typedef struct s_data
