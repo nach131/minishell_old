@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:35:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/19 16:48:47 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/19 21:12:15 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,31 +91,31 @@ void static	args(t_cmd *cmd, t_list *token)
 	}
 }
 
-void static	print_test(t_cmd *cmd)
-{
-	int	i;
+// void static	print_test(t_cmd *cmd)
+// {
+// 	int	i;
 
-	// int	j;
-	// i = 0;
-	// while (i < cmd->num_cmd)
-	// {
-	// 	j = 0;
-	// 	printf(CYAN "%d\n", count_elements(cmd->args[i]));
-	// 	while (j < count_elements(cmd->args[i]))
-	// 	{
-	// 		printf(ORANGE "\t%s\n", cmd->args[i][j]);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
-	i = 0;
-	while (i < cmd->num_cmd - 1)
-	{
-		printf(CYAN "%s\n", cmd->command[i]);
-		printf(GREEN "%s\n", cmd->out[i]);
-		i++;
-	}
-}
+// 	// int	j;
+// 	// i = 0;
+// 	// while (i < cmd->num_cmd)
+// 	// {
+// 	// 	j = 0;
+// 	// 	printf(CYAN "%d\n", count_elements(cmd->args[i]));
+// 	// 	while (j < count_elements(cmd->args[i]))
+// 	// 	{
+// 	// 		printf(ORANGE "\t%s\n", cmd->args[i][j]);
+// 	// 		j++;
+// 	// 	}
+// 	// 	i++;
+// 	// }
+// 	i = 0;
+// 	while (i < cmd->num_cmd - 1)
+// 	{
+// 		printf(CYAN "%s\n", cmd->command[i]);
+// 		printf(RED "%s\n", cmd->out[i]);
+// 		i++;
+// 	}
+// }
 
 void	init_cmd(t_list *token, t_list *env, t_cmd *cmd)
 {
@@ -127,5 +127,5 @@ void	init_cmd(t_list *token, t_list *env, t_cmd *cmd)
 	process_redirections(cmd, token);
 	// pipes_to_cmd(cmd, token);
 	pipe_to_cmd_v2(cmd);
-	print_test(cmd);
+	// print_test(cmd);
 }

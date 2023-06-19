@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 18:03:04 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/19 17:50:20 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/19 21:16:54 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,15 +69,24 @@ void	pipe_to_cmd_v2(t_cmd *cmd)
 	}
 	else
 	{
+		//cuidado con el ultimo que si es > ...?
 		cmd->filefd = malloc((cmd->num_cmd) * sizeof(int *));
 		while (i < cmd->num_cmd - 1)
 		{
 			cmd->filefd[i] = malloc(2 * sizeof(int));
-			if (pipe(cmd->filefd[i]) == 1)
+			if (!ft_strncmp(cmd->out[i], "|", 1))
+				if (pipe(cmd->filefd[i]) == 1)
+				{
+					perror("Error al crear la tubería");
+					exit(1);
+				}
+			if (!ft_strncmp(cmd->out[i], ">", 1))
 			{
-				perror("Error al crear la tubería");
-				exit(1);
+				printf("%s\n", cmd->out[i]);
+				// Aqui abrir el filfd del fichero;
 			}
+			printf(YELLOW "filefd IN: %d\n" WHITE, cmd->filefd[i][IN]);
+			printf(YELLOW "filefd OUT: %d\n" WHITE, cmd->filefd[i][OUT]);
 			i++;
 		}
 		cmd->filefd[i] = NULL;
@@ -95,7 +104,6 @@ void	pipe_to_cmd_v2(t_cmd *cmd)
 		// 	i++;
 		// }
 		// cmd->filefd[i] = malloc(sizeof(int *));
-		// Asignar memoria para el último elemento
 	}
 }
 

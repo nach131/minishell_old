@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:59:57 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/19 17:56:21 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/19 21:05:02 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,11 @@ void static	free_filefd(t_cmd *cmd)
 	{
 		i = -1;
 		while (cmd->filefd[++i] != NULL)
+		{
+			close(cmd->filefd[i][IN]);
+			close(cmd->filefd[i][OUT]);
 			free(cmd->filefd[i]);
+		}
 		free(cmd->filefd);
 	}
 }
@@ -77,7 +81,7 @@ void	free_cmd(t_cmd *cmd)
 		free_commnad(cmd);
 	if (cmd->args != NULL)
 		free_args(cmd);
-	if (cmd->out != NULL)
+	if (cmd->filefd != NULL)
 		free_filefd(cmd);
 	// Free env if needed (assuming it follows the same structure as args)
 	// free(cmd);

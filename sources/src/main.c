@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/19 17:33:40 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/19 20:53:17 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	start(t_data *data)
 		if (cmd)
 		{
 			printf(MAGENTA "hay cmd, hay que exec\n");
-
 			execute_builtin(data, cmd);
 			free_cmd(cmd);
 		}
