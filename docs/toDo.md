@@ -74,3 +74,7 @@ man ls | vim -
 ls -la | vim -
 ```
 
+
+Contemplar
+cat<toma.txt|grep a
+(sin espacios entre las redirecciones o los pipes)
