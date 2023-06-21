@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/21 14:10:56 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:16:32 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	start(t_data *data)
 			print_args(cmd->args);
 			print_filefd(cmd->filefd);
 			print_command(cmd->out);
-			// execute_builtin(data, cmd);
+			execute_builtin(data, cmd);
 			ft_printf("-------\n");
 			free_cmd(cmd);
 		}

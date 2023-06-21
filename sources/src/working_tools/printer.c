@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:52:58 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/21 14:07:55 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:15:35 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,6 @@
 #include "readline/history.h"
 #include "readline/readline.h"
 #include "working_tools.h"
-
-// int	countPointers(char **env)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (env[i] != NULL)
-// 		i++;
-// 	return (i);
-// }
-
-// void	printf_env(char **env)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (env[i] != NULL)
-// 	{
-// 		ft_printf(CYAN "%s\n", env[i]);
-// 		i++;
-// 	}
-// 	ft_printf(ORANGE "TOTAL: %d\n", countPointers(env));
-// }
 
 void	print_dptr(char **line)
 {

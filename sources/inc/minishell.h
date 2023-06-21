@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/19 17:50:00 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:14:24 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void		cmd_free(t_cmd *cmd);
 void		cmd_iter(t_cmd *cmd, void (*funcion)(void *));
 
 t_list		*parser_space_lst(char *line);
-void		ctrl_line(int flag[], char *line);
 
 void		add_export(t_list *env, t_cmd *cmd);
 t_cmd		*token_to_pipe(t_list *token, t_list *env);

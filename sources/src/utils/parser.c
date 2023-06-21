@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/24 12:54:00 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/20 16:24:17 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:14:13 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@
 
 // CONTROL DE LOS FLAG PARA EL PARSER
 // esta sin usar
-void	ctrl_line(int flag[], char *line)
-{
-	int	i;
-	int	double_quote;
+// void	ctrl_line(int flag[], char *line)
+// {
+// 	int	i;
+// 	int	double_quote;
 
-	double_quote = 0;
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == DOUBLE_QUOTE)
-			double_quote++;
-		i++;
-	}
-	if (double_quote == 2)
-		flag[DOUBLE_QUOTE] = 1;
-}
+// 	double_quote = 0;
+// 	i = 0;
+// 	while (line[i])
+// 	{
+// 		if (line[i] == DOUBLE_QUOTE)
+// 			double_quote++;
+// 		i++;
+// 	}
+// 	if (double_quote == 2)
+// 		flag[DOUBLE_QUOTE] = 1;
+// }
 
 // quita las "" de contenido de la lista
 // paras esta funcion desde ft_lstiter

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:35:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/21 13:58:19 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:16:19 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,32 +93,6 @@ void static	args(t_cmd *cmd, t_list *token)
 	cmd->args[arg_index] = NULL;
 }
 
-// void static	print_test(t_cmd *cmd)
-// {
-// 	int	i;
-
-// 	// int	j;
-// 	// i = 0;
-// 	// while (i < cmd->num_cmd)
-// 	// {
-// 	// 	j = 0;
-// 	// 	printf(CYAN "%d\n", count_elements(cmd->args[i]));
-// 	// 	while (j < count_elements(cmd->args[i]))
-// 	// 	{
-// 	// 		printf(ORANGE "\t%s\n", cmd->args[i][j]);
-// 	// 		j++;
-// 	// 	}
-// 	// 	i++;
-// 	// }
-// 	i = 0;
-// 	while (i < cmd->num_cmd - 1)
-// 	{
-// 		printf(CYAN "%s\n", cmd->command[i]);
-// 		printf(RED "%s\n", cmd->out[i]);
-// 		i++;
-// 	}
-// }
-
 void	init_cmd(t_list *token, t_list *env, t_cmd *cmd)
 {
 	cmd->num_cmd = count_commands(token) + 1;
@@ -128,5 +102,4 @@ void	init_cmd(t_list *token, t_list *env, t_cmd *cmd)
 	process_redirections(cmd, token);
 	// pipes_to_cmd(cmd, token);
 	pipe_to_cmd(cmd);
-	// print_test(cmd);
 }
