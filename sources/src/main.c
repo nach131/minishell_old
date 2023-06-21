@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/19 20:53:17 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/21 12:16:01 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,27 @@ void	start(t_data *data)
 	t_list	*token;
 	t_cmd	*cmd;
 
-	(void)data;
 	cmd = malloc(sizeof(t_cmd));
+	// cmd = NULL;
 	while (1)
 	{
 		line = readline("Minishell> ");
 		add_history(line);
 		token = parser_space_lst(line);
-		// ft_lstprint(token); // ESTO QUITAR SOLO ES PARA IMPRIMIR
-		// cmd = token_to_pipe(token, data->env);
-		init_cmd(token, data->env, cmd);
-		printf(CYAN "num:%d\n" WHITE, cmd->num_cmd);
-		if (cmd)
+		if (token)
+		{
+			ft_lstprint(token); // ESTO QUITAR SOLO ES PARA IMPRIMIR
+			init_cmd(token, data->env, cmd);
+		}
+		// printf(CYAN "num:%d\n" WHITE, cmd->num_cmd);
+		if (token && cmd->command[0])
 		{
 			printf(MAGENTA "hay cmd, hay que exec\n");
-			execute_builtin(data, cmd);
+			printf(MAGENTA "%s\n", cmd->command[0]);
+			// execute_builtin(data, cmd);
 			free_cmd(cmd);
 		}
-		else
+		else if (cmd->num_cmd && token)
 			printf(RED "-Minishell: %s: command not found\n" WHITE,
 					token->content);
 		if (token)

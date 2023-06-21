@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 18:03:04 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/19 21:16:54 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/21 10:55:56 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,12 @@ void	pipe_to_cmd_v2(t_cmd *cmd)
 				}
 			if (!ft_strncmp(cmd->out[i], ">", 1))
 			{
-				printf("%s\n", cmd->out[i]);
+				printf(RED "%s\n", cmd->out[i]);
+				// Aqui abrir el filfd del fichero;
+			}
+			if (!ft_strncmp(cmd->out[i], "<", 1))
+			{
+				printf(RED "%s\n", cmd->out[i]);
 				// Aqui abrir el filfd del fichero;
 			}
 			printf(YELLOW "filefd IN: %d\n" WHITE, cmd->filefd[i][IN]);
@@ -90,20 +95,6 @@ void	pipe_to_cmd_v2(t_cmd *cmd)
 			i++;
 		}
 		cmd->filefd[i] = NULL;
-		//=========================================================================
-		// while (i < cmd->num_cmd - 1)
-		// {
-		// 	if (!ft_strncmp(cmd->out[i], "|", 1))
-		// 	{
-		// 		printf(ORANGE "pipe: %s\n", cmd->out[i]);
-		// 	}
-		// 	else if (!ft_strncmp(cmd->out[i], ">", 1))
-		// 		printf(RED "pipe: %s\n", cmd->out[i]);
-		// 	else if (!ft_strncmp(cmd->out[i], "<", 1))
-		// 		printf(RED "pipe: %s\n", cmd->out[i]);
-		// 	i++;
-		// }
-		// cmd->filefd[i] = malloc(sizeof(int *));
 	}
 }
 

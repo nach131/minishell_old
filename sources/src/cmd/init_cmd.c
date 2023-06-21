@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:35:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/19 21:12:15 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/21 11:22:11 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ void static	args(t_cmd *cmd, t_list *token)
 
 void	init_cmd(t_list *token, t_list *env, t_cmd *cmd)
 {
-	(void)token;
 	cmd->num_cmd = count_commands(token) + 1;
 	commands(cmd, token);
 	args(cmd, token);
