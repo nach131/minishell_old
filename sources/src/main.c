@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/21 12:16:01 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:10:56 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,27 +27,26 @@ void	start(t_data *data)
 	t_cmd	*cmd;
 
 	cmd = malloc(sizeof(t_cmd));
-	// cmd = NULL;
 	while (1)
 	{
 		line = readline("Minishell> ");
 		add_history(line);
 		token = parser_space_lst(line);
 		if (token)
-		{
-			ft_lstprint(token); // ESTO QUITAR SOLO ES PARA IMPRIMIR
 			init_cmd(token, data->env, cmd);
-		}
-		// printf(CYAN "num:%d\n" WHITE, cmd->num_cmd);
 		if (token && cmd->command[0])
 		{
-			printf(MAGENTA "hay cmd, hay que exec\n");
-			printf(MAGENTA "%s\n", cmd->command[0]);
+			printf(MAGENTA "HAY que exec los commands\n");
+			print_command(cmd->command);
+			print_args(cmd->args);
+			print_filefd(cmd->filefd);
+			print_command(cmd->out);
 			// execute_builtin(data, cmd);
+			ft_printf("-------\n");
 			free_cmd(cmd);
 		}
 		else if (cmd->num_cmd && token)
-			printf(RED "-Minishell: %s: command not found\n" WHITE,
+			printf(RED "-Minishell: %s: command not found \n" WHITE,
 					token->content);
 		if (token)
 			ft_lstfree(token);
