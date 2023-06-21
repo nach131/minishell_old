@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/15 10:45:42 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/19 17:50:00 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 
 // VARIABLE GLOBAL
 
-enum				token
+enum		token
 {
 	NEW_LINE = '\n',
 	WHITE_SPACE = ' ',
@@ -56,44 +56,40 @@ enum
 
 typedef struct s_cmd
 {
-	char			*command;
-	char			**args;
-	char			**env;
-	int				filefd[2];
-	struct s_cmd	*prev;
-	struct s_cmd	*next;
-	// char			*path;
-}					t_cmd;
+	int		num_cmd;
+	char	**command;
+	char	***args;
+	char	**env;
+	int		**filefd;
+	char	**out;
+}			t_cmd;
 
 typedef struct s_data
 {
-	t_list			*env;
-	t_list			*token;
-	// t_cmd			*cmd;
-	// int				flag[126];
-	// bool interactive; // poner con flag
-	int				exit;
-	int				ret;
-}					t_data;
+	t_list	*env;
+	t_list	*token;
+	int		exit;
+	int		ret;
+}			t_data;
 
-void				handle_int(int sig);
-void				handle_quit(int sig);
+void		handle_int(int sig);
+void		handle_quit(int sig);
 
-t_cmd				*cmd_new(t_cmd cmd);
+t_cmd		*cmd_new(t_cmd cmd);
 
-void				cmd_add_back(t_cmd **cmd, t_cmd *new);
-t_cmd				*cmd_last(t_cmd *cmd);
-void				cmd_free(t_cmd *cmd);
-void				cmd_iter(t_cmd *cmd, void (*funcion)(void *));
+void		cmd_add_back(t_cmd **cmd, t_cmd *new);
+t_cmd		*cmd_last(t_cmd *cmd);
+void		cmd_free(t_cmd *cmd);
+void		cmd_iter(t_cmd *cmd, void (*funcion)(void *));
 
-t_list				*parser_space_lst(char *line);
-void				ctrl_line(int flag[], char *line);
+t_list		*parser_space_lst(char *line);
+void		ctrl_line(int flag[], char *line);
 
-void				add_export(t_list *env, t_cmd *cmd);
-t_cmd				*token_to_pipe(t_list *token, t_list *env);
-char				*access_file(char *file);
-char				**env_to_array(t_list *env);
-int					count_cmd(t_list *token);
-int					count_to_token_cmd(t_list *token);
+void		add_export(t_list *env, t_cmd *cmd);
+t_cmd		*token_to_pipe(t_list *token, t_list *env);
+char		*access_file(char *file);
+char		**env_to_array(t_list *env);
+int			count_cmd(t_list *token);
+int			count_to_token_cmd(t_list *token);
 
 #endif

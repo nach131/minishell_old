@@ -66,5 +66,15 @@ No puedo ejecuar ./archivo
 mesnaje de error
 -Minishell: ./minishell: command not found
 
+```bash
+man ls | vim -
+```
+
+```bash
+ls -la | vim -
+```
 
 
+Contemplar
+cat<toma.txt|grep a
+(sin espacios entre las redirecciones o los pipes)

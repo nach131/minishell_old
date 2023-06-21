@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:50:41 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/06 09:43:55 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/20 16:25:55 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void	start_export(t_list *palabras)
 			if (ft_strcmp(word1, word2) < 0)
 			// Modificación en la comparación
 			{
-				temp = current->content;
+				temp = current;
 				current->content = next->content;
-				next->content = temp;
+				next = temp;
 			}
 			current = current->next;
 			j++;
