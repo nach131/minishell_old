@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/21 14:16:32 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/21 20:32:55 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	start(t_data *data)
 	t_list	*token;
 	t_cmd	*cmd;
 
-	cmd = malloc(sizeof(t_cmd));
+	cmd = ft_calloc(1, sizeof(t_cmd));
 	while (1)
 	{
 		line = readline("Minishell> ");
@@ -37,13 +37,17 @@ void	start(t_data *data)
 		if (token && cmd->command[0])
 		{
 			printf(MAGENTA "HAY que exec los commands\n");
-			print_command(cmd->command);
-			print_args(cmd->args);
+			ft_print_dptr(cmd->command);
+			ft_print_tptr(cmd->args);
 			print_filefd(cmd->filefd);
-			print_command(cmd->out);
-			execute_builtin(data, cmd);
 			ft_printf("-------\n");
+			// execute_builtin(data, cmd);
 			free_cmd(cmd);
+			ft_print_dptr(cmd->command);
+			ft_print_tptr(cmd->args);
+			ft_print_dptr(cmd->out);
+			ft_print_dptr(cmd->env);
+			// print_filefd(cmd->filefd);
 		}
 		else if (cmd->num_cmd && token)
 			printf(RED "-Minishell: %s: command not found \n" WHITE,

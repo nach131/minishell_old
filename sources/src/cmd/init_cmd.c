@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:35:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/21 14:16:19 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:40:40 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,5 @@ void	init_cmd(t_list *token, t_list *env, t_cmd *cmd)
 	args(cmd, token);
 	cmd->env = ft_lst_to_dptr(&env, 0);
 	process_redirections(cmd, token);
-	// pipes_to_cmd(cmd, token);
 	pipe_to_cmd(cmd);
 }
