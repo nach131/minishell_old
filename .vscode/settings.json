@@ -10,7 +10,9 @@
 		"*.tcc": "c",
 		"bitset": "c",
 		"istream": "c",
-		"hashtable": "c"
+		"hashtable": "c",
+		"locale": "c",
+		"cstdlib": "c"
 	},
 	"editor.fontLigatures": false,
 	"lldb.dbgconfig": {}

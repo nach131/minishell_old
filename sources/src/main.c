@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/21 20:32:55 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/22 18:56:36 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "cmd.h"
 #include "minishell.h"
 #include "working_tools.h"
+#include "control.h"
 
 void	start(t_data *data)
 {
@@ -32,6 +33,8 @@ void	start(t_data *data)
 		line = readline("Minishell> ");
 		add_history(line);
 		token = parser_space_lst(line);
+		token_split(&token);
+		ft_lstprint(token);
 		if (token)
 			init_cmd(token, data->env, cmd);
 		if (token && cmd->command[0])

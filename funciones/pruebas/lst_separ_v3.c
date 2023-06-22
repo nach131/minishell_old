@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_separ.c                                        :+:      :+:    :+:   */
+/*   lst_separ_v3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 10:53:59 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/22 20:49:12 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/22 20:46:00 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,23 @@ char	*buscar_delimitador(char *str, char *delimiters, int *flag)
 	return (NULL);
 }
 
-void	separar_nodos_limitadores(t_list **a)
+void	liberar_lista_original(t_list **a, t_list *new_list)
+{
+	t_list	*temp;
+	t_list	*next;
+
+	temp = *a;
+	while (temp != NULL)
+	{
+		next = temp->next;
+		free(temp->content);
+		free(temp);
+		temp = next;
+	}
+	*a = new_list;
+}
+
+typedef struct s_data
 {
 	t_list	*current;
 	t_list	*new_list;
@@ -46,44 +62,48 @@ void	separar_nodos_limitadores(t_list **a)
 	t_list	*next;
 	char	*del_word;
 	int		flag;
+}			t_data;
 
-	flag = 1;
-	current = *a;
-	new_list = NULL;
-	delimiters = "<>|";
-	while (current != NULL)
+void	procesar_lista(t_data *data)
+{
+	while (data->current != NULL)
 	{
-		str = (char *)current->content;
-		del_word = buscar_delimitador(current->content, delimiters, &flag);
-		word = ft_strtok(str, delimiters);
-		while (word != NULL)
+		data->str = (char *)data->current->content;
+		data->del_word = buscar_delimitador(data->str, data->delimiters,
+				&(data->flag));
+		data->word = ft_strtok(data->str, data->delimiters);
+		while (data->word != NULL)
 		{
-			ft_lstadd_back(&new_list, ft_lstnew(word));
-			if (del_word && flag)
+			ft_lstadd_back(&(data->new_list), ft_lstnew(data->word));
+			if (data->del_word && data->flag)
 			{
-				ft_lstadd_back(&new_list, ft_lstnew(del_word));
-				flag = 0;
+				ft_lstadd_back(&(data->new_list), ft_lstnew(data->del_word));
+				data->flag = 0;
 			}
-			word = ft_strtok(NULL, delimiters);
-			if (word != NULL)
+			data->word = ft_strtok(NULL, data->delimiters);
+			if (data->word != NULL)
 			{
-				delimiter_node = ft_lstnew(word);
-				ft_lstadd_back(&new_list, delimiter_node);
+				data->delimiter_node = ft_lstnew(data->word);
+				ft_lstadd_back(&(data->new_list), data->delimiter_node);
 			}
-			word = ft_strtok(NULL, delimiters);
+			data->word = ft_strtok(NULL, data->delimiters);
 		}
-		current = current->next;
+		data->current = data->current->next;
 	}
-	// Liberar la lista original
-	temp = *a;
-	while (temp != NULL)
-	{
-		next = temp->next;
-		free(temp->content);
-		free(temp);
-		temp = next;
-	}
-	*a = new_list;
+}
+
+void	separar_nodos_limitadores(t_list **a)
+{
+	t_data	*data;
+
+	data = malloc(sizeof(t_data));
+	data->flag = 1;
+	data->current = *a;
+	data->new_list = NULL;
+	data->delimiters = "<>|";
+	procesar_lista(data);
+	liberar_lista_original(a, data->new_list);
+	free(data);
 }
 
 int	main(void)
@@ -97,7 +117,7 @@ int	main(void)
 	// a->next->content = ft_strdup("\"Make|grep\"");
 	a->next->next = malloc(1 * sizeof(t_list));
 	a->next->next->content = ft_strdup("clean>toma.txt");
-	a->next->next->content = ft_strdup("a");
+	// a->next->next->content = ft_strdup("a");
 	a->next->next->next = NULL;
 	ft_lstprint(a);
 	printf("------\n");
@@ -107,12 +127,3 @@ int	main(void)
 }
 
 // cat Make|grep clean>toma.txt
-
-// ENCONTAR
-// leaks Report Version: 4.0
-// Process 15639: 160 nodes malloced for 17 KB
-// Process 15639: 2 leaks for 32 total leaked bytes.
-
-//     2 (32 bytes) << TOTAL >>
-//       1 (16 bytes) ROOT LEAK: 0x7fda11402800 [16]
-//       1 (16 bytes) ROOT LEAK: 0x7fda11402840 [16]

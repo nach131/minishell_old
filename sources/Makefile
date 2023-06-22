@@ -56,6 +56,7 @@ INCLUDES 	:= inc/
 SRC_DIR 	:= src/
 OBJ_DIR 	:= obj/
 UTILS_DIR	:= utils/
+CTRL_DIR	:= ctrl/
 CMD_DIR := cmd/
 TOOLS_DIR	:= working_tools/
 BUILTINS_DIR := built-ins/
@@ -70,7 +71,8 @@ INCS := $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/)
 MAIN_FILES	:=	main
 UTILS_FILES	:= env_lst signal parser access_to_cmd exec
 CMD_FILES := init_cmd utils_cmd pipes_cmd free_cmd
-TOOLS_FILES := printer working 
+TOOLS_FILES := printer working
+CTRL_FILES := token_split
 BUILTINS_FILES := echo env_print exit_btin export_btin 
 
 SRC_MAIN_FILES	+=$(MAIN_FILES)
@@ -80,6 +82,10 @@ DEPS_MAIN := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_MAIN_FILES)))
 SRC_UTILS_FILES	+=$(addprefix $(UTILS_DIR),$(UTILS_FILES))
 OBJS_UTILS := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_UTILS_FILES)))
 DEPS_UTILS := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_UTILS_FILES)))
+
+SRC_CTRL_FILES	+=$(addprefix $(CTRL_DIR),$(CTRL_FILES))
+OBJS_CTRL := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_CTRL_FILES)))
+DEPS_CTRL := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_UTILS_FILES)))
 
 SRC_TOOLS_FILES	+=$(addprefix $(TOOLS_DIR),$(TOOLS_FILES))
 OBJ_TOOLS := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_TOOLS_FILES)))
@@ -93,8 +99,8 @@ SRC_CMD_FILES	+=$(addprefix $(CMD_DIR),$(CMD_FILES))
 OBJ_CMD := $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_CMD_FILES)))
 DEPS_CMD := $(addprefix $(OBJ_DIR), $(addsuffix .d, $(SRC_CMD_FILES)))
 
-ALL_OBJS += $(OBJS_UTILS) $(OBJS_MAIN) $(OBJ_TOOLS) $(OBJ_BUILTINS) $(OBJ_CMD)
-DEPS += $(DEPS_MAIN) $(DEPS_UTILS) $(DEPS_TOOLS) $(DEPS_BUILTINS) $(DEPS_CMD)
+ALL_OBJS += $(OBJS_UTILS) $(OBJS_MAIN) $(OBJ_TOOLS) $(OBJ_BUILTINS) $(OBJ_CMD) $(OBJS_CTRL)
+DEPS += $(DEPS_MAIN) $(DEPS_UTILS) $(DEPS_TOOLS) $(DEPS_BUILTINS) $(DEPS_CMD) $(DEPS_CTRL)
 
 # ◼◼◼◼◼◼◼◼◼◼◼◼◼ READLINE ◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼◼#
 
