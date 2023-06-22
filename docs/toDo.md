@@ -76,5 +76,8 @@ ls -la | vim -
 
 
 Contemplar
+```bash
 cat<toma.txt|grep a
+cat Makefile|grep "make"
+```
 (sin espacios entre las redirecciones o los pipes)

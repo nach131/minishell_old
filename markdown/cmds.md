@@ -41,7 +41,7 @@ Este comando ejecutaría el comando `sleep 10` en segundo plano, lo que provocar
 
 Estos son solo ejemplos básicos de comandos combinados en Bash. Hay muchas otras combinaciones y técnicas avanzadas disponibles para realizar tareas más complejas en un script de Bash.
 
-```bach
+```bash
 ls -lh > listado.txt
 ```
 
@@ -51,3 +51,23 @@ Crea el arachivo `listado.txt` con ls de la carpeta actual
 sort -k 9 listado.txt | uniq
 ```
 Ordenara el contenido de `listado.txt` segun los valores de la 9 columna y solo mostrara los resultados unicos.
+
+### find
+
+Busar todos los fichero que tiene 0 bytes los borra y si es ok realizar el archivo registro.txt
+
+```bash
+find /ruta/a/directorio -type f -size 0 -delete &> registro.txt
+```
+
+Busar todos los fichero que tiene 0 bytes los borra los visualiza antes de borrar
+
+```bash
+find /ruta/a/directorio -type f -size 0 -print
+```
+
+Busar todos los fichero que tiene 0 bytes los borra
+
+```bash
+find /ruta/a/directorio -type f -size 0 -delete
+```

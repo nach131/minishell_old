@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:52:58 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/21 19:35:04 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/21 20:43:03 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,6 @@
 #include "readline/history.h"
 #include "readline/readline.h"
 #include "working_tools.h"
-
-void	print_dptr(char **line)
-{
-	int	i;
-
-	(void)line;
-	i = 0;
-	while (line[i] != NULL)
-	{
-		ft_printf(ORANGE "%s\n", line[i]);
-		i++;
-	}
-}
 
 void	print_find_env(char *find, t_list *env)
 {

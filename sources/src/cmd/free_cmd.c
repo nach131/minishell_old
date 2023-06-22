@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:59:57 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/21 20:32:58 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/21 20:41:56 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,50 +18,6 @@
 #include "cmd.h"
 #include "minishell.h"
 #include "working_tools.h"
-
-// void static	free_commnad(char **command)
-// {
-// 	int	i;
-
-// 	if (command == NULL)
-// 		return ;
-// 	i = 0;
-// 	while (command[i] != NULL)
-// 	{
-// 		free(command[i]);
-// 		// command[i] = NULL;
-// 		i++;
-// 	}
-// 	free(command);
-// 	command = NULL;
-// }
-
-// void static	free_args(t_cmd *cmd)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	if (cmd->args == NULL)
-// 		return ;
-// 	while (i < cmd->num_cmd)
-// 	{
-// 		if (cmd->args[i] != NULL)
-// 		{
-// 			j = 0;
-// 			while (cmd->args[i][j] != NULL)
-// 			{
-// 				if (cmd->args[i][j] != NULL)
-// 					free(cmd->args[i][j]);
-// 				j++;
-// 			}
-// 			free(cmd->args[i]);
-// 		}
-// 		i++;
-// 	}
-// 	free(cmd->args);
-// 	cmd->args = NULL;
-// }
 
 void static	free_filefd(t_cmd *cmd)
 {
