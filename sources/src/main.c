@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/23 13:11:15 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/23 14:07:43 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,24 @@ void	start(t_data *data)
 			ft_print_tptr(cmd->args);
 			print_filefd(cmd->filefd);
 			ft_printf("-------\n");
-			// execute_builtin(data, cmd);
+			//
+			execute_builtin(data, cmd);
+			//
 			free_cmd(cmd);
-			ft_print_dptr(cmd->command);
-			ft_print_tptr(cmd->args);
-			ft_print_dptr(cmd->out);
-			ft_print_dptr(cmd->env);
-			print_filefd(cmd->filefd);
+			// ft_print_dptr(cmd->command);
+			// ft_print_tptr(cmd->args);
+			// ft_print_dptr(cmd->out);
+			// ft_print_dptr(cmd->env);
+			// print_filefd(cmd->filefd);
 		}
 		else if (cmd->num_cmd && token)
 			printf(RED "-Minishell: %s: command not found \n" WHITE,
 					token->content);
 		if (token)
-			ft_lstfree(token);
+			// AQUI SOLO FREE DE LOS ELEMENTOS DE LA LISTA
+			// FREE DE TOKEN EN EL EXIT
+			ft_lstfree_node(&token);
+		// ft_lstfree(token);
 		if (line)
 			free(line);
 		// history_line(); // ESTO EN FUNCION EXIT

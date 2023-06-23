@@ -6,14 +6,13 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/06/19 17:03:30 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/23 13:38:34 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "minishell.h"
 
-// hacer un structura para pasarla como argumento desde arriba incluiyendo env para despues
 void	executeCommand(char *command, char **args, int input_fd, int output_fd,
 		char **env)
 {
@@ -34,9 +33,7 @@ void	executeCommand(char *command, char **args, int input_fd, int output_fd,
 		exit(1);
 	}
 	else
-	{
 		wait(NULL);
-	}
 }
 
 int	execute_builtin(t_data *data, t_cmd *cmd)
