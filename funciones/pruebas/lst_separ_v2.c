@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 10:53:59 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/22 20:38:01 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/22 22:37:08 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 #include "../../sources/lib/libft/inc/libft.h"
 
-char *buscar_delimitador(char *str, char *delimiters, int *flag)
+char	*buscar_delimitador(char *str, char *delimiters, int *flag)
 {
-	char *tmp;
+	char	*tmp;
 
 	while (*str != '\0')
 	{
@@ -34,10 +34,10 @@ char *buscar_delimitador(char *str, char *delimiters, int *flag)
 	return (NULL);
 }
 
-void liberar_lista_original(t_list **a, t_list *new_list)
+void	liberar_lista_original(t_list **a, t_list *new_list)
 {
-	t_list *temp;
-	t_list *next;
+	t_list	*temp;
+	t_list	*next;
 
 	temp = *a;
 	while (temp != NULL)
@@ -50,18 +50,18 @@ void liberar_lista_original(t_list **a, t_list *new_list)
 	*a = new_list;
 }
 
-void separar_nodos_limitadores(t_list **a)
+void	separar_nodos_limitadores(t_list **a)
 {
-	t_list *current;
-	t_list *new_list;
-	char *str;
-	char *delimiters;
-	char *word;
-	t_list *delimiter_node;
-	t_list *temp;
-	t_list *next;
-	char *del_word;
-	int flag;
+	t_list	*current;
+	t_list	*new_list;
+	char	*str;
+	char	*delimiters;
+	char	*word;
+	t_list	*delimiter_node;
+	t_list	*temp;
+	t_list	*next;
+	char	*del_word;
+	int		flag;
 
 	flag = 1;
 	current = *a;
@@ -91,11 +91,12 @@ void separar_nodos_limitadores(t_list **a)
 		current = current->next;
 	}
 	liberar_lista_original(a, new_list);
+	system("leaks a.out");
 }
 
-int main(void)
+int	main(void)
 {
-	t_list *a;
+	t_list	*a;
 
 	a = malloc(1 * sizeof(t_list));
 	a->content = ft_strdup("cat");

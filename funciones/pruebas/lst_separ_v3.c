@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 10:53:59 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/22 20:46:00 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/23 11:40:56 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	separar_nodos_limitadores(t_list **a)
 	data->delimiters = "<>|";
 	procesar_lista(data);
 	liberar_lista_original(a, data->new_list);
-	free(data);
+	// free(data); //HACER EL FREE DE TODO EL CONTENIDO
 }
 
 int	main(void)
