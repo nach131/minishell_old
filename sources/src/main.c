@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/23 12:08:46 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/23 13:11:15 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	start(t_data *data)
 			ft_print_tptr(cmd->args);
 			ft_print_dptr(cmd->out);
 			ft_print_dptr(cmd->env);
-			// print_filefd(cmd->filefd);
+			print_filefd(cmd->filefd);
 		}
 		else if (cmd->num_cmd && token)
 			printf(RED "-Minishell: %s: command not found \n" WHITE,

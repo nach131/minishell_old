@@ -26,7 +26,7 @@ env -i ./minishel
 
 enviromen simples
 
-hacer un read del file descriptor, y ponerlo en un array de lo que contenga el fichero
+~~hacer un read del file descriptor, y ponerlo en un array de lo que contenga el fichero~~
 
 ~~acabar quitar qoutes~~
 
@@ -57,7 +57,7 @@ echo "La fecha actual es: $(date)"
 
 ## HAY QUE REVISAR
 
-### clear
+### ~~clear~~
 ~~cmd: /usr/bin/clear, filefd: 0-1~~
 ~~TERM environment variable not set.~~
 
@@ -75,9 +75,10 @@ ls -la | vim -
 ```
 
 
-Contemplar
-```bash
-cat<toma.txt|grep a
+## Contemplar
+
+~~cat<toma.txt|grep a~~
+
+~~sin espacios entre las redirecciones o los pipes~~
+
 cat Makefile|grep "make"
-```
-(sin espacios entre las redirecciones o los pipes)

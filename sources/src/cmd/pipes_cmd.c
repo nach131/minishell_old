@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 18:03:04 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/21 14:08:13 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/23 13:05:52 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	pipe_to_cmd(t_cmd *cmd)
 	}
 	else
 	{
-		//cuidado con el ultimo que si es > ...?
 		cmd->filefd = malloc((cmd->num_cmd) * sizeof(int *));
 		while (i < cmd->num_cmd - 1)
 		{

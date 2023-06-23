@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:52:58 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/21 20:43:03 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/23 13:18:06 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	print_filefd(int **filefd)
 	int	i;
 
 	i = 0;
+	if (filefd == NULL)
+		return ;
 	while (filefd[i] != NULL)
 	{
 		printf(YELLOW "filefd[%d][IN]: %d\n", i, filefd[i][0]);

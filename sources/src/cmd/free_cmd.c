@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:59:57 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/21 20:41:56 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/23 13:26:24 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ void static	free_filefd(t_cmd *cmd)
 		i = -1;
 		while (cmd->filefd[++i] != NULL)
 		{
-			// close(cmd->filefd[i][IN]);
-			// close(cmd->filefd[i][OUT]);
+			close(cmd->filefd[i][IN]);
+			close(cmd->filefd[i][OUT]);
 			free(cmd->filefd[i]);
+			cmd->filefd[i] = NULL;
 		}
 		free(cmd->filefd);
 		cmd->filefd = NULL;
