@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
+/*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/23 14:07:43 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/23 17:12:04 by caguerre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	start(t_data *data)
 			// print_filefd(cmd->filefd);
 		}
 		else if (cmd->num_cmd && token)
+		// esta tiene que estar en una funcion y pasarla tambien cuando 
+		// en algun comano no hace nada
 			printf(RED "-Minishell: %s: command not found \n" WHITE,
 					token->content);
 		if (token)
