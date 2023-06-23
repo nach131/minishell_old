@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/21 14:14:24 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/23 12:08:31 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "colorsft.h"
 # include "error.h"
-# include "ft_printf.h"
+// # include "ft_printf.h"
 // # include "functions.h"
 # include "libft.h"
 # include "readline/history.h"
@@ -78,9 +78,9 @@ void		handle_quit(int sig);
 t_cmd		*cmd_new(t_cmd cmd);
 
 void		cmd_add_back(t_cmd **cmd, t_cmd *new);
-t_cmd		*cmd_last(t_cmd *cmd);
-void		cmd_free(t_cmd *cmd);
-void		cmd_iter(t_cmd *cmd, void (*funcion)(void *));
+// t_cmd		*cmd_last(t_cmd *cmd);
+// void		cmd_free(t_cmd *cmd);
+// void		cmd_iter(t_cmd *cmd, void (*funcion)(void *));
 
 t_list		*parser_space_lst(char *line);
 
@@ -88,7 +88,7 @@ void		add_export(t_list *env, t_cmd *cmd);
 t_cmd		*token_to_pipe(t_list *token, t_list *env);
 char		*access_file(char *file);
 char		**env_to_array(t_list *env);
-int			count_cmd(t_list *token);
-int			count_to_token_cmd(t_list *token);
+// int			count_cmd(t_list *token);
+// int			count_to_token_cmd(t_list *token);
 
 #endif
