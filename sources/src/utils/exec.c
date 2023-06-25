@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/06/23 17:17:25 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:05:21 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ void	executeCommand(char *command, char **args, int input_fd, int output_fd,
 int	execute_builtin(t_data *data, t_cmd *cmd)
 {
 	int	res;
+	int	i;
 
+	i = 0;
 	res = CMD_NOT_FOUND;
 	(void)data;
 	(void)cmd;
@@ -58,8 +60,36 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	// else if (ft_strncmp(cmd->command, "exit", 5) == 0)
 	// 	printf(MAGENTA "esto es EXIT MOTHERF*CKER\n" WHITE);
 	// else
-	executeCommand(cmd->command[0], cmd->args[0], cmd->filefd[0][0],
-			cmd->filefd[0][1], cmd->env);
+	printf(ORANGE "num_command: %d\n", cmd->num_cmd);
+	if (cmd->num_cmd == 1)
+		executeCommand(cmd->command[0], cmd->args[0], cmd->filefd[0][0],
+				cmd->filefd[0][1], cmd->env);
+	else
+	{
+		while (i < cmd->num_cmd)
+		{
+			printf(RED "i: %d\n", i);
+			if (i + 1 == 1)
+			{
+				executeCommand(cmd->command[i], cmd->args[i], STDIN_FILENO,
+						cmd->filefd[i][OUT], cmd->env);
+				// close(cmd->args[0]);
+				printf(CYAN "\tPRIMERO %d\n", i);
+			}
+			else if (i + 1 == cmd->num_cmd)
+			{
+				executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i
+						- 1][IN], STDOUT_FILENO, cmd->env);
+				printf(CYAN "\tULTIMO %d\n", i);
+			}
+			else
+				printf(CYAN "\tLOS DE EN MEDIO %d\n", i);
+			// executeCommand(cmd->command[1], cmd->args[], cmd->filefd[0][IN],
+			// 		STDOUT_FILENO, cmd->env);
+			// close(cmd->args[i])
+			i++;
+		}
+	}
 	return (res);
 }
 

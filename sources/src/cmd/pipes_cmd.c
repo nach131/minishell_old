@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 18:03:04 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/23 17:05:51 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/06/23 20:50:46 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 #include "cmd.h"
 #include "minishell.h"
+#include <fcntl.h>
+#include <stdlib.h> // para open
 #include <unistd.h> // Para la función pipe()
 
 void	pipe_to_cmd(t_cmd *cmd)
@@ -46,8 +48,11 @@ void	pipe_to_cmd(t_cmd *cmd)
 				}
 			if (!ft_strncmp(cmd->out[i], ">", 1))
 			{
-				printf(RED "%s\n", cmd->out[i]);
-				// Aqui abrir el filfd del fichero;
+				cmd->filefd[i][IN] = IN;
+				cmd->filefd[i][OUT] = open(cmd->args[i + 1][0],
+											O_WRONLY | O_CREAT | O_TRUNC,
+											S_IRUSR | S_IWUSR);
+				// printf(RED "%s\n", cmd->args[i + 1][0]);
 			}
 			if (!ft_strncmp(cmd->out[i], "<", 1))
 			{
