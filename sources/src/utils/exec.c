@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/06/25 15:05:21 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/06/25 15:18:02 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,20 +73,22 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 			{
 				executeCommand(cmd->command[i], cmd->args[i], STDIN_FILENO,
 						cmd->filefd[i][OUT], cmd->env);
-				// close(cmd->args[0]);
 				printf(CYAN "\tPRIMERO %d\n", i);
 			}
 			else if (i + 1 == cmd->num_cmd)
 			{
 				executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i
 						- 1][IN], STDOUT_FILENO, cmd->env);
+				// executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i
+				// 		- 1][IN], cmd->filefd[i][OUT], cmd->env);
 				printf(CYAN "\tULTIMO %d\n", i);
 			}
 			else
+			{
+				executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i
+						- 1][IN], cmd->filefd[i][OUT], cmd->env);
 				printf(CYAN "\tLOS DE EN MEDIO %d\n", i);
-			// executeCommand(cmd->command[1], cmd->args[], cmd->filefd[0][IN],
-			// 		STDOUT_FILENO, cmd->env);
-			// close(cmd->args[i])
+			}
 			i++;
 		}
 	}
