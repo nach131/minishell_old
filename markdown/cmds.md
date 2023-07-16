@@ -60,7 +60,7 @@ Busar todos los fichero que tiene 0 bytes los borra y si es ok realizar el archi
 find /ruta/a/directorio -type f -size 0 -delete &> registro.txt
 ```
 
-Busar todos los fichero que tiene 0 bytes los borra los visualiza antes de borrar
+Busar todos los fichero que tiene 0 bytes los visualiza
 
 ```bash
 find /ruta/a/directorio -type f -size 0 -print
@@ -70,4 +70,14 @@ Busar todos los fichero que tiene 0 bytes los borra
 
 ```bash
 find /ruta/a/directorio -type f -size 0 -delete
+```
+Busar todos los diretorios vacios  y los visualiza
+
+```bash
+find /ruta/a/directorio -type f --empty -print
+```
+
+Buscar todos los directorios vacios y los borra
+```bash
+find /ruta/a/directorio -type f --empty -delete
 ```
