@@ -1,0 +1,1 @@
+drwxr-xr-x   8 nmota-bu  2022_barcelona     272 Jul 17 09:30 src

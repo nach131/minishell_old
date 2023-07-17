@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/23 17:12:04 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/07/17 11:14:04 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ void	start(t_data *data)
 			init_cmd(token, data->env, cmd);
 		if (token && cmd->command[0])
 		{
-			printf(MAGENTA "HAY que exec los commands\n");
 			ft_print_dptr(cmd->command);
 			ft_print_tptr(cmd->args);
 			print_filefd(cmd->filefd);
+			ft_printf("---out---\n");
+			ft_print_dptr(cmd->out);
 			ft_printf("-------\n");
 			//
 			execute_builtin(data, cmd);
@@ -56,8 +57,8 @@ void	start(t_data *data)
 			// print_filefd(cmd->filefd);
 		}
 		else if (cmd->num_cmd && token)
-		// esta tiene que estar en una funcion y pasarla tambien cuando 
-		// en algun comano no hace nada
+			// esta tiene que estar en una funcion y pasarla tambien cuando
+			// en algun comano no hace nada
 			printf(RED "-Minishell: %s: command not found \n" WHITE,
 					token->content);
 		if (token)
