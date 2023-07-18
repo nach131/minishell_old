@@ -1,0 +1,10 @@
+total 8
+drwxr-xr-x@  9 nacho  admin   306 Jul 18 14:24 .
+drwxr-xr-x@ 13 nacho  admin   442 Jul 18 14:19 ..
+drwxr-xr-x@  8 nacho  admin   272 Jun 21 12:33 built-ins
+drwxr-xr-x@  8 nacho  admin   272 Jul 18 14:18 cmd
+drwxr-xr-x@  3 nacho  admin   102 Jun 22 18:44 ctrl
+-rw-r--r--@  1 nacho  admin  3350 Jul 17 21:30 main.c
+-rw-------   1 nacho  admin     0 Jul 18 14:24 toma.txt
+drwxr-xr-x@ 11 nacho  admin   374 Jul 17 21:42 utils
+drwxr-xr-x@  4 nacho  admin   136 May 27 13:31 working_tools

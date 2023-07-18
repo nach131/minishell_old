@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 18:03:04 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/23 20:50:46 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/18 14:18:58 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,44 +21,52 @@
 #include <stdlib.h> // para open
 #include <unistd.h> // Para la función pipe()
 
-void	pipe_to_cmd(t_cmd *cmd)
+void static one_pipe(t_cmd *cmd)
 {
-	int	i;
+	cmd->filefd = malloc(2 * sizeof(int *));
+	cmd->filefd[0] = malloc(2 * sizeof(int));
+	cmd->filefd[0][0] = STDIN_FILENO;
+	cmd->filefd[0][1] = STDOUT_FILENO;
+	cmd->filefd[1] = NULL;
+}
+
+void static create_pipe(t_cmd *cmd, int i)
+{
+	if (pipe(cmd->filefd[i]) == 1)
+	{
+		perror("Error al crear la tubería");
+		exit(1);
+	}
+}
+
+void pipe_to_cmd(t_cmd *cmd)
+{
+	int i;
 
 	i = 0;
 	if (cmd->num_cmd == 1)
-	{
-		cmd->filefd = malloc(2 * sizeof(int *));
-		cmd->filefd[0] = malloc(2 * sizeof(int));
-		cmd->filefd[0][0] = STDIN_FILENO;
-		cmd->filefd[0][1] = STDOUT_FILENO;
-		cmd->filefd[1] = NULL;
-	}
+		one_pipe(cmd);
 	else
 	{
 		cmd->filefd = malloc((cmd->num_cmd) * sizeof(int *));
 		while (i < cmd->num_cmd - 1)
 		{
 			cmd->filefd[i] = malloc(2 * sizeof(int));
-			if (!ft_strncmp(cmd->out[i], "|", 1))
-				if (pipe(cmd->filefd[i]) == 1)
-				{
-					perror("Error al crear la tubería");
-					exit(1);
-				}
-			if (!ft_strncmp(cmd->out[i], ">", 1))
+			if (cmd->out[i][0] == '|')
+				create_pipe(cmd, i);
+			if (cmd->out[i][0] == '>')
 			{
 				cmd->filefd[i][IN] = IN;
 				cmd->filefd[i][OUT] = open(cmd->args[i + 1][0],
-											O_WRONLY | O_CREAT | O_TRUNC,
-											S_IRUSR | S_IWUSR);
-				// printf(RED "%s\n", cmd->args[i + 1][0]);
+										   O_WRONLY | O_CREAT | O_TRUNC,
+										   S_IRUSR | S_IWUSR);
 			}
 			if (!ft_strncmp(cmd->out[i], "<", 1))
 			{
 				printf(RED "%s\n", cmd->out[i]);
 				// Aqui abrir el filfd del fichero;
 			}
+
 			i++;
 		}
 		cmd->filefd[i] = NULL;

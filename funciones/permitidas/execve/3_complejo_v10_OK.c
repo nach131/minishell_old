@@ -10,9 +10,9 @@ enum
 	OUT,
 };
 
-void	executeCommand(char *command, char **args, int input_fd, int output_fd)
+void executeCommand(char *command, char **args, int input_fd, int output_fd)
 {
-	pid_t	pid;
+	pid_t pid;
 
 	pid = fork();
 	if (pid == -1)
@@ -34,13 +34,12 @@ void	executeCommand(char *command, char **args, int input_fd, int output_fd)
 	}
 }
 
-int	main(void)
+int main(void)
 {
-	char	*cmd[4];
-	int		pipefd[3][2];
-	int		filefd;
+	int pipefd[3][2];
+	int filefd;
 
-	cmd[4] = {"/bin/cat", "/usr/bin/grep", "/usr/bin/sed", "/usr/bin/sed"};
+	char *cmd[4] = {"/bin/cat", "/usr/bin/grep", "/usr/bin/sed", "/usr/bin/sed"};
 	char *args[4][3] = {
 		{"cat", "archivo.txt", NULL},
 		{"grep", "42", NULL},
@@ -55,7 +54,7 @@ int	main(void)
 		}
 	}
 	filefd = open("salida_v10.txt", O_WRONLY | O_CREAT | O_TRUNC,
-			S_IRUSR | S_IWUSR);
+				  S_IRUSR | S_IWUSR);
 	if (filefd == -1)
 	{
 		perror("Error al abrir el archivo salida.txt");
@@ -64,13 +63,17 @@ int	main(void)
 	//=========================================================================
 	executeCommand(cmd[0], args[0], STDIN_FILENO, pipefd[0][OUT]);
 	close(pipefd[0][OUT]);
-	for (int i = 0; i < 2; i++)
+
+	int i = 0;
+
+	while (i < 2)
 	{
-		executeCommand(cmd[i + 1], args[i + 1], pipefd[i][IN], pipefd[i
-				+ 1][OUT]);
+		executeCommand(cmd[i + 1], args[i + 1], pipefd[i][IN], pipefd[i + 1][OUT]);
 		close(pipefd[i][IN]);
 		close(pipefd[i + 1][OUT]);
+		i++;
 	}
+
 	executeCommand(cmd[3], args[3], pipefd[2][IN], filefd);
 	close(pipefd[2][IN]);
 	// close(filefd);

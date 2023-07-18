@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/06/25 15:18:02 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/18 18:17:23 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	i = 0;
 	res = CMD_NOT_FOUND;
 	(void)data;
-	(void)cmd;
 	// if (!ft_strncmp(cmd->command, "env", 4))
 	// 	print_env(data->env);
 	// else if (!ft_strncmp(cmd->command, "echo", 5))
@@ -60,39 +59,49 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	// else if (ft_strncmp(cmd->command, "exit", 5) == 0)
 	// 	printf(MAGENTA "esto es EXIT MOTHERF*CKER\n" WHITE);
 	// else
-	printf(ORANGE "num_command: %d\n", cmd->num_cmd);
+	// ;
+	//
+	printf(ORANGE "num_command: %d\n" WHITE, cmd->num_cmd);
+	if (cmd->num_cmd > 1)
+		printf(CYAN "out: %c\n" WHITE, cmd->out[cmd->num_cmd - 2][0]);
+	//
 	if (cmd->num_cmd == 1)
-		executeCommand(cmd->command[0], cmd->args[0], cmd->filefd[0][0],
-				cmd->filefd[0][1], cmd->env);
+		// si es 1 no hay que generar pipe
+		executeCommand(cmd->command[0], cmd->args[0], STDIN_FILENO, STDOUT_FILENO, cmd->env);
+	else if (cmd->num_cmd == 2)
+	{
+		executeCommand(cmd->command[0], cmd->args[0], STDIN_FILENO, cmd->filefd[0][OUT], cmd->env);
+		close(cmd->filefd[0][OUT]);
+		if (cmd->out[0][0] == '>')
+			executeCommand(cmd->command[1], cmd->args[1], cmd->filefd[0][IN], cmd->filefd[0][OUT], cmd->env);
+		// FALTA HACER ALGO PARA QUE SE PARE LA ORDEN CUANDO SESCRIBA EL FICHERO
+		else
+			executeCommand(cmd->command[1], cmd->args[1], cmd->filefd[0][IN], STDOUT_FILENO, cmd->env);
+		close(cmd->filefd[0][IN]);
+	}
 	else
 	{
-		while (i < cmd->num_cmd)
+		// printf(MAGENTA "\tPRIMERO %d\n", i);
+		executeCommand(cmd->command[0], cmd->args[0], STDIN_FILENO, cmd->filefd[0][OUT], cmd->env);
+		close(cmd->filefd[0][OUT]);
+		while (++i < (cmd->num_cmd - 1))
 		{
-			printf(RED "i: %d\n", i);
-			if (i + 1 == 1)
-			{
-				executeCommand(cmd->command[i], cmd->args[i], STDIN_FILENO,
-						cmd->filefd[i][OUT], cmd->env);
-				printf(CYAN "\tPRIMERO %d\n", i);
-			}
-			else if (i + 1 == cmd->num_cmd)
-			{
-				executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i
-						- 1][IN], STDOUT_FILENO, cmd->env);
-				// executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i
-				// 		- 1][IN], cmd->filefd[i][OUT], cmd->env);
-				printf(CYAN "\tULTIMO %d\n", i);
-			}
-			else
-			{
-				executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i
-						- 1][IN], cmd->filefd[i][OUT], cmd->env);
-				printf(CYAN "\tLOS DE EN MEDIO %d\n", i);
-			}
-			i++;
+			executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i - 1][IN], cmd->filefd[i][OUT], cmd->env);
+			close(cmd->filefd[i - 1][IN]);
+			close(cmd->filefd[i][OUT]);
+			// printf(MAGENTA "\tLOS DE EN MEDIO %d\n", i);
 		}
+		if (cmd->out[0][cmd->num_cmd - 2] == '>')
+		{
+			executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i - 2][IN], cmd->filefd[i - 1][OUT], cmd->env);
+			close(cmd->filefd[i - 1][OUT]);
+		}
+		executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i - 1][IN], STDOUT_FILENO, cmd->env);
+		close(cmd->filefd[i - 1][IN]);
+		// printf(MAGENTA "\tULTIMO %d\n", i);
 	}
 	return (res);
 }
 
 // CMD_NOT_FOUND ES 127 NO -1 POR...?
+

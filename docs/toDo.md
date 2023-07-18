@@ -63,7 +63,7 @@ echo "La fecha actual es: $(date)"
 
 ### ejecucion ./***.sh
 No puedo ejecuar ./archivo
-mesnaje de error
+mensaje de error
 -Minishell: ./minishell: command not found
 
 ```bash
@@ -74,7 +74,6 @@ man ls | vim -
 ls -la | vim -
 ```
 
-
 ## Contemplar
 
 ~~cat<toma.txt|grep a~~
@@ -82,3 +81,8 @@ ls -la | vim -
 ~~sin espacios entre las redirecciones o los pipes~~
 
 cat Makefile|grep "make"
+
+
+sort < archivo.txt
+
+
