@@ -6,7 +6,11 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 18:03:04 by nmota-bu          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/07/18 14:18:58 by nmota-bu         ###   ########.fr       */
+=======
+/*   Updated: 2023/07/17 11:26:15 by nmota-bu         ###   ########.fr       */
+>>>>>>> 8c0a9f6c52b9ea9975209e36d9e30e8dbf3fb421
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +67,9 @@ void pipe_to_cmd(t_cmd *cmd)
 			}
 			if (!ft_strncmp(cmd->out[i], "<", 1))
 			{
-				printf(RED "%s\n", cmd->out[i]);
+				printf(RED "es < %s\n", cmd->out[i]);
 				// Aqui abrir el filfd del fichero;
+				// TODO
 			}
 
 			i++;

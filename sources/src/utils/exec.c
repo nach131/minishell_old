@@ -6,7 +6,11 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/07/18 18:17:23 by nmota-bu         ###   ########.fr       */
+=======
+/*   Updated: 2023/07/17 14:07:26 by nmota-bu         ###   ########.fr       */
+>>>>>>> 8c0a9f6c52b9ea9975209e36d9e30e8dbf3fb421
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +30,8 @@ void	executeCommand(char *command, char **args, int input_fd, int output_fd,
 	}
 	if (pid == 0)
 	{
+		// close(input_fd);
+		// close(output_fd);
 		dup2(input_fd, STDIN_FILENO);
 		dup2(output_fd, STDOUT_FILENO);
 		execve(command, args, env);
@@ -33,7 +39,9 @@ void	executeCommand(char *command, char **args, int input_fd, int output_fd,
 		exit(1);
 	}
 	else
+	{
 		wait(NULL);
+	}
 }
 
 int	execute_builtin(t_data *data, t_cmd *cmd)
@@ -66,6 +74,7 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 		printf(CYAN "out: %c\n" WHITE, cmd->out[cmd->num_cmd - 2][0]);
 	//
 	if (cmd->num_cmd == 1)
+<<<<<<< HEAD
 		// si es 1 no hay que generar pipe
 		executeCommand(cmd->command[0], cmd->args[0], STDIN_FILENO, STDOUT_FILENO, cmd->env);
 	else if (cmd->num_cmd == 2)
@@ -79,6 +88,10 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 			executeCommand(cmd->command[1], cmd->args[1], cmd->filefd[0][IN], STDOUT_FILENO, cmd->env);
 		close(cmd->filefd[0][IN]);
 	}
+=======
+		executeCommand(cmd->command[0], cmd->args[0], cmd->filefd[0][IN],
+					   cmd->filefd[0][OUT], cmd->env);
+>>>>>>> 8c0a9f6c52b9ea9975209e36d9e30e8dbf3fb421
 	else
 	{
 		// printf(MAGENTA "\tPRIMERO %d\n", i);
@@ -86,6 +99,7 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 		close(cmd->filefd[0][OUT]);
 		while (++i < (cmd->num_cmd - 1))
 		{
+<<<<<<< HEAD
 			executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i - 1][IN], cmd->filefd[i][OUT], cmd->env);
 			close(cmd->filefd[i - 1][IN]);
 			close(cmd->filefd[i][OUT]);
@@ -99,6 +113,35 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 		executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i - 1][IN], STDOUT_FILENO, cmd->env);
 		close(cmd->filefd[i - 1][IN]);
 		// printf(MAGENTA "\tULTIMO %d\n", i);
+=======
+			printf(RED "i: %d\n", i);
+			if (i + 1 == 1)
+			{
+				executeCommand(cmd->command[i], cmd->args[i], STDIN_FILENO,
+						cmd->filefd[i][OUT], cmd->env);
+				close(cmd->filefd[i][OUT]);
+				printf(CYAN "\tPRIMERO %d\n", i);
+			}
+			else if (i + 1 == cmd->num_cmd)
+			{
+				executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i
+						- 1][IN], STDOUT_FILENO, cmd->env);
+				// close(cmd->filefd[i][IN]);
+				printf(CYAN "\tULTIMO %d\n", i);
+			}
+			else
+			{
+				executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i
+						- 1][IN], cmd->filefd[i][OUT], cmd->env);
+				printf(CYAN "\tLOS DE EN MEDIO %d\n", i);
+			}
+			i++;
+		}
+		printf(GREEN "i: %i\n", i);
+		// printf(GREEN "i: %i\n", cmd->filefd[i][IN]);
+
+		// close(cmd->filefd[i - 1][IN]);
+>>>>>>> 8c0a9f6c52b9ea9975209e36d9e30e8dbf3fb421
 	}
 	return (res);
 }

@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 			@echo "$(YELLOW) Borrado todo y recompilado...🔆$(WHITE)"
 			@echo "$(YELLOW) Borrado todo y recompilado...✌🏼$(WHITE)"
+=======
+drwxr-xr-x   8 nmota-bu  2022_barcelona     272 Jul 17 09:30 src
+>>>>>>> 8c0a9f6c52b9ea9975209e36d9e30e8dbf3fb421

@@ -36,9 +36,16 @@ void executeCommand(char *command, char **args, int input_fd, int output_fd)
 
 int main(void)
 {
+<<<<<<< HEAD
 	int pipefd[3][2];
 	int filefd;
 
+=======
+
+	int pipefd[3][2];
+	int filefd;
+
+>>>>>>> 8c0a9f6c52b9ea9975209e36d9e30e8dbf3fb421
 	char *cmd[4] = {"/bin/cat", "/usr/bin/grep", "/usr/bin/sed", "/usr/bin/sed"};
 	char *args[4][3] = {
 		{"cat", "archivo.txt", NULL},
