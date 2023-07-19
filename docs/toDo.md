@@ -82,11 +82,12 @@ ls -la | vim -
 
 cat Makefile|grep "make"
 
+./push_swap 42 84 2> error.txt
 
 sort < archivo.txt
 
 
-Alba
+### Alba
 
 cat | ls
 
@@ -111,3 +112,5 @@ dar mesaje de error
 bash: warning: shell level (10001) too high, resetting to 1
 
 Y reiniciar el SHLVL a 1
+
+
