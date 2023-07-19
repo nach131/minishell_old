@@ -6,11 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/07/18 16:48:06 by nmota-bu         ###   ########.fr       */
-=======
-/*   Updated: 2023/07/17 11:14:04 by nmota-bu         ###   ########.fr       */
->>>>>>> 8c0a9f6c52b9ea9975209e36d9e30e8dbf3fb421
+/*   Updated: 2023/07/19 09:37:31 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +39,10 @@ void	start(t_data *data)
 			init_cmd(token, data->env, cmd);
 		if (token && cmd->command[0])
 		{
-<<<<<<< HEAD
 			ft_lstprint(token);
 			ft_print_dptr(cmd->command);
 			ft_print_tptr(cmd->args);
 			print_filefd(cmd->filefd);
-=======
-			ft_print_dptr(cmd->command);
-			ft_print_tptr(cmd->args);
-			print_filefd(cmd->filefd);
-			ft_printf("---out---\n");
->>>>>>> 8c0a9f6c52b9ea9975209e36d9e30e8dbf3fb421
 			ft_print_dptr(cmd->out);
 			ft_printf("-------\n");
 			//

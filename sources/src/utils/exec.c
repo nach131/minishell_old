@@ -6,11 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/07/18 18:17:23 by nmota-bu         ###   ########.fr       */
-=======
-/*   Updated: 2023/07/17 14:07:26 by nmota-bu         ###   ########.fr       */
->>>>>>> 8c0a9f6c52b9ea9975209e36d9e30e8dbf3fb421
+/*   Updated: 2023/07/19 11:43:31 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +26,6 @@ void	executeCommand(char *command, char **args, int input_fd, int output_fd,
 	}
 	if (pid == 0)
 	{
-		// close(input_fd);
-		// close(output_fd);
 		dup2(input_fd, STDIN_FILENO);
 		dup2(output_fd, STDOUT_FILENO);
 		execve(command, args, env);
@@ -74,32 +68,52 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 		printf(CYAN "out: %c\n" WHITE, cmd->out[cmd->num_cmd - 2][0]);
 	//
 	if (cmd->num_cmd == 1)
-<<<<<<< HEAD
 		// si es 1 no hay que generar pipe
 		executeCommand(cmd->command[0], cmd->args[0], STDIN_FILENO, STDOUT_FILENO, cmd->env);
 	else if (cmd->num_cmd == 2)
 	{
-		executeCommand(cmd->command[0], cmd->args[0], STDIN_FILENO, cmd->filefd[0][OUT], cmd->env);
-		close(cmd->filefd[0][OUT]);
+
 		if (cmd->out[0][0] == '>')
-			executeCommand(cmd->command[1], cmd->args[1], cmd->filefd[0][IN], cmd->filefd[0][OUT], cmd->env);
-		// FALTA HACER ALGO PARA QUE SE PARE LA ORDEN CUANDO SESCRIBA EL FICHERO
+		{
+			executeCommand(cmd->command[0], cmd->args[0], STDIN_FILENO, cmd->filefd[0][OUT], cmd->env);
+			close(cmd->filefd[0][OUT]);
+		}
 		else
+		{
+			executeCommand(cmd->command[0], cmd->args[0], STDIN_FILENO, cmd->filefd[0][OUT], cmd->env);
+			close(cmd->filefd[0][OUT]);
 			executeCommand(cmd->command[1], cmd->args[1], cmd->filefd[0][IN], STDOUT_FILENO, cmd->env);
-		close(cmd->filefd[0][IN]);
+			close(cmd->filefd[0][IN]);
+		}
 	}
-=======
-		executeCommand(cmd->command[0], cmd->args[0], cmd->filefd[0][IN],
-					   cmd->filefd[0][OUT], cmd->env);
->>>>>>> 8c0a9f6c52b9ea9975209e36d9e30e8dbf3fb421
+	// else if (cmd->num_cmd == 2)
+	// {
+	// 	// Primero ejecutamos el primer comando con la entrada estándar y el primer pipe de salida
+	// 	executeCommand(cmd->command[0], cmd->args[0], STDIN_FILENO, cmd->filefd[0][OUT], cmd->env);
+	// 	close(cmd->filefd[0][OUT]);
+	// 	if (cmd->out[0][0] == '>')
+	// 	{
+	// 		// Si el primer operador de redirección es '>', ejecutamos el segundo comando con el último pipe de entrada y el primer pipe de salida
+	// 		executeCommand(cmd->command[1], cmd->args[1], cmd->filefd[0][IN], cmd->filefd[0][OUT], cmd->env);
+	// 		// FALTA HACER ALGO PARA QUE SE PARE LA ORDEN CUANDO SE ESCRIBA EL FICHERO
+
+	// 	}
+	// 	else
+	// 		// Si el primer operador de redirección no es '>', ejecutamos el segundo comando con el último pipe de entrada y la salida estándar
+	// 		executeCommand(cmd->command[1], cmd->args[1], cmd->filefd[0][IN], STDOUT_FILENO, cmd->env);
+	// 	close(cmd->filefd[0][IN]);
+	// }
 	else
 	{
 		// printf(MAGENTA "\tPRIMERO %d\n", i);
+		// Si hay más de dos comandos
+		// Primero ejecutamos el primer comando con la entrada estándar y el primer pipe de salida
 		executeCommand(cmd->command[0], cmd->args[0], STDIN_FILENO, cmd->filefd[0][OUT], cmd->env);
 		close(cmd->filefd[0][OUT]);
+
 		while (++i < (cmd->num_cmd - 1))
 		{
-<<<<<<< HEAD
+			// Ejecutamos los comandos intermedios con sus respectivos pipes de entrada y salida
 			executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i - 1][IN], cmd->filefd[i][OUT], cmd->env);
 			close(cmd->filefd[i - 1][IN]);
 			close(cmd->filefd[i][OUT]);
@@ -107,41 +121,14 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 		}
 		if (cmd->out[0][cmd->num_cmd - 2] == '>')
 		{
+			// Si el último operador de redirección es '>', ejecutamos el último comando con el penúltimo pipe de entrada y el último pipe de salida
 			executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i - 2][IN], cmd->filefd[i - 1][OUT], cmd->env);
 			close(cmd->filefd[i - 1][OUT]);
 		}
+		// Si el último operador de redirección no es '>', ejecutamos el último comando con el penúltimo pipe de entrada y la salida estándar
 		executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i - 1][IN], STDOUT_FILENO, cmd->env);
 		close(cmd->filefd[i - 1][IN]);
 		// printf(MAGENTA "\tULTIMO %d\n", i);
-=======
-			printf(RED "i: %d\n", i);
-			if (i + 1 == 1)
-			{
-				executeCommand(cmd->command[i], cmd->args[i], STDIN_FILENO,
-						cmd->filefd[i][OUT], cmd->env);
-				close(cmd->filefd[i][OUT]);
-				printf(CYAN "\tPRIMERO %d\n", i);
-			}
-			else if (i + 1 == cmd->num_cmd)
-			{
-				executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i
-						- 1][IN], STDOUT_FILENO, cmd->env);
-				// close(cmd->filefd[i][IN]);
-				printf(CYAN "\tULTIMO %d\n", i);
-			}
-			else
-			{
-				executeCommand(cmd->command[i], cmd->args[i], cmd->filefd[i
-						- 1][IN], cmd->filefd[i][OUT], cmd->env);
-				printf(CYAN "\tLOS DE EN MEDIO %d\n", i);
-			}
-			i++;
-		}
-		printf(GREEN "i: %i\n", i);
-		// printf(GREEN "i: %i\n", cmd->filefd[i][IN]);
-
-		// close(cmd->filefd[i - 1][IN]);
->>>>>>> 8c0a9f6c52b9ea9975209e36d9e30e8dbf3fb421
 	}
 	return (res);
 }

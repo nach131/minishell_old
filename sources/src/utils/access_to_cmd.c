@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   access_to_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: caguerre <caguerre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 21:24:26 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/23 16:54:00 by caguerre         ###   ########.fr       */
+/*   Updated: 2023/07/19 12:03:14 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 #include "minishell.h"
 
+// TODO
+// Alaba comprobar el path de env separar por los :
 char static	*real_command(char *file)
 {
 	char	*path;

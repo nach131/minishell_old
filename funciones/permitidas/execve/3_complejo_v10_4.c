@@ -33,49 +33,48 @@ void executeCommand(char *command, char **args, int input_fd, int output_fd)
 		wait(NULL);
 	}
 }
-
 int main(void)
 {
 	int pipefd[3][2];
 	int filefd;
 
-	char *cmd[4] = {"/bin/cat", "/usr/bin/grep", "/usr/bin/sed", "/usr/bin/sed"};
+	char *cmd[4] = {"/bin/cat", "/usr/bin/grep", "/usr/bin/grep", "/usr/bin/sed"};
 	char *args[4][3] = {
-		{"cat", "archivo.txt", NULL},
-		{"grep", "42", NULL},
-		{"sed", "s/42/131/g", NULL},
+		{"cat", "Makefile", NULL},
+		{"grep", "echo", NULL},
+		{"grep", "todo", NULL},
 		{"sed", "s/Barcelona/New York/g", NULL}};
+
+	// Crear las tuberías
 	for (int i = 0; i < 3; i++)
 	{
 		if (pipe(pipefd[i]) == -1)
 		{
 			perror("Error al crear la tubería");
-			exit(1);
+			exit(EXIT_FAILURE);
 		}
 	}
-	filefd = open("salida_v10.txt", O_WRONLY | O_CREAT | O_TRUNC,
-				  S_IRUSR | S_IWUSR);
+
+	filefd = open("toma.txt", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	if (filefd == -1)
 	{
-		perror("Error al abrir el archivo salida.txt");
-		exit(1);
+		perror("Error al abrir el archivo toma.txt");
+		exit(EXIT_FAILURE);
 	}
+
 	//=========================================================================
 	executeCommand(cmd[0], args[0], STDIN_FILENO, pipefd[0][OUT]);
 	close(pipefd[0][OUT]);
 
-	int i = 0;
+	executeCommand(cmd[1], args[1], pipefd[0][IN], pipefd[1][OUT]);
+	close(pipefd[0][IN]);
+	close(pipefd[1][OUT]);
 
-	while (i < 2)
-	{
-		executeCommand(cmd[i + 1], args[i + 1], pipefd[i][IN], pipefd[i + 1][OUT]);
-		close(pipefd[i][IN]);
-		close(pipefd[i + 1][OUT]);
-		i++;
-	}
+	executeCommand(cmd[2], args[2], pipefd[1][IN], filefd);
+	close(pipefd[1][IN]);
+	close(filefd);
 
-	executeCommand(cmd[3], args[3], pipefd[2][IN], filefd);
-	close(pipefd[2][IN]);
-	// close(filefd);
-	return (0);
+	return 0;
 }
+
+// cat Makefile | grep echo | grep todo > toma.txt

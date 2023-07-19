@@ -86,3 +86,28 @@ cat Makefile|grep "make"
 sort < archivo.txt
 
 
+Alba
+
+cat | ls
+
+Despues del Enter tiene que cerra el pipe
+
+export A='foo   ' B='bar   ' C='baz    '
+
+```bash
+BASH-3.2$ echo $A"$B"$C
+foo bar   baz
+BASH-3.2$ echo $A$B$C
+foo bar baz
+BASH-3.2$
+```
+
+hay que controlar SHLVL=1 cada vez que se inicie un nuevo minishell
+
+cuando se pase de SHLVL=10000
+
+dar mesaje de error
+
+bash: warning: shell level (10001) too high, resetting to 1
+
+Y reiniciar el SHLVL a 1

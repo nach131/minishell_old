@@ -12,7 +12,8 @@
 			"program": "${workspaceFolder}/sources/minishell",
 			// "args": [],
 			"stopOnEntry": false,
-			"cwd": "${fileDirname}"
+			// "cwd": "${fileDirname}"
+			"cwd": "${workspaceFolder}/sources"
 		},
 		{
 			"type": "lldb",
