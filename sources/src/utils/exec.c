@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/07/19 11:43:31 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:09:59 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,23 +86,6 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 			close(cmd->filefd[0][IN]);
 		}
 	}
-	// else if (cmd->num_cmd == 2)
-	// {
-	// 	// Primero ejecutamos el primer comando con la entrada estándar y el primer pipe de salida
-	// 	executeCommand(cmd->command[0], cmd->args[0], STDIN_FILENO, cmd->filefd[0][OUT], cmd->env);
-	// 	close(cmd->filefd[0][OUT]);
-	// 	if (cmd->out[0][0] == '>')
-	// 	{
-	// 		// Si el primer operador de redirección es '>', ejecutamos el segundo comando con el último pipe de entrada y el primer pipe de salida
-	// 		executeCommand(cmd->command[1], cmd->args[1], cmd->filefd[0][IN], cmd->filefd[0][OUT], cmd->env);
-	// 		// FALTA HACER ALGO PARA QUE SE PARE LA ORDEN CUANDO SE ESCRIBA EL FICHERO
-
-	// 	}
-	// 	else
-	// 		// Si el primer operador de redirección no es '>', ejecutamos el segundo comando con el último pipe de entrada y la salida estándar
-	// 		executeCommand(cmd->command[1], cmd->args[1], cmd->filefd[0][IN], STDOUT_FILENO, cmd->env);
-	// 	close(cmd->filefd[0][IN]);
-	// }
 	else
 	{
 		// printf(MAGENTA "\tPRIMERO %d\n", i);
