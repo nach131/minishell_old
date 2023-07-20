@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 18:44:27 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/23 11:47:56 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/20 15:49:54 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,58 +33,6 @@ char static	*find_token(char *str, char *delimiters, int *flag)
 	}
 	return (NULL);
 }
-
-// void token_split(t_list **a)
-// {
-// 	t_list *current;
-// 	t_list *new_list;
-// 	char *str;
-// 	char *delimiters;
-// 	char *word;
-// 	t_list *delimiter_node;
-// 	t_list *temp;
-// 	t_list *next;
-// 	char *del_word;
-// 	int flag = 1;
-
-// 	current = *a;
-// 	new_list = NULL;
-// 	delimiters = "<>|";
-// 	while (current != NULL)
-// 	{
-// 		str = (char *)current->content;
-// 		del_word = find_token(current->content, delimiters, &flag);
-// 		word = ft_strtok(str, delimiters);
-// 		while (word != NULL)
-// 		{
-// 			if (word != NULL && *word != '\0')
-// 				ft_lstadd_back(&new_list, ft_lstnew(word));
-// 			if (del_word && flag)
-// 			{
-// 				ft_lstadd_back(&new_list, ft_lstnew(del_word));
-// 				flag = 0;
-// 			}
-// 			word = ft_strtok(NULL, delimiters);
-// 			if (word != NULL && *word != '\0')
-// 			{
-// 				delimiter_node = ft_lstnew(word);
-// 				ft_lstadd_back(&new_list, delimiter_node);
-// 			}
-// 			word = ft_strtok(NULL, delimiters);
-// 		}
-// 		current = current->next;
-// 	}
-// 	// Liberar la lista original
-// 	temp = *a;
-// 	while (temp != NULL)
-// 	{
-// 		next = temp->next;
-// 		free(temp->content);
-// 		free(temp);
-// 		temp = next;
-// 	}
-// 	*a = new_list;
-// }
 
 void static	free_origin_lst(t_list **a, t_list *new_list)
 {
@@ -130,6 +78,9 @@ void static	process_list(t_dtoken *data)
 		data->current = data->current->next;
 	}
 }
+
+// Funcion que separa los comandos de <>| por si los escriben juntos
+// ls -la|grep lib
 
 void	token_split(t_list **a)
 {

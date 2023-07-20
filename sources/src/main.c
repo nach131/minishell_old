@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/07/19 09:37:31 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/20 15:50:07 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	start(t_data *data)
 	t_list	*token;
 	t_cmd	*cmd;
 
+	(void)data;
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	while (1)
 	{
@@ -46,7 +47,7 @@ void	start(t_data *data)
 			ft_print_dptr(cmd->out);
 			ft_printf("-------\n");
 			//
-			execute_builtin(data, cmd);
+			// execute_builtin(data, cmd);
 			//
 			free_cmd(cmd);
 		}
