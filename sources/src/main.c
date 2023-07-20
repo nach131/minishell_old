@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/07/20 15:50:07 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/20 16:37:36 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ void	start(t_data *data)
 		if (token && cmd->command[0])
 		{
 			ft_lstprint(token);
+			ft_printf(ORANGE "\tcommand\n" WHITE);
 			ft_print_dptr(cmd->command);
+			ft_printf(ORANGE "\targs\n" WHITE);
 			ft_print_tptr(cmd->args);
 			print_filefd(cmd->filefd);
 			ft_print_dptr(cmd->out);
