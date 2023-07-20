@@ -1,8 +1,14 @@
-BUILTINS_FILES := echo env_print exit_btin export_btin 
-			@echo ALL_OBJS: $(ALL_OBJS)
-			@echo NAME: $(NAME)
-			@echo "$(ORANGE) Compilando Ejecutable  ➟  $(RED)$@ $(WHITE)"
-			@echo "$(ORANGE) Compilando Minishell  ➟  $(BLUE)$< $(WHITE)"
-			@echo "$(RED)\n ✗ Archivos objetos y projecto borrados.‼️\n$(WHITE)";
-			@echo "$(YELLOW) Borrado todo y recompilado...🔆$(WHITE)"
-			@echo "$(YELLOW) Borrado todo y recompilado...✌🏼$(WHITE)"
+total 384
+drwxr-xr-x  13 nmota-bu  2022_barcelona     442 Jul 20 09:44 .
+drwxr-xr-x  14 nmota-bu  2022_barcelona     476 Jul 19 10:11 ..
+-rw-r--r--   1 nmota-bu  2022_barcelona    6110 Jul 17 09:30 Makefile
+-rw-------   1 nmota-bu  2022_barcelona       0 Jul 17 11:14 aki.txt
+-rw-------   1 nmota-bu  2022_barcelona       0 Jul 19 11:32 grep
+drwxr-xr-x   8 nmota-bu  2022_barcelona     272 Jul 17 09:30 inc
+drwxr-xr-x   4 nmota-bu  2022_barcelona     136 May 17 11:31 lib
+-rw-r--r--   1 nmota-bu  2022_barcelona     720 Jul 19 09:18 ls
+-rw-r--r--   1 nmota-bu  2022_barcelona       0 Jul 17 09:30 mas.com
+-rwxr-xr-x   1 nmota-bu  2022_barcelona  182088 Jul 20 09:44 minishell
+drwxr-xr-x   9 nmota-bu  2022_barcelona     306 Jul 19 09:37 obj
+drwxr-xr-x   9 nmota-bu  2022_barcelona     306 Jul 19 09:18 src
+-rw-------   1 nmota-bu  2022_barcelona       0 Jul 20 09:44 toma.txt

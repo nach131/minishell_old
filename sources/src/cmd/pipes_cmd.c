@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 18:03:04 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/19 09:37:35 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/20 09:44:23 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,11 @@ void	process_redirections(t_cmd *cmd, t_list *token)
 	// Recorrer la lista token y guardar los valores de redirección en out
 	while (current_token != NULL)
 	{
-		if (!ft_strncmp(current_token->content, "|", 1) ||
-			!ft_strncmp(current_token->content, ">", 1) ||
-			!ft_strncmp(current_token->content, "<", 1))
+		if (current_token->content[0] == '|' || current_token->content[0] == '>' ||
+			current_token->content[0] == '<')
+		// if (!ft_strncmp(current_token->content, "|", 1) ||
+		// 	!ft_strncmp(current_token->content, ">", 1) ||
+		// 	!ft_strncmp(current_token->content, "<", 1))
 		{
 			cmd->out[redirection_index] = ft_strdup(current_token->content);
 			redirection_index++;
