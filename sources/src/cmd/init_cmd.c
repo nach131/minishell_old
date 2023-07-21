@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:35:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/21 10:09:18 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/21 11:28:03 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 #include "cmd.h"
 #include "minishell.h"
+#include "path_env.h"
 #include "working_tools.h"
 
 void	commands(t_cmd *cmd, t_list *token)
@@ -92,22 +93,23 @@ void static	args(t_cmd *cmd, t_list *token)
 	cmd->args[arg_index] = NULL;
 }
 
-// Buscar en la lista el nodo con nombre PATH y devuelve solo el valor
-char static	*path_env(t_list *env)
-{
-	char	*res;
-
-	res = ft_lstfind_to_dptr(env, "PATH", find_env);
-	res = env_value(res);
-	return (res);
-}
-
 void	init_cmd(t_list *token, t_list *env, t_cmd *cmd)
 {
-	char	*path;
+	char	**paths;
 
-	path = path_env(env);
-	printf(GREEN "%s\n", path);
+	paths = path_env(env);
+	// Print each value in paths
+	for (int i = 0; i < 10; i++)
+	{
+		printf("Path %d: %s\n", i + 1, paths[i]);
+	}
+	// Clean up allocated memory
+	for (int i = 0; i < 10; i++)
+	{
+		free(paths[i]);
+	}
+	free(paths);
+	//
 	//
 	cmd->num_cmd = count_commands(token) + 1;
 	commands(cmd, token);
@@ -116,35 +118,3 @@ void	init_cmd(t_list *token, t_list *env, t_cmd *cmd)
 	process_redirections(cmd, token);
 	pipe_to_cmd(cmd);
 }
-
-// ANTIC
-// void static	commands(t_cmd *cmd, t_list *token)
-// {
-// 	int	i;
-// 	int	valid_cmds;
-
-// 	i = 0;
-// 	valid_cmds = 0;
-// 	// Contador para rastrear el número de comandos válidos agregados
-// 	cmd->command = malloc((cmd->num_cmd + 1) * sizeof(char *));
-// 	while (token != NULL)
-// 	{
-// 		if (!ft_strncmp(token->content, "|", 1) || !ft_strncmp(token->content,
-// 				">", 1) || !ft_strncmp(token->content, "<", 1))
-// 		{
-// 			// Ignorar "|", "<" y ">"
-// 			token = token->next;
-// 			continue ;
-// 		}
-// 		if (i % 2 == 0)
-// 		{
-// 			// Agregar el primer valor de la lista
-// 			// cmd->command[valid_cmds] = access_file(token->content);
-// 			cmd->command[valid_cmds] = ft_strdup(token->content);
-// 			valid_cmds++;
-// 		}
-// 		token = token->next;
-// 		i++;
-// 	}
-// 	cmd->command[valid_cmds] = NULL;
-// }

@@ -69,7 +69,7 @@ INCS := $(addprefix -I, $(INCLUDES) $(LIBFT_DIR)inc/)
 # ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ SOURCES ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄#
 
 MAIN_FILES	:=	main
-UTILS_FILES	:= env_lst signal parser access_to_cmd exec
+UTILS_FILES	:= env_lst signal parser access_to_cmd exec path_env
 CMD_FILES := init_cmd utils_cmd pipes_cmd free_cmd
 TOOLS_FILES := printer working
 CTRL_FILES := token_split
