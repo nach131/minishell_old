@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:35:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/21 15:56:33 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:31:26 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "path_env.h"
 #include "working_tools.h"
 
-void static commands(t_cmd *cmd, t_list *token, char **paths)
+void static	commands(t_cmd *cmd, t_list *token, char **paths)
 {
 	t_list	*current;
 	int		i;
@@ -36,7 +36,6 @@ void static commands(t_cmd *cmd, t_list *token, char **paths)
 		if (current->content[0] != '-' && current->content[0] != '<'
 			&& current->content[0] != '>' && current->content[0] != '|' && flag)
 		{
-			// cmd->command[i] = strdup(current->content);
 			cmd->command[i] = access_file(current->content, paths);
 			i++;
 			flag = 0;
@@ -98,7 +97,6 @@ void	init_cmd(t_list *token, t_list *env, t_cmd *cmd)
 	char	**paths;
 
 	paths = path_env(env);
-
 	cmd->num_cmd = count_commands(token) + 1;
 	commands(cmd, token, paths);
 	ft_free_dptr(paths);
@@ -107,9 +105,3 @@ void	init_cmd(t_list *token, t_list *env, t_cmd *cmd)
 	process_redirections(cmd, token);
 	pipe_to_cmd(cmd);
 }
-
-// // Print each value in paths
-// for (int i = 0; i < 10; i++)
-// {
-// 	printf("Path %d: %s\n", i + 1, paths[i]);
-// }

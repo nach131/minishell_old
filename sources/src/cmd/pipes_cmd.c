@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 18:03:04 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/20 17:43:20 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:12:41 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@
 #include <stdlib.h> // para open
 #include <unistd.h> // Para la función pipe()
 
-void static	one_pipe(t_cmd *cmd)
-{
-	cmd->filefd = malloc(2 * sizeof(int *));
-	cmd->filefd[0] = malloc(2 * sizeof(int));
-	cmd->filefd[0][0] = STDIN_FILENO;
-	cmd->filefd[0][1] = STDOUT_FILENO;
-	cmd->filefd[1] = NULL;
-}
+// NO ES NECESARIO USA EL POR DEFECTO
+// void static	one_pipe(t_cmd *cmd)
+// {
+// 	cmd->filefd = malloc(2 * sizeof(int *));
+// 	cmd->filefd[0] = malloc(2 * sizeof(int));
+// 	cmd->filefd[0][0] = STDIN_FILENO;
+// 	cmd->filefd[0][1] = STDOUT_FILENO;
+// 	cmd->filefd[1] = NULL;
+// }
 
-void static	create_pipe(t_cmd *cmd, int i)
+void static create_pipe(t_cmd *cmd, int i)
 {
 	if (pipe(cmd->filefd[i]) == 1)
 	{
@@ -45,7 +46,8 @@ void	pipe_to_cmd(t_cmd *cmd)
 
 	i = 0;
 	if (cmd->num_cmd == 1)
-		one_pipe(cmd);
+		;
+	// one_pipe(cmd);
 	else
 	{
 		cmd->filefd = malloc((cmd->num_cmd) * sizeof(int *));

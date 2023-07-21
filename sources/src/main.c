@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/07/20 23:19:56 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:32:06 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	start(t_data *data)
 			print_filefd(cmd->filefd);
 			ft_print_dptr(cmd->out);
 			//
-			// execute_builtin(data, cmd);
+			execute_builtin(data, cmd);
 			//
 			free_cmd(cmd);
 		}
@@ -93,7 +93,6 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	ft_bzero(&data, sizeof(t_data));
 	data.env = init_env(env);
-
 	// signal(SIGTSTP, SIG_IGN);
 	signal(SIGINT, (void *)handle_int);
 	signal(SIGQUIT, (void *)handle_quit);

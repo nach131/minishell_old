@@ -86,6 +86,9 @@ ls -la | vim -
 
 sort < archivo.txt
 
+## ctrl + z
+man ls
+para salir hay que pulsar ctrl+Z, a mi me sale del minishell
 
 ### Alba
 
