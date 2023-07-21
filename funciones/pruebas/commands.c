@@ -18,6 +18,10 @@ typedef struct s_cmd
 	char **out;
 } t_cmd;
 
+// TODO
+// CUIDADO
+// ls -a a |
+// TIENE QUE SALIR o RETORNAR
 void commands(t_cmd *cmd, t_list *token)
 {
 	int valid_cmds = 0;

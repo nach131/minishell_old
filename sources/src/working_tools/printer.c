@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:52:58 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/23 13:18:06 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/20 21:52:55 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include "readline/history.h"
 #include "readline/readline.h"
 #include "working_tools.h"
+#include "cmd.h"
 
 void	print_find_env(char *find, t_list *env)
 {

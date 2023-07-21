@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/06/23 12:08:31 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/20 23:18:29 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,7 @@ char		*access_file(char *file);
 char		**env_to_array(t_list *env);
 // int			count_cmd(t_list *token);
 // int			count_to_token_cmd(t_list *token);
+
+char *find_node_value(t_list *head, const char *target_value);
 
 #endif

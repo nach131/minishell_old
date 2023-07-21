@@ -74,10 +74,11 @@ find /ruta/a/directorio -type f -size 0 -delete
 Busar todos los diretorios vacios  y los visualiza
 
 ```bash
-find /ruta/a/directorio -type f --empty -print
+find /ruta/a/directorio -type d -empty
 ```
 
 Buscar todos los directorios vacios y los borra
 ```bash
-find /ruta/a/directorio -type f --empty -delete
+find /ruta/a/directorio -type d -empty -delete
 ```
+

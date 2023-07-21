@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/07/20 16:37:36 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/20 23:19:56 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,12 @@ void	start(t_data *data)
 		if (token && cmd->command[0])
 		{
 			ft_lstprint(token);
-			ft_printf(ORANGE "\tcommand\n" WHITE);
+			ft_printf(ORANGE "\tCOMMANDS\n" WHITE);
 			ft_print_dptr(cmd->command);
-			ft_printf(ORANGE "\targs\n" WHITE);
+			ft_printf(ORANGE "\tARGS\n" WHITE);
 			ft_print_tptr(cmd->args);
 			print_filefd(cmd->filefd);
 			ft_print_dptr(cmd->out);
-			ft_printf("-------\n");
 			//
 			// execute_builtin(data, cmd);
 			//
@@ -94,6 +93,7 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	ft_bzero(&data, sizeof(t_data));
 	data.env = init_env(env);
+
 	// signal(SIGTSTP, SIG_IGN);
 	signal(SIGINT, (void *)handle_int);
 	signal(SIGQUIT, (void *)handle_quit);
