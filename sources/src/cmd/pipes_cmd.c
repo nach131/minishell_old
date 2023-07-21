@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 18:03:04 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/21 17:14:12 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:50:05 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	pipe_to_cmd(t_cmd *cmd)
 			if (!ft_strncmp(cmd->out[i], "<", 1))
 			{
 				printf(RED "es < %s\n", cmd->out[i]);
-				// Aqui abrir el filfd del fichero;
 				// TODO
+				// Aqui abrir el filfd del fichero;
 			}
 			i++;
 		}
@@ -64,6 +64,7 @@ void	pipe_to_cmd(t_cmd *cmd)
 }
 
 // Pone en cmd->out que tipo de redireccionamiento tine el comando
+
 void	process_redirections(t_cmd *cmd, t_list *token)
 {
 	t_list	*current_token;

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/07/21 17:03:29 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:49:11 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	// 	printf(MAGENTA "esto es EXIT MOTHERF*CKER\n" WHITE);
 	// else
 	// ;
-	//
+	////
 	printf(ORANGE "num_command: %d\n" WHITE, cmd->num_cmd);
 	if (cmd->num_cmd > 1)
 		printf(CYAN "out: %c\n" WHITE, cmd->out[cmd->num_cmd - 2][0]);
-	//
+	////
 	if (cmd->num_cmd == 1)
 		// si es 1 no hay que generar pipe
 		executeCommand(cmd->command[0], cmd->args[0], STDIN_FILENO, STDOUT_FILENO, cmd->env);

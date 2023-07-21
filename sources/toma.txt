@@ -1,8 +1,0 @@
-BUILTINS_FILES := echo env_print exit_btin export_btin 
-			@echo ALL_OBJS: $(ALL_OBJS)
-			@echo NAME: $(NAME)
-			@echo "$(ORANGE) Compilando Ejecutable  ➟  $(RED)$@ $(WHITE)"
-			@echo "$(ORANGE) Compilando Minishell  ➟  $(BLUE)$< $(WHITE)"
-			@echo "$(RED)\n ✗ Archivos objetos y projecto borrados.‼️\n$(WHITE)";
-			@echo "$(YELLOW) Borrado todo y recompilado...🔆$(WHITE)"
-			@echo "$(YELLOW) Borrado todo y recompilado...✌🏼$(WHITE)"
