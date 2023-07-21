@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:57:38 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/20 21:52:37 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/21 13:18:05 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	free_cmd(t_cmd *cmd);
 // void	pipes_to_cmd(t_cmd *cmd, t_list *token);
 void	pipe_to_cmd(t_cmd *cmd);
 void	process_redirections(t_cmd *cmd, t_list *token);
-int find_env(char *s1, char *s2);
+// int find_env(char *s1, char *s2);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:35:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/21 11:28:03 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/21 15:56:33 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "path_env.h"
 #include "working_tools.h"
 
-void	commands(t_cmd *cmd, t_list *token)
+void static commands(t_cmd *cmd, t_list *token, char **paths)
 {
 	t_list	*current;
 	int		i;
@@ -37,7 +37,7 @@ void	commands(t_cmd *cmd, t_list *token)
 			&& current->content[0] != '>' && current->content[0] != '|' && flag)
 		{
 			// cmd->command[i] = strdup(current->content);
-			cmd->command[i] = access_file(current->content);
+			cmd->command[i] = access_file(current->content, paths);
 			i++;
 			flag = 0;
 		}
@@ -98,23 +98,18 @@ void	init_cmd(t_list *token, t_list *env, t_cmd *cmd)
 	char	**paths;
 
 	paths = path_env(env);
-	// Print each value in paths
-	for (int i = 0; i < 10; i++)
-	{
-		printf("Path %d: %s\n", i + 1, paths[i]);
-	}
-	// Clean up allocated memory
-	for (int i = 0; i < 10; i++)
-	{
-		free(paths[i]);
-	}
-	free(paths);
-	//
-	//
+
 	cmd->num_cmd = count_commands(token) + 1;
-	commands(cmd, token);
+	commands(cmd, token, paths);
+	ft_free_dptr(paths);
 	args(cmd, token);
 	cmd->env = ft_lst_to_dptr(&env, 0);
 	process_redirections(cmd, token);
 	pipe_to_cmd(cmd);
 }
+
+// // Print each value in paths
+// for (int i = 0; i < 10; i++)
+// {
+// 	printf("Path %d: %s\n", i + 1, paths[i]);
+// }
