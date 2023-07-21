@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 18:03:04 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/21 17:12:41 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/21 17:14:12 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,6 @@
 #include <fcntl.h>
 #include <stdlib.h> // para open
 #include <unistd.h> // Para la función pipe()
-
-// NO ES NECESARIO USA EL POR DEFECTO
-// void static	one_pipe(t_cmd *cmd)
-// {
-// 	cmd->filefd = malloc(2 * sizeof(int *));
-// 	cmd->filefd[0] = malloc(2 * sizeof(int));
-// 	cmd->filefd[0][0] = STDIN_FILENO;
-// 	cmd->filefd[0][1] = STDOUT_FILENO;
-// 	cmd->filefd[1] = NULL;
-// }
 
 void static create_pipe(t_cmd *cmd, int i)
 {
@@ -45,10 +35,8 @@ void	pipe_to_cmd(t_cmd *cmd)
 	int	i;
 
 	i = 0;
-	if (cmd->num_cmd == 1)
-		;
-	// one_pipe(cmd);
-	else
+
+	if (cmd->num_cmd > 1)
 	{
 		cmd->filefd = malloc((cmd->num_cmd) * sizeof(int *));
 		while (i < cmd->num_cmd - 1)
