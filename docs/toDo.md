@@ -80,7 +80,7 @@ ls -la | vim -
 
 ~~sin espacios entre las redirecciones o los pipes~~
 
-cat Makefile|grep "make"
+~~cat Makefile|grep "make"~~
 
 ./push_swap 42 84 2> error.txt
 

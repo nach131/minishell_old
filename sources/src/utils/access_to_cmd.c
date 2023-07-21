@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 21:24:26 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/21 16:25:12 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/21 16:27:56 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,31 +16,6 @@
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
 #include "minishell.h"
-
-// TODO
-// Alaba comprobar el path de env separar por los :
-// char static *real_command(char *file)
-// {
-// 	char *path;
-
-// 	path = ft_strjoin("/bin/", file);
-// 	if (access(path, X_OK) == 0)
-// 		return (path);
-// 	free(path);
-// 	path = ft_strjoin("/usr/bin/", file);
-// 	if (access(path, X_OK) == 0)
-// 		return (path);
-// 	free(path);
-// 	path = ft_strjoin("/sbin/", file);
-// 	if (access(path, X_OK) == 0)
-// 		return (path);
-// 	free(path);
-// 	path = ft_strjoin("/usr/sbin/", file);
-// 	if (access(path, X_OK) == 0)
-// 		return (path);
-// 	free(path);
-// 	return (NULL);
-// }
 
 // Busca en el doble puntero de env si el comando pasado existe
 // si es asi lo devuelve
