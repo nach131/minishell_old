@@ -1,3 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   path.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/07/22 13:02:29 by nmota-bu          #+#    #+#             */
+/*   Updated: 2023/07/22 13:02:34 by nmota-bu         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ╔════════════════════════════════════════════════════════════════════════╗ */
+/* ║                      https://github.com/nach131                        ║ */
+/* ╚════════════════════════════════════════════════════════════════════════╝ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,46 +22,46 @@ int main(void)
 {
 	char *path = "/Library/Frameworks/Python.framework/Versions/3.10/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/opt/X11/bin:/usr/local/mongodb/bin";
 	char **paths = NULL;
-	int num_paths = 0;
+	size_t num_paths = 0;
 
 	printf("Original path: %s\n\n", path);
 
-	// Create a copy of the original path as strtok will modify it
+	// Crea una copia de la ruta original ya que strtok la modificará
 	char *path_copy = strdup(path);
 
-	// Temporary variable to hold each token
+	// Variable temporal para contener cada token
 	char *token = strtok(path_copy, ":");
 
-	// Count the number of tokens
-	while (token != NULL)
+	// Cuenta el número de tokens
+	while (token != NULL) // Add opening curly brace here
 	{
 		num_paths++;
 		token = strtok(NULL, ":");
-	}
+	} // Add closing curly brace here
 
-	// Allocate memory for paths
+	// Asignar memoria para rutas
 	paths = (char **)malloc(num_paths * sizeof(char *));
 
-	// Reset the tokenization process
-	free(path_copy);				// Free the memory used for path_copy
-	path_copy = strdup(path);		// Create a new copy of the original path
-	token = strtok(path_copy, ":"); // Reset token to the start of the new copy
+	// Reiniciar el proceso de tokenización
+	free(path_copy);				// Liberar la memoria utilizada para path_copy
+	path_copy = strdup(path);		// Crear una nueva copia de la ruta original
+	token = strtok(path_copy, ":"); // Restablece el token al inicio de la nueva copia
 
-	// Store each token in paths
-	for (int i = 0; i < num_paths; i++)
+	// Almacenar cada token en rutas
+	for (size_t i = 0; i < num_paths; i++)
 	{
 		paths[i] = strdup(token);
 		token = strtok(NULL, ":");
 	}
 
-	// Print each value in paths
-	for (int i = 0; i < num_paths; i++)
+	// Imprime cada valor en rutas
+	for (size_t i = 0; i < num_paths; i++)
 	{
-		printf("Path %d: %s\n", i + 1, paths[i]);
+		printf("Path %zu: %s\n", i + 1, paths[i]);
 	}
 
-	// Clean up allocated memory
-	for (int i = 0; i < num_paths; i++)
+	// Limpiar la memoria asignada
+	for (size_t i = 0; i < num_paths; i++)
 	{
 		free(paths[i]);
 	}
@@ -54,3 +70,16 @@ int main(void)
 
 	return 0;
 }
+
+// Original path: /Library/Frameworks/Python.framework/Versions/3.10/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/opt/X11/bin:/usr/local/mongodb/bin
+
+// Path 1: /Library/Frameworks/Python.framework/Versions/3.10/bin
+// Path 2: /Library/Frameworks/Python.framework/Versions/3.7/bin
+// Path 3: /usr/local/bin
+// Path 4: /usr/bin
+// Path 5: /bin
+// Path 6: /usr/sbin
+// Path 7: /sbin
+// Path 8: /Applications/VMware Fusion.app/Contents/Public
+// Path 9: /opt/X11/bin
+// Path 10: /usr/local/mongodb/bin

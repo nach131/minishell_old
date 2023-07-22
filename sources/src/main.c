@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/07/21 16:32:06 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/22 13:44:15 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,3 +99,7 @@ int	main(int argc, char **argv, char **env)
 	start(&data);
 	return (0);
 }
+
+TODO
+	// en el caso de que se ejecute minishell dentro de minishell hay que sumar uno en SHLVL=2
+	// Funcion exit hay que restar un numero de SHLVL=2 y salir...?

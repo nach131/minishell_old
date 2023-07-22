@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:59:57 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/17 12:01:24 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/22 12:29:16 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void static	free_filefd(t_cmd *cmd)
 		i = -1;
 		while (cmd->filefd[++i] != NULL)
 		{
+			// TODO quitar todo esto
 			// #0 0x1070a3c72 in parser_space_lst
 			// cuando se activa
 			// close(cmd->filefd[i][IN]);
@@ -56,5 +57,5 @@ void	free_cmd(t_cmd *cmd)
 	cmd->env = NULL;
 	cmd->out = NULL;
 	cmd->filefd = NULL;
-	// Free env if needed (assuming it follows the same structure as args)
+	//TODO Free env if needed (assuming it follows the same structure as args)
 }

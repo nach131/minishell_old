@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 21:24:26 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/21 17:47:16 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/22 13:24:14 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,13 @@ char static	*real_command(char *file, char **paths)
 	return (NULL);
 }
 
+// TODO
+// si empieza con punto ponerlo todo en command
+// ./minishell
+
 char	*access_file(char *file, char **paths)
 {
+	// TODO
 	// if (!ft_strncmp(file, "echo", 5))
 	// 	return (ft_strdup("echo"));
 	// if (!ft_strncmp(file, "cd", 3))

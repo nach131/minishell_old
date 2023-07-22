@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 18:03:04 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/21 17:50:05 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/22 12:30:15 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #include <stdlib.h> // para open
 #include <unistd.h> // Para la función pipe()
 
-void static create_pipe(t_cmd *cmd, int i)
+void static	create_pipe(t_cmd *cmd, int i)
 {
 	if (pipe(cmd->filefd[i]) == 1)
 	{
@@ -35,7 +35,6 @@ void	pipe_to_cmd(t_cmd *cmd)
 	int	i;
 
 	i = 0;
-
 	if (cmd->num_cmd > 1)
 	{
 		cmd->filefd = malloc((cmd->num_cmd) * sizeof(int *));
@@ -55,7 +54,7 @@ void	pipe_to_cmd(t_cmd *cmd)
 			{
 				printf(RED "es < %s\n", cmd->out[i]);
 				// TODO
-				// Aqui abrir el filfd del fichero;
+				// Aqui abrir el filfd del fichero a abrir
 			}
 			i++;
 		}
@@ -64,24 +63,25 @@ void	pipe_to_cmd(t_cmd *cmd)
 }
 
 // Pone en cmd->out que tipo de redireccionamiento tine el comando
+// Recorrer la lista token y guardar los valores de redirección en out
 
 void	process_redirections(t_cmd *cmd, t_list *token)
 {
 	t_list	*current_token;
-	int		redirection_index;
+	int		i;
 
-	cmd->out = malloc((cmd->num_cmd) * sizeof(char *));
+	cmd->out = malloc((cmd->num_cmd + 1) * sizeof(char *));
 	current_token = token;
-	redirection_index = 0;
-	// Recorrer la lista token y guardar los valores de redirección en out
+	i = 0;
 	while (current_token != NULL)
 	{
-		if (current_token->content[0] == '|' || current_token->content[0] == '>' || current_token->content[0] == '<')
+		if (current_token->content[0] == '|' || current_token->content[0] == '>'
+			|| current_token->content[0] == '<')
 		{
-			cmd->out[redirection_index] = ft_strdup(current_token->content);
-			redirection_index++;
+			cmd->out[i] = ft_strdup(current_token->content);
+			i++;
 		}
 		current_token = current_token->next;
 	}
-	cmd->out[redirection_index] = NULL;
+	cmd->out[i] = NULL;
 }
