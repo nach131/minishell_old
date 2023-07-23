@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/07/21 13:05:13 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/22 21:38:03 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ typedef struct s_data
 {
 	t_list	*env;
 	t_list	*token;
+	int		power;
 	int		exit;
 	int		ret;
+	// char pwd -->  getcwd(NULL, 0);
 }			t_data;
 
 void		handle_int(int sig);

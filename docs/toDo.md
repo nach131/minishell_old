@@ -2,6 +2,8 @@
 
 - getenv usar para asignar el valor de  home a "~"
 
+- getcwd para conseguir la ruta donde estas
+
 ~~- controlar el crtl+c, ctrl=v~~
 - controlar $
 

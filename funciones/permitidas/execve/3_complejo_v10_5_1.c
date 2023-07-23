@@ -30,7 +30,8 @@ void executeCommand(char *command, char **args, int input_fd, int output_fd)
 	}
 	else
 	{
-		wait(NULL);
+		// quitando esto hacemos que no se espere a la ejecucion de cat
+		// wait(NULL);
 	}
 }
 
@@ -39,9 +40,7 @@ int main(void)
 	int pipefd[2];
 
 	char *cmd_cat[2] = {"/bin/cat", NULL};
-	char *cmd_ls[2] = {"/bin/ls", NULL};
 	char *args_cat[2] = {"cat", NULL};
-	char *args_ls[2] = {"ls", NULL};
 
 	if (pipe(pipefd) == -1)
 	{
@@ -50,10 +49,5 @@ int main(void)
 	}
 
 	executeCommand(cmd_cat[0], args_cat, STDIN_FILENO, pipefd[OUT]);
-	close(pipefd[OUT]);
-
-	executeCommand(cmd_ls[0], args_ls, pipefd[IN], STDOUT_FILENO);
-	close(pipefd[IN]);
-
 	return 0;
 }

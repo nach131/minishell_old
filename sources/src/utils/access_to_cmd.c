@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 21:24:26 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/22 13:24:14 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/22 13:59:23 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,7 @@ char	*access_file(char *file, char **paths)
 	// 	return (ft_strdup("env"));
 	else if (!ft_strncmp(file, "exit", 7))
 		return (ft_strdup("exit"));
+	else if (!ft_strncmp(file, ".", 1))
+		return (ft_strdup(file));
 	return (real_command(file, paths));
 }

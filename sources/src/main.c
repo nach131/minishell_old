@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/07/22 13:44:15 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/22 15:11:26 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "builtins.h"
 #include "cmd.h"
 #include "control.h"
+#include "enum.h"
 #include "ft_printf.h"
 #include "minishell.h"
 #include "working_tools.h"
@@ -92,6 +93,12 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	ft_bzero(&data, sizeof(t_data));
+	//
+	if (data.power)
+		printf("Power: %d \n", data.power);
+	printf("Power: %d \n", data.power);
+	data.power = ON;
+	//
 	data.env = init_env(env);
 	// signal(SIGTSTP, SIG_IGN);
 	signal(SIGINT, (void *)handle_int);
@@ -100,6 +107,6 @@ int	main(int argc, char **argv, char **env)
 	return (0);
 }
 
-TODO
-	// en el caso de que se ejecute minishell dentro de minishell hay que sumar uno en SHLVL=2
-	// Funcion exit hay que restar un numero de SHLVL=2 y salir...?
+// TODO
+// en el caso de que se ejecute minishell dentro de minishell hay que sumar uno en SHLVL=2
+// Funcion exit hay que restar un numero de SHLVL=2 y salir ..?
