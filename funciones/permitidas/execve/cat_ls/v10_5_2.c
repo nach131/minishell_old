@@ -35,8 +35,9 @@ void executeCommand(char *command, char **args, int input_fd, int output_fd)
 	}
 	if (pid == 0)
 	{
-		dup2(input_fd, STDIN_FILENO);
-		dup2(output_fd, STDOUT_FILENO);
+		printf("input_fd:%d\n", dup2(input_fd, STDIN_FILENO));
+		printf("output_fd:%d\n", dup2(output_fd, STDOUT_FILENO));
+
 		execve(command, args, NULL);
 		perror("Error al ejecutar el comando");
 
@@ -52,6 +53,7 @@ void executeCommand(char *command, char **args, int input_fd, int output_fd)
 			if (c == '\n')
 			{
 				printf("Has pulsado Enter\n");
+				close(input_fd);
 				break;
 			}
 		}

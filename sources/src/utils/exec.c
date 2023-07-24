@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/07/23 00:48:09 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/24 16:15:00 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,39 @@ void	executeCommand(char *command, char **args, int input_fd, int output_fd,
 		perror("Error al crear el proceso hijo");
 		exit(1);
 	}
+	// if (pid == 0)
+	// {
+	// 	// Redirige la entrada y salida según los descriptores de archivo dados
+	// 	dup2(input_fd, STDIN_FILENO);
+	// 	dup2(output_fd, STDOUT_FILENO);
+	// 	// Cierra el descriptor de archivo de entrada,
+	// 	//  si es diferente del descriptor estándar
+	// 	if (input_fd != STDIN_FILENO)
+	// 		close(input_fd);
+	// 	// Cierra el descriptor de archivo de salida,
+	// 	//  si es diferente del descriptor estándar
+	// 	if (output_fd != STDOUT_FILENO)
+	// 		close(output_fd);
+	// 	// Ejecuta el comando
+	// 	execve(command, args, env);
+	// 	perror("Error al ejecutar el comando");
+	// 	exit(1);
+	// }
+	// / /
 	if (pid == 0)
 	{
-		// Redirige la entrada y salida según los descriptores de archivo dados
-		dup2(input_fd, STDIN_FILENO);
-		dup2(output_fd, STDOUT_FILENO);
-		// Cierra el descriptor de archivo de entrada,
-		//  si es diferente del descriptor estándar
 		if (input_fd != STDIN_FILENO)
+		{
+			dup2(input_fd, STDIN_FILENO);
 			close(input_fd);
-		// Cierra el descriptor de archivo de salida,
-		//  si es diferente del descriptor estándar
+		}
+
 		if (output_fd != STDOUT_FILENO)
+		{
+			dup2(output_fd, STDOUT_FILENO);
 			close(output_fd);
-		// Ejecuta el comando
+		}
+
 		execve(command, args, env);
 		perror("Error al ejecutar el comando");
 		exit(1);
