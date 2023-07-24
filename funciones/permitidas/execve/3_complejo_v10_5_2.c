@@ -3,6 +3,8 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <poll.h>
+#include <signal.h>
 
 enum
 {
@@ -15,9 +17,15 @@ void handler(int sig)
 	printf("Se recibió la señal %d\n", sig);
 }
 
+void handler_ctrd(int sig)
+{
+	printf("Pulsado ctrl+d %d\n", sig);
+}
+
 void executeCommand(char *command, char **args, int input_fd, int output_fd)
 {
 	pid_t pid;
+	char c;
 
 	pid = fork();
 	if (pid == -1)
@@ -31,13 +39,22 @@ void executeCommand(char *command, char **args, int input_fd, int output_fd)
 		dup2(output_fd, STDOUT_FILENO);
 		execve(command, args, NULL);
 		perror("Error al ejecutar el comando");
+
 		exit(1);
 	}
 	else if (pid > 0)
 	{
+
 		printf("-----------------------------\n");
 		printf("Soy el proceso padre\n");
-		signal(SIGTERM, handler);
+		while (read(STDIN_FILENO, &c, 1) == 1)
+		{
+			if (c == '\n')
+			{
+				printf("Has pulsado Enter\n");
+				break;
+			}
+		}
 		printf("-----------------------------\n");
 		wait(NULL);
 		printf("El proceso hijo ha finalizado\n");
@@ -72,7 +89,12 @@ int main(void)
 	executeCommand(cmd_ls[0], args_ls, STDIN_FILENO, STDOUT_FILENO);
 	close(pipefd[IN]);
 
+	// Esperar a que el usuario presione Enter
+	printf("Presiona Enter para terminar el proceso hijo...\n");
+	getchar(); // Esperar a que el usuario presione Enter
+
+	// Enviamos la señal SIGTERM al proceso hijo
+	kill(-getpid(), SIGTERM);
+
 	return 0;
 }
-
-// cat | ls
