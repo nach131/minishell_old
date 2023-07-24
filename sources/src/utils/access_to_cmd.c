@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 21:24:26 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/22 13:59:23 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/24 09:32:36 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,6 @@ char static	*real_command(char *file, char **paths)
 	}
 	return (NULL);
 }
-
-// TODO
-// si empieza con punto ponerlo todo en command
-// ./minishell
 
 char	*access_file(char *file, char **paths)
 {

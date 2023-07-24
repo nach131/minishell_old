@@ -92,7 +92,7 @@ sort < archivo.txt
 man ls
 para salir hay que pulsar ctrl+Z, a mi me sale del minishell
 
-### Alba
+## Alba
 
 cat | ls
 
