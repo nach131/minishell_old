@@ -1,0 +1,5 @@
+total 0
+drwxr-xr-x   4 nacho  admin   136B 25 jul 22:56 ./
+drwxr-xr-x@ 20 nacho  admin   680B 25 jul 22:55 ../
+-rw-r--r--   1 nacho  admin     0B 25 jul 22:56 aki.txt
+-rw-r--r--   1 nacho  admin     0B 25 jul 22:56 toma.txt
