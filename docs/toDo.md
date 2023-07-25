@@ -119,3 +119,7 @@ bash: warning: shell level (10001) too high, resetting to 1
 Y reiniciar el SHLVL a 1
 
 
+## Recordar
+```bash
+nm fichero_compilado
+``
