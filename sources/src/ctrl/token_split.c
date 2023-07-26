@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 18:44:27 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/20 15:49:54 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/26 14:24:10 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void static	process_list(t_dtoken *data)
 	}
 }
 
-// Funcion que separa los comandos de <>| por si los escriben juntos
+// Funcion que separa los comandos de <>| por si se escriben juntos
+
 // ls -la|grep lib
 
 void	token_split(t_list **a)
