@@ -6,12 +6,14 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:00:02 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/05/23 16:00:48 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:11:03 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "ft_printf.h"
+
+// TODO
 
 void	toma(void)
 {

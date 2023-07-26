@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/07/26 17:35:21 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:41:00 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,32 +23,33 @@
 #include "minishell.h"
 #include "working_tools.h"
 
-char static	*getpwd(void)
-{
-	char	*pwd;
-	char	*tmp;
+// char static	*getpwd(void)
+// {
+// 	char	*pwd;
+// 	char	*tmp;
 
-	pwd = getcwd(NULL, 0);
-	tmp = ft_strjoin("\033[0;33m", pwd);
-	free(pwd);
-	pwd = ft_strjoin(tmp, "$ \033[0;37m");
-	free(tmp);
-	return (pwd);
-}
+// 	pwd = getcwd(NULL, 0);
+// 	tmp = ft_strjoin("\033[0;33m", pwd);
+// 	free(pwd);
+// 	pwd = ft_strjoin(tmp, "$ \033[0;37m");
+// 	free(tmp);
+// 	return (pwd);
+// }
 
 void	start(t_data *data)
 {
 	char	*line;
 	t_list	*token;
 	t_cmd	*cmd;
-	char	*prompt;
 
+	// char	*prompt;
 	cmd = ft_calloc(1, sizeof(t_cmd));
 	while (1)
 	{
-		prompt = getpwd();
-		// line = readline("Minishell> ");
-		line = readline(prompt);
+		// prompt = getpwd();
+		// line = readline(prompt);
+		//
+		line = readline("Minishell> ");
 		add_history(line);
 		token = parser_space_lst(line);
 		token_split(&token);
@@ -82,7 +83,7 @@ void	start(t_data *data)
 		// ft_lstfree(token);
 		if (line)
 			free(line);
-		free(prompt);
+		// free(prompt); // ACTIVAR CUANDO prompt
 		// history_line(); // ESTO EN FUNCION EXIT
 	}
 }
