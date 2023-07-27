@@ -6,14 +6,12 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/07/27 12:10:31 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:15:01 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "minishell.h"
-
-// int exec_cmd(char *cmd, char **args, char **env);
 
 void	exe_cmd(char *command, char **args, int in_fd, int out_fd, char **env,
 		pid_t *pid, int to_close)
@@ -43,33 +41,6 @@ void	exe_cmd(char *command, char **args, int in_fd, int out_fd, char **env,
 	}
 }
 
-// void execute(t_cmd *cmd)
-// {
-// 	pid_t pid;
-
-// 	int waitstat;
-
-// 	pid = fork();
-
-// 	if (pid == -1)
-// 	{
-// 		perror("Error al crear el proceso hijo");
-// 		exit(1);
-// 	}
-// 	if (pid == 0)
-// 	{
-// 		if (execve(cmd->command[0], cmd->args[0], cmd->env) == -1)
-// 			printf("Error, no se pudo ejecutar ls!\n");
-// 	}
-// 	else
-// 	{
-
-// 		// close(cmd->filefd[0][1]);
-// 		wait(&waitstat);
-// 		// close(cmd->filefd[0][0]);
-// 	}
-// }
-
 int	ctrl_builtin(char *command)
 {
 	if (!ft_strncmp(command, "echo", 5))
@@ -98,7 +69,6 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	int		finished;
 	int		result;
 
-	printf(RED "\t%d\n", cmd->num_cmd);
 	pid = calloc(cmd->num_cmd, sizeof(pid_t));
 	i = 0;
 	res = CMD_NOT_FOUND;
@@ -120,17 +90,16 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 		if (cmd->out[cmd->num_cmd - 2][0] == '>')
 		{
 			exe_cmd(cmd->command[0], cmd->args[0], STDIN_FILENO,
-					cmd->filefd[0][1], cmd->env, &pid[0], -1);
-			close(cmd->filefd[0][1]);
+					cmd->filefd[0][OUT], cmd->env, &pid[0], -1);
+			close(cmd->filefd[0][OUT]);
 		}
 		else
 		{
-			printf("IN: %d\tOUT: %d\n", cmd->filefd[0][0], cmd->filefd[0][1]);
 			exe_cmd(cmd->command[0], cmd->args[0], STDIN_FILENO,
-					cmd->filefd[0][1], cmd->env, &pid[0], cmd->filefd[0][0]);
+					cmd->filefd[0][OUT], cmd->env, &pid[0], cmd->filefd[0][IN]);
 			close(cmd->filefd[0][OUT]);
-			exe_cmd(cmd->command[1], cmd->args[1], cmd->filefd[0][0],
-					STDOUT_FILENO, cmd->env, &pid[1], cmd->filefd[0][1]);
+			exe_cmd(cmd->command[1], cmd->args[1], cmd->filefd[0][IN],
+					STDOUT_FILENO, cmd->env, &pid[1], cmd->filefd[0][OUT]);
 			close(cmd->filefd[0][IN]);
 		}
 	}
@@ -142,12 +111,9 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 			printf(MAGENTA "\tLOS DE EN MEDIO %d\n", i);
 		}
 	}
-	// close(cmd->filefd[0][IN]);
-	// close(cmd->filefd[0][OUT]);
 	i = -1;
 	status = 0;
 	finished = 0;
-	// printf("PID 0: %i\t1: %d\n", pid[0], pid[1]);
 	while (finished < cmd->num_cmd)
 	{
 		i = -1;
@@ -158,11 +124,7 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 				finished++;
 		}
 	}
-	printf("End\n");
-	// wait(NULL);
-	// i++;
-	// }
-	// execute(cmd);
+	printf(CYAN "End\n" WHITE);
 	return (res);
 }
 
