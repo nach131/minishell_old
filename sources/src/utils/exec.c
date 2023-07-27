@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/07/27 16:15:01 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:32:29 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,8 @@ int	ctrl_builtin(char *command)
 int	execute_builtin(t_data *data, t_cmd *cmd)
 {
 	int		res;
-	int		i;
-	int		status;
 	pid_t	*pid;
-	int		finished;
-	int		result;
+	int		i;
 
 	pid = calloc(cmd->num_cmd, sizeof(pid_t));
 	i = 0;
@@ -111,20 +108,8 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 			printf(MAGENTA "\tLOS DE EN MEDIO %d\n", i);
 		}
 	}
-	i = -1;
-	status = 0;
-	finished = 0;
-	while (finished < cmd->num_cmd)
-	{
-		i = -1;
-		while (++i < cmd->num_cmd)
-		{
-			result = waitpid(pid[i], &status, WNOHANG);
-			if (result > 0)
-				finished++;
-		}
-	}
-	printf(CYAN "End\n" WHITE);
+	wait_pipe(pid, cmd->num_cmd);
+	free(pid);
 	return (res);
 }
 
