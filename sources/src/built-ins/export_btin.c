@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:50:41 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/06/20 16:25:55 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/27 09:49:17 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,3 +90,7 @@ void	add_export(t_list *env, t_cmd *cmd)
 	(void)cmd;
 	ft_lstadd_back(&env, ft_lstnew("TOMATE=nuevo tomate"));
 }
+
+// TODO
+// export uno dos tres
+// Tiene que crear tres env con los nomres y el valor vacio

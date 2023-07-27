@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/07/26 17:41:00 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/27 10:01:22 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,3 +129,11 @@ int	main(int argc, char **argv, char **env)
 // TODO
 // en el caso de que se ejecute minishell dentro de minishell hay que sumar uno en SHLVL=2
 // Funcion exit hay que restar un numero de SHLVL=2 y salir ..?
+// FALTA
+// $?
+// >> <<
+//  cotrolar el typeo dinamico
+//
+// built-ins
+// todo lo que salga en pantalla (printf) hacerlo pasar por ft_putchar,
+// usando el fd necesario asi cuando este el pipe se puede rediriguir...?
