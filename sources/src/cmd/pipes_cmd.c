@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 18:03:04 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/27 11:43:49 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/28 16:25:37 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	pipe_to_cmd(t_cmd *cmd)
 				create_pipe(cmd, i);
 			if (cmd->out[i][0] == '>')
 			{
-				cmd->filefd[i][IN] = IN;
+				// cmd->filefd[i][IN] = IN;
+				cmd->filefd[i][IN] = -1;
 				cmd->filefd[i][OUT] = open(cmd->args[i + 1][0],
 											O_WRONLY | O_CREAT | O_TRUNC,
 											S_IRUSR | S_IWUSR);

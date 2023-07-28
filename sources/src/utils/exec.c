@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/07/28 15:37:27 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:03:27 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,9 +120,12 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 		}
 		// Execute the last command in the pipeline
 		printf(MAGENTA "\tULTIMO %d\n", i);
-		exe_cmd(cmd->command[i], cmd->args[i], cmd->filefd[i - 1][IN],
-				STDOUT_FILENO, cmd->env, &pid[i], -1);
-		close(cmd->filefd[i - 1][IN]);
+		if (cmd->out[i - 1][0] != '>')
+		{
+			exe_cmd(cmd->command[i], cmd->args[i], cmd->filefd[i - 1][IN],
+					STDOUT_FILENO, cmd->env, &pid[i], -1);
+			close(cmd->filefd[i - 1][IN]);
+		}
 	}
 	wait_pipe(pid, cmd->num_cmd);
 	free(pid);
@@ -130,3 +133,8 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 }
 
 // CMD_NOT_FOUND ES 127 NO -1 POR...?
+
+// TODO
+// ls -la | grep i | grep b | grep lib
+// CUIDADO AVECES "end" de wait_pipe antes que el ultimo comando..?
+// y despues se queda a falta de INTRO

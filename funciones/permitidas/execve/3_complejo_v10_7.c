@@ -36,50 +36,47 @@ void executeCommand(char *command, char **args, int input_fd, int output_fd)
 
 int main(void)
 {
-	int pipefd[2];
+	int pipefd[2][2];
+	int filefd;
 
-	char *cmd[3] = {"/bin/ls", "/usr/bin/grep", "/usr/bin/grep"};
-	char *args[3][5] = {
-		{"ls", "-la", NULL},
-		{"grep", "3_", NULL},
-		{"grep", "3_", NULL}};
+	char *cmd[3] = {"/bin/ls", "/usr/bin/grep", "/usr/bin/sed"};
+	char *args[3][3] = {
+		{"ls", "-ls", NULL},
+		{"grep", "toma", NULL},
+		{"sed", "s/42/131/g", NULL}};
 
-	// Create the two output files
-	int file1_fd = open("uno.txt", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-	if (file1_fd == -1)
+	for (int i = 0; i < 2; i++)
 	{
-		perror("Error al abrir/crear uno.txt");
+		if (pipe(pipefd[i]) == -1)
+		{
+			perror("Error al crear la tubería");
+			exit(1);
+		}
+	}
+
+	filefd = open("toma.txt", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+	if (filefd == -1)
+	{
+		perror("Error al abrir el archivo toma.txt");
 		exit(1);
 	}
 
-	int file2_fd = open("dos.txt", O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-	if (file2_fd == -1)
+	//=========================================================================
+	executeCommand(cmd[0], args[0], STDIN_FILENO, pipefd[0][OUT]);
+	close(pipefd[0][OUT]);
+
+	int i = 0;
+
+	while (i < 1)
 	{
-		perror("Error al abrir/crear dos.txt");
-		exit(1);
+		executeCommand(cmd[i + 1], args[i + 1], pipefd[i][IN], pipefd[i + 1][OUT]);
+		close(pipefd[i][IN]);
+		close(pipefd[i + 1][OUT]);
+		i++;
 	}
 
-	if (pipe(pipefd) == -1)
-	{
-		perror("Error al crear la tubería");
-		exit(1);
-	}
-
-	executeCommand(cmd[0], args[0], STDIN_FILENO, pipefd[1]);
-	// close(pipefd[1]);
-
-	// Redirect output to uno.txt
-	executeCommand(cmd[1], args[1], pipefd[0], file1_fd);
-	// close(pipefd[0]);
-
-	// Redirect output to dos.txt
-	executeCommand(cmd[2], args[2], STDIN_FILENO, file2_fd);
-
-	// Close the file descriptors
-	// close(file1_fd);
-	// close(file2_fd);
-
-	return 0;
+	executeCommand(cmd[2], args[2], pipefd[1][IN], filefd);
+	close(pipefd[1][IN]);
+	close(filefd);
+	return (0);
 }
-
-// ls > uno.txt > dos.txt
