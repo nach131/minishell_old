@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/07/27 16:32:29 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:37:27 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,10 +103,26 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	else
 	{
 		printf(MAGENTA "\tPRIMERO %d\n", i);
-		while (++i < (cmd->num_cmd - 1))
+		// Execute the first command in the pipeline
+		exe_cmd(cmd->command[i], cmd->args[i], STDIN_FILENO,
+				cmd->filefd[i][OUT], cmd->env, &pid[i], cmd->filefd[i][IN]);
+		close(cmd->filefd[i][OUT]);
+		i++;
+		// Execute commands in the middle of the pipeline
+		while (i < (cmd->num_cmd - 1))
 		{
-			printf(MAGENTA "\tLOS DE EN MEDIO %d\n", i);
+			printf(MAGENTA "\tLOS DE EN MEDIO %d, %s\n", i, cmd->out[i]);
+			exe_cmd(cmd->command[i], cmd->args[i], cmd->filefd[i - 1][IN],
+					cmd->filefd[i][OUT], cmd->env, &pid[i], cmd->filefd[i][IN]);
+			close(cmd->filefd[i][OUT]);
+			close(cmd->filefd[i - 1][IN]);
+			i++;
 		}
+		// Execute the last command in the pipeline
+		printf(MAGENTA "\tULTIMO %d\n", i);
+		exe_cmd(cmd->command[i], cmd->args[i], cmd->filefd[i - 1][IN],
+				STDOUT_FILENO, cmd->env, &pid[i], -1);
+		close(cmd->filefd[i - 1][IN]);
 	}
 	wait_pipe(pid, cmd->num_cmd);
 	free(pid);
