@@ -120,6 +120,19 @@ Y reiniciar el SHLVL a 1
 
 
 ## Recordar
+
 ```bash
 nm fichero_compilado
-``
+```
+
+---
+
+- Usar nombres más descriptivos para las variables como num_commands, in_fd, out_fd, etc.
+- Extraer las partes comunes de código a funciones separadas, por ejemplo para ejecutar un comando o cerrar un file descriptor.
+- Revisar el manejo de errores. Se podrían validar los retornos de funciones como exe_cmd() y reportar errores.
+- El código se repite en varias partes, se podría simplificar con bucles o funciones auxiliares.
+- El comentario grandes bloques de código ayudaría a entender mejor la lógica.
+- Hay varias "magic numbers" como -1, 0, 1 que podrían ser constantes o enums.
+- Se podrían agregar asertos o validaciones extra para garantizar el estado esperado.
+- El paso de tantos parámetros a exe_cmd() podría encapsularse en una estructura.
+- El manejo de file descriptors es complejo, valdría crear structs o abstracciones para simplificarlo.

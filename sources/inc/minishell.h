@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/07/27 16:28:03 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:06:15 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,5 @@ void		remove_quotes(void *content);
 // int			count_to_token_cmd(t_list *token);
 
 char		*find_node_value(t_list *head, const char *target_value);
-
-void		wait_pipe(pid_t *pid, int num_cmd);
 
 #endif

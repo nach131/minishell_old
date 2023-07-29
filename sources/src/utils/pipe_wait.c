@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 16:20:11 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/28 15:49:40 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:14:45 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* ║                     https://github.com/Carlos1073                      ║ */
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
-#include "minishell.h"
+#include "builtins.h"
 
 void	wait_pipe(pid_t *pid, int num_cmd)
 {
