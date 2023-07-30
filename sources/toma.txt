@@ -1,0 +1,12 @@
+total 408
+drwxr-xr-x@ 11 nacho  admin     374 30 jul 23:31 .
+drwxr-xr-x@ 14 nacho  admin     476 30 jul 11:48 ..
+-rw-r--r--@  1 nacho  admin    6148 28 jul 17:04 .DS_Store
+-rw-r--r--@  1 nacho  admin    6129 27 jul 23:16 Makefile
+drwxr-xr-x@  9 nacho  admin     306 21 jul 10:49 inc
+drwxr-xr-x@  3 nacho  admin     102 12 may 13:46 lib
+-rwxr-xr-x   1 nacho  admin  188316 30 jul 11:49 minishell
+drwxr-xr-x   9 nacho  admin     306 29 jul 19:38 obj
+-rwxr-xr-x@  1 nacho  admin      35 22 jul 14:01 script.sh
+drwxr-xr-x@ 10 nacho  admin     340 27 jul 13:15 src
+-rw-r--r--   1 nacho  admin       0 30 jul 23:31 toma.txt

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/07/30 11:48:10 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/30 23:45:50 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,16 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	int		res;
 	int		i;
 	pid_t	*pid;
+	int		builtin;
 
 	pid = calloc(cmd->num_cmd, sizeof(pid_t));
 	i = 0;
 	res = CMD_NOT_FOUND;
 	(void)data;
+	builtin = ctrl_builtin(cmd->command[0]);
 	if (cmd->num_cmd == 1)
 	{
-		if (ctrl_builtin(cmd->command[0]))
+		if (builtin)
 			// TODO
 			// aqui ejecucion de bultings
 			printf("tomate\n");
@@ -158,7 +160,8 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 			close(cmd->filefd[i - 1][IN]);
 		}
 	}
-	wait_pipe(pid, cmd->num_cmd);
+	if (!builtin)
+		wait_pipe(pid, cmd->num_cmd);
 	free(pid);
 	return (res);
 }
