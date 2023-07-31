@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/07/29 18:06:15 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/31 12:33:07 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ enum		token
 	NEW_LINE = '\n',
 	WHITE_SPACE = ' ',
 	DOUBLE_QUOTE = '\"',
-	ENV = '$',
+	DOLLAR = '$',
 	QOUTE = '\'',
 	_NULL = '0',
 	REDIR_IN = '<',

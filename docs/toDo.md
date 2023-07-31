@@ -1,3 +1,4 @@
+TODO
 ## cositas a hacer....!!!
 
 - getenv usar para asignar el valor de  home a "~"
@@ -11,6 +12,7 @@
 
 ## EXPORT
 Pasar todas las lista a **env y ordenar dentro todo los valores según ASCII
+
 
 ## Dobles comillas o simple
 cuando se impar, abrir la consola para que el usuario intruduzca comandos
@@ -135,4 +137,29 @@ nm fichero_compilado
 - Hay varias "magic numbers" como -1, 0, 1 que podrían ser constantes o enums.
 - Se podrían agregar asertos o validaciones extra para garantizar el estado esperado.
 - El paso de tantos parámetros a exe_cmd() podría encapsularse en una estructura.
-- El manejo de file descriptors es complejo, valdría crear structs o abstracciones para simplificarlo.
+- El manejo de file descriptors es complejo, valdría crear structs o abstracciones para simplificarlo
+
+## Pipe Built-in
+
+### Multiples pipes
+- export
+- pwd
+- env
+-	echo
+
+
+```bash
+export | grep USER > user.txt
+
+echo "hola mundo" | tr '[:lower:]' '[:upper:]'
+echo "Juan,Pérez,30" | cut -d ',' -f 2
+
+pwd | tr '[:lower:]' '[:upper:]'
+
+
+```
+
+### Sin pipe
+- unset
+- cd
+- exit

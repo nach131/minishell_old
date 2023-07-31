@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/07/30 23:45:50 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/31 13:26:25 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,23 +69,38 @@ void	exe_cmd(t_exec data, pid_t *pid)
 	}
 }
 
-int static	ctrl_builtin(char *command)
+// int static	ctrl_builtin(char *command)
+// {
+// 	if (!ft_strncmp(command, "echo", 5))
+// 		return (1);
+// 	if (!ft_strncmp(command, "cd", 3))
+// 		return (1);
+// 	else if (!ft_strncmp(command, "pwd", 4))
+// 		return (1);
+// 	else if (!ft_strncmp(command, "export", 7))
+// 		return (1);
+// 	else if (!ft_strncmp(command, "unset", 7))
+// 		return (1);
+// 	else if (!ft_strncmp(command, "env", 4))
+// 		return (1);
+// 	else if (!ft_strncmp(command, "exit", 7))
+// 		return (1);
+// 	return (0);
+// }
+
+void static	one_comman(t_cmd *cmd, int *pid)
 {
-	if (!ft_strncmp(command, "echo", 5))
-		return (1);
-	if (!ft_strncmp(command, "cd", 3))
-		return (1);
-	else if (!ft_strncmp(command, "pwd", 4))
-		return (1);
-	else if (!ft_strncmp(command, "export", 7))
-		return (1);
-	else if (!ft_strncmp(command, "unset", 7))
-		return (1);
-	else if (!ft_strncmp(command, "env", 4))
-		return (1);
-	else if (!ft_strncmp(command, "exit", 7))
-		return (1);
-	return (0);
+	int	builtin;
+
+	builtin = ctrl_builtin(cmd->command[0]);
+	if (builtin)
+		filter_builtin(builtin, cmd, STDOUT_FILENO);
+	else
+		exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
+				STDOUT_FILENO, cmd->env, -1}, pid);
+	// &pid[0]);
+	if (!builtin)
+		wait_pipe(pid, cmd->num_cmd);
 }
 
 int	execute_builtin(t_data *data, t_cmd *cmd)
@@ -93,24 +108,23 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	int		res;
 	int		i;
 	pid_t	*pid;
-	int		builtin;
 
+	// int		builtin;
 	pid = calloc(cmd->num_cmd, sizeof(pid_t));
 	i = 0;
 	res = CMD_NOT_FOUND;
 	(void)data;
-	builtin = ctrl_builtin(cmd->command[0]);
+	// builtin = ctrl_builtin(cmd->command[0]);
 	if (cmd->num_cmd == 1)
-	{
-		if (builtin)
-			// TODO
-			// aqui ejecucion de bultings
-			printf("tomate\n");
-		else
-			exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
-					STDOUT_FILENO, cmd->env, -1},
-					&pid[0]);
-	}
+		one_comman(cmd, &pid[0]);
+	// {
+	// 	if (builtin)
+	// 		filter_builtin(builtin, cmd, STDOUT_FILENO);
+	// 	else
+	// 		exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
+	// 				STDOUT_FILENO, cmd->env, -1},
+	// 				&pid[0]);
+	// }
 	else if (cmd->num_cmd == 2)
 	{
 		if (cmd->out[cmd->num_cmd - 2][0] == '>')
@@ -131,6 +145,8 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 					&pid[1]);
 			close(cmd->filefd[0][IN]);
 		}
+		// if (!builtin)
+		wait_pipe(pid, cmd->num_cmd);
 	}
 	else
 	{
@@ -159,9 +175,11 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 					&pid[i]);
 			close(cmd->filefd[i - 1][IN]);
 		}
-	}
-	if (!builtin)
+		// if (!builtin)
 		wait_pipe(pid, cmd->num_cmd);
+	}
+	// if (!builtin)
+	// wait_pipe(pid, cmd->num_cmd);
 	free(pid);
 	return (res);
 }
