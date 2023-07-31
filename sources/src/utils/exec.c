@@ -6,43 +6,14 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/07/31 13:28:28 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/31 13:34:15 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "minishell.h"
 
-// void	exe_cmd(char *command, char **args, int in_fd, int out_fd, char **env,
-// 		pid_t *pid, int to_close)
-// {
-// 	*pid = fork();
-// 	if (*pid == -1)
-// 	{
-// 		perror("Error al crear el proceso hijo");
-// 		exit(1);
-// 	}
-// 	if (*pid == 0)
-// 	{
-// 		if (in_fd != STDIN_FILENO)
-// 		{
-// 			dup2(in_fd, STDIN_FILENO);
-// 			close(in_fd);
-// 		}
-// 		if (out_fd != STDOUT_FILENO)
-// 		{
-// 			dup2(out_fd, STDOUT_FILENO);
-// 			close(out_fd);
-// 		}
-// 		close(to_close);
-// 		if (execve(command, args, env) == -1)
-// 			perror("Error al ejecutar el comando");
-// 		exit(1);
-// 	}
-// }
-// void	exe_cmd(char *command, char **args, int in_fd, int out_fd, char **env,
-// 		pid_t *pid, int to_close)
-void	exe_cmd(t_exec data, pid_t *pid)
+void static	exe_cmd(t_exec data, pid_t *pid)
 {
 	*pid = fork();
 	if (*pid == -1)
@@ -69,25 +40,6 @@ void	exe_cmd(t_exec data, pid_t *pid)
 	}
 }
 
-// int static	ctrl_builtin(char *command)
-// {
-// 	if (!ft_strncmp(command, "echo", 5))
-// 		return (1);
-// 	if (!ft_strncmp(command, "cd", 3))
-// 		return (1);
-// 	else if (!ft_strncmp(command, "pwd", 4))
-// 		return (1);
-// 	else if (!ft_strncmp(command, "export", 7))
-// 		return (1);
-// 	else if (!ft_strncmp(command, "unset", 7))
-// 		return (1);
-// 	else if (!ft_strncmp(command, "env", 4))
-// 		return (1);
-// 	else if (!ft_strncmp(command, "exit", 7))
-// 		return (1);
-// 	return (0);
-// }
-
 void static	one_comman(t_cmd *cmd, int *pid)
 {
 	int	builtin;
@@ -103,6 +55,30 @@ void static	one_comman(t_cmd *cmd, int *pid)
 		wait_pipe(pid, cmd->num_cmd);
 }
 
+void static	two_comman(t_cmd *cmd, int *pid)
+{
+	if (cmd->out[cmd->num_cmd - 2][0] == '>')
+	{
+		exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
+				cmd->filefd[0][OUT], cmd->env, -1},
+				&pid[0]);
+		close(cmd->filefd[0][OUT]);
+	}
+	else
+	{
+		exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
+				cmd->filefd[0][OUT], cmd->env, cmd->filefd[0][IN]},
+				&pid[0]);
+		close(cmd->filefd[0][OUT]);
+		exe_cmd((t_exec){cmd->command[1], cmd->args[1], cmd->filefd[0][IN],
+				STDOUT_FILENO, cmd->env, cmd->filefd[0][OUT]},
+				&pid[1]);
+		close(cmd->filefd[0][IN]);
+	}
+	// if (!builtin) // hay que ponerla para que no se quede un fd..?
+	wait_pipe(pid, cmd->num_cmd);
+}
+
 int	execute_builtin(t_data *data, t_cmd *cmd)
 {
 	int		res;
@@ -116,28 +92,29 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	if (cmd->num_cmd == 1)
 		one_comman(cmd, &pid[0]);
 	else if (cmd->num_cmd == 2)
-	{
-		if (cmd->out[cmd->num_cmd - 2][0] == '>')
-		{
-			exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
-					cmd->filefd[0][OUT], cmd->env, -1},
-					&pid[0]);
-			close(cmd->filefd[0][OUT]);
-		}
-		else
-		{
-			exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
-					cmd->filefd[0][OUT], cmd->env, cmd->filefd[0][IN]},
-					&pid[0]);
-			close(cmd->filefd[0][OUT]);
-			exe_cmd((t_exec){cmd->command[1], cmd->args[1], cmd->filefd[0][IN],
-					STDOUT_FILENO, cmd->env, cmd->filefd[0][OUT]},
-					&pid[1]);
-			close(cmd->filefd[0][IN]);
-		}
-		// if (!builtin) // hay que ponerla para que no se quede un fd..?
-		wait_pipe(pid, cmd->num_cmd);
-	}
+		two_comman(cmd, pid);
+	// {
+	// 	if (cmd->out[cmd->num_cmd - 2][0] == '>')
+	// 	{
+	// 		exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
+	// 				cmd->filefd[0][OUT], cmd->env, -1},
+	// 				&pid[0]);
+	// 		close(cmd->filefd[0][OUT]);
+	// 	}
+	// 	else
+	// 	{
+	// 		exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
+	// 				cmd->filefd[0][OUT], cmd->env, cmd->filefd[0][IN]},
+	// 				&pid[0]);
+	// 		close(cmd->filefd[0][OUT]);
+	// 		exe_cmd((t_exec){cmd->command[1], cmd->args[1], cmd->filefd[0][IN],
+	// 				STDOUT_FILENO, cmd->env, cmd->filefd[0][OUT]},
+	// 				&pid[1]);
+	// 		close(cmd->filefd[0][IN]);
+	// 	}
+	// 	// if (!builtin) // hay que ponerla para que no se quede un fd..?
+	// 	wait_pipe(pid, cmd->num_cmd);
+	// }
 	else
 	{
 		// Execute the first command in the pipeline
