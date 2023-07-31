@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:39:40 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/31 13:43:11 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/31 14:00:55 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	filter_builtin(int builtin, t_cmd *cmd, int fd)
 	else if (builtin == PWD)
 		printf("PWD\n");
 	else if (builtin == EXPORT)
-		printf("EXPORT\n");
+		ft_putstr_fd("EXPORT", fd);
 	else if (builtin == UNSET)
 		printf("UNSET\n");
 	else if (builtin == ENV)
