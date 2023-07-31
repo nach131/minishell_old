@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:26:59 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/31 13:10:32 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/31 13:42:54 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,19 @@
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
 #include "builtins.h"
+#include "libft.h"
 
 void	env_btin(char **env, int fd)
 {
+	int	i;
+
+	i = 0;
+	if (env == NULL)
+		return ;
+	while (env[i] != NULL)
+	{
+		ft_putstr_fd(env[i], fd);
+		write(fd, "\n", 1);
+		i++;
+	}
 }

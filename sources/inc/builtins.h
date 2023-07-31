@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:57:38 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/31 13:20:23 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/31 13:39:51 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ void		wait_pipe(pid_t *pid, int num_cmd);
 int			ctrl_builtin(char *command);
 void		filter_builtin(int builtin, t_cmd *cmd, int fd);
 // int		ft_isnumber(const char *str);
+
+//BUILTINGS
+void		env_btin(char **env, int fd);
 
 // WORKS
 

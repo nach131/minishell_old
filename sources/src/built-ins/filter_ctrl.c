@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:39:40 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/31 13:20:46 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/07/31 13:43:11 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,7 @@ void	filter_builtin(int builtin, t_cmd *cmd, int fd)
 	else if (builtin == UNSET)
 		printf("UNSET\n");
 	else if (builtin == ENV)
-	{
-		ft_print_dptr(cmd->env);
-		ft_putstr_fd("ENV", fd);
-		write(1, "\n", 1);
-	}
+		env_btin(cmd->env, fd);
 	else if (builtin == EXIT)
 		printf("EXIT\n");
 }
