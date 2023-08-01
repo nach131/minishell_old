@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:39:40 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/31 14:00:55 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/01 11:24:05 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ctrl_builtin(char *command)
 	return (0);
 }
 
-void	filter_builtin(int builtin, t_cmd *cmd, int fd)
+void	filter_builtin(int builtin, t_cmd *cmd, int out_fd)
 {
 	// TODO
 	// aqui la ejecucion de los builtin
@@ -47,11 +47,11 @@ void	filter_builtin(int builtin, t_cmd *cmd, int fd)
 	else if (builtin == PWD)
 		printf("PWD\n");
 	else if (builtin == EXPORT)
-		ft_putstr_fd("EXPORT", fd);
+		ft_putstr_fd("EXPORT\n", out_fd);
 	else if (builtin == UNSET)
 		printf("UNSET\n");
 	else if (builtin == ENV)
-		env_btin(cmd->env, fd);
+		env_btin(cmd->env, out_fd);
 	else if (builtin == EXIT)
 		printf("EXIT\n");
 }
