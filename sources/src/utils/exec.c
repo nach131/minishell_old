@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/08/01 13:46:21 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/01 19:45:30 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ void static	two_comman(t_cmd *cmd, int *pid)
 		wait_pipe(pid, cmd->num_cmd);
 }
 
+// ESTE HACE cat | ls como el original
 // void static	two_comman(t_cmd *cmd, int *pid)
 // {
 // 	if (cmd->out[cmd->num_cmd - 2][0] == '>')
@@ -171,7 +172,7 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	pid_t	*pid;
 
 	pid = calloc(cmd->num_cmd, sizeof(pid_t));
-	i = 0;
+	i = 1;
 	res = CMD_NOT_FOUND;
 	(void)data;
 	if (cmd->num_cmd == 1)
@@ -181,33 +182,61 @@ int	execute_builtin(t_data *data, t_cmd *cmd)
 	else
 	{
 		// Execute the first command in the pipeline
-		exe_cmd((t_exec){cmd->command[i], cmd->args[i], STDIN_FILENO,
-				cmd->filefd[i][OUT], cmd->env, cmd->filefd[i][IN]},
-				&pid[i]);
-		close(cmd->filefd[i][OUT]);
-		i++;
-		// Execute commands in the middle of the pipeline
+		printf(MAGENTA "\tPRIMERO %d\n", i - 1);
+		exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
+						 cmd->filefd[0][OUT], cmd->env, cmd->filefd[0][IN]},
+				&pid[0]);
+		close(cmd->filefd[0][OUT]);
 		while (i < (cmd->num_cmd - 1))
 		{
-			exe_cmd((t_exec){cmd->command[i], cmd->args[i], cmd->filefd[i
-					- 1][IN], cmd->filefd[i][OUT], cmd->env,
-					cmd->filefd[i][IN]},
+			printf(MAGENTA "\tLOS DE EN MEDIO %d, %s\n", i, cmd->out[i]);
+			exe_cmd((t_exec){cmd->command[i], cmd->args[i], cmd->filefd[i - 1][IN],
+							 cmd->filefd[i][OUT], cmd->env, cmd->filefd[i - 1][IN]},
 					&pid[i]);
 			close(cmd->filefd[i][OUT]);
-			close(cmd->filefd[i - 1][IN]);
 			i++;
 		}
 		// Execute the last command in the pipeline
-		if (cmd->out[i - 1][0] != '>')
-		{
-			exe_cmd((t_exec){cmd->command[i], cmd->args[i], cmd->filefd[i
-					- 1][IN], STDOUT_FILENO, cmd->env, -1},
-					&pid[i]);
-			close(cmd->filefd[i - 1][IN]);
-		}
-		// if (!builtin) // hay que ponerla para que no se quede un fd..?
+		printf(MAGENTA "\tULTIMO %d\n", i);
+		exe_cmd((t_exec){cmd->command[i], cmd->args[i], cmd->filefd[i - 1][IN],
+						 STDOUT_FILENO, cmd->env, cmd->filefd[i - 1][IN]},
+				&pid[i]);
+		close(cmd->filefd[i - 1][OUT]);
+
 		wait_pipe(pid, cmd->num_cmd);
 	}
+	// {
+	// Execute the first command in the pipeline
+	// exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
+	// 		cmd->filefd[0][OUT], cmd->env, cmd->filefd[0][IN]},
+	// 		&pid[0]);
+	// close(cmd->filefd[0][OUT]);
+	// Execute commands in the middle of the pipeline
+	// while (i < (cmd->num_cmd - 1))
+	// {
+	// 	exe_cmd((t_exec){cmd->command[i], cmd->args[i], cmd->filefd[i
+	// 			- 1][IN], cmd->filefd[i][OUT], cmd->env,
+	// 			cmd->filefd[i][IN]},
+	// 			&pid[i]);
+	// 	close(cmd->filefd[i][OUT]);
+	// 	close(cmd->filefd[i - 1][IN]);
+	// 	i++;
+	// }
+	// // Execute the last command in the pipeline
+	// if (cmd->out[i - 1][0] != '>')
+	// {
+	// 	exe_cmd((t_exec){cmd->command[i], cmd->args[i], cmd->filefd[i
+	// 			- 1][IN], STDOUT_FILENO, cmd->env, -1},
+	// 			&pid[i]);
+	// 	close(cmd->filefd[i - 1][IN]);
+	// }
+	// // if (!builtin) // hay que ponerla para que no se quede un fd..?
+	// wait_pipe(pid, cmd->num_cmd);
+	// }
 	free(pid);
 	return (res);
 }
+
+//=========================================================================
+
+//=========================================================================
