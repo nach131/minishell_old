@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:39:40 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/01 11:24:05 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/02 17:46:47 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,61 @@ int	ctrl_builtin(char *command)
 	return (0);
 }
 
-void	filter_builtin(int builtin, t_cmd *cmd, int out_fd)
+// void	filter_builtin(int builtin, t_cmd *cmd, int out_fd)
+// {
+// 	// TODO
+// 	// aqui la ejecucion de los builtin
+// 	if (builtin == ECHO)
+// 		printf("ECHO\n");
+// 	else if (builtin == CD)
+// 		printf("CD\n");
+// 	else if (builtin == PWD)
+// 		printf("PWD\n");
+// 	else if (builtin == EXPORT)
+// 		ft_putstr_fd("EXPORT\n", out_fd);
+// 	else if (builtin == UNSET)
+// 		printf("UNSET\n");
+// 	else if (builtin == ENV)
+// 		env_btin(cmd->env, out_fd);
+// 	else if (builtin == EXIT)
+// 		printf("EXIT\n");
+// }
+
+void exec_btin(char *command, char **env, int out_fd)
 {
 	// TODO
 	// aqui la ejecucion de los builtin
-	if (builtin == ECHO)
-		printf("ECHO\n");
-	else if (builtin == CD)
-		printf("CD\n");
-	else if (builtin == PWD)
-		printf("PWD\n");
-	else if (builtin == EXPORT)
-		ft_putstr_fd("EXPORT\n", out_fd);
-	else if (builtin == UNSET)
-		printf("UNSET\n");
-	else if (builtin == ENV)
-		env_btin(cmd->env, out_fd);
-	else if (builtin == EXIT)
-		printf("EXIT\n");
+	if (!ft_strncmp(command, "echo", 5))
+		ft_putstr_fd("ECHO\n", out_fd);
+	if (!ft_strncmp(command, "cd", 3))
+		ft_putstr_fd("CD\n", out_fd);
+	else if (!ft_strncmp(command, "pwd", 4))
+		ft_putstr_fd("PWD\n", out_fd);
+	else if (!ft_strncmp(command, "export", 7))
+		ft_putstr_fd("export\n", out_fd);
+	else if (!ft_strncmp(command, "unset", 7))
+		ft_putstr_fd("unset\n", out_fd);
+	else if (!ft_strncmp(command, "env", 4))
+		env_btin(env, out_fd);
+	else if (!ft_strncmp(command, "exit", 7))
+		ft_putstr_fd("exit\n", out_fd);
 }
+// void exec_btin(int builtin, char **env, int out_fd)
+// {
+// 	// TODO
+// 	// aqui la ejecucion de los builtin
+// 	if (builtin == ECHO)
+// 		printf("ECHO\n");
+// 	else if (builtin == CD)
+// 		printf("CD\n");
+// 	else if (builtin == PWD)
+// 		printf("PWD\n");
+// 	else if (builtin == EXPORT)
+// 		ft_putstr_fd("EXPORT\n", out_fd);
+// 	else if (builtin == UNSET)
+// 		printf("UNSET\n");
+// 	else if (builtin == ENV)
+// 		env_btin(env, out_fd);
+// 	else if (builtin == EXIT)
+// 		printf("EXIT\n");
+// }

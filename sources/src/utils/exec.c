@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/08/02 14:09:24 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/02 17:53:29 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void static	exe_cmd(t_exec data, pid_t *pid)
 {
 	*pid = fork();
 	printf(CYAN "\tpid dentro %d\n", *pid);
-	printf(YELLOW "-\n");
+	printf(YELLOW "----\n");
 
 	if (*pid == -1)
 	{
@@ -37,8 +37,20 @@ void static	exe_cmd(t_exec data, pid_t *pid)
 			close(data.out_fd);
 		}
 		close(data.to_close);
-		if (execve(data.command, data.args, data.env) == -1)
-			perror("Error al ejecutar el comando");
+
+		if (ctrl_builtin(data.command))
+		{
+			printf(MAGENTA "--%s--\n", data.command);
+			printf(MAGENTA "%d\n", data.out_fd);
+			env_btin(data.env, data.out_fd);
+
+			exec_btin(data.command, data.env, data.out_fd);
+		}
+		else
+		{
+			if (execve(data.command, data.args, data.env) == -1)
+				perror("Error al ejecutar el comando");
+		}
 		exit(1);
 	}
 }
@@ -75,61 +87,47 @@ void static	exe_cmd(t_exec data, pid_t *pid)
 
 void static	one_comman(t_cmd *cmd, int *pid)
 {
-	int	builtin;
-
-	builtin = ctrl_builtin(cmd->command[0]);
-	if (builtin)
-		filter_builtin(builtin, cmd, STDOUT_FILENO);
-	// exec_btin((t_btin){
-	// 			  builtin,
-	// 			  cmd,
-	// 			  STDIN_FILENO,
-	// 			  STDOUT_FILENO,
-	// 			  -1},
-	// 		  pid);
-	else
-		exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
-						 STDOUT_FILENO, cmd->env, -1},
-				pid);
-	if (!builtin)
-		wait_pipe(pid, cmd->num_cmd);
+	exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
+					 STDOUT_FILENO, cmd->env, -1},
+			pid);
+	wait_pipe(pid, cmd->num_cmd);
 }
 
 void static	two_comman(t_cmd *cmd, int *pid)
 {
-	int	builtin;
+	// int	builtin;
 
-	builtin = ctrl_builtin(cmd->command[0]);
+	// builtin = ctrl_builtin(cmd->command[0]);
 	if (cmd->out[cmd->num_cmd - 2][0] == '>')
 	{
-		if (builtin)
-			filter_builtin(builtin, cmd, cmd->filefd[0][OUT]);
-		else
-			exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
-							 cmd->filefd[0][OUT], cmd->env, -1},
-					&pid[0]);
+		// if (builtin)
+		// 	filter_builtin(builtin, cmd, cmd->filefd[0][OUT]);
+		// else
+		exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
+						 cmd->filefd[0][OUT], cmd->env, -1},
+				&pid[0]);
 		close(cmd->filefd[0][OUT]); // NO ES NECESARIO...?
 	}
 	else
 	{
-		if (builtin)
-			filter_builtin(builtin, cmd, cmd->filefd[0][OUT]);
-		else
-		{
-			exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
-							 cmd->filefd[0][OUT], cmd->env, cmd->filefd[0][IN]},
-					&pid[0]);
-		}
-		close(cmd->filefd[0][OUT]);
-		exe_cmd((t_exec){cmd->command[1], cmd->args[1], cmd->filefd[0][IN],
-						 //  STDOUT_FILENO, cmd->env, -1},
-						 STDOUT_FILENO, cmd->env, cmd->filefd[0][OUT]},
+		// if (builtin)
+		// 	filter_builtin(builtin, cmd, cmd->filefd[0][OUT]);
+		// else
+		// {
+		exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
+						 cmd->filefd[0][IN], cmd->env, cmd->filefd[0][OUT]},
 				&pid[0]);
-		// &pid[1]); // OK cat | ls
+		// }
+		close(cmd->filefd[0][OUT]);
+		exe_cmd((t_exec){cmd->command[1], cmd->args[1], cmd->filefd[0][OUT],
+						 //  STDOUT_FILENO, cmd->env, -1},
+						 STDOUT_FILENO, cmd->env, cmd->filefd[0][IN]},
+				// &pid[0]);
+				&pid[1]); // OK cat | ls
 		close(cmd->filefd[0][IN]);
 	}
-	if (!builtin || cmd->out[cmd->num_cmd - 2][0] == '|')
-		wait_pipe(pid, cmd->num_cmd);
+	// if (!builtin || cmd->out[cmd->num_cmd - 2][0] == '|')
+	wait_pipe(pid, cmd->num_cmd);
 }
 
 //======TODO OK, pero cat | ls no es como original====================================================
