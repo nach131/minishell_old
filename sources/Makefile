@@ -72,7 +72,7 @@ MAIN_FILES	:=	main
 UTILS_FILES	:= env_lst signal parser access_to_cmd exec path_env pipe_wait
 CMD_FILES := init_cmd utils_cmd pipes_cmd free_cmd
 TOOLS_FILES := printer working
-CTRL_FILES := token_split
+CTRL_FILES := token_split built_ins
 BUILTINS_FILES := echo env_print exit_btin export_btin filter_ctrl env_btin
 
 SRC_MAIN_FILES	+=$(MAIN_FILES)

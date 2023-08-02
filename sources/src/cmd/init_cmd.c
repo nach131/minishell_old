@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:35:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/21 16:31:26 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/02 21:44:59 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,26 @@
 #include "minishell.h"
 #include "path_env.h"
 #include "working_tools.h"
+#include "control.h"
 
-void static	commands(t_cmd *cmd, t_list *token, char **paths)
+void static commands(t_cmd *cmd, t_list *token, char **paths)
 {
-	t_list	*current;
-	int		i;
-	int		flag;
+	t_list *current;
+	int i;
+	int flag;
 
 	current = token;
 	cmd->command = malloc((cmd->num_cmd + 1) * sizeof(char *));
+	cmd->builtin = ft_calloc((cmd->num_cmd), sizeof(int *));
 	i = 0;
 	flag = 1;
 	current = token;
 	while (current != NULL)
 	{
-		if (current->content[0] != '-' && current->content[0] != '<'
-			&& current->content[0] != '>' && current->content[0] != '|' && flag)
+		if (current->content[0] != '-' && current->content[0] != '<' && current->content[0] != '>' && current->content[0] != '|' && flag)
 		{
 			cmd->command[i] = access_file(current->content, paths);
+			cmd->builtin[i] = ctrl_built_ins(cmd->command[i]);
 			i++;
 			flag = 0;
 		}

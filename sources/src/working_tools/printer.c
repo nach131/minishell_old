@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:52:58 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/21 11:22:20 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/02 21:37:14 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,20 @@ void	print_filefd(int **filefd)
 	{
 		printf(YELLOW "filefd[%d][IN]: %d\n", i, filefd[i][0]);
 		printf("filefd[%d][OUT]: %d\n" WHITE, i, filefd[i][1]);
+		i++;
+	}
+}
+
+void print_builtin(int *builtin, int num)
+{
+	int i;
+
+	i = 0;
+	if (builtin == 0)
+		return;
+	while (i < num)
+	{
+		printf(MAGENTA "builtin[%d]: %d\n", i, builtin[i]);
 		i++;
 	}
 }
