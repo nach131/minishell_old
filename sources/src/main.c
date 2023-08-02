@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/08/02 21:37:03 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/02 22:55:54 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,6 @@ void	start(t_data *data)
 		token = parser_space_lst(line);
 		token_split(&token);
 		ft_lstiter(token, remove_quotes);
-		// cmd->builtin = ft_calloc(3, sizeof(int));
-
-		// cmd->builtin[0] = TRUE;
-		// cmd->builtin[2] = TRUE;
-		// printf(MAGENTA "builtin %d", builtin[i]);
 
 		if (token)
 			init_cmd(token, data->env, cmd);
@@ -73,7 +68,6 @@ void	start(t_data *data)
 			print_filefd(cmd->filefd);
 			ft_print_dptr(cmd->out);
 			print_builtin(cmd->builtin, cmd->num_cmd);
-
 			//
 			execute_command(data, cmd);
 			//

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/16 12:35:20 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/02 21:44:59 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/02 23:00:30 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void static commands(t_cmd *cmd, t_list *token, char **paths)
 
 	current = token;
 	cmd->command = malloc((cmd->num_cmd + 1) * sizeof(char *));
-	cmd->builtin = ft_calloc((cmd->num_cmd), sizeof(int *));
+	cmd->builtin = ft_calloc((cmd->num_cmd + 1), sizeof(int *));
 	i = 0;
 	flag = 1;
 	current = token;
