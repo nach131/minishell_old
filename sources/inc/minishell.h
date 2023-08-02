@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/07/31 12:33:07 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/02 18:17:41 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_cmd
 	char	**env;
 	int		**filefd;
 	char	**out;
+	int *builtin;
 }			t_cmd;
 
 typedef struct s_data
