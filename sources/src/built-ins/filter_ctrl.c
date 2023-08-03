@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:39:40 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/02 18:23:44 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/03 09:50:50 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,24 @@
 
 #include "builtins.h"
 
-int	ctrl_builtin(char *command)
-{
-	if (!ft_strncmp(command, "echo", 5))
-		return (ECHO);
-	if (!ft_strncmp(command, "cd", 3))
-		return (CD);
-	else if (!ft_strncmp(command, "pwd", 4))
-		return (PWD);
-	else if (!ft_strncmp(command, "export", 7))
-		return (EXPORT);
-	else if (!ft_strncmp(command, "unset", 7))
-		return (UNSET);
-	else if (!ft_strncmp(command, "env", 4))
-		return (ENV);
-	else if (!ft_strncmp(command, "exit", 7))
-		return (EXIT);
-	return (0);
-}
+// int	ctrl_builtin(char *command)
+// {
+// 	if (!ft_strncmp(command, "echo", 5))
+// 		return (ECHO);
+// 	if (!ft_strncmp(command, "cd", 3))
+// 		return (CD);
+// 	else if (!ft_strncmp(command, "pwd", 4))
+// 		return (PWD);
+// 	else if (!ft_strncmp(command, "export", 7))
+// 		return (EXPORT);
+// 	else if (!ft_strncmp(command, "unset", 7))
+// 		return (UNSET);
+// 	else if (!ft_strncmp(command, "env", 4))
+// 		return (ENV);
+// 	else if (!ft_strncmp(command, "exit", 7))
+// 		return (EXIT);
+// 	return (0);
+// }
 
 // void	filter_builtin(int builtin, t_cmd *cmd, int out_fd)
 // {

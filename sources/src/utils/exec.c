@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/08/02 18:27:22 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/03 09:51:36 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,8 @@ void static	exe_cmd(t_exec data, pid_t *pid)
 
 void static	one_comman(t_cmd *cmd, int *pid)
 {
-	int	builtin;
 
-	builtin = ctrl_builtin(cmd->command[0]);
-	if (builtin)
+	if (cmd->builtin[0])
 		// filter_builtin(builtin, cmd, STDOUT_FILENO);
 		exec_btin(cmd->command[0], cmd->env, STDOUT_FILENO);
 	// exec_btin((t_btin){
@@ -92,20 +90,18 @@ void static	one_comman(t_cmd *cmd, int *pid)
 		exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
 						 STDOUT_FILENO, cmd->env, -1},
 				pid);
-	if (!builtin)
+	if (!cmd->builtin[0])
 		wait_pipe(pid, cmd->num_cmd);
 }
 
 void static	two_comman(t_cmd *cmd, int *pid)
 {
-	int	builtin;
 
-	builtin = ctrl_builtin(cmd->command[0]);
 	if (cmd->out[cmd->num_cmd - 2][0] == '>')
 	{
-		if (builtin)
+		if (cmd->builtin[0])
+			// filter_builtin(builtin, cmd, cmd->filefd[0][OUT]);
 			exec_btin(cmd->command[0], cmd->env, cmd->filefd[0][OUT]);
-
 		else
 			exe_cmd((t_exec){cmd->command[0], cmd->args[0], STDIN_FILENO,
 							 cmd->filefd[0][OUT], cmd->env, -1},
@@ -114,7 +110,7 @@ void static	two_comman(t_cmd *cmd, int *pid)
 	}
 	else
 	{
-		if (builtin)
+		if (cmd->builtin[0])
 		{
 			exec_btin(cmd->command[0], cmd->env, cmd->filefd[0][OUT]);
 			// close(cmd->filefd[0][IN]);
@@ -133,7 +129,7 @@ void static	two_comman(t_cmd *cmd, int *pid)
 				&pid[1]); // OK cat | ls
 		close(cmd->filefd[0][IN]);
 	}
-	if (!builtin || cmd->out[cmd->num_cmd - 2][0] == '|')
+	if (!cmd->builtin[0] || cmd->out[cmd->num_cmd - 2][0] == '|')
 		wait_pipe(pid, cmd->num_cmd);
 }
 
