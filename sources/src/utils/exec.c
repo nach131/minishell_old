@@ -6,33 +6,33 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/08/03 17:09:52 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/03 23:53:22 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "minishell.h"
 
-int static exec_btin(char *command, char **env, int out_fd)
+int static exec_btin(char *command, char **args, char **env)
 {
 	// TODO
 	// quitar fd de la funcion si al final no la necesito para
 	// las redirecciones
 
 	if (!ft_strncmp(command, "echo", 5))
-		ft_putstr_fd("ECHO\n", out_fd);
+		printf("ECHO\n");
 	if (!ft_strncmp(command, "cd", 3))
-		ft_putstr_fd("CD\n", out_fd);
+		printf("CD\n");
 	else if (!ft_strncmp(command, "pwd", 4))
-		ft_putstr_fd("PWD\n", out_fd);
+		printf("PWD\n");
 	else if (!ft_strncmp(command, "export", 7))
-		export_btin(NULL);
+		export_btin(NULL, args, env);
 	else if (!ft_strncmp(command, "unset", 7))
-		ft_putstr_fd("unset\n", out_fd);
+		printf("UNSET\n");
 	else if (!ft_strncmp(command, "env", 4))
-		env_btin(env, out_fd);
+		env_btin(env);
 	else if (!ft_strncmp(command, "exit", 7))
-		ft_putstr_fd("exit\n", out_fd);
+		printf("EXIT\n");
 	return (1);
 }
 
@@ -61,7 +61,7 @@ void static exe_cmd(t_exec data, pid_t *pid)
 		}
 		close(data.to_close);
 
-		(data.builting && exec_btin(data.command, data.env, data.out_fd));
+		(data.builting && exec_btin(data.command, data.args, data.env));
 		(!data.builting && execve(data.command, data.args, data.env));
 		// TODO
 		// Hacer funcion error y exit
@@ -78,14 +78,9 @@ void static exe_cmd(t_exec data, pid_t *pid)
 
 void static one_comman(t_data *data, t_cmd *cmd, int *pid)
 {
-	(void)data;
 
 	if (!ft_strncmp(cmd->command[0], "export", 7))
-	{
-		// ft_lstadd_back(&data->env, ft_lstnew("TOMATE_ONE=one_comman"));
-		export_btin(data->env);
-	}
-	// printf("export\n");
+		export_btin(data->env, cmd->args[0], cmd->env);
 	else
 	{
 		exe_cmd((t_exec){cmd->command[0], cmd->args[0], cmd->env, STDIN_FILENO,
@@ -110,6 +105,7 @@ void static two_comman(t_cmd *cmd, int *pid)
 						 cmd->filefd[0][OUT], cmd->builtin[0], cmd->filefd[0][IN]},
 				&pid[0]);
 		close(cmd->filefd[0][OUT]);
+
 		exe_cmd((t_exec){cmd->command[1], cmd->args[1], cmd->env, cmd->filefd[0][IN],
 						 STDOUT_FILENO, cmd->builtin[1], -1},
 				&pid[0]);

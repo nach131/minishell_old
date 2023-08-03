@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 12:26:59 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/03 12:02:48 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/03 23:54:25 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,15 @@
 /* ╚════════════════════════════════════════════════════════════════════════╝ */
 
 #include "builtins.h"
-#include "libft.h"
+#include <stdio.h>
 
-void	env_btin(char **env, int fd)
+void env_btin(char **env)
 {
-	int	i;
-	// TODO
-	// quitar fd de la funcion si al final no la necesito para
-	// las redirecciones
-	(void)fd;
+	int i;
 
-	i = 0;
+	i = -1;
 	if (env == NULL)
 		return ;
-	while (env[i] != NULL)
-	{
+	while (env[++i] != NULL)
 		printf("%s\n", env[i]);
-		i++;
-	}
 }

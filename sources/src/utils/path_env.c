@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 10:47:31 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/21 16:30:15 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/03 23:26:43 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	**path_env(t_list *env)
 	data.res = find_env_to_ptr(env);
 	data.path_copy = ft_strdup(data.res);
 	data.token = ft_strtok(data.path_copy, ":");
-	data.num_paths = len_token(data.token, ":");
+	data.num_paths = ft_len_token(data.token, ":");
 	data.paths = (char **)malloc((data.num_paths + 1) * sizeof(char *));
 	free(data.path_copy);
 	data.path_copy = ft_strdup(data.res);
