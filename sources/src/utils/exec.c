@@ -6,12 +6,32 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/08/03 10:38:04 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/03 10:44:48 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "minishell.h"
+
+void static exec_btin(char *command, char **env, int out_fd)
+{
+	// TODO
+	// aqui la ejecucion de los builtin
+	if (!ft_strncmp(command, "echo", 5))
+		ft_putstr_fd("ECHO\n", out_fd);
+	if (!ft_strncmp(command, "cd", 3))
+		ft_putstr_fd("CD\n", out_fd);
+	else if (!ft_strncmp(command, "pwd", 4))
+		ft_putstr_fd("PWD\n", out_fd);
+	else if (!ft_strncmp(command, "export", 7))
+		ft_putstr_fd("export\n", out_fd);
+	else if (!ft_strncmp(command, "unset", 7))
+		ft_putstr_fd("unset\n", out_fd);
+	else if (!ft_strncmp(command, "env", 4))
+		env_btin(env, out_fd);
+	else if (!ft_strncmp(command, "exit", 7))
+		ft_putstr_fd("exit\n", out_fd);
+}
 
 void static	exe_cmd(t_exec data, pid_t *pid)
 {

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:57:38 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/03 09:53:28 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/03 10:46:16 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_btin
 
 }			t_btin;
 
-void		print_env(t_list *env);
+// void		print_env(t_list *env);
 int execute_command(t_data *data, t_cmd *cmd);
 void		start_export(t_list *env);
 void		wait_pipe(pid_t *pid, int num_cmd);
@@ -60,7 +60,7 @@ void		wait_pipe(pid_t *pid, int num_cmd);
 // int			ctrl_builtin(char *command);
 void		filter_builtin(int builtin, t_cmd *cmd, int fd);
 // int		ft_isnumber(const char *str);
-void exec_btin(char *command, char **env, int out_fd);
+// void exec_btin(char *command, char **env, int out_fd);
 
 //BUILTINGS
 void		env_btin(char **env, int fd);
