@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:50:41 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/04 00:17:47 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/04 00:25:42 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,6 @@ void	print_dptr(char **arr)
 	while (arr[++i] != NULL)
 		printf("declare -x %s\n", arr[i]);
 }
-
-// VALE ....
-// PRIMERO EL NOMBRE DE LA VARIABLE, DEPUES LA VARIABLE DENTRO DE ""
-// asi que organizar solo los nombres despues buscar cada variable e imprimir el valor
 
 void	add_export(t_list *env, t_cmd *cmd)
 {

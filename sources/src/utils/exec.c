@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/08/03 23:53:22 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/04 00:21:53 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int execute_command(t_data *data, t_cmd *cmd)
 	int i;
 	pid_t *pid;
 
-	pid = calloc(cmd->num_cmd, sizeof(pid_t));
+	pid = ft_calloc(cmd->num_cmd, sizeof(pid_t));
 	printf(RED "\tpid %d\n" WHITE, pid[0]);
 	i = 1;
 	res = CMD_NOT_FOUND;
