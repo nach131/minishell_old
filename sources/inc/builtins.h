@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:57:38 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/03 11:02:36 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/03 17:08:50 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ typedef struct s_exec
 // }			t_btin;
 
 // void		print_env(t_list *env);
-int			execute_command(t_data *data, t_cmd *cmd);
-void		start_export(t_list *env);
+int execute_command(t_data *data, t_cmd *cmd);
 void		wait_pipe(pid_t *pid, int num_cmd);
 
 // int			ctrl_builtin(char *command);
@@ -65,6 +64,9 @@ void		filter_builtin(int builtin, t_cmd *cmd, int fd);
 
 //BUILTINGS
 void		env_btin(char **env, int fd);
+void export_btin(t_list *env);
+
+void start_export(t_list *env);
 
 // WORKS
 #endif

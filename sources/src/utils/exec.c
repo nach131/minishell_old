@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/08/03 16:19:11 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/03 17:09:52 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int static exec_btin(char *command, char **env, int out_fd)
 	// TODO
 	// quitar fd de la funcion si al final no la necesito para
 	// las redirecciones
+
 	if (!ft_strncmp(command, "echo", 5))
 		ft_putstr_fd("ECHO\n", out_fd);
 	if (!ft_strncmp(command, "cd", 3))
@@ -25,7 +26,7 @@ int static exec_btin(char *command, char **env, int out_fd)
 	else if (!ft_strncmp(command, "pwd", 4))
 		ft_putstr_fd("PWD\n", out_fd);
 	else if (!ft_strncmp(command, "export", 7))
-		ft_putstr_fd("export\n", out_fd);
+		export_btin(NULL);
 	else if (!ft_strncmp(command, "unset", 7))
 		ft_putstr_fd("unset\n", out_fd);
 	else if (!ft_strncmp(command, "env", 4))
@@ -59,6 +60,7 @@ void static exe_cmd(t_exec data, pid_t *pid)
 			close(data.out_fd);
 		}
 		close(data.to_close);
+
 		(data.builting && exec_btin(data.command, data.env, data.out_fd));
 		(!data.builting && execve(data.command, data.args, data.env));
 		// TODO
@@ -74,19 +76,29 @@ void static exe_cmd(t_exec data, pid_t *pid)
 	}
 }
 
-void static one_comman(t_cmd *cmd, int *pid)
+void static one_comman(t_data *data, t_cmd *cmd, int *pid)
 {
-	exe_cmd((t_exec){cmd->command[0], cmd->args[0], cmd->env, STDIN_FILENO,
-					 STDOUT_FILENO, cmd->builtin[0], -1},
-			&pid[0]);
-	wait_pipe(pid, cmd->num_cmd);
+	(void)data;
+
+	if (!ft_strncmp(cmd->command[0], "export", 7))
+	{
+		// ft_lstadd_back(&data->env, ft_lstnew("TOMATE_ONE=one_comman"));
+		export_btin(data->env);
+	}
+	// printf("export\n");
+	else
+	{
+		exe_cmd((t_exec){cmd->command[0], cmd->args[0], cmd->env, STDIN_FILENO,
+						 STDOUT_FILENO, cmd->builtin[0], -1},
+				&pid[0]);
+		wait_pipe(pid, cmd->num_cmd);
+	}
 }
 
 void static two_comman(t_cmd *cmd, int *pid)
 {
 	if (cmd->out[cmd->num_cmd - 2][0] == '>')
 	{
-
 		exe_cmd((t_exec){cmd->command[0], cmd->args[0], cmd->env,
 						 STDIN_FILENO, cmd->filefd[0][OUT], cmd->builtin[0], -1},
 				&pid[0]);
@@ -119,7 +131,7 @@ int execute_command(t_data *data, t_cmd *cmd)
 	res = CMD_NOT_FOUND;
 	(void)data;
 	if (cmd->num_cmd == 1)
-		one_comman(cmd, &pid[0]);
+		one_comman(data, cmd, &pid[0]);
 	else if (cmd->num_cmd == 2)
 		two_comman(cmd, pid);
 	else
