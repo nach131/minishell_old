@@ -6,14 +6,14 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/08/03 12:07:39 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/03 16:19:11 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "minishell.h"
 
-void static exec_btin(char *command, char **env, int out_fd)
+int static exec_btin(char *command, char **env, int out_fd)
 {
 	// TODO
 	// quitar fd de la funcion si al final no la necesito para
@@ -32,6 +32,7 @@ void static exec_btin(char *command, char **env, int out_fd)
 		env_btin(env, out_fd);
 	else if (!ft_strncmp(command, "exit", 7))
 		ft_putstr_fd("exit\n", out_fd);
+	return (1);
 }
 
 void static exe_cmd(t_exec data, pid_t *pid)
@@ -58,13 +59,17 @@ void static exe_cmd(t_exec data, pid_t *pid)
 			close(data.out_fd);
 		}
 		close(data.to_close);
-		if (data.builting)
-			exec_btin(data.command, data.env, data.out_fd);
-		else
-		{
-			if (execve(data.command, data.args, data.env) == -1)
-				perror("Error al ejecutar el comando");
-		}
+		(data.builting && exec_btin(data.command, data.env, data.out_fd));
+		(!data.builting && execve(data.command, data.args, data.env));
+		// TODO
+		// Hacer funcion error y exit
+		// if (data.builting)
+		// 	exec_btin(data.command, data.env, data.out_fd);
+		// else
+		// {
+		// 	if (execve(data.command, data.args, data.env) == -1)
+		// 		perror("Error al ejecutar el comando");
+		// }
 		exit(1);
 	}
 }
