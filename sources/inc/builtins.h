@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:57:38 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/03 10:46:16 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/03 11:02:36 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,27 @@ typedef struct s_exec
 {
 	char	*command;
 	char	**args;
+	char	**env;
 	int		in_fd;
 	int		out_fd;
-	char	**env;
+	int		builting;
 	int		to_close;
 }			t_exec;
 
 // TODO
 // NO USO ESTO ERA PARA EXEC_BTIN
-typedef struct s_btin
-{
-	int		builtin;
-	t_cmd	*cmd;
-	int		in_fd;
-	int		out_fd;
-	int		to_close;
+// typedef struct s_btin
+// {
+// 	int		builtin;
+// 	t_cmd	*cmd;
+// 	int		in_fd;
+// 	int		out_fd;
+// 	int		to_close;
 
-}			t_btin;
+// }			t_btin;
 
 // void		print_env(t_list *env);
-int execute_command(t_data *data, t_cmd *cmd);
+int			execute_command(t_data *data, t_cmd *cmd);
 void		start_export(t_list *env);
 void		wait_pipe(pid_t *pid, int num_cmd);
 
@@ -67,4 +68,5 @@ void		env_btin(char **env, int fd);
 
 // WORKS
 #endif
+
 //
