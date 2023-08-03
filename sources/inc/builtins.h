@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:57:38 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/03 09:50:48 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/03 09:53:28 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@
 
 # define CMD_NOT_FOUND 127
 
-enum
-{
-	FAILED,
-	ECHO,
-	CD,
-	PWD,
-	EXPORT,
-	UNSET,
-	ENV,
-	EXIT
-};
+// enum
+// {
+// 	FAILED,
+// 	ECHO,
+// 	CD,
+// 	PWD,
+// 	EXPORT,
+// 	UNSET,
+// 	ENV,
+// 	EXIT
+// };
 
 typedef struct s_exec
 {
