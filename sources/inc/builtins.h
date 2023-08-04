@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:57:38 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/03 23:53:15 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/04 12:32:28 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,15 @@ typedef struct s_exec
 	int		to_close;
 }			t_exec;
 
+typedef struct s_quotes
+{
+	int		len;
+	char	*tmp;
+	int		i;
+	int		j;
+
+}			t_qoutes;
+
 // TODO
 // NO USO ESTO ERA PARA EXEC_BTIN
 // typedef struct s_btin
@@ -54,7 +63,7 @@ typedef struct s_exec
 // }			t_btin;
 
 // void		print_env(t_list *env);
-int execute_command(t_data *data, t_cmd *cmd);
+int			execute_command(t_data *data, t_cmd *cmd);
 void		wait_pipe(pid_t *pid, int num_cmd);
 
 // int			ctrl_builtin(char *command);
@@ -63,8 +72,8 @@ void		filter_builtin(int builtin, t_cmd *cmd, int fd);
 // void exec_btin(char *command, char **env, int out_fd);
 
 //BUILTINGS
-void env_btin(char **env);
-void export_btin(t_list *env_lst, char **args, char **env);
+void		env_btin(char **env);
+void		export_btin(t_list *env_lst, char **args, char **env);
 
 // WORKS
 #endif
