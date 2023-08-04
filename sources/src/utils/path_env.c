@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 10:47:31 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/03 23:26:43 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/04 15:38:56 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 // Encuentra el valor, del nombre pasado en un lista
 
-int	find_env(char *s1, char *s2)
+int find_env(char *s1, char *s2)
 {
 	int	i;
 

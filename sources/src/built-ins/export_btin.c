@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:50:41 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/04 12:35:54 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/04 19:21:10 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,35 +54,17 @@ void static	custom_qsort(char **env, size_t size)
 	}
 }
 
-// char	*insertQuotes(char *input)
-// {
-// 	int		len;
-// 	char	*tmp;
-// 	int		i;
-// 	int		j;
-
-// 	len = ft_strlen(input);
-// 	tmp = malloc((len + 3) * sizeof(char *));
-// 	i = 0;
-// 	j = 0;
-// 	while (input[i] != '\0')
-// 	{
-// 		if (input[i] == '=')
-// 		{
-// 			tmp[j] = input[i];
-// 			j++;
-// 			tmp[j] = '"';
-// 		}
-// 		else
-// 			tmp[j] = input[i];
-// 		i++;
-// 		j++;
-// 	}
-// 	tmp[j] = '"';
-// 	tmp[j + 1] = '\0';
-// 	free(input);
-// 	return (tmp);
-// }
+int this_iqual(char *s)
+{
+	int i = 0;
+	while (s[i])
+	{
+		if (s[i] == '=')
+			return (i);
+		i++;
+	}
+	return (0);
+}
 
 char	*insertQuotes(char *input)
 {
@@ -105,17 +87,15 @@ char	*insertQuotes(char *input)
 		data.i++;
 		data.j++;
 	}
-	data.tmp[data.j] = '"';
-	data.tmp[data.j + 1] = '\0';
+	if (this_iqual(input))
+	{
+		data.tmp[data.j] = '"'; // solo si hay =
+		data.tmp[data.j + 1] = '\0';
+	}
+	data.tmp[data.j] = '\0';
 	free(input);
 	return (data.tmp);
 }
-
-// void add_export(t_list *env, t_cmd *cmd)
-// {
-// 	(void)cmd;
-// 	ft_lstadd_back(&env, ft_lstnew("TOMATE=nuevo tomate"));
-// }
 
 void	export_btin(t_list *env_lst, char **args, char **env)
 {
@@ -132,7 +112,7 @@ void	export_btin(t_list *env_lst, char **args, char **env)
 	else
 		// si existe el export cambia el valor
 		// recorre args, quita " i ' add nuevo valor
-		ft_lstadd_back(&env_lst, ft_lstnew(args[1]));
+		add_export(env_lst, args);
 }
 
 // TODO

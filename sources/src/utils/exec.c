@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/08/04 00:21:53 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/04 13:38:16 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int static exec_btin(char *command, char **args, char **env)
 	else if (!ft_strncmp(command, "export", 7))
 		export_btin(NULL, args, env);
 	else if (!ft_strncmp(command, "unset", 7))
-		printf("UNSET\n");
+		unset_btin(NULL, NULL);
 	else if (!ft_strncmp(command, "env", 4))
 		env_btin(env);
 	else if (!ft_strncmp(command, "exit", 7))
@@ -81,6 +81,9 @@ void static one_comman(t_data *data, t_cmd *cmd, int *pid)
 
 	if (!ft_strncmp(cmd->command[0], "export", 7))
 		export_btin(data->env, cmd->args[0], cmd->env);
+	else if (!ft_strncmp(cmd->command[0], "unset", 6))
+		unset_btin(data->env, cmd->args[0]);
+
 	else
 	{
 		exe_cmd((t_exec){cmd->command[0], cmd->args[0], cmd->env, STDIN_FILENO,

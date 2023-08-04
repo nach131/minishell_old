@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/08/02 21:20:59 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/04 16:46:49 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void		cmd_add_back(t_cmd **cmd, t_cmd *new);
 
 t_list		*parser_space_lst(char *line);
 
-void		add_export(t_list *env, t_cmd *cmd);
 t_cmd		*token_to_pipe(t_list *token, t_list *env);
 char		*access_file(char *file, char **paths);
 char		**env_to_array(t_list *env);
@@ -96,5 +95,6 @@ void		remove_quotes(void *content);
 // int			count_to_token_cmd(t_list *token);
 
 char		*find_node_value(t_list *head, const char *target_value);
+int find_env(char *s1, char *s2);
 
 #endif
