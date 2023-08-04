@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:50:41 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/04 00:25:42 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/04 12:11:35 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,60 +18,127 @@
 #include "libft.h"
 #include "minishell.h"
 
-void	custom_qsort(void *base, size_t num_elements, size_t element_size)
+// int compare_env_strings(const void *a, const void *b)
+// {
+// 	// The environment strings are in the format "VARIABLE=value"
+// 	// We need to compare only the VARIABLE part, so find the '=' character.
+// 	const char *str_a = *(const char **)a;
+// 	const char *str_b = *(const char **)b;
+// 	// const char *equals_a = strchr(str_a, '=');
+// 	// const char *equals_b = strchr(str_b, '=');
+
+// 	// return ft_strcmp((char *)str_a, (char *)str_b);
+// 	return strcmp(str_a, str_b);
+// }
+
+// void custom_qsort(void *base, size_t num_elements, size_t element_size, int (*compare)(const void *, const void *))
+// {
+// 	char *arr = (char *)base;
+// 	size_t i = 0;
+// 	char *temp = (char *)malloc(element_size);
+
+// 	while (i < num_elements - 1)
+// 	{
+// 		size_t j = i + 1;
+// 		while (j < num_elements)
+// 		{
+// 			char *element_a = arr + i * element_size;
+// 			char *element_b = arr + j * element_size;
+
+// 			if (compare(element_a, element_b) > 0)
+// 			// if (strcmp(element_a, element_b) > 0)
+// 			{
+// 				memcpy(temp, element_a, element_size);
+// 				memcpy(element_a, element_b, element_size);
+// 				memcpy(element_b, temp, element_size);
+// 			}
+
+// 			j++;
+// 		}
+
+// 		i++;
+// 	}
+
+// 	free(temp);
+// }
+//=========================================================================
+
+void print_dptr(char **arr)
 {
-	char	*arr;
-	size_t	i;
-	char	*temp;
-	size_t	j;
-	char	*element_a;
-	char	*element_b;
+	int i;
 
-	arr = (char *)base;
-	i = 0;
-	temp = (char *)malloc(element_size);
-	while (i < num_elements - 1)
-	{
-		j = i + 1;
-		while (j < num_elements)
-		{
-			element_a = arr + i * element_size;
-			element_b = arr + j * element_size;
-			if ((ft_strcmp(element_a, element_b)) > 0)
-			{
-				ft_memcpy(temp, element_a, element_size);
-				ft_memcpy(element_a, element_b, element_size);
-				ft_memcpy(element_b, temp, element_size);
-			}
-			j++;
-		}
-		i++;
-	}
-	free(temp);
-}
-
-void	print_dptr(char **arr)
-{
-	int	i;
-
-	i = 1;
+	i = -1;
 	if (arr == NULL)
-		return ;
+		return;
 	while (arr[++i] != NULL)
 		printf("declare -x %s\n", arr[i]);
 }
 
-void	add_export(t_list *env, t_cmd *cmd)
+void static custom_qsort(char **env, size_t size)
 {
-	(void)cmd;
-	ft_lstadd_back(&env, ft_lstnew("TOMATE=nuevo tomate"));
+	char *tmp;
+	size_t i;
+	size_t j;
+	size_t j_min;
+
+	i = -1;
+	while (++i < size - 1)
+	{
+		j_min = i;
+		j = i + 1;
+		while (++j < size)
+		{
+			if (env[j_min] && env[j] && ft_strcmp(env[j], env[j_min]) < 0)
+				j_min = j;
+		}
+		if (j_min != i)
+		{
+			tmp = env[i];
+			env[i] = env[j_min];
+			env[j_min] = tmp;
+		}
+	}
 }
 
-void	export_btin(t_list *env_lst, char **args, char **env)
+char *insertQuotes(char *input)
+{
+	int len = ft_strlen(input);
+	char *tmp = malloc((len + 3) * sizeof(char *));
+	int i = 0;
+	int j = 0;
+	while (input[i] != '\0')
+	{
+		if (input[i] == '=')
+		{
+			tmp[j] = input[i];
+			j++;
+			tmp[j] = '"';
+		}
+		else
+			tmp[j] = input[i];
+		i++;
+		j++;
+	}
+	tmp[j] = '"';
+	tmp[j + 1] = '\0';
+
+	return (tmp);
+}
+
+// void add_export(t_list *env, t_cmd *cmd)
+// {
+// 	(void)cmd;
+// 	ft_lstadd_back(&env, ft_lstnew("TOMATE=nuevo tomate"));
+// }
+
+void export_btin(t_list *env_lst, char **args, char **env)
 {
 	if (args[1] == NULL)
 	{
-		custom_qsort(env, ft_len_dptr(env) - 1, sizeof(char *));
+		int i = -1;
+		while (env[++i] != NULL)
+			env[i] = insertQuotes(env[i]);
+		custom_qsort(env, ft_len_dptr(env));
 		print_dptr(env);
 	}
 	else
