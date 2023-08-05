@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:50:41 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/04 19:21:10 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/04 20:48:07 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,12 @@ char	*insertQuotes(char *input)
 		data.i++;
 		data.j++;
 	}
-	if (this_iqual(input))
-	{
-		data.tmp[data.j] = '"'; // solo si hay =
-		data.tmp[data.j + 1] = '\0';
-	}
-	data.tmp[data.j] = '\0';
+	// if (this_iqual(input))
+	// {
+	data.tmp[data.j] = '"'; // solo si hay =
+	data.tmp[data.j + 1] = '\0';
+	// }
+	// data.tmp[data.j] = '\0';
 	free(input);
 	return (data.tmp);
 }
