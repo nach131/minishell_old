@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 09:50:12 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/05 18:14:07 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/05 20:36:27 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 // Tiene que borra los tres env
 
 #include "builtins.h"
+
+// combinacion de la funcion ft_lstfind_rm y ft_lstfind
+// busca el nombre de la variable dentro del la lista
+// y si lo hay lo borra de la lista original
 
 void static	env_find_rm(t_list **head, void *data_ref, int (*cmp)(char *,
 			char *))
