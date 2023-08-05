@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:50:41 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/04 20:48:07 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/05 11:30:48 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,17 +54,17 @@ void static	custom_qsort(char **env, size_t size)
 	}
 }
 
-int this_iqual(char *s)
-{
-	int i = 0;
-	while (s[i])
-	{
-		if (s[i] == '=')
-			return (i);
-		i++;
-	}
-	return (0);
-}
+// int this_iqual(char *s)
+// {
+// 	int i = 0;
+// 	while (s[i])
+// 	{
+// 		if (s[i] == '=')
+// 			return (i);
+// 		i++;
+// 	}
+// 	return (0);
+// }
 
 char	*insertQuotes(char *input)
 {

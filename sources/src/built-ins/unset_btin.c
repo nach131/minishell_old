@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 09:50:12 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/04 14:54:44 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/05 18:14:07 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,57 @@
 
 #include "builtins.h"
 
-void unset_btin(t_list *env_lst, char **args)
+void static	env_find_rm(t_list **head, void *data_ref, int (*cmp)(char *,
+			char *))
 {
-	int i;
+	t_list	*current;
+	t_list	*prev;
+
+	current = *head;
+	prev = NULL;
+	while (current != NULL)
+	{
+		if ((*cmp)(current->content, data_ref) == 0)
+		{
+			if (prev != NULL)
+				prev->next = current->next;
+			else
+				*head = current->next;
+			free(current->content);
+			free(current);
+			current = NULL;
+		}
+		else
+		{
+			prev = current;
+			current = current->next;
+		}
+	}
+}
+
+void	unset_btin(t_list *env_lst, char **args)
+{
+	int		i;
+	char	*tmp;
+
 	if (!args[1])
-		return;
+		return ;
 	else
 	{
 		i = 1;
 		while (args[i] != NULL)
 		{
-			printf("%s\n", args[i]);
-			ft_lstadd_back(&env_lst, ft_lstnew(args[i]));
-
+			take_quote(args[i]);
+			tmp = ft_substr(args[i], 0, ft_strcspn(args[i], "="));
+			if (!ft_lstfind(env_lst, tmp, find_env))
+			{
+				printf(RED "NO HAY: \n");
+				return ;
+			}
+			else
+				env_find_rm(&env_lst, tmp, find_env);
+			free(tmp);
 			i++;
 		}
-
-		// ft_lstprint(env_lst);
 	}
 }

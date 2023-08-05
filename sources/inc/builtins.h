@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:57:38 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/04 20:42:17 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/05 11:30:45 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,12 @@ void		filter_builtin(int builtin, t_cmd *cmd, int fd);
 //BUILTINGS
 void		env_btin(char **env);
 void		export_btin(t_list *env_lst, char **args, char **env);
-void add_export(t_list *env, char **args);
-void unset_btin(t_list *env_lst, char **args);
+void		add_export(t_list *env, char **args);
+void		unset_btin(t_list *env_lst, char **args);
 
 // UTILS
-void take_quote(char *s);
+void		take_quote(char *s);
+int			this_iqual(char *s);
 
 // WORKS
 #endif
