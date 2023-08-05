@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:50:41 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/05 11:30:48 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/06 00:37:13 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #include "builtins.h"
 
-void static	print_dptr(char **arr)
+void static	print_export(char **arr)
 {
 	int	i;
 
@@ -54,19 +54,7 @@ void static	custom_qsort(char **env, size_t size)
 	}
 }
 
-// int this_iqual(char *s)
-// {
-// 	int i = 0;
-// 	while (s[i])
-// 	{
-// 		if (s[i] == '=')
-// 			return (i);
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
-char	*insertQuotes(char *input)
+char	*insert_quotes(char *input)
 {
 	t_qoutes	data;
 
@@ -87,12 +75,8 @@ char	*insertQuotes(char *input)
 		data.i++;
 		data.j++;
 	}
-	// if (this_iqual(input))
-	// {
-	data.tmp[data.j] = '"'; // solo si hay =
+	data.tmp[data.j] = '"';
 	data.tmp[data.j + 1] = '\0';
-	// }
-	// data.tmp[data.j] = '\0';
 	free(input);
 	return (data.tmp);
 }
@@ -105,16 +89,10 @@ void	export_btin(t_list *env_lst, char **args, char **env)
 	{
 		i = -1;
 		while (env[++i] != NULL)
-			env[i] = insertQuotes(env[i]);
+			env[i] = insert_quotes(env[i]);
 		custom_qsort(env, ft_len_dptr(env));
-		print_dptr(env);
+		print_export(env);
 	}
 	else
-		// si existe el export cambia el valor
-		// recorre args, quita " i ' add nuevo valor
 		add_export(env_lst, args);
 }
-
-// TODO
-// export uno= dos= tres=
-// Tiene que crear tres env con los nomres y el valor vacio
