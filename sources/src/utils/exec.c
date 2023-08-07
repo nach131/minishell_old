@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/08/06 00:18:14 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/07 10:52:46 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int static exec_btin(char *command, char **args, char **env)
 	// las redirecciones
 
 	if (!ft_strncmp(command, "echo", 5))
-		printf("ECHO\n");
+		echo_btin(NULL, args);
 	else if (!ft_strncmp(command, "cd", 3))
 		printf("__CD__\n");
 	else if (!ft_strncmp(command, "pwd", 4))
@@ -78,8 +78,9 @@ void static exe_cmd(t_exec data, pid_t *pid)
 
 void static one_comman(t_data *data, t_cmd *cmd, int *pid)
 {
-
-	if (!ft_strncmp(cmd->command[0], "export", 7))
+	if (!ft_strncmp(cmd->command[0], "echo", 5))
+		echo_btin(data->env, cmd->args[0]);
+	else if (!ft_strncmp(cmd->command[0], "export", 7))
 		export_btin(data->env, cmd->args[0], cmd->env);
 	else if (!ft_strncmp(cmd->command[0], "unset", 6))
 		unset_btin(data->env, cmd->args[0]);

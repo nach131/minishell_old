@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   echo_btin.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:00:02 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/05 23:32:30 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/07 10:54:42 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-#include "ft_printf.h"
 
 // TODO
 // desarrollar aqui los $ENV y buscar env_dptr y devolver solo el valor
@@ -21,7 +20,14 @@
 // NADIE LO HACE
 // echo {1..10}
 
-void	toma(void)
+void echo_btin(t_list *env_lst, char **args)
 {
-	ft_printf("toma\n");
+	(void)env_lst;
+
+	if (args[1] == NULL)
+		printf("\n");
+	else
+	{
+		printf("echo_btin\n");
+	}
 }
