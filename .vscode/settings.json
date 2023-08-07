@@ -12,7 +12,8 @@
 		"istream": "c",
 		"hashtable": "c",
 		"locale": "c",
-		"cstdlib": "c"
+		"cstdlib": "c",
+		"path_env.h": "c"
 	},
 	"editor.fontLigatures": false,
 	"lldb.dbgconfig": {},
