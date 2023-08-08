@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/08/08 13:38:51 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/08 15:45:19 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,11 @@ enum		token
 
 enum
 {
-	NOTHING,
-	PIPE,
-	REDIR_IN,
-	D_REDIR_IN,
-	REDIR_OUT,
-	D_REDIR_OUT,
+	PIPE = '|',
+	REDIR_IN = '<',
+	D_REDIR_IN = 1060,
+	REDIR_OUT = '>',
+	D_REDIR_OUT = 1062,
 };
 
 enum
@@ -70,9 +69,9 @@ typedef struct s_cmd
 	char	***args;
 	char	**env;
 	int		**filefd;
-	char	**out;
+	int		**out;
 	int		*builtin;
-	int		**redir;
+	// int		**redir;
 }			t_cmd;
 
 typedef struct s_data

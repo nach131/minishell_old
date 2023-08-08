@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/08/08 14:15:52 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/08 15:44:22 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,11 @@ void	start(t_data *data)
 			ft_printf(ORANGE "\tARGS\n" WHITE);
 			ft_print_tptr(cmd->args);
 			print_filefd(cmd->filefd);
-			ft_print_dptr(cmd->out);
-			print_redir(cmd->redir);
+			// ft_print_dptr(cmd->out);
+			print_redir(cmd->out);
 			print_builtin(cmd->builtin, cmd->num_cmd);
 			//
-			// execute_command(data, cmd);
+			execute_command(data, cmd);
 			//
 			free_cmd(cmd);
 		}
