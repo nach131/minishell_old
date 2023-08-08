@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:08:47 by caguerre          #+#    #+#             */
-/*   Updated: 2023/08/04 16:46:49 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/08 13:38:51 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,25 @@
 
 enum		token
 {
-	NEW_LINE = '\n',
+	// 	NEW_LINE = '\n',
 	WHITE_SPACE = ' ',
 	DOUBLE_QUOTE = '\"',
-	DOLLAR = '$',
+	// 	DOLLAR = '$',
 	QOUTE = '\'',
-	_NULL = '0',
-	REDIR_IN = '<',
-	REDIR_OUT = '>',
-	ESCAPE = '\\',
-	PIPE = '|',
+	// 	_NULL = '0',
+	// 	REDIR_IN = '<',
+	// 	REDIR_OUT = '>',
+	// 	ESCAPE = '\\',
+};
+
+enum
+{
+	NOTHING,
+	PIPE,
+	REDIR_IN,
+	D_REDIR_IN,
+	REDIR_OUT,
+	D_REDIR_OUT,
 };
 
 enum
@@ -62,7 +71,8 @@ typedef struct s_cmd
 	char	**env;
 	int		**filefd;
 	char	**out;
-	int *builtin;
+	int		*builtin;
+	int		**redir;
 }			t_cmd;
 
 typedef struct s_data
@@ -95,6 +105,6 @@ void		remove_quotes(void *content);
 // int			count_to_token_cmd(t_list *token);
 
 char		*find_node_value(t_list *head, const char *target_value);
-int find_env(char *s1, char *s2);
+int			find_env(char *s1, char *s2);
 
 #endif

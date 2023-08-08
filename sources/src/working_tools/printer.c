@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:52:58 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/02 21:37:14 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/08 13:37:52 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,28 @@ void	print_filefd(int **filefd)
 	}
 }
 
-void print_builtin(int *builtin, int num)
+void	print_builtin(int *builtin, int num)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (builtin == 0)
-		return;
+		return ;
 	while (i < num)
 	{
 		printf(MAGENTA "builtin[%d]: %d\n", i, builtin[i]);
+		i++;
+	}
+}
+
+void	print_redir(int **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i] != NULL)
+	{
+		printf("Redir: %d\n", arr[i][0]);
 		i++;
 	}
 }

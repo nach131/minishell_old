@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 18:44:27 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/26 14:24:10 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/08 14:15:36 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,45 @@ void static	process_list(t_dtoken *data)
 		data->current = data->current->next;
 	}
 }
+
+// no funciona >> <<
+// void static	process_list(t_dtoken *data)
+// {
+// 	while (data->current != NULL)
+// 	{
+// 		data->str = (char *)data->current->content;
+// 		data->del_word = find_token(data->current->content, data->delimiters,
+// 				&data->flag);
+// 		data->word = ft_strtok(data->str, data->delimiters);
+// 		while (data->word != NULL)
+// 		{
+// 			if (data->word != NULL && *data->word != '\0')
+// 			{
+// 				// Check if the word is ">>" or "<<"
+// 				if (strcmp(data->word, ">>") == 0 || strcmp(data->word,
+// 						"<<") == 0)
+// 					ft_lstadd_back(&data->new_list, ft_lstnew(data->word));
+// 				else
+// 				{
+// 					ft_lstadd_back(&data->new_list, ft_lstnew(data->word));
+// 				}
+// 			}
+// 			if (data->del_word && data->flag)
+// 			{
+// 				ft_lstadd_back(&data->new_list, ft_lstnew(data->del_word));
+// 				data->flag = 0;
+// 			}
+// 			data->word = ft_strtok(NULL, data->delimiters);
+// 			if (data->word != NULL && *data->word != '\0')
+// 			{
+// 				data->delimiter_node = ft_lstnew(data->word);
+// 				ft_lstadd_back(&data->new_list, data->delimiter_node);
+// 			}
+// 			data->word = ft_strtok(NULL, data->delimiters);
+// 		}
+// 		data->current = data->current->next;
+// 	}
+// }
 
 // Funcion que separa los comandos de <>| por si se escriben juntos
 

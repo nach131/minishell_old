@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:53:41 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/02 21:30:10 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/08 12:28:24 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@ void	print_find_env(char *find, t_list *env);
 int		parser_tmp(void);
 void	history_line(void);
 void	print_filefd(int **filefd);
-void print_builtin(int *builtin, int num);
+void	print_builtin(int *builtin, int num);
+void	print_redir(int **arr);
+
 #endif

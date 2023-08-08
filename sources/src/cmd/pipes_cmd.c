@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 18:03:04 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/28 16:25:37 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/08 14:19:44 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	pipe_to_cmd(t_cmd *cmd)
 			cmd->filefd[i] = malloc(2 * sizeof(int));
 			if (cmd->out[i][0] == '|')
 				create_pipe(cmd, i);
-			if (cmd->out[i][0] == '>')
+			else if (!ft_strncmp(cmd->out[i], ">", 1))
 			{
 				// cmd->filefd[i][IN] = IN;
 				cmd->filefd[i][IN] = -1;
@@ -51,11 +51,14 @@ void	pipe_to_cmd(t_cmd *cmd)
 											O_WRONLY | O_CREAT | O_TRUNC,
 											S_IRUSR | S_IWUSR);
 			}
-			if (!ft_strncmp(cmd->out[i], "<", 1))
+			else if (!ft_strncmp(cmd->out[i], ">>\n", 3))
 			{
-				printf(RED "es < %s\n", cmd->out[i]);
-				// TODO
-				// Aqui abrir el filfd del fichero a abrir
+				;
+				// printf(RED "es < %s\n", cmd->out[i]);
+				// cmd->filefd[i][IN] = -1;
+				// cmd->filefd[i][OUT] = open(cmd->args[i + 1][0],
+				// 							O_WRONLY | O_CREAT | O_APPEND,
+				// 							S_IRUSR | S_IWUSR);
 			}
 			i++;
 		}
@@ -66,12 +69,32 @@ void	pipe_to_cmd(t_cmd *cmd)
 // Pone en cmd->out que tipo de redireccionamiento tine el comando
 // Recorrer la lista token y guardar los valores de redirección en out
 
+int	what_pipe(char *pipe)
+{
+	printf(RED "\t_what_pipe: %s\n", pipe);
+	if (!ft_strncmp(pipe, "|", 1))
+		return (PIPE);
+	else if (!ft_strncmp(pipe, ">>", 2))
+		return (D_REDIR_OUT);
+	else if (!ft_strncmp(pipe, ">", 1))
+		return (REDIR_OUT);
+	else if (!ft_strncmp(pipe, "<<", 2))
+		return (D_REDIR_IN);
+	else if (!ft_strncmp(pipe, "<", 1))
+		return (REDIR_IN);
+	return (-1);
+}
+
+// TODO
+// cambiar redir por out
+
 void	process_redirections(t_cmd *cmd, t_list *token)
 {
 	t_list	*current_token;
 	int		i;
 
 	cmd->out = malloc((cmd->num_cmd + 1) * sizeof(char *));
+	cmd->redir = malloc((cmd->num_cmd + 1) * sizeof(int *));
 	current_token = token;
 	i = 0;
 	while (current_token != NULL)
@@ -80,9 +103,11 @@ void	process_redirections(t_cmd *cmd, t_list *token)
 			|| current_token->content[0] == '<')
 		{
 			cmd->out[i] = ft_strdup(current_token->content);
+			cmd->redir[i] = ft_numdup(what_pipe(current_token->content));
 			i++;
 		}
 		current_token = current_token->next;
 	}
 	cmd->out[i] = NULL;
+	cmd->redir[i] = NULL;
 }
