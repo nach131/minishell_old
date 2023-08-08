@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/08/07 10:52:46 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:13:02 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,23 @@ void static one_comman(t_data *data, t_cmd *cmd, int *pid)
 
 void static two_comman(t_cmd *cmd, int *pid)
 {
-	if (cmd->out[cmd->num_cmd - 2][0] == '>')
+	if (*cmd->out[0] == '>')
 	{
 		exe_cmd((t_exec){cmd->command[0], cmd->args[0], cmd->env,
 						 STDIN_FILENO, cmd->filefd[0][OUT], cmd->builtin[0], -1},
 				&pid[0]);
 		close(cmd->filefd[0][OUT]); // NO ES NECESARIO...?
+	}
+	else if (*cmd->out[0] == '<')
+	{
+		exe_cmd((t_exec){cmd->command[0], cmd->args[0], cmd->env,
+						 cmd->filefd[0][IN], STDOUT_FILENO, cmd->builtin[0], -1},
+				&pid[0]);
+		close(cmd->filefd[0][IN]);
+		exe_cmd((t_exec){cmd->command[0], cmd->args[0], cmd->env,
+						 STDIN_FILENO, STDOUT_FILENO, cmd->builtin[0], -1},
+				&pid[0]);
+		// close(STDIN_FILENO);
 	}
 	else
 	{

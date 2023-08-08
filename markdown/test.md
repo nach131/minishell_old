@@ -61,3 +61,5 @@ ls -lh | awk '{print $5, $9}' | sort -hr
 echo "Convirtiendo CSV a tabla HTML:"
 cat datos.csv | awk 'BEGIN{print "<table>"} {print "<tr>"; for(i=1;i<=NF;i++)print "<td>" $i"</td>"; print "</tr>"} END{print "</table>"}' > tabla.html
 ```
+
+comando_inexistente 2>> errores.txt

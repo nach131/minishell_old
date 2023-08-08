@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 18:03:04 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/08 15:49:19 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:06:16 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,8 @@ void	pipe_to_cmd(t_cmd *cmd)
 			cmd->filefd[i] = malloc(2 * sizeof(int));
 			if (cmd->out[i][0] == '|')
 				create_pipe(cmd, i);
-			// else if (!ft_strncmp(cmd->out[i], ">", 1))
-			else if (*cmd->out[i] == REDIR_OUT)
+			else if (*cmd->out[i] == '>')
 			{
-				// cmd->filefd[i][IN] = IN;
 				cmd->filefd[i][IN] = -1;
 				cmd->filefd[i][OUT] = open(cmd->args[i + 1][0],
 											O_WRONLY | O_CREAT | O_TRUNC,
@@ -58,6 +56,11 @@ void	pipe_to_cmd(t_cmd *cmd)
 				cmd->filefd[i][OUT] = open(cmd->args[i + 1][0],
 											O_WRONLY | O_CREAT | O_APPEND,
 											S_IRUSR | S_IWUSR);
+			}
+			else if (*cmd->out[i] == '<')
+			{
+				cmd->filefd[i][OUT] = -1;
+				cmd->filefd[i][IN] = open(cmd->args[i + 1][0], O_RDONLY);
 			}
 			i++;
 		}
@@ -83,16 +86,12 @@ int static	what_pipe(char *pipe)
 	return (-1);
 }
 
-// TODO
-// cambiar redir por out
-
 void	process_redirections(t_cmd *cmd, t_list *token)
 {
 	t_list	*current_token;
 	int		i;
 
 	cmd->out = malloc((cmd->num_cmd + 1) * sizeof(char *));
-	// cmd->redir = malloc((cmd->num_cmd + 1) * sizeof(int *));
 	current_token = token;
 	i = 0;
 	while (current_token != NULL)
@@ -101,12 +100,9 @@ void	process_redirections(t_cmd *cmd, t_list *token)
 			|| current_token->content[0] == '<')
 		{
 			cmd->out[i] = ft_numdup(what_pipe(current_token->content));
-			// cmd->out[i] = ft_strdup(current_token->content);
-			// cmd->redir[i] = ft_numdup(what_pipe(current_token->content));
 			i++;
 		}
 		current_token = current_token->next;
 	}
 	cmd->out[i] = NULL;
-	// cmd->redir[i] = NULL;
 }
