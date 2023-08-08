@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 12:52:58 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/08 13:37:52 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/08 21:12:36 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,14 @@ void	print_builtin(int *builtin, int num)
 	}
 }
 
-void	print_redir(int **arr)
+void print_out(int **arr)
 {
 	int	i;
 
 	i = 0;
 	while (arr[i] != NULL)
 	{
-		printf("Redir: %d\n", arr[i][0]);
+		printf("Out[%d]: %d\n", i, arr[i][0]);
 		i++;
 	}
 }

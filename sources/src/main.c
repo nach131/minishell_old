@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:13:41 by caguerre          #+#    #+#             */
-/*   Updated: 2023/08/08 17:22:36 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/08 21:12:31 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,26 @@ void	start(t_data *data)
 		line = readline("Minishell> ");
 		add_history(line);
 		token = parser_space_lst(line);
+		// TODO
+		// solucionar el token_split con >>  y <<
 		// token_split(&token);
 		ft_lstiter(token, remove_quotes);
 		if (token)
 			init_cmd(token, data->env, cmd);
 		if (token && cmd->command[0])
 		{
-			printf("__________\n");
+			printf("________________________________________\n");
+			ft_lstprint(token);
 			printf(ORANGE "num_command: %d\n" WHITE, cmd->num_cmd);
 			ft_printf(ORANGE "\tCOMMANDS\n" WHITE);
 			ft_print_dptr(cmd->command);
 			ft_printf(ORANGE "\tARGS\n" WHITE);
 			ft_print_tptr(cmd->args);
 			print_filefd(cmd->filefd);
-			// ft_print_dptr(cmd->out);
-			print_redir(cmd->out);
+			print_out(cmd->out);
 			print_builtin(cmd->builtin, cmd->num_cmd);
 			//
-			execute_command(data, cmd);
+			// execute_command(data, cmd);
 			//
 			free_cmd(cmd);
 		}

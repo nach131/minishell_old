@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 18:03:04 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/08/08 18:06:16 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/08 21:38:20 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,36 @@ void	pipe_to_cmd(t_cmd *cmd)
 	i = 0;
 	if (cmd->num_cmd > 1)
 	{
-		cmd->filefd = malloc((cmd->num_cmd) * sizeof(int *));
-		while (i < cmd->num_cmd - 1)
+		cmd->filefd = malloc((cmd->num_cmd + 1) * sizeof(int *));
+		while (i < cmd->num_cmd)
 		{
 			cmd->filefd[i] = malloc(2 * sizeof(int));
-			if (cmd->out[i][0] == '|')
+			if (!i)
 				create_pipe(cmd, i);
-			else if (*cmd->out[i] == '>')
+			else
 			{
-				cmd->filefd[i][IN] = -1;
-				cmd->filefd[i][OUT] = open(cmd->args[i + 1][0],
-											O_WRONLY | O_CREAT | O_TRUNC,
-											S_IRUSR | S_IWUSR);
-			}
-			else if (*cmd->out[i] == D_REDIR_OUT)
-			{
-				cmd->filefd[i][IN] = -1;
-				cmd->filefd[i][OUT] = open(cmd->args[i + 1][0],
-											O_WRONLY | O_CREAT | O_APPEND,
-											S_IRUSR | S_IWUSR);
-			}
-			else if (*cmd->out[i] == '<')
-			{
-				cmd->filefd[i][OUT] = -1;
-				cmd->filefd[i][IN] = open(cmd->args[i + 1][0], O_RDONLY);
+				if (cmd->out[i - 1][0] == '|')
+					create_pipe(cmd, i);
+				else if (cmd->out[i - 1][0] == '>')
+				{
+					printf(GREEN "\tout[%i] %d\n", i, cmd->out[i - 1][0]);
+					cmd->filefd[i][IN] = -1;
+					cmd->filefd[i][OUT] = open(cmd->args[i][0],
+											   O_WRONLY | O_CREAT | O_TRUNC,
+											   S_IRUSR | S_IWUSR);
+				}
+				else if (cmd->out[i - 1][0] == D_REDIR_OUT)
+				{
+					cmd->filefd[i][IN] = -1;
+					cmd->filefd[i][OUT] = open(cmd->args[i][0],
+											   O_WRONLY | O_CREAT | O_APPEND,
+											   S_IRUSR | S_IWUSR);
+				}
+				else if (cmd->out[i - 1][0] == '<')
+				{
+					cmd->filefd[i][IN] = open(cmd->args[i][0], O_RDONLY);
+					cmd->filefd[i][OUT] = -1;
+				}
 			}
 			i++;
 		}
