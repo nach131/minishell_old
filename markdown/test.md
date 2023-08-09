@@ -17,6 +17,25 @@ Solo esta tres con valor vacio en la lista de env
 	tres=
 ---
 
+## IN '<'
+
+```bash
+cat < archivo.txt
+```
+
+```bash
+wc -l < archivo.txt
+```
+
+```bash
+grep "palabra" < archivo.txt
+```
+
+```bash
+awk '{sum += $1} END {print sum}' < numeros.txt
+```
+
+
 ## ECHO
 
 ```bash

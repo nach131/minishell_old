@@ -1,12 +1,9 @@
-total 512
-drwxr-xr-x@ 11 nacho  admin     374  8 ago 23:04 .
-drwxr-xr-x@ 14 nacho  admin     476  8 ago 17:26 ..
--rw-r--r--@  1 nacho  admin    6148 28 jul 17:04 .DS_Store
--rw-r--r--@  1 nacho  admin    6176  7 ago 10:47 Makefile
-drwxr-xr-x@  9 nacho  admin     306  3 ago 16:17 inc
-drwxr-xr-x@  3 nacho  admin     102 12 may 13:46 lib
--rwxr-xr-x   1 nacho  admin  239164  8 ago 23:04 minishell
-drwxr-xr-x   9 nacho  admin     306  8 ago 22:37 obj
--rwxr-xr-x@  1 nacho  admin      35 22 jul 14:01 script.sh
-drwxr-xr-x@ 10 nacho  admin     340  8 ago 20:57 src
--rw-------   1 nacho  admin       0  8 ago 23:04 toma.txt
+total 496
+ 16 -rw-r--r--@  1 nacho  admin    6176  7 ago 10:47 Makefile
+  0 drwxr-xr-x@  9 nacho  admin     306  3 ago 16:17 inc
+  0 drwxr-xr-x@  3 nacho  admin     102 12 may 13:46 lib
+472 -rwxr-xr-x   1 nacho  admin  238948  9 ago 10:53 minishell
+  0 drwxr-xr-x   9 nacho  admin     306  9 ago 10:24 obj
+  8 -rwxr-xr-x@  1 nacho  admin      35 22 jul 14:01 script.sh
+  0 drwxr-xr-x@ 10 nacho  admin     340  8 ago 20:57 src
+  0 -rw-------   1 nacho  admin       0  9 ago 10:53 toma.txt
