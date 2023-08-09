@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/27 16:20:11 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/07/29 18:14:45 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/09 14:14:41 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	wait_pipe(pid_t *pid, int num_cmd)
 	i = -1;
 	status = 0;
 	finished = 0;
-	if (num_cmd >= 2)
-		num_cmd--;
+	// if (num_cmd >= 2)
+	// num_cmd--;
 	while (finished < num_cmd)
 	{
 		i = -1;

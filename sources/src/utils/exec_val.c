@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/08/09 14:15:10 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/09 13:57:23 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int static exec_btin(char *command, char **args, char **env)
 	return (1);
 }
 
-void static exe_cmd(t_exec data, pid_t *pid)
+void static exe_cmd(t_exec data, pid_t *pid, t_cmd *cmd)
 {
 	*pid = fork();
 	// TODO
@@ -51,12 +51,14 @@ void static exe_cmd(t_exec data, pid_t *pid)
 			dup2(data.in_fd, STDIN_FILENO);
 			close(data.in_fd);
 			// close(cmd->filefd[0][OUT]);
+			close(data.to_close);
 		}
 		if (data.out_fd != STDOUT_FILENO)
 		{
 			dup2(data.out_fd, STDOUT_FILENO);
 			close(data.out_fd);
 			// close(cmd->filefd[0][IN]);
+			clos(data.in_fd);
 		}
 		close(data.to_close);
 		// close(cmd->filefd[1][IN]);
@@ -88,10 +90,10 @@ void static one_comman(t_data *data, t_cmd *cmd, int *pid)
 		unset_btin(data->env, cmd->args[0]);
 	else
 	{
-		exe_cmd((t_exec){cmd->command[0], cmd->args[0], cmd->env, STDIN_FILENO,
-						 STDOUT_FILENO, cmd->builtin[0], -1},
-				&pid[0]);
-		wait_pipe(pid, cmd->num_cmd);
+		// exe_cmd((t_exec){cmd->command[0], cmd->args[0], cmd->env, STDIN_FILENO,
+		// 				 STDOUT_FILENO, cmd->builtin[0], -1},
+		// 		&pid[0]);
+		// wait_pipe(pid, cmd->num_cmd);
 		;
 	}
 }
@@ -119,12 +121,11 @@ void static two_comman(t_cmd *cmd, int *pid)
 	else
 	{
 		exe_cmd((t_exec){cmd->command[0], cmd->args[0], cmd->env, STDIN_FILENO,
-						 cmd->filefd[0][OUT], cmd->builtin[0], cmd->filefd[0][IN]},
-				&pid[0]);
+						 cmd->filefd[0][OUT], cmd->builtin[0], cmd->filefd[0][OUT]},
+				&pid[0], cmd);
 		exe_cmd((t_exec){cmd->command[1], cmd->args[1], cmd->env, cmd->filefd[0][IN],
-						 STDOUT_FILENO, cmd->builtin[1], cmd->filefd[0][OUT]},
-				&pid[1]); // OK cat | ls
-						  // &pid[1]); // OK cat | ls
+						 STDOUT_FILENO, cmd->builtin[1], -1},
+				&pid[1], cmd); // OK cat | ls
 
 		close(cmd->filefd[0][IN]);
 		close(cmd->filefd[0][OUT]);
