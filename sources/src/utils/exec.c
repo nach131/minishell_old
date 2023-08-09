@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 23:02:58 by carles            #+#    #+#             */
-/*   Updated: 2023/08/09 14:15:10 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/08/09 14:36:04 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,21 +100,18 @@ void static two_comman(t_cmd *cmd, int *pid)
 {
 	if (*cmd->out[0] == '>' || *cmd->out[0] == D_REDIR_OUT)
 	{
-		// exe_cmd((t_exec){cmd->command[0], cmd->args[0], cmd->env,
-		// 				 STDIN_FILENO, cmd->filefd[1][OUT], cmd->builtin[0], -1},
-		// 		&pid[0]);
-		;
+		exe_cmd((t_exec){cmd->command[0], cmd->args[0], cmd->env,
+						 STDIN_FILENO, cmd->filefd[1][OUT], cmd->builtin[0], -1},
+				&pid[0]);
 	}
 	else if (*cmd->out[0] == '<' || *cmd->out[0] == D_REDIR_IN)
 	{
-		// exe_cmd((t_exec){cmd->command[0], cmd->args[0], cmd->env,
-		// 				 cmd->filefd[1][IN], STDOUT_FILENO, cmd->builtin[0], -1},
-		// 		&pid[0]);
-		// exe_cmd((t_exec){cmd->command[0], cmd->args[0], cmd->env,
-		// 				 cmd->filefd[0][IN], STDOUT_FILENO, cmd->builtin[0], -1},
-		// 		// &pid[0]);
-		// 		&pid[1]);
-		;
+		exe_cmd((t_exec){cmd->command[0], cmd->args[0], cmd->env,
+						 cmd->filefd[1][IN], STDOUT_FILENO, cmd->builtin[0], -1},
+				&pid[0]);
+		exe_cmd((t_exec){cmd->command[0], cmd->args[0], cmd->env,
+						 cmd->filefd[0][IN], STDOUT_FILENO, cmd->builtin[0], -1},
+				&pid[1]);
 	}
 	else
 	{
@@ -123,23 +120,10 @@ void static two_comman(t_cmd *cmd, int *pid)
 				&pid[0]);
 		exe_cmd((t_exec){cmd->command[1], cmd->args[1], cmd->env, cmd->filefd[0][IN],
 						 STDOUT_FILENO, cmd->builtin[1], cmd->filefd[0][OUT]},
-				&pid[1]); // OK cat | ls
-						  // &pid[1]); // OK cat | ls
-
+				&pid[1]);
 		close(cmd->filefd[0][IN]);
 		close(cmd->filefd[0][OUT]);
 	}
-	// {
-	// 	exe_cmd((t_exec){cmd->command[0], cmd->args[0], cmd->env, STDIN_FILENO,
-	// 					 cmd->filefd[0][OUT], cmd->builtin[0], cmd->filefd[0][IN]},
-	// 			&pid[0]);
-	// 	close(cmd->filefd[0][OUT]);
-	// 	exe_cmd((t_exec){cmd->command[1], cmd->args[1], cmd->env, cmd->filefd[0][IN],
-	// 					 STDOUT_FILENO, cmd->builtin[1], -1},
-	// 			// &pid[1]); // OK cat | ls
-	// 			&pid[0]);
-	// 	close(cmd->filefd[0][IN]);
-	// }
 	wait_pipe(pid, cmd->num_cmd);
 }
 
