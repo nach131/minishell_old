@@ -40,10 +40,10 @@
    ```
 este no lo hacen todos.
 
-8. Cambiar el valor de una variable de entorno existente y ejecutar un script:
-   ```
-   env VAR_NAME=nuevo_valor script.sh
-   ```
+~~8. Cambiar el valor de una variable de entorno existente y ejecutar un script:~~
+```bash
+env VAR_NAME=nuevo_valor script.sh
+```
 
 9. Leer variables de entorno desde un archivo y ejecutar un comando:
    ```

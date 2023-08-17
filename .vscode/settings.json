@@ -13,7 +13,8 @@
 		"hashtable": "c",
 		"locale": "c",
 		"cstdlib": "c",
-		"path_env.h": "c"
+		"path_env.h": "c",
+		"builtins.h": "c"
 	},
 	"editor.fontLigatures": false,
 	"lldb.dbgconfig": {},

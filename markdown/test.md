@@ -1,21 +1,9 @@
 # Test hacer en minishell
 
 ```bash
-export uno dos tres=
+export uno dos='dos' tres="tres"
 ```
-## NO hace falta
-Se declaran todas pero solo tres tiene valo vacio.
 
-	declare -x uno
-	declare -x dos
-	declare -x tres=""
-```bash
-env
-```
-Solo esta tres con valor vacio en la lista de env
-
-	tres=
----
 
 ## IN '<'
 
@@ -35,6 +23,21 @@ grep "palabra" < archivo.txt
 awk '{sum += $1} END {print sum}' < numeros.txt
 ```
 
+## OUT '>'
+
+```bash
+date > fecha.txt
+```
+
+Redireccionar la salida de un comando de error estándar a un archivo:
+
+```bash
+comando 1>> salida.txt 2>> errores.txt
+```
+
+```bash
+find /ruta/a/directorio -type f -size 0 -print
+```
 
 ## ECHO
 
